@@ -60,3 +60,5 @@ uv run python script.py
 ## Claude Instructions
 
 - When asked about current APIs, libraries, or technical solutions, proactively search online without being explicitly asked.
+- Use Context7 MCP to look up current library documentation and usage examples.
+- Use DeepWiki MCP to explore GitHub repositories and understand library architecture.
