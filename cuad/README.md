@@ -2,6 +2,25 @@
 
 10 sample contracts from the [CUAD dataset](https://www.atticusprojectai.org/cuad) for testing the AI Legal & Compliance platform.
 
+## Setup
+
+To regenerate the contracts and metadata from the CUAD source:
+
+1. Download `CUAD_v1.zip` from https://www.atticusprojectai.org/cuad
+2. Place the zip file in this folder (`cuad/CUAD_v1.zip`)
+3. Run the extraction script:
+
+```bash
+python cuad/extract_metadata.py
+```
+
+This will:
+- Extract the zip file to `cuad/CUAD_v1/`
+- Copy the 10 selected contracts to `cuad/contracts/`
+- Generate `metadata.json` and `metadata.csv` with ground truth labels
+
+To select different contracts, edit `contracts_to_extract.json`.
+
 ## Selection Criteria
 
 1. **3 contract types** most relevant to fintech/asset management:
