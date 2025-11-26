@@ -17,6 +17,7 @@ cp .env.example .env
 ```
 
 Required API keys:
+- `OPENAI_API_KEY` - For OpenAI API access
 - `ANTHROPIC_API_KEY` - For Anthropic token counting
 - `GOOGLE_API_KEY` - For Gemini token counting
 
