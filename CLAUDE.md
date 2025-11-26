@@ -41,7 +41,7 @@ MVP schema in `src/extraction/schema.py` with 5 fields, all matching CUAD ground
 
 ## Tech Stack (TBD)
 
-- Python backend
+- Python backend (uv for package management)
 - Vector store: TBD
 - LLM: Claude (model tiering based on task complexity)
 - Integrations: Airtable API, Slack API
@@ -50,6 +50,13 @@ MVP schema in `src/extraction/schema.py` with 5 fields, all matching CUAD ground
 ## Commands
 
 ```bash
-# Activate venv
-source .venv/bin/activate
+# Sync dependencies
+uv sync
+
+# Run scripts
+uv run python script.py
 ```
+
+## Claude Instructions
+
+- When asked about current APIs, libraries, or technical solutions, proactively search online without being explicitly asked.

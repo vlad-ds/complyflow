@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 .venv/
 .env
+.idea/
 *.egg-info/
 dist/
 build/
@@ -11,3 +12,6 @@ build/
 # Large CUAD dataset (keep only selected contracts in cuad/contracts/)
 cuad/CUAD_v1/
 cuad/CUAD_v1.zip
+
+# Temp scripts
+temp/
