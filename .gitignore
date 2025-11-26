@@ -1,0 +1,14 @@
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+.env
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# Large CUAD dataset (keep only selected contracts in cuad/contracts/)
+cuad/CUAD_v1/
+cuad/CUAD_v1.zip
+cuad/extract_metadata.py

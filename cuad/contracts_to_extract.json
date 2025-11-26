@@ -1,0 +1,12 @@
+[
+  {"file": "01_service_gpaq.pdf", "match": "GpaqAcquisitionHoldingsInc_20200123_S-4A_EX-10.8", "type": "Service Agreement"},
+  {"file": "02_service_reynolds.pdf", "match": "ReynoldsConsumerProductsInc_20200121_S-1A_EX-10.22", "type": "Service Agreement"},
+  {"file": "03_service_verizon.pdf", "match": "VerizonAbsLlc_20200123_8-K_EX-10.4", "type": "Service Agreement"},
+  {"file": "04_service_integrity.pdf", "match": "IntegrityFunds_20200121_485BPOS", "type": "Service Agreement"},
+  {"file": "05_license_gopage.pdf", "match": "GopageCorp_20140221_10-K_EX-10.1", "type": "License Agreement"},
+  {"file": "06_license_morganstanley.pdf", "match": "MorganStanleyDirectLendingFund_20191119", "type": "License Agreement"},
+  {"file": "07_license_cytodyn.pdf", "match": "CytodynInc_20200109_10-Q_EX-10.5", "type": "License Agreement"},
+  {"file": "08_license_artara.pdf", "match": "ArtaraTherapeuticsInc_20200110_8-K_EX-10.5", "type": "License Agreement"},
+  {"file": "09_outsourcing_photronics.pdf", "match": "PhotronicsInc_20171219_10-QA_EX-10.28", "type": "Outsourcing Agreement"},
+  {"file": "10_outsourcing_paratek.pdf", "match": "ParatekPharmaceuticalsInc_20170505_10-KA_EX-10.29", "type": "Outsourcing Agreement"}
+]
