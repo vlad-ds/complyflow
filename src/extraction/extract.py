@@ -78,6 +78,7 @@ def extract_contract_metadata(
     provider: BaseLLMProvider,
     text_path: Path | str,
     model: str | None = None,
+    eval_id: str | None = None,
 ) -> ExtractionResponse:
     """Extract contract metadata from a text file using any LLM provider.
 
@@ -85,6 +86,7 @@ def extract_contract_metadata(
         provider: LLM provider instance (Anthropic, OpenAI, or Gemini).
         text_path: Path to the contract text file.
         model: Optional model override (uses provider's default if None).
+        eval_id: Optional evaluation run ID for Langfuse tagging.
 
     Returns:
         ExtractionResponse with raw snippets, reasoning, and normalized values.
@@ -94,6 +96,11 @@ def extract_contract_metadata(
     prompt = prompt_template.format(contract_types=_get_contract_types_str())
     text_content = _load_text_file(text_path)
 
+    # Build tags list
+    tags = [f"provider:{provider.provider_name}", f"model:{model or provider.default_model}"]
+    if eval_id:
+        tags.append(eval_id)
+
     # Update current trace with document and provider info
     langfuse = get_client()
     langfuse.update_current_trace(
@@ -102,8 +109,10 @@ def extract_contract_metadata(
             "document": text_path.name,
             "provider": provider.provider_name,
             "model": model or provider.default_model,
+            "eval_id": eval_id,
         },
         session_id=provider.get_langfuse_session_name(),
+        tags=tags,
     )
 
     # Call provider's extraction method
