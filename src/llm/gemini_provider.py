@@ -10,8 +10,12 @@ Requires environment variables:
 
 from google import genai
 from langfuse import observe
+from openinference.instrumentation.google_genai import GoogleGenAIInstrumentor
 
 from llm.base import BaseLLMProvider, LLMResponse
+
+# Initialize instrumentation once at module load
+GoogleGenAIInstrumentor().instrument()
 
 
 class GeminiProvider(BaseLLMProvider):
@@ -19,11 +23,11 @@ class GeminiProvider(BaseLLMProvider):
 
     provider_name = "gemini"
 
-    # Available models (as of Nov 2025)
+    # Available models
     MODELS = {
-        "flash": "gemini-2.5-flash-preview-05-20",
-        "flash-lite": "gemini-2.5-flash-lite-preview-06-17",
-        "pro": "gemini-2.5-pro-preview-05-06",
+        "flash": "gemini-2.5-flash",
+        "flash-lite": "gemini-2.5-flash-lite",
+        "2.0-flash": "gemini-2.0-flash",
     }
 
     def __init__(self, model: str | None = None):

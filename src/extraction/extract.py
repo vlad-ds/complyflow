@@ -32,26 +32,29 @@ def _get_json_schema() -> dict:
     """
     schema = ExtractionResponse.model_json_schema()
 
-    # Recursively add additionalProperties: false to all objects
-    def add_additional_properties(obj: dict) -> dict:
+    # Recursively add additionalProperties: false and required fields to all objects
+    def fix_object_schema(obj: dict) -> dict:
         if isinstance(obj, dict):
             if obj.get("type") == "object":
                 obj["additionalProperties"] = False
+                # OpenAI requires 'required' to list ALL properties (even those with defaults)
+                if "properties" in obj:
+                    obj["required"] = list(obj["properties"].keys())
             for key, value in obj.items():
                 if isinstance(value, dict):
-                    add_additional_properties(value)
+                    fix_object_schema(value)
                 elif isinstance(value, list):
                     for item in value:
                         if isinstance(item, dict):
-                            add_additional_properties(item)
+                            fix_object_schema(item)
         return obj
 
-    # Inline $defs references and add additionalProperties
+    # Inline $defs references and fix schema
     if "$defs" in schema:
         defs = schema.pop("$defs")
-        # Add additionalProperties to all defs
+        # Fix all defs
         for def_schema in defs.values():
-            add_additional_properties(def_schema)
+            fix_object_schema(def_schema)
 
         # Replace $ref with actual definitions
         def resolve_refs(obj: dict) -> dict:
@@ -66,7 +69,7 @@ def _get_json_schema() -> dict:
 
         schema = resolve_refs(schema)
 
-    add_additional_properties(schema)
+    fix_object_schema(schema)
     return schema
 
 
@@ -94,6 +97,7 @@ def extract_contract_metadata(
     # Update current trace with document and provider info
     langfuse = get_client()
     langfuse.update_current_trace(
+        name=f"extraction-{provider.provider_name}",
         metadata={
             "document": text_path.name,
             "provider": provider.provider_name,

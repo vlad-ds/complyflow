@@ -10,8 +10,14 @@ Requires environment variables:
 
 from langfuse import observe
 from openai import OpenAI
+from opentelemetry.instrumentation.openai import OpenAIInstrumentor
 
 from llm.base import BaseLLMProvider, LLMResponse
+
+# Initialize instrumentation once at module load
+_instrumentor = OpenAIInstrumentor()
+if not _instrumentor.is_instrumented_by_opentelemetry:
+    _instrumentor.instrument()
 
 
 class OpenAIProvider(BaseLLMProvider):
@@ -20,11 +26,13 @@ class OpenAIProvider(BaseLLMProvider):
     provider_name = "openai"
 
     # Available models (as of Nov 2025)
-    # GPT-4.1 series released April 2025
     MODELS = {
-        "gpt-4.1": "gpt-4.1-2025-04-14",
-        "gpt-4.1-mini": "gpt-4.1-mini-2025-04-14",
-        "gpt-4.1-nano": "gpt-4.1-nano-2025-04-14",
+        # GPT-5 series (Aug 2025)
+        "gpt-5": "gpt-5-2025-08-07",
+        "gpt-5-mini": "gpt-5-mini-2025-08-07",
+        "gpt-5-nano": "gpt-5-nano-2025-08-07",
+        # GPT-5.1 series (Nov 2025)
+        "gpt-5.1": "gpt-5.1-2025-11-13",
         # Legacy models
         "gpt-4o": "gpt-4o-2024-08-06",
         "gpt-4o-mini": "gpt-4o-mini-2024-07-18",
@@ -34,11 +42,11 @@ class OpenAIProvider(BaseLLMProvider):
         """Initialize OpenAI provider.
 
         Args:
-            model: Model to use. Can be a short name ("gpt-4.1", "gpt-4.1-mini", etc.)
-                   or full model ID. Defaults to "gpt-4.1-mini".
+            model: Model to use. Can be a short name ("gpt-5", "gpt-5-mini", etc.)
+                   or full model ID. Defaults to "gpt-5".
         """
         self._client = OpenAI()
-        self._model = self._resolve_model(model or "gpt-4.1-mini")
+        self._model = self._resolve_model(model or "gpt-5")
 
     def _resolve_model(self, model: str) -> str:
         """Resolve short model name to full model ID."""

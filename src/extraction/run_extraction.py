@@ -2,19 +2,26 @@
 """Run contract metadata extraction on a text file.
 
 Supports multiple LLM providers (Anthropic, OpenAI, Gemini) with model selection.
+Output is organized by model name for easy comparison.
 
 Usage:
     python -m extraction.run_extraction <contract_path> [--provider <provider>] [--model <model>]
 
 Examples:
-    # Use default (Anthropic Sonnet)
+    # Claude Sonnet 4.5 (default)
     python -m extraction.run_extraction temp/extracted_text/train/06_license_morganstanley.txt
 
-    # Use OpenAI GPT-4.1
-    python -m extraction.run_extraction temp/extracted_text/train/06_license_morganstanley.txt --provider openai
+    # Claude Haiku
+    python -m extraction.run_extraction temp/extracted_text/train/06_license_morganstanley.txt -p anthropic -m haiku
 
-    # Use Gemini Flash
-    python -m extraction.run_extraction temp/extracted_text/train/06_license_morganstanley.txt --provider gemini --model flash
+    # GPT-5
+    python -m extraction.run_extraction temp/extracted_text/train/06_license_morganstanley.txt -p openai -m gpt-5
+
+    # GPT-5-mini
+    python -m extraction.run_extraction temp/extracted_text/train/06_license_morganstanley.txt -p openai -m gpt-5-mini
+
+    # Gemini 2.5 Flash
+    python -m extraction.run_extraction temp/extracted_text/train/06_license_morganstanley.txt -p gemini
 """
 
 import argparse
@@ -55,7 +62,7 @@ def main():
         "--output", "-o",
         type=Path,
         default=None,
-        help="Output JSON path (default: output/<provider>/<contract_name>_extraction.json)",
+        help="Output JSON path (default: output/<model>/<contract_name>_extraction.json)",
     )
     args = parser.parse_args()
 
@@ -68,16 +75,21 @@ def main():
         print(f"Error: Contract file not found: {contract_path}")
         sys.exit(1)
 
-    # Default output path with provider subfolder
-    output_dir = Path(__file__).parent.parent.parent / "output" / args.provider
+    # Initialize provider
+    provider = get_provider(args.provider, model=args.model)
+
+    # Get the actual model name for the output folder
+    model_name = args.model or provider.default_model
+    # Use short name if it was resolved from a short name
+    model_folder = args.model if args.model else list(provider.MODELS.keys())[list(provider.MODELS.values()).index(provider.default_model)]
+
+    # Default output path with model subfolder
+    output_dir = Path(__file__).parent.parent.parent / "output" / model_folder
     output_dir.mkdir(parents=True, exist_ok=True)
 
     output_path = args.output
     if output_path is None:
         output_path = output_dir / f"{contract_path.stem}_extraction.json"
-
-    # Initialize provider
-    provider = get_provider(args.provider, model=args.model)
 
     # Run extraction
     print(f"Provider: {args.provider}")
