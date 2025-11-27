@@ -13,8 +13,11 @@ For each field, provide:
 - normalized_value: List of party names (just company/person names, not definitions like "Licensor")
 
 ### contract_type
-- raw_snippet: Copy the exact title or description indicating contract type
-- reasoning: Why this classification
+- raw_snippet: Copy the text that best indicates the PRIMARY purpose of the agreement
+- reasoning: Analyze the core obligations and economic substance, not just the title. Consider:
+  - What are the primary obligations of each party?
+  - What is the main subject matter (services, licenses, goods, etc.)?
+  - Titles can be misleading - look at the actual substance of the agreement
 - normalized_value: Must be one of: {contract_types}
 
 ### notice_period
@@ -30,12 +33,13 @@ For each field, provide:
 
 ### expiration_date
 - raw_snippet: Copy the exact expiration/term text, or empty string if not found
-- reasoning: How you determined the date (if relative, explain the calculation)
+- reasoning: How you identified this (or why it's not found)
 - normalized_value: One of the following:
-  - ISO date (YYYY-MM-DD) if you can compute a specific date
+  - If the contract specifies a relative term (e.g., "5 years from Effective Date", "12 months following Commencement Date"), keep it as a relative description - do NOT compute to a specific date
+  - ISO date (YYYY-MM-DD) ONLY if the contract explicitly states a calendar date (e.g., "December 31, 2028")
   - "perpetual" ONLY if the agreement explicitly states it continues "in perpetuity", "indefinitely", or similar language
-  - A description of the relative term if you cannot compute (e.g., "2 years from Effective Date")
   - Empty string if the contract is silent on term/expiration (even if it can be terminated at will)
+- IMPORTANT: Preserve relative terms as written. Do NOT calculate dates from relative terms - we will compute them later with the effective date.
 - IMPORTANT: Do NOT infer "perpetual" just because the contract lacks an expiration date or can be terminated at any time. "Perpetual" requires explicit language in the contract.
 
 ### renewal_term

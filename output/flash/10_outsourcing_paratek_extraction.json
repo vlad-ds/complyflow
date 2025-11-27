@@ -2,42 +2,42 @@
   "source_file": "10_outsourcing_paratek.txt",
   "provider": "gemini",
   "model": "flash",
-  "eval_id": "eval_flash_20251127_150143_2f19796b",
-  "timestamp": "2025-11-27T15:03:18.710666",
+  "eval_id": "eval_flash_20251127_163038_038fe6d4",
+  "timestamp": "2025-11-27T16:32:23.632305",
   "extraction": {
     "parties": {
-      "raw_snippet": "Between Paratek Pharmaceuticals, Inc. and CARBOGEN AMCIS AG",
-      "reasoning": "The parties are identified in the introductory section of the agreement, immediately below the contract type.",
+      "raw_snippet": "Between Paratek Pharmaceuticals, Inc.\nand\nCARBOGEN AMCIS AG\nDate\n30 December 2016\nSource: PARATEK PHARMACEUTICALS, INC., 10-K/A, 5/5/2017\n\nTHIS EXHIBIT HAS BEEN REDACTED AND IS THE SUBJECT OF A CONFIDENTIAL TREATMENT REQUEST. REDACTED MATERIAL IS\nMARKED WITH [* * *] AND HAS BEEN FILED SEPARATELY WITH THE SECURITIES AND EXCHANGE COMMISSION.\nExecution Version\nOutsourcing Agreement\nBetween\nParatek Pharmaceuticals, Inc., a company having a place of business at 75 Park Plaza, 4th Floor, Boston, MA 02116, USA (\u201cCustomer\u201d)\nAND:\nCARBOGEN AMCIS AG, a company having a place of business at Hauptstrasse 171, CH 4416 Bubendorf, Switzerland (\u201cSupplier\u201d and, collectively\nwith Customer, the \u201cParties\u201d, and each, a \u201cParty).",
+      "reasoning": "The parties are explicitly identified at the beginning of the agreement as 'Paratek Pharmaceuticals, Inc.' and 'CARBOGEN AMCIS AG', with their respective roles as 'Customer' and 'Supplier'.",
       "normalized_value": [
         "Paratek Pharmaceuticals, Inc.",
         "CARBOGEN AMCIS AG"
       ]
     },
     "contract_type": {
-      "raw_snippet": "Outsourcing Agreement",
-      "reasoning": "The title of the agreement explicitly states 'Outsourcing Agreement'.",
+      "raw_snippet": "Outsourcing Agreement\nBetween\nParatek Pharmaceuticals, Inc.\nand\nCARBOGEN AMCIS AG\nDate\n30 December 2016\nSource: PARATEK PHARMACEUTICALS, INC., 10-K/A, 5/5/2017\n\nWHEREAS:\nA. Customer is the owner of certain technology and patent rights regarding the Product (as defined herein) having the description set out in Exhibit\nA (Description of Product) and Exhibit B (Chemical Synthesis);\nB. Customer has filed / intends to file for approval with the United States Food and Drug Administration and/or its foreign equivalents, an\nInvestigational New Drug Application (\u201cIND\u201d) and a New Drug Application (\u201cNDA\u201d), and/or the foreign equivalents thereof, for certain\nformulations containing the Product;\nC. Supplier is engaged in the business of performing contracted process development, Manufacturing and supply services of active pharmaceutical\ningredients (\u201cAPIs\u201d) and intermediates; and\nD. Customer desires that Supplier Manufacture the Product in bulk quantities, and Supplier desires to perform such services, each on the terms and\nconditions set out in this Agreement.",
+      "reasoning": "The document is titled 'Outsourcing Agreement'. The 'WHEREAS' clauses further clarify that the Supplier will perform 'Manufacturing and supply services' for the Customer, where the Customer 'desires that Supplier Manufacture the Product in bulk quantities'. This clearly defines an outsourcing relationship for manufacturing and supply.",
       "normalized_value": "Outsourcing Agreement"
     },
     "notice_period": {
-      "raw_snippet": "Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term; b) either Party delivers written notice of termination to the other Party at least [* * *] prior to the expiration date of the Renewal Term, which termination shall be effective as of the expiration date of the Renewal Term;",
-      "reasoning": "Section 18.1 'Termination' clause (b) explicitly states that 'either Party delivers written notice of termination to the other Party at least [* * *] prior to the expiration date of the Renewal Term'. The specific duration is redacted, but the mechanism is present.",
-      "normalized_value": "Redacted"
+      "raw_snippet": "Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term;",
+      "reasoning": "Article 2.1 states the agreement will 'automatically stay in force for a maximum of [* * *]' if a follow-on agreement is not reached, 'unless otherwise set forth in Section 18.1(a)'. Section 18.1(a) specifies that Customer can deliver written notice of termination 'at least [* * *] prior to the expiration date of the Initial Term' to make termination effective as of the Initial Term's expiration. This notice prevents the automatic 'stay in force'. The specific period is redacted.",
+      "normalized_value": "[* * *] prior to expiration of Initial Term"
     },
     "expiration_date": {
       "raw_snippet": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \u201cInitial Term\u201d).",
-      "reasoning": "Article 2.1 'Term' states the agreement commences on the Effective Date (December 30, 2016) and is valid until a redacted date, defining the 'Initial Term'. Since the exact date is redacted, I cannot provide an ISO date.",
-      "normalized_value": "Redacted until the end of the Initial Term from the Effective Date"
+      "reasoning": "Article 2.1 explicitly defines the 'Initial Term' as valid 'until the [* * *]' from the Effective Date (December 30, 2016). The specific duration or date is redacted.",
+      "normalized_value": "until the [* * *] from the Effective Date"
     },
     "renewal_term": {
       "raw_snippet": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \u201cRenewal Term\u201d).",
-      "reasoning": "Article 2.1 'Term' describes an automatic renewal for a maximum of a redacted period if a follow-on agreement is not signed by a certain date.",
-      "normalized_value": "Automatic renewal for a maximum of a redacted period"
+      "reasoning": "Article 2.1 describes the 'Renewal Term' as the agreement automatically staying in force for a maximum of a redacted period if a subsequent long-term agreement is not reached by a certain redacted date.",
+      "normalized_value": "automatically stay in force for a maximum of [* * *]"
     }
   },
   "usage": {
     "model": "gemini-2.5-flash",
-    "input_tokens": 25929,
-    "output_tokens": 592
+    "input_tokens": 26057,
+    "output_tokens": 1136
   },
-  "latency_seconds": 5.342321872711182
+  "latency_seconds": 15.535525798797607
 }

@@ -2,42 +2,42 @@
   "source_file": "04_service_integrity.txt",
   "provider": "gemini",
   "model": "flash",
-  "eval_id": "eval_flash_20251127_150143_2f19796b",
-  "timestamp": "2025-11-27T15:02:29.346434",
+  "eval_id": "eval_flash_20251127_163038_038fe6d4",
+  "timestamp": "2025-11-27T16:31:23.925829",
   "extraction": {
     "parties": {
-      "raw_snippet": "the Integrity Short Term Government Fund, (the \u201cFund\u201d)... has agreed that Integrity Funds Distributor, LLC, (\u201cIntegrity\u201d), shall be",
-      "reasoning": "The preamble explicitly identifies 'the Integrity Short Term Government Fund' and 'Integrity Funds Distributor, LLC' as the parties entering into the agreement, with their respective defined terms 'the Fund' and 'Integrity'. The signature block confirms these entities.",
+      "raw_snippet": "the Integrity Short Term Government Fund, (the \u201cFund\u201d), an open-end, diversified, management investment company organized as a series of The Integrity Funds, a Delaware statutory trust, has agreed that Integrity Funds Distributor, LLC, (\u201cIntegrity\u201d), shall be, for the period of this distribution agreement (the \u201cAgreement\u201d), the principal underwriter of shares issued by the Fund",
+      "reasoning": "The introductory paragraph explicitly names and defines the two primary entities entering into the agreement: \"the Integrity Short Term Government Fund\" and \"Integrity Funds Distributor, LLC.\"",
       "normalized_value": [
         "Integrity Short Term Government Fund",
         "Integrity Funds Distributor, LLC"
       ]
     },
     "contract_type": {
-      "raw_snippet": "DISTRIBUTION AND SERVICES AGREEMENT",
-      "reasoning": "The title of the document clearly states 'DISTRIBUTION AND SERVICES AGREEMENT'. From the provided categories, 'Distributor Agreement' is the most fitting description.",
+      "raw_snippet": "DISTRIBUTION AND SERVICES AGREEMENT. Integrity will act as principal underwriter for the distribution of the Shares covered by the registration statement, prospectus, and statement of additional information then in effect of the Fund",
+      "reasoning": "The title of the agreement clearly states \"DISTRIBUTION AND SERVICES AGREEMENT,\" and Section 1 explicitly describes Integrity's role as the \"principal underwriter for the distribution of the Shares.\" This indicates the primary purpose is the distribution of the Fund's shares.",
       "normalized_value": "Distributor Agreement"
     },
     "notice_period": {
-      "raw_snippet": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the purpose of voting on such approval.",
-      "reasoning": "The contract states that continuation for successive annual periods is 'provided such continuance is specifically approved' by the Board of Trustees and Qualified Trustees. This is a condition requiring affirmative action (approval) for renewal, rather than an automatic renewal that requires notice to prevent. Therefore, there is no notice period for preventing an automatic renewal in the sense requested.",
+      "raw_snippet": "",
+      "reasoning": "The contract states that continuance for successive annual periods is \"provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority...\" This means the agreement does not automatically renew unless a party gives notice; instead, it requires affirmative approval to continue. Therefore, there is no notice period specifically for preventing an automatic renewal.",
       "normalized_value": ""
     },
     "expiration_date": {
       "raw_snippet": "This Agreement shall continue until January 18, 2022",
-      "reasoning": "Section 7.1 explicitly states the agreement 'shall continue until January 18, 2022', which is the initial fixed expiration date.",
+      "reasoning": "Section 7.1 explicitly states the date until which the agreement will initially continue.",
       "normalized_value": "2022-01-18"
     },
     "renewal_term": {
       "raw_snippet": "and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the purpose of voting on such approval.",
-      "reasoning": "While the contract mentions 'successive annual periods', its continuation is conditional upon specific annual approval by the Board of Trustees and Qualified Trustees. This is not a standard automatic renewal where the term rolls over unless terminated by notice; instead, it requires an active decision (approval) to continue. Therefore, it does not fit the definition of a 'renewal_term' that automatically takes effect.",
-      "normalized_value": ""
+      "reasoning": "Section 7.1 describes the agreement continuing \"automatically for successive annual periods\" after the initial term, albeit conditioned on specific annual approvals.",
+      "normalized_value": "1 year auto-renewal"
     }
   },
   "usage": {
     "model": "gemini-2.5-flash",
-    "input_tokens": 5747,
-    "output_tokens": 803
+    "input_tokens": 5875,
+    "output_tokens": 687
   },
-  "latency_seconds": 12.772387266159058
+  "latency_seconds": 11.126415014266968
 }

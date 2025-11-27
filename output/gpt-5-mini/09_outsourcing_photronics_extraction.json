@@ -2,12 +2,12 @@
   "source_file": "09_outsourcing_photronics.txt",
   "provider": "openai",
   "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_151221_f01b2d60",
-  "timestamp": "2025-11-27T15:17:22.601581",
+  "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+  "timestamp": "2025-11-27T16:58:34.572586",
   "extraction": {
     "parties": {
-      "raw_snippet": "This OUTSOURCING AGREEMENT (this \u201cAgreement\u201d) is made and entered into as of the 16th day of May, 2017, by and among\nPhotronics, Inc., a Connecticut corporation with its principal place of business at 15 Secor Road, Brookfield, Connecticut, U.S.A\n(\u201cPhotronics\u201d),\nDai Nippon Printing Co., Ltd., a Japanese corporation with its principal place of business at 1-1, Ichigaya Kagacho 1-chome,\nShinjuku-ku, Tokyo, Japan (\u201cDNP\u201d),\nPhotronics DNP Photomask Corporation, a company limited by shares organized and formed under the Company Act of the\nRepublic of China with its principal place of business at 4f, #2, Li-Hsin Road, Science Park, Hsinchu, Taiwan, ROC (\u201cPDMC\u201d), and\nXiamen American Japan Photronics Mask Co., Ltd., a limited liability company organized and formed under the People\u2019s Republic\nof China with its principal place of business at R203-95, South Building of Torch Square, No. 56-58 Torch Road, Gaoxin District, Xiamen, Fujian\nProvince, Peoples Republic of China (the \u201cCompany\").",
-      "reasoning": "The quoted paragraph at the start of the Agreement explicitly lists the parties \"by and among\" and names four corporate entities with their jurisdictions and defined short names.",
+      "raw_snippet": "This OUTSOURCING AGREEMENT (this \u201cAgreement\u201d) is made and entered into as of the 16th day of May, 2017, by and among\nPhotronics, Inc., a Connecticut corporation with its principal place of business at 15 Secor Road, Brookfield, Connecticut, U.S.A\n(\u201cPhotronics\u201d),\nDai Nippon Printing Co., Ltd., a Japanese corporation with its principal place of business at 1-1, Ichigaya Kagacho 1-chome,\nShinjuku-ku, Tokyo, Japan (\u201cDNP\u201d),\nPhotronics DNP Photomask Corporation, a company limited by shares organized and formed under the Company Act of the\nRepublic of China with its principal place of business at 4f, #2, Li-Hsin Road, Science Park, Hsinchu, Taiwan, ROC (\u201cPDMC\u201d), and\nXiamen American Japan Photronics Mask Co., Ltd., a limited liability company organized and formed under the People\u2019s Republic\nof China with its principal place of business at R203-95, South Building of Torch Square, No. 56-58 Torch Road, Gaoxin District, Xiamen, Fujian\nProvince, Peoples Republic of China (the \u201cCompany\u201d).",
+      "reasoning": "The initial recital paragraph of the agreement lists the contracting parties by name, each followed by corporate description and the defined short name in parentheses. These are the main parties to the Agreement.",
       "normalized_value": [
         "Photronics, Inc.",
         "Dai Nippon Printing Co., Ltd.",
@@ -16,30 +16,30 @@
       ]
     },
     "contract_type": {
-      "raw_snippet": "OUTSOURCING AGREEMENT",
-      "reasoning": "The document title at the top of the contract is \"OUTSOURCING AGREEMENT\", which identifies the type of agreement.",
+      "raw_snippet": "This OUTSOURCING AGREEMENT (this \u201cAgreement\u201d) is made and entered into as of the 16th day of May, 2017, by and among",
+      "reasoning": "The document title and opening sentence explicitly identify the agreement as an 'Outsourcing Agreement'. The substantive provisions (Articles 2\u20135) govern outsourcing of product manufacture/supply, purchase orders, allocation, pricing, delivery and related obligations, confirming the primary purpose is outsourcing/supply of Products.",
       "normalized_value": "Outsourcing Agreement"
     },
     "notice_period": {
       "raw_snippet": "",
-      "reasoning": "The contract does not contain any clause requiring advance notice to prevent an automatic renewal. Term is tied to shareholding (see Section 7.1) rather than an automatic renewal mechanism, so no notice-to-prevent-renewal period applies.",
+      "reasoning": "The contract does not contain any clause describing an advance notice required to prevent automatic renewal (no auto-renewal language was found). Term provisions describe duration tied to shareholding and a 30-day cure period for breach termination, but no notice-to-prevent-renewal provision exists.",
       "normalized_value": ""
     },
     "expiration_date": {
-      "raw_snippet": "7.1 Term\nThis Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as\nPhotronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
-      "reasoning": "Section 7.1 defines the duration: the Agreement continues while Photronics and DNP (or their Affiliates) each remain shareholders of the Company. This is a relative condition rather than a fixed calendar date.",
-      "normalized_value": "Continues while Photronics and DNP, or their Affiliates, remain Shareholders of the Company."
+      "raw_snippet": "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as\nPhotronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
+      "reasoning": "Article 7.1 (Term) specifies the duration: the Agreement remains in effect while Photronics and DNP (or their Affiliates) each remain Shareholders of the Company. This is a relative/condition-based term rather than a fixed calendar date or explicit 'perpetual' phrasing.",
+      "normalized_value": "shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company."
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "There is no renewal clause or automatic renewal term in the agreement; duration is tied to shareholding rather than a renewal period.",
+      "reasoning": "There is no renewal clause or automatic renewal term in the agreement. The term is tied to shareholding status rather than a fixed term that renews.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 7057,
-    "output_tokens": 1935
+    "input_tokens": 7175,
+    "output_tokens": 2104
   },
-  "latency_seconds": 30.167414903640747
+  "latency_seconds": 31.23125720024109
 }

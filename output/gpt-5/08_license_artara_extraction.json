@@ -2,42 +2,42 @@
   "source_file": "08_license_artara.txt",
   "provider": "openai",
   "model": "gpt-5",
-  "eval_id": "eval_gpt-5_20251127_152256_11b14ee2",
-  "timestamp": "2025-11-27T15:28:37.499273",
+  "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+  "timestamp": "2025-11-27T16:51:35.760044",
   "extraction": {
     "parties": {
-      "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and\nbetween ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of\nSponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
-      "reasoning": "Identified the parties from the introductory paragraph specifying the entities entering into the agreement.",
+      "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and\nbetween ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of\nSponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d). ArTara and University may individually be referred to herein as a \u201cParty,\u201d\nand collectively as \u201cParties.\u201d",
+      "reasoning": "The introductory clause explicitly names the contracting entities and states they are the Parties to the Agreement.",
       "normalized_value": [
         "ArTara, Inc.",
         "The University of Iowa"
       ]
     },
     "contract_type": {
-      "raw_snippet": "SPONSORED RESEARCH AND LICENSE AGREEMENT",
-      "reasoning": "The document title indicates it is a sponsored research agreement that includes a license grant; among the provided categories, this best aligns with a License Agreement.",
+      "raw_snippet": "4.2 License. University hereby grants to ArTara an exclusive license to use the Program Data solely for the Project and in Regulatory Filings\nin the Field in the Territory.",
+      "reasoning": "The core economic substance is the University granting ArTara an exclusive license and right of reference to use Program Data for regulatory filings, coupled with funding, milestones, and royalties\u2014hallmarks of a license agreement.",
       "normalized_value": "License Agreement"
     },
     "notice_period": {
       "raw_snippet": "",
-      "reasoning": "The agreement contains termination notice periods (e.g., 30 days) but no automatic renewal or notice required to prevent renewal. Therefore, no notice-to-terminate-renewal provision exists.",
+      "reasoning": "The agreement contains general termination notice provisions (e.g., 30 days) but no automatic renewal or notice-to-prevent-renewal clause.",
       "normalized_value": ""
     },
     "expiration_date": {
       "raw_snippet": "",
-      "reasoning": "The agreement does not specify a fixed term or expiration date; it only provides termination rights. As instructed, leave blank when the contract is silent on expiration.",
+      "reasoning": "No fixed term or explicit expiration date is stated; only termination rights are provided. There is no explicit perpetual language.",
       "normalized_value": ""
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "No auto-renewal language is present; the agreement does not describe renewal terms.",
+      "reasoning": "The contract does not include any renewal or auto-renewal provision.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "gpt-5-2025-08-07",
-    "input_tokens": 9677,
-    "output_tokens": 1491
+    "input_tokens": 9795,
+    "output_tokens": 2816
   },
-  "latency_seconds": 32.50205111503601
+  "latency_seconds": 58.242533922195435
 }

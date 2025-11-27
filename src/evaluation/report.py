@@ -5,6 +5,7 @@ Generates comprehensive reports for model comparison.
 """
 
 import json
+import random
 import time
 from datetime import datetime
 from pathlib import Path
@@ -14,6 +15,41 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from langfuse import Langfuse
+from langfuse.api.core.api_error import ApiError
+
+
+def _retry_with_backoff(func, max_retries: int = 5, base_delay: float = 2.0):
+    """Retry a function with exponential backoff and jitter.
+
+    Args:
+        func: Function to call (no args).
+        max_retries: Maximum number of retry attempts.
+        base_delay: Base delay in seconds (will be multiplied exponentially).
+
+    Returns:
+        Result of the function call.
+
+    Raises:
+        The last exception if all retries fail.
+    """
+    last_exception = None
+
+    for attempt in range(max_retries + 1):
+        try:
+            return func()
+        except ApiError as e:
+            if e.status_code != 429:
+                raise  # Only retry on rate limit errors
+
+            last_exception = e
+
+            if attempt < max_retries:
+                # Exponential backoff with jitter
+                delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
+                print(f"    Rate limited, retrying in {delay:.1f}s (attempt {attempt + 1}/{max_retries})...")
+                time.sleep(delay)
+
+    raise last_exception
 
 from evaluation.config import (
     CUAD_TRAIN_METADATA,
@@ -80,10 +116,15 @@ def fetch_langfuse_metrics_for_eval_id(
 ) -> dict:
     """Fetch metrics from Langfuse for a single eval_id.
 
+    Uses retry with exponential backoff to handle rate limits.
+
     Returns:
         Dict with trace_count, total tokens, total cost, and per-trace details.
     """
-    traces_response = langfuse.api.trace.list(limit=100, tags=[eval_id])
+    # Fetch traces with retry
+    traces_response = _retry_with_backoff(
+        lambda: langfuse.api.trace.list(limit=100, tags=[eval_id])
+    )
     traces = traces_response.data
 
     if not traces:
@@ -102,8 +143,10 @@ def fetch_langfuse_metrics_for_eval_id(
     trace_details = []
 
     for trace in traces:
-        # Get observations for this trace (contains generation details)
-        observations = langfuse.api.observations.get_many(trace_id=trace.id)
+        # Get observations for this trace (contains generation details) with retry
+        observations = _retry_with_backoff(
+            lambda t=trace: langfuse.api.observations.get_many(trace_id=t.id)
+        )
 
         trace_input = 0
         trace_output = 0

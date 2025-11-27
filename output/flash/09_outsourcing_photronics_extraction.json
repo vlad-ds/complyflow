@@ -2,12 +2,12 @@
   "source_file": "09_outsourcing_photronics.txt",
   "provider": "gemini",
   "model": "flash",
-  "eval_id": "eval_flash_20251127_150143_2f19796b",
-  "timestamp": "2025-11-27T15:03:13.330892",
+  "eval_id": "eval_flash_20251127_163038_038fe6d4",
+  "timestamp": "2025-11-27T16:32:08.065151",
   "extraction": {
     "parties": {
-      "raw_snippet": "Photronics, Inc., a Connecticut corporation with its principal place of business at 15 Secor Road, Brookfield, Connecticut, U.S.A (\u201cPhotronics\u201d),Dai Nippon Printing Co., Ltd., a Japanese corporation with its principal place of business at 1-1, Ichigaya Kagacho 1-chome, Shinjuku-ku, Tokyo, Japan (\u201cDNP\u201d),Photronics DNP Photomask Corporation, a company limited by shares organized and formed under the Company Act of the Republic of China with its principal place of business at 4f, #2, Li-Hsin Road, Science Park, Hsinchu, Taiwan, ROC (\u201cPDMC\u201d), andXiamen American Japan Photronics Mask Co., Ltd., a limited liability company organized and formed under the People\u2019s Republic of China with its principal place of business at R203-95, South Building of Torch Square, No. 56-58 Torch Road, Gaoxin District, Xiamen, Fujian Province, Peoples Republic of China (the \u201cCompany\u201d).",
-      "reasoning": "The parties are explicitly listed in the introductory paragraph of the agreement, identifying each entity and their respective roles/abbreviations.",
+      "raw_snippet": "Photronics, Inc., a Connecticut corporation with its principal place of business at 15 Secor Road, Brookfield, Connecticut, U.S.A (\u201cPhotronics\u201d),\nDai Nippon Printing Co., Ltd., a Japanese corporation with its principal place of business at 1-1, Ichigaya Kagacho 1-chome,\nShinjuku-ku, Tokyo, Japan (\u201cDNP\u201d),\nPhotronics DNP Photomask Corporation, a company limited by shares organized and formed under the Company Act of the\nRepublic of China with its principal place of business at 4f, #2, Li-Hsin Road, Science Park, Hsinchu, Taiwan, ROC (\u201cPDMC\u201d), and\nXiamen American Japan Photronics Mask Co., Ltd., a limited liability company organized and formed under the People\u2019s Republic\nof China with its principal place of business at R203-95, South Building of Torch Square, No. 56-58 Torch Road, Gaoxin District, Xiamen, Fujian\nProvince, Peoples Republic of China (the \u201cCompany\u201d).",
+      "reasoning": "The raw snippet identifies the corporations involved in the agreement, listed at the beginning of the document as the parties to the agreement.",
       "normalized_value": [
         "Photronics, Inc.",
         "Dai Nippon Printing Co., Ltd.",
@@ -17,29 +17,29 @@
     },
     "contract_type": {
       "raw_snippet": "OUTSOURCING AGREEMENT",
-      "reasoning": "The title of the agreement clearly states 'OUTSOURCING AGREEMENT', which directly matches one of the predefined categories.",
+      "reasoning": "The title of the agreement clearly states 'OUTSOURCING AGREEMENT'. Additionally, Article 2.1 explicitly states that the 'Parties agree to the outsource model'.",
       "normalized_value": "Outsourcing Agreement"
     },
     "notice_period": {
       "raw_snippet": "",
-      "reasoning": "The agreement does not contain any clauses specifying a notice period required to prevent an automatic renewal. The term is conditional, not fixed with auto-renewal.",
+      "reasoning": "The contract's term is conditional (Article 7.1) and does not describe a fixed term with automatic renewal that would require notice to prevent.",
       "normalized_value": ""
     },
     "expiration_date": {
       "raw_snippet": "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
-      "reasoning": "Article 7.1 defines the term of the agreement as conditional, lasting as long as Photronics and DNP remain shareholders of the Company, rather than a fixed date or perpetual term.",
-      "normalized_value": "Conditional on Photronics and DNP remaining Shareholders"
+      "reasoning": "Article 7.1 defines the term of the agreement as being conditional on Photronics and DNP remaining shareholders. This is not a fixed calendar date, a relative term from the effective date, or 'perpetual' language.",
+      "normalized_value": ""
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "The agreement's term is defined by a condition (Photronics and DNP remaining shareholders) and does not include any provisions for automatic or optional renewal.",
+      "reasoning": "The agreement's term is based on a condition (Photronics and DNP remaining shareholders), not a fixed period that automatically renews. Therefore, no specific renewal term is stated.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "gemini-2.5-flash",
-    "input_tokens": 6621,
-    "output_tokens": 655
+    "input_tokens": 6749,
+    "output_tokens": 685
   },
-  "latency_seconds": 7.6680519580841064
+  "latency_seconds": 9.054141998291016
 }

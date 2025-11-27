@@ -2,12 +2,12 @@
   "source_file": "08_license_artara.txt",
   "provider": "gemini",
   "model": "flash",
-  "eval_id": "eval_flash_20251127_150143_2f19796b",
-  "timestamp": "2025-11-27T15:03:05.627096",
+  "eval_id": "eval_flash_20251127_163038_038fe6d4",
+  "timestamp": "2025-11-27T16:31:58.964595",
   "extraction": {
     "parties": {
-      "raw_snippet": "ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\"ArTara\"), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\"University\").",
-      "reasoning": "The parties were identified in the introductory paragraph of the agreement, which explicitly names and provides addresses for both ArTara, Inc. and The University of Iowa.",
+      "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
+      "reasoning": "The raw snippet explicitly identifies the two main parties entering into the agreement: ArTara, Inc. and The University of Iowa, along with their defined short names and addresses.",
       "normalized_value": [
         "ArTara, Inc.",
         "The University of Iowa"
@@ -15,29 +15,29 @@
     },
     "contract_type": {
       "raw_snippet": "SPONSORED RESEARCH AND LICENSE AGREEMENT",
-      "reasoning": "The title of the document clearly states \"Sponsored Research and License Agreement.\" From the provided categories, \"License Agreement\" best fits the core nature of the agreement, which includes granting an exclusive license to use program data.",
+      "reasoning": "The title of the agreement clearly states 'Sponsored Research and License Agreement'. The 'WHEREAS' clauses further confirm that ArTara wishes to develop products using data from research conducted by the University, and the University grants ArTara an exclusive license to use Program Data for the Project and Regulatory Filings.",
       "normalized_value": "License Agreement"
     },
     "notice_period": {
       "raw_snippet": "",
-      "reasoning": "The agreement outlines general termination rights upon thirty (30) days written notice by either party, but it does not specify any automatic renewal terms that would require a specific notice period to prevent such renewal.",
+      "reasoning": "The agreement outlines termination rights (Section 8.1 and 8.2) but does not contain any provisions for automatic renewal that require a notice period to prevent such renewal. There is no language indicating the contract automatically extends for fixed terms unless notice is given.",
       "normalized_value": ""
     },
     "expiration_date": {
-      "raw_snippet": "",
-      "reasoning": "The agreement details termination conditions but does not specify a fixed end date or an explicit perpetual term for the overall agreement. Therefore, the expiration date cannot be determined.",
+      "raw_snippet": "This Agreement may be terminated by ArTara upon thirty (30) days prior written notice to University.",
+      "reasoning": "The contract does not specify a fixed term or an explicit expiration date. Instead, it defines how the agreement can be terminated (e.g., ArTara can terminate upon 30 days' notice, or either party can terminate the Project with 30 days' notice). There is no language indicating a perpetual term either.",
       "normalized_value": ""
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "The agreement does not contain any clauses describing automatic renewal or other renewal terms.",
+      "reasoning": "The contract includes provisions for term and termination but does not contain any clauses describing automatic renewal or specific renewal terms for the entire agreement. Phase IV is an 'Optional' phase for new studies upon 'mutual written agreement', which is not an automatic renewal.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "gemini-2.5-flash",
-    "input_tokens": 9314,
-    "output_tokens": 424
+    "input_tokens": 9442,
+    "output_tokens": 577
   },
-  "latency_seconds": 10.389798879623413
+  "latency_seconds": 5.540894031524658
 }

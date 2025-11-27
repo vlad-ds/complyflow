@@ -2,42 +2,42 @@
   "source_file": "07_license_cytodyn.txt",
   "provider": "anthropic",
   "model": "sonnet",
-  "eval_id": "eval_sonnet_20251127_151918_db585718",
-  "timestamp": "2025-11-27T15:21:37.882783",
+  "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+  "timestamp": "2025-11-27T16:28:18.846512",
   "extraction": {
     "parties": {
       "raw_snippet": "This Commercialization and License Agreement (this \"Agreement\") is made effective as of December 17, 2019 (the \"Effective Date\") by and between Vyera Pharmaceuticals, LLC, a Delaware limited liability company (\"Vyera\"), and CytoDyn Inc., a Delaware corporation (\"CytoDyn\").",
-      "reasoning": "The parties are identified in the opening paragraph of the agreement with their legal entity types and jurisdictions.",
+      "reasoning": "The parties are identified in the introductory paragraph of the agreement, which states the full legal names and organizational structures of both contracting entities.",
       "normalized_value": [
         "Vyera Pharmaceuticals, LLC",
         "CytoDyn Inc."
       ]
     },
     "contract_type": {
-      "raw_snippet": "COMMERCIALIZATION AND LICENSE AGREEMENT",
-      "reasoning": "The title of the agreement clearly indicates this is a commercialization and license agreement. Given the structure where CytoDyn grants Vyera exclusive rights to commercialize licensed products in exchange for royalties and milestones, this falls under License Agreement.",
+      "raw_snippet": "CytoDyn hereby grants to Vyera, and Vyera hereby accepts, an exclusive royalty-bearing license (or sublicense, as the case may be), under the CytoDyn Patents, the CytoDyn Know-How and the Inventions (if any) solely to Commercialize, use, have used, offer for sale and sell Licensed Products in the Field in the Territory... Vyera shall pay to CytoDyn royalties equal to fifty percent (50%) of Net Sales of Licensed Products in the Territory during the Royalty Term",
+      "reasoning": "Despite the title 'Commercialization and License Agreement', the core economic substance is a license grant. CytoDyn grants Vyera exclusive rights to commercialize licensed products under CytoDyn's patents and know-how in exchange for royalties (50% of Net Sales), milestone payments, and a license fee. While Vyera has commercialization obligations, the primary legal relationship is a license of intellectual property rights. The agreement creates a licensor-licensee relationship with CytoDyn as the IP owner granting rights to Vyera.",
       "normalized_value": "License Agreement"
     },
     "notice_period": {
       "raw_snippet": "",
-      "reasoning": "The agreement does not contain an automatic renewal provision that requires notice to prevent renewal. Under Section 11.1, the term expires 'on the last day of the Royalty Term' and the agreement does not automatically renew. While Section 11.2(c) allows Vyera to terminate 'at any time following the second (2nd) anniversary of the First Commercial Sale of the Licensed Product, for any reason or no reason, upon one hundred eighty (180) days' written notice', this is a general termination provision, not a notice period to prevent automatic renewal.",
+      "reasoning": "This agreement does not auto-renew. Section 11.1 states the Term expires 'on the last day of the Royalty Term' and upon expiration 'the license granted to Vyera under Section 2.1 of this Agreement shall become non-exclusive, fully-paid, royalty free, perpetual and irrevocable.' There is no provision requiring notice to prevent automatic renewal. The agreement has various termination provisions (Sections 11.2-11.6) but these are for terminating the agreement under specific circumstances, not for preventing automatic renewal. Section 11.2(c) allows Vyera to terminate 'at any time following the second (2nd) anniversary of the First Commercial Sale of the Licensed Product, for any reason or no reason, upon one hundred eighty (180) days' written notice to CytoDyn', but this is a general termination right, not a notice to prevent renewal.",
       "normalized_value": ""
     },
     "expiration_date": {
       "raw_snippet": "The term of this Agreement (\"Term\") shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term.",
-      "reasoning": "The expiration is tied to the end of the Royalty Term, which is defined in Section 1.94 as 'the time period beginning with the First Commercial Sale of the Licensed Product in the Territory and continuing until the latest of (a) the expiration of the last Valid Claim Covering the Licensed Product and included in a CytoDyn Patent licensed to Vyera under this Agreement, (b) the date that is ten (10) years from the date of the First Commercial Sale, (c) the expiration of any Regulatory Exclusivity with respect to the Licensed Product and (d) the Biosimilar Entry Date.' This is contingent on future events and cannot be calculated to a specific date.",
-      "normalized_value": "Until the last day of the Royalty Term (the later of: patent expiration, 10 years from First Commercial Sale, regulatory exclusivity expiration, or Biosimilar Entry Date)"
+      "reasoning": "Section 11.1 specifies that the agreement expires on the last day of the Royalty Term. The Royalty Term is defined in Section 1.94 as a complex period that depends on multiple future events including First Commercial Sale, patent expiration, Regulatory Exclusivity expiration, and Biosimilar Entry Date. Since the Royalty Term is contingent on future uncertain events and is not a fixed calendar date or simple relative term from the Effective Date, this represents a conditional expiration tied to business milestones rather than a specific date or simple relative term.",
+      "normalized_value": "on the last day of the Royalty Term"
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "The agreement does not contain any renewal provisions. Section 11.1 states the term expires on the last day of the Royalty Term without any provision for automatic or optional renewal. Upon expiration, the license simply becomes 'non-exclusive, fully-paid, royalty free, perpetual and irrevocable' but this is not a renewal of the agreement itself.",
+      "reasoning": "The agreement does not contain any renewal provisions. Section 11.1 clearly states the Term expires on the last day of the Royalty Term, and upon expiration, the license becomes 'non-exclusive, fully-paid, royalty free, perpetual and irrevocable' rather than the agreement renewing. There is no language indicating the agreement auto-renews for successive periods or that either party can elect to renew the agreement for additional terms.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "claude-sonnet-4-5-20250929",
-    "input_tokens": 40038,
-    "output_tokens": 731
+    "input_tokens": 40172,
+    "output_tokens": 955
   },
-  "latency_seconds": 21.234713077545166
+  "latency_seconds": 28.1531720161438
 }

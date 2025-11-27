@@ -2,42 +2,42 @@
   "source_file": "04_service_integrity.txt",
   "provider": "openai",
   "model": "gpt-5",
-  "eval_id": "eval_gpt-5_20251127_152256_11b14ee2",
-  "timestamp": "2025-11-27T15:25:55.255681",
+  "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+  "timestamp": "2025-11-27T16:46:51.833654",
   "extraction": {
     "parties": {
-      "raw_snippet": "This is to confirm that, in consideration of the agreements hereinafter contained, the undersigned, the Integrity Short Term\nGovernment Fund, (the \u201cFund\u201d), an open-end, diversified, management investment company organized as a series of The Integrity\nFunds, a Delaware statutory trust, has agreed that Integrity Funds Distributor, LLC, (\u201cIntegrity\u201d), shall be, for the period of this\ndistribution agreement (the \u201cAgreement\u201d), the principal underwriter of shares issued by the Fund, including such classes of shares\nas may now or hereafter be authorized (the \u201cShares\u201d).",
-      "reasoning": "The opening paragraph explicitly names the parties to the agreement: Integrity Short Term Government Fund and Integrity Funds Distributor, LLC.",
+      "raw_snippet": "In Witness Whereof, the parties hereto have caused this Agreement to be executed as of the date first set forth herein.\nIntegrity Short Term Government Fund\nBy: /s/ Shannon D. Radke\nShannon D. Radke - President\nAccepted:\nIntegrity Funds Distributor, LLC\nBy: /s/ Shannon D. Radke\nShannon D. Radke - President\nDated: January 18, 2020",
+      "reasoning": "The signature block clearly lists the two contracting parties by name.",
       "normalized_value": [
         "Integrity Short Term Government Fund",
         "Integrity Funds Distributor, LLC"
       ]
     },
     "contract_type": {
-      "raw_snippet": "DISTRIBUTION AND SERVICES AGREEMENT",
-      "reasoning": "The title clearly identifies the agreement as a distribution and services agreement, which fits the Distributor Agreement category.",
+      "raw_snippet": "Section 1.1 Integrity will act as principal underwriter for the distribution of the Shares covered by the registration statement, prospectus, and statement of additional information then in effect of the Fund (the \u201cRegistration Statement\u201d) under the Securities Act of 1933, as amended (the \u201c1933 Act\u201d), and the Investment Company Act of 1940, as amended (the \u201c1940 Act\u201d).",
+      "reasoning": "The core obligation is that Integrity serves as principal underwriter to distribute the Fund\u2019s shares, which is a distribution arrangement.",
       "normalized_value": "Distributor Agreement"
     },
     "notice_period": {
       "raw_snippet": "",
-      "reasoning": "The agreement auto-renews only if annually approved by the Board and Qualified Trustees; there is no notice requirement to prevent renewal. Termination notice periods (60/90 days) are general termination rights and are excluded by the instructions.",
+      "reasoning": "Renewal requires annual Board and Qualified Trustees approval rather than an advance notice to prevent auto-renewal; no notice-to-nonrenew text is provided.",
       "normalized_value": ""
     },
     "expiration_date": {
-      "raw_snippet": "Section 7.1 This Agreement shall continue until January 18, 2022,",
-      "reasoning": "Section 7.1 states a specific date through which the agreement continues.",
+      "raw_snippet": "This Agreement shall continue until January 18, 2022,",
+      "reasoning": "This clause specifies a concrete end date for the initial term.",
       "normalized_value": "2022-01-18"
     },
     "renewal_term": {
       "raw_snippet": "and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the purpose of voting on such approval.",
-      "reasoning": "This clause defines automatic renewal for successive one-year periods, conditional on annual board and Qualified Trustees approval.",
-      "normalized_value": "1 year auto-renewal (subject to annual board approval)"
+      "reasoning": "After the initial term, the agreement auto-renews in one-year increments subject to annual approval.",
+      "normalized_value": "1 year auto-renewal"
     }
   },
   "usage": {
     "model": "gpt-5-2025-08-07",
-    "input_tokens": 6236,
-    "output_tokens": 3020
+    "input_tokens": 6354,
+    "output_tokens": 4253
   },
-  "latency_seconds": 49.343676805496216
+  "latency_seconds": 102.92170000076294
 }

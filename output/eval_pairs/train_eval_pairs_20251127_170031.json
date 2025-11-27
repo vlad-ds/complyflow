@@ -1,0 +1,2091 @@
+{
+  "generated_at": "2025-11-27T17:00:31.276058",
+  "split": "train",
+  "models": [
+    "sonnet",
+    "gpt-5",
+    "gpt-5-mini",
+    "flash"
+  ],
+  "contract_count": 10,
+  "eval_pairs": [
+    {
+      "contract_file": "01_service_gpaq.pdf",
+      "ground_truth": {
+        "file": "01_service_gpaq.pdf",
+        "original_filename": "GpaqAcquisitionHoldingsInc_20200123_S-4A_EX-10.8_11951679_EX-10.8_Service Agreement.pdf",
+        "contract_type": "Service Agreement",
+        "Document Name": [
+          "SPONSORSHIP AND SERVICES AGREEMENT"
+        ],
+        "Parties": [
+          "HOFV and/or PFHOF, on the one hand, and Constellation, on the other hand, are referred to herein as a \"Party\" and, collectively, as the \"Parties\".",
+          "(\"PFHOF\" and, together with HOFV, the \"HOF Entities\"",
+          "on behalf of itself and its retail affiliates and subsidiaries (collectively, \"Constellation\")",
+          "HOF Village, LLC",
+          "Constellation NewEnergy, Inc.",
+          "HOFV",
+          "National Football Museum, Inc., d/b/a Pro Football Hall of Fame"
+        ],
+        "Agreement Date": [
+          "19t h day of December, 2018"
+        ],
+        "Effective Date": [],
+        "Expiration Date": [
+          "The term of this Agreement (the \"Term\"), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028."
+        ],
+        "Renewal Term": [],
+        "Notice Period To Terminate Renewal": [],
+        "Governing Law": [
+          "This Agreement shall be governed by and construed in accordance with the laws of the State of Ohio, without reference to principles of conflicts of law."
+        ]
+      },
+      "model_outputs": {
+        "sonnet": {
+          "source_file": "01_service_gpaq.txt",
+          "provider": "anthropic",
+          "model": "sonnet",
+          "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+          "timestamp": "2025-11-27T16:25:52.052254",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This SPONSORSHIP AND SERVICES AGREEMENT (the \"Agreement\") is made and entered into as of the 19th day of December, 2018, by and among HOF Village, LLC, a Delaware limited liability company (\"HOFV\"), National Football Museum, Inc., d/b/a Pro Football Hall of Fame, an Ohio corporation (\"PFHOF\" and, together with HOFV, the \"HOF Entities\") and Constellation NewEnergy, Inc., a Delaware corporation, on behalf of itself and its retail affiliates and subsidiaries (collectively, \"Constellation\").",
+              "reasoning": "The parties are identified in the preamble of the agreement, listing the three contracting entities with their legal forms and jurisdictions.",
+              "normalized_value": [
+                "HOF Village, LLC",
+                "National Football Museum, Inc.",
+                "Constellation NewEnergy, Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "SPONSORSHIP AND SERVICES AGREEMENT... Constellation desires to provide to the HOF Entities, and the HOF Entities desire to obtain from Constellation, certain of Constellation's products and services... Constellation desires to become a sponsor of the Village and to obtain the rights set forth herein in connection with such sponsorship... ARTICLE 1 SUPPLY OF PRODUCTS & SERVICES... ARTICLE 3 SPONSORSHIP RIGHTS AND BENEFITS... For the advertising and other rights described herein, Constellation shall pay to the HOF Entities total combined sponsorship fees",
+              "reasoning": "While titled 'Sponsorship and Services Agreement', the contract has dual purposes: (1) Constellation providing energy products and services to the HOF Entities, and (2) Constellation receiving sponsorship rights in exchange for sponsorship fees. However, the primary economic substance appears to be the sponsorship arrangement, as evidenced by the extensive sponsorship rights detailed in Article 3 and Exhibit E, the payment of sponsorship fees in Section 3.4, and the fact that the products/services are sold separately at market prices rather than being the primary consideration. The sponsorship is the main transaction, with the services being an additional commercial relationship.",
+              "normalized_value": "Sponsorship Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract has a fixed term expiring December 31, 2028 per Section 4.1, with no automatic renewal provision mentioned. There are various termination provisions in Section 4.2 for breach, reputational damage, and failure to recover investment, but none of these relate to preventing automatic renewal. The contract simply expires at the end of the term without requiring notice to prevent renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "The term of this Agreement (the \"Term\"), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+              "reasoning": "Section 4.1 explicitly states the expiration date as a specific calendar date rather than a relative term from the effective date.",
+              "normalized_value": "2028-12-31"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "Section 4.1 states the term expires on December 31, 2028 'unless mutually extended by written agreement of the Parties'. This requires mutual agreement for extension, not automatic renewal. There is no automatic renewal provision in the contract.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "claude-sonnet-4-5-20250929",
+            "input_tokens": 15246,
+            "output_tokens": 782
+          },
+          "latency_seconds": 24.87119197845459
+        },
+        "gpt-5": {
+          "source_file": "01_service_gpaq.txt",
+          "provider": "openai",
+          "model": "gpt-5",
+          "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+          "timestamp": "2025-11-27T16:43:31.375683",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This SPONSORSHIP AND SERVICES AGREEMENT (the \u201cAgreement\u201d) is made and entered into as of the 19th day of December, 2018, by\nand among HOF Village, LLC, a Delaware limited liability company (\u201cHOFV\u201d), National Football Museum, Inc., d/b/a Pro Football Hall of Fame, an\nOhio corporation (\u201cPFHOF\u201d and, together with HOFV, the \u201cHOF Entities\u201d) and Constellation NewEnergy, Inc., a Delaware corporation, on behalf of\nitself and its retail affiliates and subsidiaries (collectively, \u201cConstellation\u201d).",
+              "reasoning": "The opening paragraph lists the contracting entities by full legal names and roles, clearly identifying the parties.",
+              "normalized_value": [
+                "HOF Village, LLC",
+                "National Football Museum, Inc. d/b/a Pro Football Hall of Fame",
+                "Constellation NewEnergy, Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "WHEREAS, Constellation desires to provide to the HOF Entities, and the HOF Entities desire to obtain from Constellation, certain of\nConstellation\u2019s products and services listed and described in Exhibit A (collectively, the \u201cProducts & Services\u201d) for use in connection with the\nJohnson Controls Hall of Fame Village in Canton, Ohio (the \u201cVillage)\u201d\u037e and\nWHEREAS, Constellation desires to become a sponsor of the Village and to obtain the rights set forth herein in connection with such\nsponsorship.",
+              "reasoning": "The recitals show the agreement covers both provision of products/services and sponsorship rights, with sponsorship fees and rights detailed later. The primary nature aligns with a sponsorship arrangement.",
+              "normalized_value": "Sponsorship Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The agreement specifies a fixed expiration date and contains no automatic renewal or notice requirement to prevent renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "4.1 Term. The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner\nterminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+              "reasoning": "This clause states the contract expires on a specific calendar date.",
+              "normalized_value": "2028-12-31"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "No auto-renewal or renewal term language is provided; only a fixed end date with potential mutual extension.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-2025-08-07",
+            "input_tokens": 13459,
+            "output_tokens": 2315
+          },
+          "latency_seconds": 61.212892293930054
+        },
+        "gpt-5-mini": {
+          "source_file": "01_service_gpaq.txt",
+          "provider": "openai",
+          "model": "gpt-5-mini",
+          "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+          "timestamp": "2025-11-27T16:54:38.565401",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This SPONSORSHIP AND SERVICES AGREEMENT (the \u201cAgreement\u201d) is made and entered into as of the 19th day of December, 2018, by and among HOF Village, LLC, a Delaware limited liability company (\u201cHOFV\u201d), National Football Museum, Inc., d/b/a Pro Football Hall of Fame, an Ohio corporation (\u201cPFHOF\u201d and, together with HOFV, the \u201cHOF Entities\u201d) and Constellation NewEnergy, Inc., a Delaware corporation, on behalf of itself and its retail affiliates and subsidiaries (collectively, \u201cConstellation\u201d). HOFV and/or PFHOF, on the one hand, and Constellation, on the other hand, are referred to herein as a \u201cParty\u201d and, collectively, as the \u201cParties\u201d.",
+              "reasoning": "The quoted paragraph in the preamble explicitly names the contracting entities and their corporate forms and trade names; it identifies the three main parties to the Agreement.",
+              "normalized_value": [
+                "HOF Village, LLC",
+                "National Football Museum, Inc. d/b/a Pro Football Hall of Fame",
+                "Constellation NewEnergy, Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "SPONSORSHIP AND SERVICES AGREEMENT\n\nWHEREAS, Constellation desires to become a sponsor of the Village and to obtain the rights set forth herein in connection with such sponsorship.",
+              "reasoning": "The document title describes the agreement as a 'Sponsorship and Services' agreement and the WHEREAS clause expressly states Constellation's desire to become a sponsor and obtain sponsorship rights. Substantively the contract grants sponsorship/branding rights to Constellation in exchange for sponsorship fees and also sets out Constellation's obligation to provide products and services (energy-related supply and services). The primary commercial exchange centers on sponsorship/branding rights plus related service/supply obligations, so 'Sponsorship Agreement' best captures the primary purpose.",
+              "normalized_value": "Sponsorship Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract does not contain any clause stating that the agreement will automatically renew unless notice is given, nor does it specify an advance notice period to prevent renewal. The Term is a fixed calendar end date (December 31, 2028) with no automatic renewal language.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+              "reasoning": "Section 4.1 explicitly states the agreement's expiration as a calendar date: 'shall expire on December 31, 2028.' This is an explicit calendar date so it can be normalized to ISO format.",
+              "normalized_value": "2028-12-31"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "There is no language in the Agreement providing for automatic renewal or specifying renewal terms (only that the Term may be 'mutually extended by written agreement of the Parties'). Therefore no renewal term is specified.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-mini-2025-08-07",
+            "input_tokens": 13459,
+            "output_tokens": 2388
+          },
+          "latency_seconds": 39.57147812843323
+        },
+        "flash": {
+          "source_file": "01_service_gpaq.txt",
+          "provider": "gemini",
+          "model": "flash",
+          "eval_id": "eval_flash_20251127_163038_038fe6d4",
+          "timestamp": "2025-11-27T16:30:49.024296",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "HOF Village, LLC, a Delaware limited liability company (\u201cHOFV\u201d), National Football Museum, Inc., d/b/a Pro Football Hall of Fame, an Ohio corporation (\u201cPFHOF\u201d and, together with HOFV, the \u201cHOF Entities\u201d) and Constellation NewEnergy, Inc., a Delaware corporation, on behalf of itself and its retail affiliates and subsidiaries (collectively, \u201cConstellation\u201d)",
+              "reasoning": "The introductory paragraph of the agreement explicitly identifies the full legal names of all parties involved.",
+              "normalized_value": [
+                "HOF Village, LLC",
+                "National Football Museum, Inc.",
+                "Constellation NewEnergy, Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "SPONSORSHIP AND SERVICES AGREEMENT",
+              "reasoning": "The title of the agreement clearly states 'SPONSORSHIP AND SERVICES AGREEMENT'. Additionally, the 'WHEREAS' clauses describe Constellation's desire to become a sponsor and provide services, confirming the dual nature of the agreement, with sponsorship being a core element.",
+              "normalized_value": "Sponsorship Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+              "reasoning": "The agreement specifies a fixed term expiring on December 31, 2028, and states that extensions require mutual written agreement. There is no clause indicating automatic renewal that would necessitate a notice period to prevent it.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "shall expire on December 31, 2028",
+              "reasoning": "Section 4.1, titled 'Term', explicitly states that the agreement 'shall expire on December 31, 2028'.",
+              "normalized_value": "2028-12-31"
+            },
+            "renewal_term": {
+              "raw_snippet": "unless mutually extended by written agreement of the Parties",
+              "reasoning": "Section 4.1 states that the agreement expires on a specific date 'unless mutually extended by written agreement of the Parties'. This indicates that there is no automatic renewal or a predefined renewal term; any extension requires a new, explicit agreement.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gemini-2.5-flash",
+            "input_tokens": 13009,
+            "output_tokens": 569
+          },
+          "latency_seconds": 10.931681156158447
+        }
+      }
+    },
+    {
+      "contract_file": "02_service_reynolds.pdf",
+      "ground_truth": {
+        "file": "02_service_reynolds.pdf",
+        "original_filename": "ReynoldsConsumerProductsInc_20200121_S-1A_EX-10.22_11948918_EX-10.22_Service Agreement.pdf",
+        "contract_type": "Service Agreement",
+        "Document Name": [
+          "TRANSITION SERVICES AGREEMENT"
+        ],
+        "Parties": [
+          "Reynolds Group Holdings Inc.",
+          "RGHI",
+          "(the \"Company\" or \"RCP\")",
+          "Reynolds Consumer Products Inc.",
+          "Each Party or any of its Affiliates providing services hereunder shall be a \"Provider,\" and each Party or any of its Affiliates receiving services hereunder shall be a \"Recipient.\""
+        ],
+        "Agreement Date": [
+          "[\u2022], 2020"
+        ],
+        "Effective Date": [],
+        "Expiration Date": [
+          "With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \"Commencement Date\"), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \"Term\") or (ii) earlier terminated pursuant to this Agreement (a \"Termination Date\")."
+        ],
+        "Renewal Term": [],
+        "Notice Period To Terminate Renewal": [],
+        "Governing Law": [
+          "This Agreement shall be governed in all respects, including as to validity, interpretation and effect, by the Laws of the State of Illinois, without giving effect to its principles or rules of conflict of laws, to the extent such principles or rules are not mandatorily applicable by statute and would permit or require the application of the Laws of another jurisdiction."
+        ]
+      },
+      "model_outputs": {
+        "sonnet": {
+          "source_file": "02_service_reynolds.txt",
+          "provider": "anthropic",
+          "model": "sonnet",
+          "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+          "timestamp": "2025-11-27T16:26:19.880104",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "TRANSITION SERVICES AGREEMENT (the \"Agreement\") dated as of [\u2022], 2020, between Reynolds Group Holdings Inc., a Delaware corporation (\"RGHI\"), and Reynolds Consumer Products Inc., a Delaware corporation, (the \"Company\" or \"RCP\").",
+              "reasoning": "The parties are identified in the preamble of the agreement, which clearly names the two contracting entities.",
+              "normalized_value": [
+                "Reynolds Group Holdings Inc.",
+                "Reynolds Consumer Products Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "B. In order to facilitate the separation of the Company and its Affiliates from RGHI and its Affiliates, (i) RGHI will provide, or cause its Affiliates to provide, certain services to the Company and its Affiliates, and (ii) the Company will provide, or cause its Affiliates to provide, certain services to RGHI and its Affiliates, all on the terms and conditions set forth herein.",
+              "reasoning": "While the title is 'Transition Services Agreement', the substance confirms this is a Service Agreement where both parties provide various services to each other (IT, HR, financial, legal, procurement, etc.) on a transitional basis following a corporate separation. The core obligation is service provision in exchange for fees, making this fundamentally a Service Agreement.",
+              "normalized_value": "Service Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "Company may terminate for convenience any Transition Service, and RGHI may terminate for convenience any Reverse Transition Service, upon 30 days' prior written notice of such termination",
+              "reasoning": "This contract does not have auto-renewal provisions that require notice to prevent renewal. The notice periods mentioned (30 days) relate to termination for convenience of individual services, not to preventing renewal of the agreement. The agreement terminates when all services expire, and each service has a fixed term (typically 12 or 24 months from commencement) without auto-renewal provisions.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \"Commencement Date\"), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \"Term\") or (ii) earlier terminated pursuant to this Agreement (a \"Termination Date\").",
+              "reasoning": "The agreement does not have a single fixed expiration date. Instead, each service has its own term - generally 12 months from the Commencement Date, though some services specify 18 or 24 months. The overall agreement terminates when all services have terminated. This is a relative term structure, not a specific calendar date.",
+              "normalized_value": "12 months following the Commencement Date"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "The contract does not contain any renewal provisions. Each service has a fixed term as specified in Exhibits A and B (typically 12, 18, or 24 months from commencement), and there is no language indicating automatic renewal. Section 6.1 states the term continues until the specified date or earlier termination, with no mention of renewal. Section 6.2 allows termination for convenience but does not establish renewal terms.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "claude-sonnet-4-5-20250929",
+            "input_tokens": 28927,
+            "output_tokens": 787
+          },
+          "latency_seconds": 27.803902864456177
+        },
+        "gpt-5": {
+          "source_file": "02_service_reynolds.txt",
+          "provider": "openai",
+          "model": "gpt-5",
+          "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+          "timestamp": "2025-11-27T16:44:26.955874",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "TRANSITION SERVICES AGREEMENT (the \u201cAgreement\u201d) dated as of [\u2022], 2020, between Reynolds Group Holdings Inc., a Delaware corporation\n(\u201cRGHI\u201d), and Reynolds Consumer Products Inc., a Delaware corporation, (the \u201cCompany\u201d or \u201cRCP\u201d).",
+              "reasoning": "The opening paragraph explicitly names the two contracting parties and their defined abbreviations.",
+              "normalized_value": [
+                "Reynolds Group Holdings Inc.",
+                "Reynolds Consumer Products Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "B. In order to facilitate the separation of the Company and its Affiliates from RGHI and its Affiliates, (i) RGHI will provide, or cause its Affiliates to\nprovide, certain services to the Company and its Affiliates, and (ii) the Company will provide, or cause its Affiliates to provide, certain services to RGHI\nand its Affiliates, all on the terms and conditions set forth herein.",
+              "reasoning": "The core purpose is reciprocal provision of transition services (IT, HR, finance, legal, etc.) to facilitate separation; the economic substance is a services arrangement.",
+              "normalized_value": "Service Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The agreement sets fixed terms for services and allows convenience termination (e.g., 30 days) but contains no auto-renewal requiring advance notice to prevent renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "Section 6.1 Term of Services. With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a\ndifferent date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \u201cCommencement Date\u201d), and shall\ncontinue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in\nthis Agreement or on Exhibit A or Exhibit B, as applicable (the \u201cTerm\u201d) or (ii) earlier terminated pursuant to this Agreement (a \u201cTermination Date\u201d).",
+              "reasoning": "This clause states the default duration for each Service (12 months following the Commencement Date) unless otherwise specified in the Exhibits.",
+              "normalized_value": "12 months following the Commencement Date"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "No provision indicates automatic renewal or a defined renewal period for the Services.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-2025-08-07",
+            "input_tokens": 25570,
+            "output_tokens": 2685
+          },
+          "latency_seconds": 55.5633442401886
+        },
+        "gpt-5-mini": {
+          "source_file": "02_service_reynolds.txt",
+          "provider": "openai",
+          "model": "gpt-5-mini",
+          "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+          "timestamp": "2025-11-27T16:55:17.115227",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "TRANSITION SERVICES AGREEMENT (the \u201cAgreement\u201d) dated as of [\u2022], 2020, between Reynolds Group Holdings Inc., a Delaware corporation\n(\u201cRGHI\u201d), and Reynolds Consumer Products Inc., a Delaware corporation, (the \u201cCompany\u201d or \u201cRCP\u201d).",
+              "reasoning": "The preamble identifies the two contracting entities by name and corporate form and uses the conventional 'between <Party A> and <Party B>' phrasing to name the parties to the Agreement.",
+              "normalized_value": [
+                "Reynolds Group Holdings Inc.",
+                "Reynolds Consumer Products Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "B. In order to facilitate the separation of the Company and its Affiliates from RGHI and its Affiliates, (i) RGHI will provide, or cause its Affiliates to\nprovide, certain services to the Company and its Affiliates, and (ii) the Company will provide, or cause its Affiliates to provide, certain services to RGHI\nand its Affiliates, all on the terms and conditions set forth herein.",
+              "reasoning": "The core economic substance is reciprocal provision of transitional services to facilitate separation following the Commencement Date. The primary obligations are service provision (Transition Services and Reverse Transition Services), so the agreement is properly classified as a Service Agreement.",
+              "normalized_value": "Service Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract contains termination-for-convenience notice periods (e.g., Section 6.2 provides 30 days' prior written notice to terminate specific Services), but it contains no language about automatic renewal or an advance notice required to prevent automatic renewal of the agreement. Because this field specifically asks for the notice period to prevent automatic renewal, and no such renewal-notice language exists, the field is left empty.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "Section 6.1 Term of Services. With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a\ndifferent date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \u201cCommencement Date\u201d), and shall\ncontinue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in\nthis Agreement or on Exhibit A or Exhibit B, as applicable (the \u201cTerm\u201d) or (ii) earlier terminated pursuant to this Agreement (a \u201cTermination Date\u201d).",
+              "reasoning": "Section 6.1 sets out the general term for Services: they run from the Commencement Date and continue until '12 months following the Commencement Date' unless a different termination date is specified for a particular Service in the Exhibits or earlier termination applies. This is a relative-term specification, so it is preserved as written.",
+              "normalized_value": "12 months following the Commencement Date"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "The agreement does not include any clause describing automatic renewal or renewal terms for the overall Agreement or Services. Exhibit entries specify fixed terms for many Services (e.g., '24 months from the Commencement Date' for certain services), but there is no renewal mechanism or automatic extension language to extract. Therefore this field is empty.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-mini-2025-08-07",
+            "input_tokens": 25570,
+            "output_tokens": 2032
+          },
+          "latency_seconds": 38.53089189529419
+        },
+        "flash": {
+          "source_file": "02_service_reynolds.txt",
+          "provider": "gemini",
+          "model": "flash",
+          "eval_id": "eval_flash_20251127_163038_038fe6d4",
+          "timestamp": "2025-11-27T16:31:02.443246",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "Reynolds Group Holdings Inc., a Delaware corporation(\"RGHI\"), and Reynolds Consumer Products Inc., a Delaware corporation, (the \"Company\" or \"RCP\")",
+              "reasoning": "The parties are identified in the introductory paragraph of the agreement.",
+              "normalized_value": [
+                "Reynolds Group Holdings Inc.",
+                "Reynolds Consumer Products Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "TRANSITION SERVICES AGREEMENT (the \u201cAgreement\u201d) dated as of [\u2022], 2020, between Reynolds Group Holdings Inc., a Delaware corporation(\"RGHI\"), and Reynolds Consumer Products Inc., a Delaware corporation, (the \"Company\" or \"RCP\"). Each Party or any of its Affiliates providing services hereunder shall be a \"Provider,\" and each Party or any of its Affiliates receiving services hereunder shall be a \"Recipient.\"\nPRELIMINARY STATEMENT\nB. In order to facilitate the separation of the Company and its Affiliates from RGHI and its Affiliates, (i) RGHI will provide, or cause its Affiliates to provide, certain services to the Company and its Affiliates, and (ii) the Company will provide, or cause its Affiliates to provide, certain services to RGHI and its Affiliates, all on the terms and conditions set forth herein.",
+              "reasoning": "The agreement is titled 'TRANSITION SERVICES AGREEMENT' and its preliminary statement explicitly states that both parties will provide 'certain services' to each other to facilitate the separation. This clearly indicates a service agreement.",
+              "normalized_value": "Service Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract defines specific terms for services (e.g., 12 months, 24 months) and allows for termination for convenience with 30 days' notice, or termination for cause. It does not contain provisions for automatic renewal that require a notice period to prevent such renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "Section 6.1 Term of Services. With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \u201cCommencement Date\u201d), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \u201cTerm\u201d) or (ii) earlier terminated pursuant to this Agreement (a \u201cTermination Date\u201d).\nSection 6.3 Termination of Agreement. This Agreement shall terminate when the Termination Date has occurred for all Services.\nExhibit A: Many services, particularly in Section G1 (IT Services), Section G4.2 (Tax Services \u2013 Direct), Section G4.3 (Tax Services \u2013 Indirect), Section G4.5 (Tax Services \u2013 Audit Support), Section G8.1 (General Services \u2013 Legal Support), Section G8.4 (General Services \u2013 SEC Reporting and Compliance) specify a term of \"24 months from the Commencement Date.\"",
+              "reasoning": "Section 6.3 states that the agreement terminates when the 'Termination Date has occurred for all Services'. While Section 6.1 indicates a general term of '12 months following the Commencement Date' for services, it also states 'unless such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B'. Several key services listed in Exhibit A (e.g., various IT, Tax, and Legal support services) explicitly specify a term of '24 months from the Commencement Date'. Therefore, the overall agreement's duration is dictated by the longest specified service term.",
+              "normalized_value": "24 months following the Commencement Date"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "The contract does not describe any automatic renewal terms for the agreement or its services. Services have fixed terms or specific termination conditions, not auto-renewal clauses.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gemini-2.5-flash",
+            "input_tokens": 25680,
+            "output_tokens": 932
+          },
+          "latency_seconds": 13.381263971328735
+        }
+      }
+    },
+    {
+      "contract_file": "03_service_verizon.pdf",
+      "ground_truth": {
+        "file": "03_service_verizon.pdf",
+        "original_filename": "VerizonAbsLlc_20200123_8-K_EX-10.4_11952335_EX-10.4_Service Agreement.pdf",
+        "contract_type": "Service Agreement",
+        "Document Name": [
+          "TRANSFER AND SERVICING AGREEMENT, d"
+        ],
+        "Parties": [
+          "Servicer",
+          "Marketing Agent",
+          "Depositor",
+          "Issuer",
+          "VERIZON ABS LLC",
+          "Custodian",
+          "VERIZON OWNER TRUST 2020-A",
+          "Cellco Partnership d/b/a Verizon Wireless",
+          "Cellco"
+        ],
+        "Agreement Date": [
+          "January 29, 2020"
+        ],
+        "Effective Date": [],
+        "Expiration Date": [
+          "Cellco's appointment as custodian is effective as of the Initial Cutoff Date and will continue until the later of (i) the date on which all obligations of the Issuer have been paid in full and (ii) the date on which such appointment is terminated under this Section 3.10(f).",
+          "This Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement."
+        ],
+        "Renewal Term": [],
+        "Notice Period To Terminate Renewal": [],
+        "Governing Law": [
+          "THIS AGREEMENT, INCLUDING THE RIGHTS AND DUTIES OF THE PARTIES HERETO, SHALL BE GOVERNED BY, AND CONSTRUED IN ACCORDANCE WITH, THE INTERNAL LAWS OF THE STATE OF NEW YORK (INCLUDING SECTIONS 5-1401 AND 5-1402 OF THE GENERAL OBLIGATIONS LAW OF THE STATE OF NEW YORK, BUT WITHOUT REGARD TO ANY OTHERWISE APPLICABLE CONFLICTS OF LAW PRINCIPLES)."
+        ]
+      },
+      "model_outputs": {
+        "sonnet": {
+          "source_file": "03_service_verizon.txt",
+          "provider": "anthropic",
+          "model": "sonnet",
+          "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+          "timestamp": "2025-11-27T16:26:44.760034",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "TRANSFER AND SERVICING AGREEMENT, dated as of January 29, 2020 (this \"Agreement\"), among VERIZON OWNER TRUST 2020-A, a Delaware statutory trust, as issuer (the \"Issuer\"), VERIZON ABS LLC, a Delaware limited liability company, as depositor (the \"Depositor\"), and Cellco Partnership d/b/a Verizon Wireless, a Delaware general partnership (\"Cellco\"), as servicer (in such capacity, the \"Servicer\"), as marketing agent (in such capacity, the \"Marketing Agent\") and as custodian (in such capacity, the \"Custodian\").",
+              "reasoning": "The parties are identified in the opening paragraph of the agreement, listing the three entities entering into this Transfer and Servicing Agreement.",
+              "normalized_value": [
+                "Verizon Owner Trust 2020-A",
+                "Verizon ABS LLC",
+                "Cellco Partnership d/b/a Verizon Wireless"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "TRANSFER AND SERVICING AGREEMENT, dated as of January 29, 2020 (this \"Agreement\"), among VERIZON OWNER TRUST 2020-A, a Delaware statutory trust, as issuer (the \"Issuer\"), VERIZON ABS LLC, a Delaware limited liability company, as depositor (the \"Depositor\"), and Cellco Partnership d/b/a Verizon Wireless, a Delaware general partnership (\"Cellco\"), as servicer (in such capacity, the \"Servicer\"), as marketing agent (in such capacity, the \"Marketing Agent\") and as custodian (in such capacity, the \"Custodian\"). ... In connection with a securitization transaction sponsored by Cellco in which the Issuer will issue Notes secured by a pool of Receivables consisting of device payment plan agreements, certain of the Originators and/or the Master Trust have transferred a pool of Receivables and related property, and any of the Originators and/or the Master Trust may from time to time transfer additional pools of Receivables and related property to the Depositor, who will transfer them to the Issuer. The Issuer will engage the Servicer to service the Receivables.",
+              "reasoning": "This is a securitization agreement where the Depositor transfers receivables to the Issuer, and Cellco is engaged to service those receivables. The primary economic substance involves the servicing of receivables for an asset-backed securities transaction. The servicer is being engaged to manage, service, administer and collect on receivables. This is fundamentally a service agreement where Cellco provides servicing, custodian, and marketing agent services for the securitization structure.",
+              "normalized_value": "Service Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "This agreement does not contain a renewal provision or a notice period to terminate renewal. The agreement has a specific termination structure tied to the Amortization Period and Final Maturity Date, with optional redemption provisions. There is no automatic renewal mechanism that requires advance notice to prevent renewal. Section 8.3 states termination occurs when receivables are paid in full or the Issuer is terminated under the Trust Agreement, but there is no notice period to prevent renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "\"Final Maturity Date\" means, for (i) the Class A-1a Notes, the Payment Date in July, 2024, (ii) the Class A-1b Notes, the Payment Date in July, 2024, (iii) the Class B Notes, the Payment Date in July, 2024, and (iv) the Class C Notes, the Payment Date in July, 2024.",
+              "reasoning": "The agreement defines the Final Maturity Date for all classes of Notes as the Payment Date in July 2024. While the agreement may technically continue until all receivables are settled per Section 8.3, the substantive obligations related to the Notes expire on the Final Maturity Date. The Payment Date is defined as the 20th day of each month, so this would be July 20, 2024.",
+              "normalized_value": "2024-07-20"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "This agreement does not contain any automatic renewal provisions. Section 8.3 states that the agreement terminates on the earlier of (a) when the last receivable is paid in full, settled, sold or written off, or (b) when the Issuer is terminated under the Trust Agreement. There are optional redemption provisions in Sections 8.1 and 8.2, but no renewal term. This is a securitization agreement tied to specific notes with a Final Maturity Date, not a contract that renews for successive terms.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "claude-sonnet-4-5-20250929",
+            "input_tokens": 73792,
+            "output_tokens": 1117
+          },
+          "latency_seconds": 24.85361909866333
+        },
+        "gpt-5": {
+          "source_file": "03_service_verizon.txt",
+          "provider": "openai",
+          "model": "gpt-5",
+          "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+          "timestamp": "2025-11-27T16:45:08.893567",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "TRANSFER AND SERVICING AGREEMENT, dated as of January 29, 2020 (this \u201cAgreement\u201d), among VERIZON OWNER TRUST 2020-A,\na Delaware statutory trust, as issuer (the \u201cIssuer\u201d), VERIZON ABS LLC, a Delaware limited liability company, as depositor (the \u201cDepositor\u201d), and\nCellco Partnership d/b/a Verizon Wireless, a Delaware general partnership (\u201cCellco\u201d), as servicer (in such capacity, the \u201cServicer\u201d), as marketing\nagent (in such capacity, the \u201cMarketing Agent\u201d) and as custodian (in such capacity, the \u201cCustodian\u201d).",
+              "reasoning": "The opening paragraph lists all contracting parties and their roles, clearly identifying the entities bound by the agreement.",
+              "normalized_value": [
+                "Verizon Owner Trust 2020-A",
+                "Verizon ABS LLC",
+                "Cellco Partnership d/b/a Verizon Wireless"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "Section 3.1 Engagement. The Issuer engages Cellco as the Servicer of the Receivables for the Issuer and the Indenture Trustee, and Cellco\naccepts this engagement.",
+              "reasoning": "The core substance involves Cellco providing servicing of receivables for the Issuer; despite transfer provisions, the primary ongoing obligation is servicing, fitting a service agreement.",
+              "normalized_value": "Service Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The agreement contains no auto-renewal mechanism or notice requirement to prevent renewal; termination is event/condition-based, not renewal-based.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "Section 8.3 Termination. This Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is\npaid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust\nAgreement.",
+              "reasoning": "Section 8.3 explicitly defines the term end based on specified conditions rather than a fixed date.",
+              "normalized_value": "earlier of last remaining Receivable paid/settled/sold/written off and Issuer termination under Trust Agreement Section 8.1"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "No renewal provisions or auto-renewal terms are present in the agreement.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-2025-08-07",
+            "input_tokens": 64589,
+            "output_tokens": 1776
+          },
+          "latency_seconds": 41.91443729400635
+        },
+        "gpt-5-mini": {
+          "source_file": "03_service_verizon.txt",
+          "provider": "openai",
+          "model": "gpt-5-mini",
+          "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+          "timestamp": "2025-11-27T16:55:45.152337",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "TRANSFER AND SERVICING AGREEMENT, dated as of January 29, 2020 (this \u201cAgreement\u201d), among VERIZON OWNER TRUST 2020-A, a Delaware statutory trust, as issuer (the \u201cIssuer\u201d), VERIZON ABS LLC, a Delaware limited liability company, as depositor (the \u201cDepositor\u201d), and Cellco Partnership d/b/a Verizon Wireless, a Delaware general partnership (\u201cCellco\u201d), as servicer (in such capacity, the \u201cServicer\u201d), as marketing agent (in such capacity, the \u201cMarketing Agent\u201d) and as custodian (in such capacity, the \u201cCustodian\u201d).",
+              "reasoning": "This paragraph expressly identifies the contracting parties, their legal forms and the capacities in which they act. It appears in the introductory recitals and names the Issuer, the Depositor and Cellco (the Servicer/Marketing Agent/Custodian).",
+              "normalized_value": [
+                "VERIZON OWNER TRUST 2020-A",
+                "VERIZON ABS LLC",
+                "Cellco Partnership d/b/a Verizon Wireless"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "The Issuer will engage the Servicer to service the Receivables.",
+              "reasoning": "Although the document title is 'Transfer and Servicing Agreement', the core economic substance is that the Issuer acquires pools of receivables and engages Cellco to service those receivables (collection, administration, reporting, etc.). That makes this primarily a services arrangement (servicing of receivables).",
+              "normalized_value": "Service Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "I searched for any clause that creates an automatic renewal and an advance notice requirement to prevent renewal. The agreement contains termination, resignation and replacement provisions, and termination on final payment, but it does not contain language describing an automatic renewal term requiring advance notice to prevent renewal. Therefore there is no \"notice period to prevent automatic renewal\" to extract.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
+              "reasoning": "Section 8.3 explicitly states when the Agreement terminates \u2014 it is tied to the final payment/settlement/write-off of the last Receivable or termination of the Issuer under the Trust Agreement. This is a relative/contingent termination provision rather than a fixed calendar date.",
+              "normalized_value": "the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "No automatic renewal or renewal-term clause was found. The agreement contemplates termination upon certain events (e.g., final payment of Receivables, servicer resignation/termination), but does not provide for renewal terms or automatic extension periods.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-mini-2025-08-07",
+            "input_tokens": 64589,
+            "output_tokens": 1880
+          },
+          "latency_seconds": 28.01185894012451
+        },
+        "flash": {
+          "source_file": "03_service_verizon.txt",
+          "provider": "gemini",
+          "model": "flash",
+          "eval_id": "eval_flash_20251127_163038_038fe6d4",
+          "timestamp": "2025-11-27T16:31:12.759719",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "TRANSFER AND SERVICING AGREEMENT, dated as of January 29, 2020 (this \u201cAgreement\u201d), among VERIZON OWNER TRUST 2020-A, a Delaware statutory trust, as issuer (the \u201cIssuer\u201d), VERIZON ABS LLC, a Delaware limited liability company, as depositor (the \u201cDepositor\u201d), and Cellco Partnership d/b/a Verizon Wireless, a Delaware general partnership (\u201cCellco\u201d), as servicer (in such capacity, the \u201cServicer\u201d), as marketing agent (in such capacity, the \u201cMarketing Agent\u201d) and as custodian (in such capacity, the \u201cCustodian\u201d).",
+              "reasoning": "The parties are identified in the introductory paragraph of the agreement, where each entity is named along with its role.",
+              "normalized_value": [
+                "VERIZON OWNER TRUST 2020-A",
+                "VERIZON ABS LLC",
+                "Cellco Partnership d/b/a Verizon Wireless"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "TRANSFER AND SERVICING AGREEMENT",
+              "reasoning": "The title of the agreement clearly states 'TRANSFER AND SERVICING AGREEMENT'. The document's content, particularly Section 3.1, confirms that the Issuer engages Cellco to 'service the Receivables', indicating the primary purpose is providing services related to the transferred assets.",
+              "normalized_value": "Service Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract specifies conditions for optional acquisition, redemption, and a general termination clause tied to the life of the receivables or the Issuer's termination (Section 8.3). It does not contain any clause for automatic renewal of the agreement itself that would require a notice period to prevent such renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
+              "reasoning": "Section 8.3 outlines the termination conditions, which are based on specific events (receivables paid/sold/written off or Issuer termination) rather than a fixed calendar date or a relative term from the effective date. It does not state that the agreement continues 'in perpetuity' or 'indefinitely'.",
+              "normalized_value": ""
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "The contract does not include any provisions for automatic renewal of the agreement. Its termination is based on the fulfillment of specific conditions related to the underlying receivables or the Issuer's termination.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gemini-2.5-flash",
+            "input_tokens": 65424,
+            "output_tokens": 639
+          },
+          "latency_seconds": 10.290127754211426
+        }
+      }
+    },
+    {
+      "contract_file": "04_service_integrity.pdf",
+      "ground_truth": {
+        "file": "04_service_integrity.pdf",
+        "original_filename": "IntegrityFunds_20200121_485BPOS_EX-99.E UNDR CONTR_11948727_EX-99.E UNDR CONTR_Service Agreement.pdf",
+        "contract_type": "Service Agreement",
+        "Document Name": [
+          "DISTRIBUTION AND SERVICES AGREEMENT"
+        ],
+        "Parties": [
+          "Integrity Short Term Government Fund",
+          "Integrity",
+          "Integrity Funds Distributor, LLC",
+          "Fund"
+        ],
+        "Agreement Date": [
+          "January 18, 2020"
+        ],
+        "Effective Date": [],
+        "Expiration Date": [
+          "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \"Qualified Trustees\"), by vote cast in person at a meeting called for the purpose of voting on such approval."
+        ],
+        "Renewal Term": [
+          "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \"Qualified Trustees\"), by vote cast in person at a meeting called for the purpose of voting on such approval."
+        ],
+        "Notice Period To Terminate Renewal": [],
+        "Governing Law": [
+          "This Agreement shall be construed in accordance with the laws of the State of Kansas."
+        ]
+      },
+      "model_outputs": {
+        "sonnet": {
+          "source_file": "04_service_integrity.txt",
+          "provider": "anthropic",
+          "model": "sonnet",
+          "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+          "timestamp": "2025-11-27T16:27:07.094170",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "the undersigned, the Integrity Short Term Government Fund, (the \"Fund\"), an open-end, diversified, management investment company organized as a series of The Integrity Funds, a Delaware statutory trust, has agreed that Integrity Funds Distributor, LLC, (\"Integrity\"), shall be, for the period of this distribution agreement",
+              "reasoning": "The parties are identified in the opening paragraph of the agreement, which names both the Fund and the Distributor as the contracting parties. The signature block confirms these parties with Shannon D. Radke signing on behalf of both entities.",
+              "normalized_value": [
+                "Integrity Short Term Government Fund",
+                "Integrity Funds Distributor, LLC"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "DISTRIBUTION AND SERVICES AGREEMENT ... Integrity will act as principal underwriter for the distribution of the Shares ... Integrity agrees to use its best efforts to solicit orders for the sale of the Shares at the public offering price ... Integrity may allow commissions or concessions to dealers",
+              "reasoning": "While titled a 'Distribution and Services Agreement', the substance of the contract establishes Integrity as the principal underwriter and distributor for the Fund's shares. The primary obligation is distribution of investment fund shares, with Integrity acting as the exclusive distributor soliciting orders, working with dealers, and receiving commissions. This is fundamentally a distributor arrangement where one party is appointed to distribute products (shares) of another.",
+              "normalized_value": "Distributor Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "Section 7.1 specifies that the agreement continues automatically for successive annual periods 'provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority...of the Fund's Trustees'. The renewal mechanism requires affirmative Board approval rather than notice to prevent renewal. While there are notice periods for termination (60 days by Fund, 90 days by Integrity), these are for terminating the agreement, not for preventing automatic renewal. Since renewal requires affirmative action (Board approval) rather than being automatic unless notice is given, there is no 'notice period to terminate renewal' in the traditional sense.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement shall continue until January 18, 2022",
+              "reasoning": "Section 7.1 explicitly states that the agreement continues until a specific calendar date: January 18, 2022. After this initial term, it may continue for successive annual periods subject to Board approval.",
+              "normalized_value": "2022-01-18"
+            },
+            "renewal_term": {
+              "raw_snippet": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees",
+              "reasoning": "Section 7.1 specifies that after the initial term ending January 18, 2022, the agreement continues automatically for successive annual periods. However, this automatic continuation is conditional upon specific annual approval by the Board of Trustees and qualified trustees. The renewal term is annual (one year periods), though it requires affirmative action rather than being purely automatic.",
+              "normalized_value": "1 year, subject to annual Board approval"
+            }
+          },
+          "usage": {
+            "model": "claude-sonnet-4-5-20250929",
+            "input_tokens": 7662,
+            "output_tokens": 781
+          },
+          "latency_seconds": 22.30799913406372
+        },
+        "gpt-5": {
+          "source_file": "04_service_integrity.txt",
+          "provider": "openai",
+          "model": "gpt-5",
+          "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+          "timestamp": "2025-11-27T16:46:51.833654",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "In Witness Whereof, the parties hereto have caused this Agreement to be executed as of the date first set forth herein.\nIntegrity Short Term Government Fund\nBy: /s/ Shannon D. Radke\nShannon D. Radke - President\nAccepted:\nIntegrity Funds Distributor, LLC\nBy: /s/ Shannon D. Radke\nShannon D. Radke - President\nDated: January 18, 2020",
+              "reasoning": "The signature block clearly lists the two contracting parties by name.",
+              "normalized_value": [
+                "Integrity Short Term Government Fund",
+                "Integrity Funds Distributor, LLC"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "Section 1.1 Integrity will act as principal underwriter for the distribution of the Shares covered by the registration statement, prospectus, and statement of additional information then in effect of the Fund (the \u201cRegistration Statement\u201d) under the Securities Act of 1933, as amended (the \u201c1933 Act\u201d), and the Investment Company Act of 1940, as amended (the \u201c1940 Act\u201d).",
+              "reasoning": "The core obligation is that Integrity serves as principal underwriter to distribute the Fund\u2019s shares, which is a distribution arrangement.",
+              "normalized_value": "Distributor Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "Renewal requires annual Board and Qualified Trustees approval rather than an advance notice to prevent auto-renewal; no notice-to-nonrenew text is provided.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement shall continue until January 18, 2022,",
+              "reasoning": "This clause specifies a concrete end date for the initial term.",
+              "normalized_value": "2022-01-18"
+            },
+            "renewal_term": {
+              "raw_snippet": "and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+              "reasoning": "After the initial term, the agreement auto-renews in one-year increments subject to annual approval.",
+              "normalized_value": "1 year auto-renewal"
+            }
+          },
+          "usage": {
+            "model": "gpt-5-2025-08-07",
+            "input_tokens": 6354,
+            "output_tokens": 4253
+          },
+          "latency_seconds": 102.92170000076294
+        },
+        "gpt-5-mini": {
+          "source_file": "04_service_integrity.txt",
+          "provider": "openai",
+          "model": "gpt-5-mini",
+          "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+          "timestamp": "2025-11-27T16:56:23.181871",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This is to confirm that, in consideration of the agreements hereinafter contained, the undersigned, the Integrity Short Term\nGovernment Fund, (the \u201cFund\u201d), an open-end, diversified, management investment company organized as a series of The Integrity\nFunds, a Delaware statutory trust, has agreed that Integrity Funds Distributor, LLC, (\u201cIntegrity\u201d), shall be, for the period of this\ndistribution agreement (the \u201cAgreement\u201d), the principal underwriter of shares issued by the Fund, including such classes of shares\nas may now or hereafter be authorized (the \u201cShares\u201d).",
+              "reasoning": "The opening paragraph explicitly names the contracting parties: the Integrity Short Term Government Fund (the Fund) and Integrity Funds Distributor, LLC (Integrity). These are the primary parties who agree the Fund appoints Integrity as principal underwriter.",
+              "normalized_value": [
+                "Integrity Short Term Government Fund",
+                "Integrity Funds Distributor, LLC"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "DISTRIBUTION AND SERVICES AGREEMENT\n\nSection 1.1 Integrity will act as principal underwriter for the distribution of the Shares covered by the registration statement, prospectus, and statement of additional information then in effect of the Fund (the \u201cRegistration Statement\u201d) under the Securities Act of 1933, as amended (the \u201c1933 Act\u201d), and the Investment Company Act of 1940, as amended (the \u201c1940 Act\u201d).",
+              "reasoning": "The title and Section 1.1 show the core economic substance: Integrity's role is to act as principal underwriter/distributor of the Fund's shares and to perform distribution-related services. This is primarily a distribution (underwriting) arrangement rather than, for example, a pure services or licensing agreement.",
+              "normalized_value": "Distributor Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "Section 7.1 provides that continuance after the initial term \"shall continue automatically for successive annual periods... provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority ... of the Fund\u2019s Trustees who are not interested persons (the 'Qualified Trustees').\" Because renewal depends on specific annual approvals rather than a notice-to-prevent-auto-renewal mechanism, there is no discrete \"notice period to prevent automatic renewal\" to extract.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "Section 7.1 This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual\nperiods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s\nBoard of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons\n(as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this\nAgreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the\npurpose of voting on such approval.",
+              "reasoning": "Section 7.1 explicitly states the initial term end date: \"shall continue until January 18, 2022,\" which is a calendar date and thus convertible to ISO format.",
+              "normalized_value": "2022-01-18"
+            },
+            "renewal_term": {
+              "raw_snippet": "and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+              "reasoning": "This clause describes the renewal mechanism: automatic continuation in successive annual periods (ending January 18 each year) but conditioned on specific annual approval by the Fund\u2019s Board and the Qualified Trustees. The renewal period is therefore one year, subject to the stated approval condition.",
+              "normalized_value": "1 year auto-renewal (successive annual periods ending Jan 18; subject to annual approval by Fund's Board and Qualified Trustees)"
+            }
+          },
+          "usage": {
+            "model": "gpt-5-mini-2025-08-07",
+            "input_tokens": 6354,
+            "output_tokens": 2666
+          },
+          "latency_seconds": 38.015321016311646
+        },
+        "flash": {
+          "source_file": "04_service_integrity.txt",
+          "provider": "gemini",
+          "model": "flash",
+          "eval_id": "eval_flash_20251127_163038_038fe6d4",
+          "timestamp": "2025-11-27T16:31:23.925829",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "the Integrity Short Term Government Fund, (the \u201cFund\u201d), an open-end, diversified, management investment company organized as a series of The Integrity Funds, a Delaware statutory trust, has agreed that Integrity Funds Distributor, LLC, (\u201cIntegrity\u201d), shall be, for the period of this distribution agreement (the \u201cAgreement\u201d), the principal underwriter of shares issued by the Fund",
+              "reasoning": "The introductory paragraph explicitly names and defines the two primary entities entering into the agreement: \"the Integrity Short Term Government Fund\" and \"Integrity Funds Distributor, LLC.\"",
+              "normalized_value": [
+                "Integrity Short Term Government Fund",
+                "Integrity Funds Distributor, LLC"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "DISTRIBUTION AND SERVICES AGREEMENT. Integrity will act as principal underwriter for the distribution of the Shares covered by the registration statement, prospectus, and statement of additional information then in effect of the Fund",
+              "reasoning": "The title of the agreement clearly states \"DISTRIBUTION AND SERVICES AGREEMENT,\" and Section 1 explicitly describes Integrity's role as the \"principal underwriter for the distribution of the Shares.\" This indicates the primary purpose is the distribution of the Fund's shares.",
+              "normalized_value": "Distributor Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract states that continuance for successive annual periods is \"provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority...\" This means the agreement does not automatically renew unless a party gives notice; instead, it requires affirmative approval to continue. Therefore, there is no notice period specifically for preventing an automatic renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement shall continue until January 18, 2022",
+              "reasoning": "Section 7.1 explicitly states the date until which the agreement will initially continue.",
+              "normalized_value": "2022-01-18"
+            },
+            "renewal_term": {
+              "raw_snippet": "and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+              "reasoning": "Section 7.1 describes the agreement continuing \"automatically for successive annual periods\" after the initial term, albeit conditioned on specific annual approvals.",
+              "normalized_value": "1 year auto-renewal"
+            }
+          },
+          "usage": {
+            "model": "gemini-2.5-flash",
+            "input_tokens": 5875,
+            "output_tokens": 687
+          },
+          "latency_seconds": 11.126415014266968
+        }
+      }
+    },
+    {
+      "contract_file": "05_license_gopage.pdf",
+      "ground_truth": {
+        "file": "05_license_gopage.pdf",
+        "original_filename": "GopageCorp_20140221_10-K_EX-10.1_8432966_EX-10.1_Content License Agreement.pdf",
+        "contract_type": "License Agreement",
+        "Document Name": [
+          "WEBSITE CONTENT LICENSE AGREEMENT"
+        ],
+        "Parties": [
+          "PSiTech Corporation",
+          "Licensor",
+          "Licensee",
+          "Empirical Ventures, Inc."
+        ],
+        "Agreement Date": [
+          "Feb 10, 2014"
+        ],
+        "Effective Date": [
+          "Feb 10, 2014"
+        ],
+        "Expiration Date": [
+          "The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision of this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\")."
+        ],
+        "Renewal Term": [
+          "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term]."
+        ],
+        "Notice Period To Terminate Renewal": [
+          "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term]."
+        ],
+        "Governing Law": [
+          "This Agreement shall be governed by and construed in accordance with the internal laws of the State of Nevada without giving effect to any choice or conflict of law provision or rule."
+        ]
+      },
+      "model_outputs": {
+        "sonnet": {
+          "source_file": "05_license_gopage.txt",
+          "provider": "anthropic",
+          "model": "sonnet",
+          "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+          "timestamp": "2025-11-27T16:27:31.988077",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This Content License Agreement (\"Agreement\"), dated as of Feb 10, 2014 (the \"Effective Date\"), is by and between PSiTech Corporation, a BVI Corporation, with offices located at 303, 3rdFl, St. Georges Bldg, 2 Ice House St, Central, Hong Kong(\"Licensor\"), and Empirical Ventures, Inc., a Nevada corporation with offices located at 100, 40 Lake Bellevue Dr, Bellevue, WA(\"Licensee\").",
+              "reasoning": "The parties are identified in the opening paragraph of the agreement, which clearly names both contracting entities with their respective jurisdictions and office locations.",
+              "normalized_value": [
+                "PSiTech Corporation",
+                "Empirical Ventures, Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "Subject to Licensee's on\u00adgoing compliance with Section 3.2 and all other terms and conditions of this Agreement, Licensor grants to Licensee an exclusive (save for rights reserved to Licensor hereunder), non-transferable (except as provided in Section 11.7) and non-sublicensable license, during the License Term, to reproduce, perform, display, transmit and distribute the Licensed Content on the Licensee Siteand Related Media intended solely for use by End Usersin the Territory within the scope set forth in Schedule 1 (License Scope)",
+              "reasoning": "While the title indicates 'Content License Agreement', the substance confirms this is indeed a license agreement. The core obligation is Licensor granting Licensee rights to use Licensed Content (website content, images, and code) in exchange for license fees and royalties. The primary economic relationship is licensing of intellectual property rights, not a service, distribution, or other arrangement.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term",
+              "reasoning": "This provision specifies that to prevent automatic renewal, either party must provide written notice at least 90 days before the expiration of the Initial Term. This is the notice period specifically required to terminate renewal.",
+              "normalized_value": "90 days"
+            },
+            "expiration_date": {
+              "raw_snippet": "The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision of this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
+              "reasoning": "The contract specifies an initial term of 5 years from the Effective Date (Feb 10, 2014). Since this is expressed as a relative term ('five (5) years following the Effective Date'), I preserve it in that format rather than calculating the specific calendar date.",
+              "normalized_value": "5 years from Effective Date"
+            },
+            "renewal_term": {
+              "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\")",
+              "reasoning": "After the initial 5-year term, the agreement automatically renews for one additional 3-year period unless either party provides 90 days notice of non-renewal before the expiration of the Initial Term.",
+              "normalized_value": "3 years auto-renewal"
+            }
+          },
+          "usage": {
+            "model": "claude-sonnet-4-5-20250929",
+            "input_tokens": 11830,
+            "output_tokens": 798
+          },
+          "latency_seconds": 24.872047185897827
+        },
+        "gpt-5": {
+          "source_file": "05_license_gopage.txt",
+          "provider": "openai",
+          "model": "gpt-5",
+          "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+          "timestamp": "2025-11-27T16:47:58.284794",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This Content License Agreement (\"Agreement\"), dated as of Feb 10, 2014 (the \"Effective Date\"), is by and between PSiTech Corporation, a BVI\nCorporation, with offices located at 303, 3rdFl, St. Georges Bldg, 2 Ice House St, Central, Hong Kong(\"Licensor\"), and Empirical Ventures, Inc., a\nNevada corporation with offices located at 100, 40 Lake Bellevue Dr, Bellevue, WA(\"Licensee\").",
+              "reasoning": "The parties are identified in the opening paragraph as the entities entering into the agreement (the \u201cby and between\u201d clause). Roles (Licensor/Licensee) are excluded from the normalized names.",
+              "normalized_value": [
+                "PSiTech Corporation",
+                "Empirical Ventures, Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "WEBSITE CONTENT LICENSE AGREEMENT",
+              "reasoning": "The agreement\u2019s core substance is Licensor granting Licensee rights to reproduce, display, transmit, and distribute Licensed Content (Section 3.1) in exchange for license fees and royalties (Section 5). This is a license of IP/content, making it a License Agreement.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+              "reasoning": "Section 6.1 sets an automatic renewal and specifies the advance written notice required to prevent renewal: at least 90 days before expiration of the Initial Term.",
+              "normalized_value": "90 days"
+            },
+            "expiration_date": {
+              "raw_snippet": "6.1 Term. The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision of this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
+              "reasoning": "The contract specifies a relative initial term length (five years from the Effective Date) rather than a specific calendar date.",
+              "normalized_value": "5 years following the Effective Date"
+            },
+            "renewal_term": {
+              "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\")",
+              "reasoning": "Section 6.1 states the agreement auto-renews for one additional three-year period after the Initial Term.",
+              "normalized_value": "3 years auto-renewal (one additional term)"
+            }
+          },
+          "usage": {
+            "model": "gpt-5-2025-08-07",
+            "input_tokens": 9937,
+            "output_tokens": 2518
+          },
+          "latency_seconds": 66.42811179161072
+        },
+        "gpt-5-mini": {
+          "source_file": "05_license_gopage.txt",
+          "provider": "openai",
+          "model": "gpt-5-mini",
+          "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+          "timestamp": "2025-11-27T16:56:43.771063",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This Content License Agreement (\"Agreement\"), dated as of Feb 10, 2014 (the \"Effective Date\"), is by and between PSiTech Corporation, a BVI\nCorporation, with offices located at 303, 3rdFl, St. Georges Bldg, 2 Ice House St, Central, Hong Kong(\"Licensor\"), and Empirical Ventures, Inc., a\nNevada corporation with offices located at 100, 40 Lake Bellevue Dr, Bellevue, WA(\"Licensee\").",
+              "reasoning": "The clause explicitly states the parties to the Agreement, identifying PSiTech Corporation as Licensor and Empirical Ventures, Inc. as Licensee.",
+              "normalized_value": [
+                "PSiTech Corporation",
+                "Empirical Ventures, Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "This Content License Agreement (\"Agreement\"), dated as of Feb 10, 2014 (the \"Effective Date\"), is by and between PSiTech Corporation, a BVI\nCorporation, with offices located at 303, 3rdFl, St. Georges Bldg, 2 Ice House St, Central, Hong Kong(\"Licensor\"), and Empirical Ventures, Inc., a\nNevada corporation with offices located at 100, 40 Lake Bellevue Dr, Bellevue, WA(\"Licensee\").",
+              "reasoning": "The agreement's title and the body describe Licensor granting Licensee rights to reproduce, display, transmit and distribute \"Licensed Content\" on the Licensee Site and Related Media, and includes license fees and royalties. The primary subject matter is granting IP/content usage rights \u2014 i.e., a license of content and trademarks.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+              "reasoning": "Section 6.1 contains the auto-renewal clause and specifies the advance written notice required to prevent automatic renewal: \"at least ninety (90) days before the expiration of the Initial Term.\" This is the notice to prevent renewal, as requested.",
+              "normalized_value": "90 days"
+            },
+            "expiration_date": {
+              "raw_snippet": "The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision of this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
+              "reasoning": "Section 6.1 defines the Initial Term as continuing \"until five (5) years following the Effective Date.\" This is a relative term specifying the contract duration rather than a calendar date.",
+              "normalized_value": "five (5) years following the Effective Date"
+            },
+            "renewal_term": {
+              "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+              "reasoning": "This sentence in Section 6.1 describes the renewal: an automatic renewal for one additional three-year period (the Renewal Term).",
+              "normalized_value": "One (1) additional three (3) year automatic renewal"
+            }
+          },
+          "usage": {
+            "model": "gpt-5-mini-2025-08-07",
+            "input_tokens": 9937,
+            "output_tokens": 1581
+          },
+          "latency_seconds": 20.562849760055542
+        },
+        "flash": {
+          "source_file": "05_license_gopage.txt",
+          "provider": "gemini",
+          "model": "flash",
+          "eval_id": "eval_flash_20251127_163038_038fe6d4",
+          "timestamp": "2025-11-27T16:31:31.051772",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This Content License Agreement (\"Agreement\"), dated as of Feb 10, 2014 (the \"Effective Date\"), is by and between PSiTech Corporation, a BVI Corporation, with offices located at 303, 3rdFl, St. Georges Bldg, 2 Ice House St, Central, Hong Kong(\"Licensor\"), and Empirical Ventures, Inc., a Nevada corporation with offices located at 100, 40 Lake Bellevue Dr, Bellevue, WA(\"Licensee\").",
+              "reasoning": "The parties are explicitly identified in the introductory paragraph of the agreement, stating who the agreement is 'by and between'.",
+              "normalized_value": [
+                "PSiTech Corporation",
+                "Empirical Ventures, Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "WEBSITE CONTENT LICENSE AGREEMENT\nWHEREAS, Licensor owns or otherwise has the right to license the Licensed Content (as defined below);\nWHEREAS, Licensee wishes to make Licensed Content accessible on the Licensee Site; and\nWHEREAS, Licensor is willing to license the Licensed Content to Licensee, subject to all terms and conditions set forth herein.",
+              "reasoning": "The title of the agreement is 'WEBSITE CONTENT LICENSE AGREEMENT'. Furthermore, the 'WHEREAS' clauses and Section 3 'License Grants' clearly indicate that the primary purpose is the licensing of content from Licensor to Licensee.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+              "reasoning": "Section 6.1, 'Term', specifies that the agreement renews automatically unless written notice of non-renewal is provided at least ninety (90) days before the expiration of the Initial Term. This is the notice period required to prevent automatic renewal.",
+              "normalized_value": "90 days"
+            },
+            "expiration_date": {
+              "raw_snippet": "The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision of this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
+              "reasoning": "Section 6.1 'Term' defines the 'Initial Term' as continuing for five (5) years following the Effective Date. The Effective Date is Feb 10, 2014, but the instruction is to preserve relative terms.",
+              "normalized_value": "5 years from the Effective Date"
+            },
+            "renewal_term": {
+              "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+              "reasoning": "Section 6.1 'Term' explicitly states that after the initial term, the agreement 'shall renew automatically for one (1) additional three (3) year period'.",
+              "normalized_value": "3 year auto-renewal"
+            }
+          },
+          "usage": {
+            "model": "gemini-2.5-flash",
+            "input_tokens": 9710,
+            "output_tokens": 782
+          },
+          "latency_seconds": 7.100210189819336
+        }
+      }
+    },
+    {
+      "contract_file": "06_license_morganstanley.pdf",
+      "ground_truth": {
+        "file": "06_license_morganstanley.pdf",
+        "original_filename": "MorganStanleyDirectLendingFund_20191119_10-12GA_EX-10.5_11898508_EX-10.5_Trademark License Agreement.pdf",
+        "contract_type": "License Agreement",
+        "Document Name": [
+          "TRADEMARK LICENSE AGREEMENT"
+        ],
+        "Parties": [
+          "Morgan Stanley Investment Management Inc.",
+          "Licensor",
+          "Licensee",
+          "Morgan Stanley Direct Lending Fund"
+        ],
+        "Agreement Date": [
+          "[\u00b7] day of [\u00b7], 2019"
+        ],
+        "Effective Date": [
+          "[\u00b7] day of [\u00b7], 2019"
+        ],
+        "Expiration Date": [
+          "The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4."
+        ],
+        "Renewal Term": [],
+        "Notice Period To Terminate Renewal": [],
+        "Governing Law": [
+          "THIS AGREEMENT SHALL BE GOVERNED BY, AND CONSTRUED AND INTERPRETED IN ACCORDANCE WITH, THE LAW OF THE STATE OF NEW YORK."
+        ]
+      },
+      "model_outputs": {
+        "sonnet": {
+          "source_file": "06_license_morganstanley.txt",
+          "provider": "anthropic",
+          "model": "sonnet",
+          "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+          "timestamp": "2025-11-27T16:27:50.674619",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This TRADEMARK LICENSE AGREEMENT (the \"Agreement\") is effective as of the [\u00b7] day of [\u00b7], 2019 (\"Effective Date\") between Morgan Stanley Investment Management Inc. (\"Licensor\"), and Morgan Stanley Direct Lending Fund, a Delaware corporation (\"Licensee\").",
+              "reasoning": "The parties are identified in the opening paragraph of the agreement, which specifies the two entities entering into this trademark license agreement.",
+              "normalized_value": [
+                "Morgan Stanley Investment Management Inc.",
+                "Morgan Stanley Direct Lending Fund"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "TRADEMARK LICENSE AGREEMENT ... Subject to the terms and conditions herein, Licensor hereby grants to Licensee a non-exclusive, non-transferable, and (subject to Section 1.2 hereof) non-sublicensable license for the use of the Brand solely for the Permitted Activity.",
+              "reasoning": "While titled as a Trademark License Agreement, the substance confirms this is a license agreement. The core obligation is Licensor granting Licensee the right to use the \"Morgan Stanley\" trademark and design (the Brand) in exchange for compliance with quality standards and other conditions. This is a classic intellectual property license agreement where the licensor permits use of IP rights.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract does not contain a notice period to prevent renewal. Section 4.1 states the agreement continues \"in perpetuity\" unless terminated under specific conditions (convenience, breach, or termination of advisory agreement). There is no automatic renewal mechanism that requires advance notice to prevent renewal. The termination provisions in Sections 4.2-4.4 are for ending the agreement, not for preventing renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "Section 4.1.Term. The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+              "reasoning": "Section 4.1 explicitly states that the agreement continues \"in perpetuity\" unless terminated under specific conditions. This is explicit perpetual language.",
+              "normalized_value": "perpetual"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "There is no renewal term because the agreement is perpetual under Section 4.1. It continues indefinitely from the Effective Date rather than having fixed terms with renewal periods. The agreement can only end through termination provisions (for convenience, breach, or termination of the underlying advisory agreement), not through expiration and renewal.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "claude-sonnet-4-5-20250929",
+            "input_tokens": 6428,
+            "output_tokens": 583
+          },
+          "latency_seconds": 18.660916090011597
+        },
+        "gpt-5": {
+          "source_file": "06_license_morganstanley.txt",
+          "provider": "openai",
+          "model": "gpt-5",
+          "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+          "timestamp": "2025-11-27T16:48:59.297434",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This TRADEMARK LICENSE AGREEMENT (the \u201cAgreement\u201d) is effective as of the [\u00b7] day of [\u00b7], 2019 (\u201cEffective Date\u201d) between\nMorgan Stanley Investment Management Inc. (\u201cLicensor\u201d), and Morgan Stanley Direct Lending Fund, a Delaware corporation (\u201cLicensee\u201d).",
+              "reasoning": "The introductory paragraph explicitly lists the parties and their roles as Licensor and Licensee.",
+              "normalized_value": [
+                "Morgan Stanley Investment Management Inc.",
+                "Morgan Stanley Direct Lending Fund"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "Section 1.1.License Grant. Subject to the terms and conditions herein, Licensor hereby grants to Licensee a non-exclusive, non-\ntransferable, and (subject to Section 1.2 hereof) non-sublicensable license for the use of the Brand solely for the Permitted Activity.",
+              "reasoning": "The core obligation is a grant of a license to use the trademark (the Brand) for specified activities, indicating a license agreement focused on IP use.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The agreement does not include an automatic renewal mechanism or an advance notice requirement to prevent renewal. Termination rights exist, but they are not tied to renewal notice.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "Section 4.1.Term. The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+              "reasoning": "The agreement explicitly states it continues in perpetuity unless terminated under specified sections.",
+              "normalized_value": "perpetual"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "There is no renewal clause; the agreement is perpetual unless terminated.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-2025-08-07",
+            "input_tokens": 5120,
+            "output_tokens": 2433
+          },
+          "latency_seconds": 60.98883509635925
+        },
+        "gpt-5-mini": {
+          "source_file": "06_license_morganstanley.txt",
+          "provider": "openai",
+          "model": "gpt-5-mini",
+          "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+          "timestamp": "2025-11-27T16:57:06.352748",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This TRADEMARK LICENSE AGREEMENT (the \u201cAgreement\u201d) is effective as of the [\u00b7] day of [\u00b7], 2019 (\u201cEffective Date\u201d) between\nMorgan Stanley Investment Management Inc. (\u201cLicensor\u201d), and Morgan Stanley Direct Lending Fund, a Delaware corporation (\u201cLicensee\u201d).",
+              "reasoning": "The opening recitals identify the parties to the Agreement explicitly, naming Morgan Stanley Investment Management Inc. as \u201cLicensor\u201d and Morgan Stanley Direct Lending Fund as \u201cLicensee.\u201d These are the two contracting entities.",
+              "normalized_value": [
+                "Morgan Stanley Investment Management Inc.",
+                "Morgan Stanley Direct Lending Fund"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "Section 1.1.License Grant. Subject to the terms and conditions herein, Licensor hereby grants to Licensee a non-exclusive, non-transferable, and (subject to Section 1.2 hereof) non-sublicensable license for the use of the Brand solely for the Permitted Activity.",
+              "reasoning": "The economic substance of the agreement is the grant of trademark rights: Licensor grants Licensee a license to use the Brand for specified Permitted Activity. This is a license of intellectual property (trademark), so the appropriate category is a License Agreement.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract contains no clause requiring advance notice to prevent an automatic renewal (there is no automatic renewal mechanism). The term is stated to continue \"in perpetuity\" and termination provisions are immediate or conditional; therefore there is no \"notice period to prevent renewal.\"",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "Section 4.1.Term. The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+              "reasoning": "Section 4.1 explicitly states the agreement \"continues in perpetuity,\" which is explicit language of indefinite/perpetual term.",
+              "normalized_value": "perpetual"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "No renewal or renewal-term language is present. The agreement states it continues in perpetuity and contains termination provisions, but does not specify any renewal periods or automatic renewals.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-mini-2025-08-07",
+            "input_tokens": 5120,
+            "output_tokens": 1120
+          },
+          "latency_seconds": 22.555086612701416
+        },
+        "flash": {
+          "source_file": "06_license_morganstanley.txt",
+          "provider": "gemini",
+          "model": "flash",
+          "eval_id": "eval_flash_20251127_163038_038fe6d4",
+          "timestamp": "2025-11-27T16:31:36.519223",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "Morgan Stanley Investment Management Inc. (\u201cLicensor\u201d), and Morgan Stanley Direct Lending Fund, a Delaware corporation (\u201cLicensee\u201d).",
+              "reasoning": "The parties are identified in the introductory paragraph of the agreement, where they are named and defined as \"Licensor\" and \"Licensee\" respectively.",
+              "normalized_value": [
+                "Morgan Stanley Investment Management Inc.",
+                "Morgan Stanley Direct Lending Fund"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "TRADEMARK LICENSE AGREEMENT",
+              "reasoning": "The title of the agreement clearly states it is a \"TRADEMARK LICENSE AGREEMENT\". Section 1.1 further confirms this by stating Licensor grants Licensee a \"license for the use of the Brand\". The primary purpose is the licensing of a trademark.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The agreement states it continues in perpetuity and does not have a fixed term that would automatically renew, thus there is no notice period required to terminate a renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+              "reasoning": "Section 4.1 explicitly states that the agreement \"continues in perpetuity\".",
+              "normalized_value": "perpetual"
+            },
+            "renewal_term": {
+              "raw_snippet": "The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+              "reasoning": "The agreement explicitly states that it continues \"in perpetuity\", which means it does not have a fixed term that would then renew. Therefore, there is no renewal term.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gemini-2.5-flash",
+            "input_tokens": 4601,
+            "output_tokens": 456
+          },
+          "latency_seconds": 5.397810935974121
+        }
+      }
+    },
+    {
+      "contract_file": "07_license_cytodyn.pdf",
+      "ground_truth": {
+        "file": "07_license_cytodyn.pdf",
+        "original_filename": "CytodynInc_20200109_10-Q_EX-10.5_11941634_EX-10.5_License Agreement.pdf",
+        "contract_type": "License Agreement",
+        "Document Name": [
+          "COMMERCIALIZATION AND LICENSE AGREEMENT"
+        ],
+        "Parties": [
+          "Vyera",
+          "Vyera Pharmaceuticals, LLC",
+          "CytoDyn Inc.",
+          "CytoDyn and Vyera are sometimes referred to herein individually as a \"Party\" and collectively as the \"Parties.\"",
+          "CytoDyn"
+        ],
+        "Agreement Date": [
+          "December 17, 2019"
+        ],
+        "Effective Date": [
+          "December 17, 2019"
+        ],
+        "Expiration Date": [
+          "The term of this Agreement (\"Term\") shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term."
+        ],
+        "Renewal Term": [],
+        "Notice Period To Terminate Renewal": [],
+        "Governing Law": [
+          "This Agreement and all disputes arising out of or related to this Agreement or any breach hereof shall be governed by and construed in accordance with the laws of the State of New York, without giving effect to any choice of law principles that would result in the application of the laws of any other jurisdiction."
+        ]
+      },
+      "model_outputs": {
+        "sonnet": {
+          "source_file": "07_license_cytodyn.txt",
+          "provider": "anthropic",
+          "model": "sonnet",
+          "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+          "timestamp": "2025-11-27T16:28:18.846512",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This Commercialization and License Agreement (this \"Agreement\") is made effective as of December 17, 2019 (the \"Effective Date\") by and between Vyera Pharmaceuticals, LLC, a Delaware limited liability company (\"Vyera\"), and CytoDyn Inc., a Delaware corporation (\"CytoDyn\").",
+              "reasoning": "The parties are identified in the introductory paragraph of the agreement, which states the full legal names and organizational structures of both contracting entities.",
+              "normalized_value": [
+                "Vyera Pharmaceuticals, LLC",
+                "CytoDyn Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "CytoDyn hereby grants to Vyera, and Vyera hereby accepts, an exclusive royalty-bearing license (or sublicense, as the case may be), under the CytoDyn Patents, the CytoDyn Know-How and the Inventions (if any) solely to Commercialize, use, have used, offer for sale and sell Licensed Products in the Field in the Territory... Vyera shall pay to CytoDyn royalties equal to fifty percent (50%) of Net Sales of Licensed Products in the Territory during the Royalty Term",
+              "reasoning": "Despite the title 'Commercialization and License Agreement', the core economic substance is a license grant. CytoDyn grants Vyera exclusive rights to commercialize licensed products under CytoDyn's patents and know-how in exchange for royalties (50% of Net Sales), milestone payments, and a license fee. While Vyera has commercialization obligations, the primary legal relationship is a license of intellectual property rights. The agreement creates a licensor-licensee relationship with CytoDyn as the IP owner granting rights to Vyera.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "This agreement does not auto-renew. Section 11.1 states the Term expires 'on the last day of the Royalty Term' and upon expiration 'the license granted to Vyera under Section 2.1 of this Agreement shall become non-exclusive, fully-paid, royalty free, perpetual and irrevocable.' There is no provision requiring notice to prevent automatic renewal. The agreement has various termination provisions (Sections 11.2-11.6) but these are for terminating the agreement under specific circumstances, not for preventing automatic renewal. Section 11.2(c) allows Vyera to terminate 'at any time following the second (2nd) anniversary of the First Commercial Sale of the Licensed Product, for any reason or no reason, upon one hundred eighty (180) days' written notice to CytoDyn', but this is a general termination right, not a notice to prevent renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "The term of this Agreement (\"Term\") shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term.",
+              "reasoning": "Section 11.1 specifies that the agreement expires on the last day of the Royalty Term. The Royalty Term is defined in Section 1.94 as a complex period that depends on multiple future events including First Commercial Sale, patent expiration, Regulatory Exclusivity expiration, and Biosimilar Entry Date. Since the Royalty Term is contingent on future uncertain events and is not a fixed calendar date or simple relative term from the Effective Date, this represents a conditional expiration tied to business milestones rather than a specific date or simple relative term.",
+              "normalized_value": "on the last day of the Royalty Term"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "The agreement does not contain any renewal provisions. Section 11.1 clearly states the Term expires on the last day of the Royalty Term, and upon expiration, the license becomes 'non-exclusive, fully-paid, royalty free, perpetual and irrevocable' rather than the agreement renewing. There is no language indicating the agreement auto-renews for successive periods or that either party can elect to renew the agreement for additional terms.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "claude-sonnet-4-5-20250929",
+            "input_tokens": 40172,
+            "output_tokens": 955
+          },
+          "latency_seconds": 28.1531720161438
+        },
+        "gpt-5": {
+          "source_file": "07_license_cytodyn.txt",
+          "provider": "openai",
+          "model": "gpt-5",
+          "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+          "timestamp": "2025-11-27T16:50:37.498481",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This Commercialization and License Agreement (this \u201cAgreement\u201d) is made effective as of December 17, 2019 (the \u201cEffective Date\u201d) by and between\nVyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d).",
+              "reasoning": "The introductory paragraph clearly names the contracting entities and their jurisdictions, identifying the two parties to the agreement.",
+              "normalized_value": [
+                "Vyera Pharmaceuticals, LLC",
+                "CytoDyn Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "2.1 Grant of Licenses.\n(a) License to Vyera. CytoDyn hereby grants to Vyera, and Vyera hereby accepts, an exclusive royalty-bearing license (or sublicense, as the\ncase may be), under the CytoDyn Patents, the CytoDyn Know-How and the Inventions (if any) solely to Commercialize, use, have used,\noffer for sale and sell Licensed Products in the Field in the Territory.",
+              "reasoning": "The core substance is an exclusive IP license granting commercialization rights, with royalties and milestones, making this primarily a license agreement despite additional commercialization obligations.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The agreement does not include an automatic renewal provision; the term ends based on the Royalty Term triggers. Therefore, there is no notice period to prevent an auto-renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "11.1 Term. The term of this Agreement (\u201cTerm\u201d) shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall\nexpire on the last day of the Royalty Term.\n\n1.94 \u201cRoyalty Term\u201d means the time period beginning with the First Commercial Sale of the Licensed Product in the Territory and continuing until the\nlatest of (a) the expiration of the last Valid Claim Covering the Licensed Product and included in a CytoDyn Patent licensed to Vyera under this\nAgreement, (b) the date that is ten (10) years from the date of the First Commercial Sale, (c) the expiration of any Regulatory Exclusivity with respect to\nthe Licensed Product and (d) the Biosimilar Entry Date.",
+              "reasoning": "Section 11.1 ties expiration to the Royalty Term, and Section 1.94 defines the Royalty Term with relative milestones tied to First Commercial Sale and IP/regulatory events.",
+              "normalized_value": "Expires on the last day of the Royalty Term: until the latest of (a) expiration of last Valid Claim; (b) 10 years from First Commercial Sale; (c) expiration of any Regulatory Exclusivity; (d) Biosimilar Entry Date"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "No provision states that the agreement auto-renews for successive terms; the duration is tied to the Royalty Term without renewal cycles.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-2025-08-07",
+            "input_tokens": 35737,
+            "output_tokens": 2676
+          },
+          "latency_seconds": 98.18524289131165
+        },
+        "gpt-5-mini": {
+          "source_file": "07_license_cytodyn.txt",
+          "provider": "openai",
+          "model": "gpt-5-mini",
+          "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+          "timestamp": "2025-11-27T16:57:41.785497",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This Commercialization and License Agreement (this \u201cAgreement\u201d) is made effective as of December 17, 2019 (the \u201cEffective Date\u201d) by and between Vyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d).",
+              "reasoning": "The introductory paragraph explicitly identifies the contracting entities and their legal forms and short names; these are the primary parties to the Agreement.",
+              "normalized_value": [
+                "Vyera Pharmaceuticals, LLC",
+                "CytoDyn Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "CytoDyn hereby grants to Vyera, and Vyera hereby accepts, an exclusive royalty-bearing license (or sublicense, as the case may be), under the CytoDyn Patents, the CytoDyn Know-How and the Inventions (if any) solely to Commercialize, use, have used, offer for sale and sell Licensed Products in the Field in the Territory.",
+              "reasoning": "Substance of the agreement: CytoDyn grants Vyera an exclusive royalty-bearing license to intellectual property (Patents, Know-How, Inventions) to commercialize, offer for sale and sell the Licensed Product in the Field and Territory. The primary economic/core obligations are an IP license from CytoDyn and commercialization obligations/payments (royalties/milestones) from Vyera, so this is principally a license agreement with commercialization obligations.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract does not include any clause that establishes an advance notice period to prevent automatic renewal (there is no auto-renewal clause). The Agreement's Term is defined to expire at the end of the Royalty Term; termination-at-will notice periods (e.g., Section 11.2(c) 180 days' notice) are present but are not notice-to-prevent-renewal language, so this field is empty.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "The term of this Agreement (\u201cTerm\u201d) shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term.\n\n\u201cRoyalty Term\u201d means the time period beginning with the First Commercial Sale of the Licensed Product in the Territory and continuing until the latest of (a) the expiration of the last Valid Claim Covering the Licensed Product and included in a CytoDyn Patent licensed to Vyera under this Agreement, (b) the date that is ten (10) years from the date of the First Commercial Sale, (c) the expiration of any Regulatory Exclusivity with respect to the Licensed Product and (d) the Biosimilar Entry Date.",
+              "reasoning": "Section 11.1 defines the Term as expiring on the last day of the Royalty Term. Section 1.94 defines \"Royalty Term\" as a relative period tied to First Commercial Sale and the latest of several listed events. This is a relative/conditional termination (not a fixed calendar date).",
+              "normalized_value": "expire on the last day of the Royalty Term (Royalty Term = period beginning with the First Commercial Sale and continuing until the latest of (a) expiration of the last Valid Claim covering the Licensed Product licensed to Vyera, (b) ten (10) years from the date of the First Commercial Sale, (c) expiration of any Regulatory Exclusivity for the Licensed Product, and (d) the Biosimilar Entry Date)"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "The Agreement contains no explicit automatic renewal clause or specified renewal term. It defines a term tied to the Royalty Term and contains termination rights, but no renewal period or automatic renewal mechanics are stated.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-mini-2025-08-07",
+            "input_tokens": 35737,
+            "output_tokens": 2578
+          },
+          "latency_seconds": 35.406981229782104
+        },
+        "flash": {
+          "source_file": "07_license_cytodyn.txt",
+          "provider": "gemini",
+          "model": "flash",
+          "eval_id": "eval_flash_20251127_163038_038fe6d4",
+          "timestamp": "2025-11-27T16:31:53.391983",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "Vyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d). CytoDyn and Vyera are sometimes referred to herein individually as a \u201cParty\u201d and collectively as the \u201cParties.\u201d",
+              "reasoning": "The introductory paragraph clearly identifies and defines the two primary parties to the agreement.",
+              "normalized_value": [
+                "Vyera Pharmaceuticals, LLC",
+                "CytoDyn Inc."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "COMMERCIALIZATION AND LICENSE AGREEMENT This Commercialization and License Agreement (this \u201cAgreement\u201d) is made effective as of December 17, 2019 (the \u201cEffective Date\u201d) by and between Vyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d).",
+              "reasoning": "The title of the agreement explicitly states 'Commercialization and License Agreement.' The recitals also specify that Vyera will 'Commercialize' Licensed Products 'in accordance with the terms and conditions of this Agreement' and Section 2.1 grants licenses.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The agreement defines a 'Term' that expires on the 'last day of the Royalty Term' (Section 11.1). Upon this expiration, the license becomes perpetual and royalty-free, rather than the agreement renewing. There is no clause specifying a notice period required to prevent an automatic renewal of the agreement's term.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "The term of this Agreement (\u201cTerm\u201d) shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term.\n\u201cRoyalty Term\u201d means the time period beginning with the First Commercial Sale of the Licensed Product in the Territory and continuing until the latest of (a) the expiration of the last Valid Claim Covering the Licensed Product and included in a CytoDyn Patent licensed to Vyera under this Agreement, (b) the date that is ten (10) years from the date of the First Commercial Sale, (c) the expiration of any Regulatory Exclusivity with respect to the Licensed Product and (d) the Biosimilar Entry Date.",
+              "reasoning": "Section 11.1 states that the agreement's 'Term' shall 'expire on the last day of the Royalty Term.' Section 1.94 defines 'Royalty Term' as a period contingent on several relative future events. This is a relative term for the agreement's active duration.",
+              "normalized_value": "latest of (a) expiration of last Valid Claim, (b) 10 years from First Commercial Sale, (c) expiration of Regulatory Exclusivity, or (d) Biosimilar Entry Date"
+            },
+            "renewal_term": {
+              "raw_snippet": "The term of this Agreement (\u201cTerm\u201d) shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term. Upon the expiration of the Royalty Term, the license granted to Vyera under Section 2.1 of this Agreement shall become non-exclusive, fully-paid, royalty free, perpetual and irrevocable.",
+              "reasoning": "Section 11.1 states that the agreement's 'Term' shall 'expire' rather than automatically renew. Upon this expiration, the license *transforms* into a perpetual, royalty-free license, which is a post-expiration condition, not a renewal of the agreement itself. No explicit renewal term for the agreement is found.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gemini-2.5-flash",
+            "input_tokens": 35818,
+            "output_tokens": 841
+          },
+          "latency_seconds": 16.84062886238098
+        }
+      }
+    },
+    {
+      "contract_file": "08_license_artara.pdf",
+      "ground_truth": {
+        "file": "08_license_artara.pdf",
+        "original_filename": "ArtaraTherapeuticsInc_20200110_8-K_EX-10.5_11943350_EX-10.5_License Agreement.pdf",
+        "contract_type": "License Agreement",
+        "Document Name": [
+          "SPONSORED RESEARCH AND LICENSE AGREEMENT"
+        ],
+        "Parties": [
+          "University",
+          "ArTara, Inc.",
+          "The University of Iowa",
+          "ArTara"
+        ],
+        "Agreement Date": [
+          "November 28, 2018"
+        ],
+        "Effective Date": [
+          "November 28, 2018"
+        ],
+        "Expiration Date": [],
+        "Renewal Term": [],
+        "Notice Period To Terminate Renewal": [],
+        "Governing Law": [
+          "This Agreement shall be governed by the laws of the State of Iowa."
+        ]
+      },
+      "model_outputs": {
+        "sonnet": {
+          "source_file": "08_license_artara.txt",
+          "provider": "anthropic",
+          "model": "sonnet",
+          "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+          "timestamp": "2025-11-27T16:28:41.694823",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This Sponsored Research and License Agreement (this \"Agreement\") is entered into on November 28, 2018 (the \"Effective Date\"), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\"ArTara\"), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\"University\").",
+              "reasoning": "The parties are explicitly identified in the opening paragraph of the agreement with their full legal names and addresses.",
+              "normalized_value": [
+                "ArTara, Inc.",
+                "The University of Iowa"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "SPONSORED RESEARCH AND LICENSE AGREEMENT\n\nWHEREAS, ArTara wishes to use the Program Data (as defined below) collected from the Program, conduct research analysis of the Data and potentially rely on said Program Data to support Regulatory Approvals (as defined below) for TARA-002 in the Territory (as defined below);\n\n4.2 License. University hereby grants to ArTara an exclusive license to use the Program Data solely for the Project and in Regulatory Filings in the Field in the Territory.\n\n4.3 Right of Reference and IND Assignment. University hereby grants to ArTara an exclusive Right of Reference to all Program Regulatory Filings by University in support of the Product.",
+              "reasoning": "While the title suggests both research and licensing components, the primary economic substance is the exclusive license granted by University to ArTara for Program Data and regulatory filings. The sponsored research component (Phase I-V) is a supporting activity to facilitate the main purpose: granting ArTara exclusive rights to use the Program Data for regulatory approvals. The payment structure (royalties on Net Sales, milestone payments) is characteristic of a license agreement. The research is being sponsored to support the licensed use of data.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "This agreement does not contain an automatic renewal provision that requires advance notice to prevent renewal. Article 8.1 states 'This Agreement may be terminated by ArTara upon thirty (30) days prior written notice to University' and Section 8.2 states 'Either Party may terminate the Project and all commitments and obligations with respect thereto, subject to Section 8.3 herein, upon thirty (30) days written notice to the other Party.' These are general termination provisions, not notice periods to prevent automatic renewal. The agreement does not specify an initial term that auto-renews unless notice is given.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "",
+              "reasoning": "The agreement does not specify an expiration date or initial term. Article 8 addresses termination rights but does not establish when the agreement naturally expires. Section 8.1 allows ArTara to terminate upon 30 days notice, and Section 8.2 allows either party to terminate the Project upon 30 days notice, but there is no stated term or expiration date for the agreement itself. The agreement appears to continue until terminated by a party.",
+              "normalized_value": ""
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "The agreement does not contain any renewal provisions. There is no language indicating that the agreement automatically renews for successive terms or that either party has the option to renew. The agreement only addresses termination rights in Article 8, not renewal.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "claude-sonnet-4-5-20250929",
+            "input_tokens": 11479,
+            "output_tokens": 784
+          },
+          "latency_seconds": 22.8239688873291
+        },
+        "gpt-5": {
+          "source_file": "08_license_artara.txt",
+          "provider": "openai",
+          "model": "gpt-5",
+          "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+          "timestamp": "2025-11-27T16:51:35.760044",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and\nbetween ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of\nSponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d). ArTara and University may individually be referred to herein as a \u201cParty,\u201d\nand collectively as \u201cParties.\u201d",
+              "reasoning": "The introductory clause explicitly names the contracting entities and states they are the Parties to the Agreement.",
+              "normalized_value": [
+                "ArTara, Inc.",
+                "The University of Iowa"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "4.2 License. University hereby grants to ArTara an exclusive license to use the Program Data solely for the Project and in Regulatory Filings\nin the Field in the Territory.",
+              "reasoning": "The core economic substance is the University granting ArTara an exclusive license and right of reference to use Program Data for regulatory filings, coupled with funding, milestones, and royalties\u2014hallmarks of a license agreement.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The agreement contains general termination notice provisions (e.g., 30 days) but no automatic renewal or notice-to-prevent-renewal clause.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "",
+              "reasoning": "No fixed term or explicit expiration date is stated; only termination rights are provided. There is no explicit perpetual language.",
+              "normalized_value": ""
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "The contract does not include any renewal or auto-renewal provision.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-2025-08-07",
+            "input_tokens": 9795,
+            "output_tokens": 2816
+          },
+          "latency_seconds": 58.242533922195435
+        },
+        "gpt-5-mini": {
+          "source_file": "08_license_artara.txt",
+          "provider": "openai",
+          "model": "gpt-5-mini",
+          "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+          "timestamp": "2025-11-27T16:58:03.313476",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
+              "reasoning": "The quoted paragraph at the start of the Agreement explicitly names the contracting entities and their defined short names (\u201cArTara\u201d and \u201cUniversity\u201d), identifying them as the Parties to the Agreement.",
+              "normalized_value": [
+                "ArTara, Inc.",
+                "The University of Iowa"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "SPONSORED RESEARCH AND LICENSE AGREEMENT",
+              "reasoning": "The document title and the substance show ArTara funds and sponsors research (payments, Project phases) and obtains exclusive license/right-of-reference to University Program Data for regulatory filings and commercialization. The primary economic substance is granting ArTara licensing and regulatory rights to use Program Data to support product approvals, so the agreement is best classified as a License Agreement.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract contains termination-at-will notice provisions (e.g., 30 days to terminate) but contains no language about automatic renewal or a notice period required to prevent automatic renewal. Therefore there is no 'notice period to terminate renewal' specified.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "",
+              "reasoning": "The agreement does not state a fixed expiration date or an explicit term (it contains termination rights but no explicit contract term length or 'perpetual' language). Therefore no expiration/term statement is present to extract.",
+              "normalized_value": ""
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "There is no provision describing automatic renewal or any renewal term. Renewal is not addressed, so no renewal term can be extracted.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-mini-2025-08-07",
+            "input_tokens": 9795,
+            "output_tokens": 1267
+          },
+          "latency_seconds": 21.500367879867554
+        },
+        "flash": {
+          "source_file": "08_license_artara.txt",
+          "provider": "gemini",
+          "model": "flash",
+          "eval_id": "eval_flash_20251127_163038_038fe6d4",
+          "timestamp": "2025-11-27T16:31:58.964595",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
+              "reasoning": "The raw snippet explicitly identifies the two main parties entering into the agreement: ArTara, Inc. and The University of Iowa, along with their defined short names and addresses.",
+              "normalized_value": [
+                "ArTara, Inc.",
+                "The University of Iowa"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "SPONSORED RESEARCH AND LICENSE AGREEMENT",
+              "reasoning": "The title of the agreement clearly states 'Sponsored Research and License Agreement'. The 'WHEREAS' clauses further confirm that ArTara wishes to develop products using data from research conducted by the University, and the University grants ArTara an exclusive license to use Program Data for the Project and Regulatory Filings.",
+              "normalized_value": "License Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The agreement outlines termination rights (Section 8.1 and 8.2) but does not contain any provisions for automatic renewal that require a notice period to prevent such renewal. There is no language indicating the contract automatically extends for fixed terms unless notice is given.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement may be terminated by ArTara upon thirty (30) days prior written notice to University.",
+              "reasoning": "The contract does not specify a fixed term or an explicit expiration date. Instead, it defines how the agreement can be terminated (e.g., ArTara can terminate upon 30 days' notice, or either party can terminate the Project with 30 days' notice). There is no language indicating a perpetual term either.",
+              "normalized_value": ""
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "The contract includes provisions for term and termination but does not contain any clauses describing automatic renewal or specific renewal terms for the entire agreement. Phase IV is an 'Optional' phase for new studies upon 'mutual written agreement', which is not an automatic renewal.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gemini-2.5-flash",
+            "input_tokens": 9442,
+            "output_tokens": 577
+          },
+          "latency_seconds": 5.540894031524658
+        }
+      }
+    },
+    {
+      "contract_file": "09_outsourcing_photronics.pdf",
+      "ground_truth": {
+        "file": "09_outsourcing_photronics.pdf",
+        "original_filename": "PhotronicsInc_20171219_10-QA_EX-10.28_10982650_EX-10.28_Outsourcing Agreement.pdf",
+        "contract_type": "Outsourcing Agreement",
+        "Document Name": [
+          "OUTSOURCING AGREEMENT"
+        ],
+        "Parties": [
+          "PDMC",
+          "Photronics",
+          "Company",
+          "Photronics, Inc.",
+          "Dai Nippon Printing Co., Ltd.",
+          "Photronics DNP Photomask Corporation",
+          "DNP",
+          "Xiamen American Japan Photronics Mask Co., Ltd.",
+          "Each of Photronics and DNP is hereinafter referred to as a \"Shareholder\" and collectively as the \"Shareholders\", each of the Shareholders and PDMC is hereinafter referred to as a \"Supplier\" and collectively as the \"Suppliers\", and each of the Suppliers and the Company is hereinafter referred to as a \"Party\" and collectively as the \"Parties.\""
+        ],
+        "Agreement Date": [
+          "16t h day of May, 2017,"
+        ],
+        "Effective Date": [],
+        "Expiration Date": [
+          "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company."
+        ],
+        "Renewal Term": [],
+        "Notice Period To Terminate Renewal": [],
+        "Governing Law": []
+      },
+      "model_outputs": {
+        "sonnet": {
+          "source_file": "09_outsourcing_photronics.txt",
+          "provider": "anthropic",
+          "model": "sonnet",
+          "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+          "timestamp": "2025-11-27T16:29:18.332213",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "Photronics, Inc., a Connecticut corporation with its principal place of business at 15 Secor Road, Brookfield, Connecticut, U.S.A (\"Photronics\"), Dai Nippon Printing Co., Ltd., a Japanese corporation with its principal place of business at 1-1, Ichigaya Kagacho 1-chome, Shinjuku-ku, Tokyo, Japan (\"DNP\"), Photronics DNP Photomask Corporation, a company limited by shares organized and formed under the Company Act of the Republic of China with its principal place of business at 4f, #2, Li-Hsin Road, Science Park, Hsinchu, Taiwan, ROC (\"PDMC\"), and Xiamen American Japan Photronics Mask Co., Ltd., a limited liability company organized and formed under the People's Republic of China with its principal place of business at R203-95, South Building of Torch Square, No. 56-58 Torch Road, Gaoxin District, Xiamen, Fujian Province, Peoples Republic of China (the \"Company\").",
+              "reasoning": "The parties are identified in the opening paragraph of the agreement, which lists all four entities entering into this outsourcing agreement.",
+              "normalized_value": [
+                "Photronics, Inc.",
+                "Dai Nippon Printing Co., Ltd.",
+                "Photronics DNP Photomask Corporation",
+                "Xiamen American Japan Photronics Mask Co., Ltd."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "OUTSOURCING AGREEMENT This OUTSOURCING AGREEMENT (this \"Agreement\") is made and entered into as of the 16th day of May, 2017... the Company desires to outsource or [***]of the Company pursuant to the terms and conditions set forth herein... Subject to the terms and conditions mentioned hereunder, the Parties agree to the outsource model based on [***]... Suppliers will make good faith efforts to accept all [***]from the Company... The purchase price for the Product shall be as set forth in Schedule 2.",
+              "reasoning": "This is substantively an outsourcing agreement where the Company receives purchase orders from customers and outsources the manufacturing of photomasks to the Suppliers (Photronics, DNP, and PDMC). The primary economic substance is the outsourcing of production work, with detailed provisions for purchase orders, allocation rules, pricing, delivery, and warranty terms. While it has supply agreement elements, the core relationship is outsourcing production capacity.",
+              "normalized_value": "Outsourcing Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The agreement does not contain any notice period requirement to prevent automatic renewal. Article 7.1 states the agreement continues 'for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company' - this is a perpetual term tied to ownership status, not a renewable term requiring notice to prevent renewal. Section 7.2 provides for termination for cause with 30 days to cure, but this is not a notice period to prevent renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
+              "reasoning": "Article 7.1 specifies the term of the agreement. The agreement does not have a fixed expiration date but rather continues indefinitely based on a condition (continued shareholding). This is not the same as 'perpetual' language - it's contingent on the shareholding relationship continuing. Since there is no fixed term or explicit perpetual language, and the duration is tied to an external condition, this is best represented as an empty string as it doesn't fit the standard expiration date patterns.",
+              "normalized_value": ""
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "The agreement in Article 7.1 states it continues 'for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.' This is not a renewal term structure but rather a continuous term tied to a condition. There is no provision for periodic renewal (e.g., automatic 1-year renewals). The agreement simply continues based on the shareholding condition.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "claude-sonnet-4-5-20250929",
+            "input_tokens": 8685,
+            "output_tokens": 1018
+          },
+          "latency_seconds": 36.60684084892273
+        },
+        "gpt-5": {
+          "source_file": "09_outsourcing_photronics.txt",
+          "provider": "openai",
+          "model": "gpt-5",
+          "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+          "timestamp": "2025-11-27T16:52:46.198928",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This OUTSOURCING AGREEMENT (this \u201cAgreement\u201d) is made and entered into as of the 16th day of May, 2017, by and among\nPhotronics, Inc., a Connecticut corporation with its principal place of business at 15 Secor Road, Brookfield, Connecticut, U.S.A\n(\u201cPhotronics\u201d),\nDai Nippon Printing Co., Ltd., a Japanese corporation with its principal place of business at 1-1, Ichigaya Kagacho 1-chome,\nShinjuku-ku, Tokyo, Japan (\u201cDNP\u201d),\nPhotronics DNP Photomask Corporation, a company limited by shares organized and formed under the Company Act of the\nRepublic of China with its principal place of business at 4f, #2, Li-Hsin Road, Science Park, Hsinchu, Taiwan, ROC (\u201cPDMC\u201d), and\nXiamen American Japan Photronics Mask Co., Ltd., a limited liability company organized and formed under the People\u2019s Republic\nof China with its principal place of business at R203-95, South Building of Torch Square, No. 56-58 Torch Road, Gaoxin District, Xiamen, Fujian\nProvince, Peoples Republic of China (the \u201cCompany\u201d).",
+              "reasoning": "The parties are explicitly listed in the introductory paragraph as the entities entering into the agreement.",
+              "normalized_value": [
+                "Photronics, Inc.",
+                "Dai Nippon Printing Co., Ltd.",
+                "Photronics DNP Photomask Corporation",
+                "Xiamen American Japan Photronics Mask Co., Ltd."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "OUTSOURCING AGREEMENT",
+              "reasoning": "The agreement governs an outsourcing model for Products, purchase orders, pricing, delivery, warranties, and allocation between the Company and Suppliers, indicating an outsourcing arrangement.",
+              "normalized_value": "Outsourcing Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The agreement does not include auto-renewal terms or a notice requirement to prevent renewal; the term is tied to shareholding rather than renewal.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "7.1 Term\nThis Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as\nPhotronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
+              "reasoning": "Article 7.1 sets the duration by linking the term to the parties\u2019 shareholding status rather than a fixed end date.",
+              "normalized_value": "Continues so long as Photronics and DNP (or their Affiliates) each remains a Shareholder of the Company"
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "No renewal or auto-renewal provision is stated; the term continues based on shareholding conditions.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-2025-08-07",
+            "input_tokens": 7175,
+            "output_tokens": 3423
+          },
+          "latency_seconds": 70.41681694984436
+        },
+        "gpt-5-mini": {
+          "source_file": "09_outsourcing_photronics.txt",
+          "provider": "openai",
+          "model": "gpt-5-mini",
+          "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+          "timestamp": "2025-11-27T16:58:34.572586",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "This OUTSOURCING AGREEMENT (this \u201cAgreement\u201d) is made and entered into as of the 16th day of May, 2017, by and among\nPhotronics, Inc., a Connecticut corporation with its principal place of business at 15 Secor Road, Brookfield, Connecticut, U.S.A\n(\u201cPhotronics\u201d),\nDai Nippon Printing Co., Ltd., a Japanese corporation with its principal place of business at 1-1, Ichigaya Kagacho 1-chome,\nShinjuku-ku, Tokyo, Japan (\u201cDNP\u201d),\nPhotronics DNP Photomask Corporation, a company limited by shares organized and formed under the Company Act of the\nRepublic of China with its principal place of business at 4f, #2, Li-Hsin Road, Science Park, Hsinchu, Taiwan, ROC (\u201cPDMC\u201d), and\nXiamen American Japan Photronics Mask Co., Ltd., a limited liability company organized and formed under the People\u2019s Republic\nof China with its principal place of business at R203-95, South Building of Torch Square, No. 56-58 Torch Road, Gaoxin District, Xiamen, Fujian\nProvince, Peoples Republic of China (the \u201cCompany\u201d).",
+              "reasoning": "The initial recital paragraph of the agreement lists the contracting parties by name, each followed by corporate description and the defined short name in parentheses. These are the main parties to the Agreement.",
+              "normalized_value": [
+                "Photronics, Inc.",
+                "Dai Nippon Printing Co., Ltd.",
+                "Photronics DNP Photomask Corporation",
+                "Xiamen American Japan Photronics Mask Co., Ltd."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "This OUTSOURCING AGREEMENT (this \u201cAgreement\u201d) is made and entered into as of the 16th day of May, 2017, by and among",
+              "reasoning": "The document title and opening sentence explicitly identify the agreement as an 'Outsourcing Agreement'. The substantive provisions (Articles 2\u20135) govern outsourcing of product manufacture/supply, purchase orders, allocation, pricing, delivery and related obligations, confirming the primary purpose is outsourcing/supply of Products.",
+              "normalized_value": "Outsourcing Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract does not contain any clause describing an advance notice required to prevent automatic renewal (no auto-renewal language was found). Term provisions describe duration tied to shareholding and a 30-day cure period for breach termination, but no notice-to-prevent-renewal provision exists.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as\nPhotronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
+              "reasoning": "Article 7.1 (Term) specifies the duration: the Agreement remains in effect while Photronics and DNP (or their Affiliates) each remain Shareholders of the Company. This is a relative/condition-based term rather than a fixed calendar date or explicit 'perpetual' phrasing.",
+              "normalized_value": "shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company."
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "There is no renewal clause or automatic renewal term in the agreement. The term is tied to shareholding status rather than a fixed term that renews.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-mini-2025-08-07",
+            "input_tokens": 7175,
+            "output_tokens": 2104
+          },
+          "latency_seconds": 31.23125720024109
+        },
+        "flash": {
+          "source_file": "09_outsourcing_photronics.txt",
+          "provider": "gemini",
+          "model": "flash",
+          "eval_id": "eval_flash_20251127_163038_038fe6d4",
+          "timestamp": "2025-11-27T16:32:08.065151",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "Photronics, Inc., a Connecticut corporation with its principal place of business at 15 Secor Road, Brookfield, Connecticut, U.S.A (\u201cPhotronics\u201d),\nDai Nippon Printing Co., Ltd., a Japanese corporation with its principal place of business at 1-1, Ichigaya Kagacho 1-chome,\nShinjuku-ku, Tokyo, Japan (\u201cDNP\u201d),\nPhotronics DNP Photomask Corporation, a company limited by shares organized and formed under the Company Act of the\nRepublic of China with its principal place of business at 4f, #2, Li-Hsin Road, Science Park, Hsinchu, Taiwan, ROC (\u201cPDMC\u201d), and\nXiamen American Japan Photronics Mask Co., Ltd., a limited liability company organized and formed under the People\u2019s Republic\nof China with its principal place of business at R203-95, South Building of Torch Square, No. 56-58 Torch Road, Gaoxin District, Xiamen, Fujian\nProvince, Peoples Republic of China (the \u201cCompany\u201d).",
+              "reasoning": "The raw snippet identifies the corporations involved in the agreement, listed at the beginning of the document as the parties to the agreement.",
+              "normalized_value": [
+                "Photronics, Inc.",
+                "Dai Nippon Printing Co., Ltd.",
+                "Photronics DNP Photomask Corporation",
+                "Xiamen American Japan Photronics Mask Co., Ltd."
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "OUTSOURCING AGREEMENT",
+              "reasoning": "The title of the agreement clearly states 'OUTSOURCING AGREEMENT'. Additionally, Article 2.1 explicitly states that the 'Parties agree to the outsource model'.",
+              "normalized_value": "Outsourcing Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "",
+              "reasoning": "The contract's term is conditional (Article 7.1) and does not describe a fixed term with automatic renewal that would require notice to prevent.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
+              "reasoning": "Article 7.1 defines the term of the agreement as being conditional on Photronics and DNP remaining shareholders. This is not a fixed calendar date, a relative term from the effective date, or 'perpetual' language.",
+              "normalized_value": ""
+            },
+            "renewal_term": {
+              "raw_snippet": "",
+              "reasoning": "The agreement's term is based on a condition (Photronics and DNP remaining shareholders), not a fixed period that automatically renews. Therefore, no specific renewal term is stated.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gemini-2.5-flash",
+            "input_tokens": 6749,
+            "output_tokens": 685
+          },
+          "latency_seconds": 9.054141998291016
+        }
+      }
+    },
+    {
+      "contract_file": "10_outsourcing_paratek.pdf",
+      "ground_truth": {
+        "file": "10_outsourcing_paratek.pdf",
+        "original_filename": "ParatekPharmaceuticalsInc_20170505_10-KA_EX-10.29_10323872_EX-10.29_Outsourcing Agreement.pdf",
+        "contract_type": "Outsourcing Agreement",
+        "Document Name": [
+          "Outsourcing Agreement"
+        ],
+        "Parties": [
+          "Paratek Pharmaceuticals, Inc.",
+          "Customer",
+          "CARBOGEN AMCIS AG",
+          "\"Supplier\" and, collectively with Customer, the \"Parties\", and each, a \"Party"
+        ],
+        "Agreement Date": [
+          "December 30, 2016"
+        ],
+        "Effective Date": [
+          "December 30, 2016"
+        ],
+        "Expiration Date": [
+          "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \"Initial Term\")."
+        ],
+        "Renewal Term": [
+          "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \"Renewal Term\")."
+        ],
+        "Notice Period To Terminate Renewal": [
+          "This Agreement is effective as of the Effective Date and will expire in accordance with Section 2.1, unless, upon the occurrence of any of the following events, this Agreement is earlier terminated in accordance with this Section 18.1:\n\na) Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term;\n\nb) either Party delivers written notice of termination to the other Party at least [* * *] prior to the expiration date of the Renewal Term, which termination shall be effective as of the expiration date of the Renewal Term;"
+        ],
+        "Governing Law": [
+          "This Agreement shall be governed by and construed in accordance with the substantive Laws of the [* * *], excluding any rules of conflicts of laws that would apply the substantive laws of any other jurisdiction."
+        ]
+      },
+      "model_outputs": {
+        "sonnet": {
+          "source_file": "10_outsourcing_paratek.txt",
+          "provider": "anthropic",
+          "model": "sonnet",
+          "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+          "timestamp": "2025-11-27T16:29:41.794003",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "THIS AGREEMENT (this \"Agreement\"), dated December 30, 2016 (the \"Effective Date\"), is\nBETWEEN:\nParatek Pharmaceuticals, Inc., a company having a place of business at 75 Park Plaza, 4th Floor, Boston, MA 02116, USA (\"Customer\")\nAND:\nCARBOGEN AMCIS AG, a company having a place of business at Hauptstrasse 171, CH 4416 Bubendorf, Switzerland (\"Supplier\"",
+              "reasoning": "The parties are clearly identified in the opening section of the agreement using standard contract language with 'BETWEEN:' followed by both parties with their addresses.",
+              "normalized_value": [
+                "Paratek Pharmaceuticals, Inc.",
+                "CARBOGEN AMCIS AG"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "Outsourcing Agreement\nBetween\nParatek Pharmaceuticals, Inc.\nand\nCARBOGEN AMCIS AG",
+              "reasoning": "While the title states 'Outsourcing Agreement', examining the substance reveals this is fundamentally a manufacturing agreement. The core obligations involve Supplier manufacturing and supplying Product to Customer according to specifications, with detailed provisions about manufacturing processes, quality standards, testing, delivery, and fees for manufactured goods. Section 3.1 states 'Supplier shall Manufacture the Product' and Section 3.2 refers to 'Manufacturing Services'. The economic substance is the manufacture and supply of pharmaceutical products, making this a Manufacturing Agreement despite the 'Outsourcing' title.",
+              "normalized_value": "Manufacturing Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term",
+              "reasoning": "Section 18.1(a) describes the notice requirement to terminate at the end of the Initial Term. The specific number of days/months is redacted [* * *], but this is the notice period to prevent continuation beyond the Initial Term. Section 18.1(b) contains similar language for the Renewal Term with a different redacted notice period.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \"Initial Term\").",
+              "reasoning": "Section 2.1 defines the Initial Term with a specific duration from the Effective Date, but the duration is redacted [* * *]. The contract states it commences on December 30, 2016 (the Effective Date) and continues for a redacted period. Since the specific term length is redacted, I cannot provide the normalized value.",
+              "normalized_value": ""
+            },
+            "renewal_term": {
+              "raw_snippet": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \"Renewal Term\").",
+              "reasoning": "Section 2.1 describes that if the parties don't reach a follow-on agreement by a certain date, this Agreement automatically continues for a maximum period (the Renewal Term). The specific durations are redacted [* * *]. This describes an automatic renewal mechanism contingent on not reaching a new agreement, but the actual renewal period is redacted.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "claude-sonnet-4-5-20250929",
+            "input_tokens": 29596,
+            "output_tokens": 806
+          },
+          "latency_seconds": 23.438050031661987
+        },
+        "gpt-5": {
+          "source_file": "10_outsourcing_paratek.txt",
+          "provider": "openai",
+          "model": "gpt-5",
+          "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+          "timestamp": "2025-11-27T16:53:58.970857",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "BETWEEN:\nParatek Pharmaceuticals, Inc., a company having a place of business at 75 Park Plaza, 4th Floor, Boston, MA 02116, USA (\u201cCustomer\u201d)\nAND:\nCARBOGEN AMCIS AG, a company having a place of business at Hauptstrasse 171, CH 4416 Bubendorf, Switzerland (\u201cSupplier\u201d and, collectively\nwith Customer, the \u201cParties\u201d, and each, a \u201cParty).",
+              "reasoning": "The parties are explicitly listed in the BETWEEN section identifying Paratek Pharmaceuticals, Inc. as Customer and CARBOGEN AMCIS AG as Supplier.",
+              "normalized_value": [
+                "Paratek Pharmaceuticals, Inc.",
+                "CARBOGEN AMCIS AG"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "b) \u201cAgreement\u201d means this Supply Agreement for the Product, including all Exhibits attached hereto\u037e",
+              "reasoning": "Despite the title \"Outsourcing Agreement,\" the agreement\u2019s definition clause explicitly characterizes it as a Supply Agreement, and the substance centers on manufacturing and supplying product under purchase orders.",
+              "normalized_value": "Supply Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "a) Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term\u037e",
+              "reasoning": "This clause provides the advance notice required to terminate at the end of the Initial Term, thereby preventing the automatic continuation into the Renewal Term. The specific period is redacted, so the exact number of days cannot be normalized.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \u201cInitial Term\u201d).",
+              "reasoning": "This is the primary term/expiration statement. The specific end point is redacted, so no calculable or relative duration can be normalized.",
+              "normalized_value": ""
+            },
+            "renewal_term": {
+              "raw_snippet": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of\n[* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on\nagreement (the \u201cRenewal Term\u201d).",
+              "reasoning": "This clause defines an automatic continuation as a Renewal Term with a maximum duration, but the exact duration is redacted.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-2025-08-07",
+            "input_tokens": 26534,
+            "output_tokens": 2893
+          },
+          "latency_seconds": 72.75094699859619
+        },
+        "gpt-5-mini": {
+          "source_file": "10_outsourcing_paratek.txt",
+          "provider": "openai",
+          "model": "gpt-5-mini",
+          "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+          "timestamp": "2025-11-27T16:59:14.146153",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "THIS AGREEMENT (this \u201cAgreement\u201d), dated December 30, 2016 (the \u201cEffective Date\u201d), is\nBETWEEN:\nParatek Pharmaceuticals, Inc., a company having a place of business at 75 Park Plaza, 4th Floor, Boston, MA 02116, USA (\u201cCustomer\u201d)\nAND:\nCARBOGEN AMCIS AG, a company having a place of business at Hauptstrasse 171, CH 4416 Bubendorf, Switzerland (\u201cSupplier\u201d and, collectively\nwith Customer, the \u201cParties\u201d, and each, a \u201cParty).",
+              "reasoning": "The block labeled 'THIS AGREEMENT ... is BETWEEN:' names the two contracting entities and labels them Customer and Supplier. This is the explicit identification of the parties to the agreement.",
+              "normalized_value": [
+                "Paratek Pharmaceuticals, Inc.",
+                "CARBOGEN AMCIS AG"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "Execution Version\nOutsourcing Agreement\nBetween\nParatek Pharmaceuticals, Inc.\nand\nCARBOGEN AMCIS AG\nDate\n30 December 2016",
+              "reasoning": "The document header identifies the agreement as an 'Outsourcing Agreement'. Substantively, the agreement obligates Supplier to Manufacture and supply Product and perform related Services for Customer (see Article 3: Supply of Product, Manufacturing Services, and numerous supply/ purchase order/fee provisions), which aligns with an outsourcing/manufacturing/supply relationship. The title 'Outsourcing Agreement' is the clearest primary-purpose indicator.",
+              "normalized_value": "Outsourcing Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "a) Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall\nbe effective as of the expiration date of the Initial Term\u037e",
+              "reasoning": "Section 18.1(a) is the clause that requires advance written notice to terminate at the end of the Initial Term (i.e., to prevent automatic continuation/renewal). The required period is redacted ([* * *]) so the specific notice length cannot be determined from the text.",
+              "normalized_value": ""
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \u201cInitial Term\u201d). Both Parties shall use reasonably\ndiligent efforts to come to a subsequent long-term agreement, including good faith negotiations regarding minimum volume-based Product\ncommitments from Customer to Supplier, no later than [* * *] to replace this Agreement and serve as a long-term supply agreement between the\nParties. Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of\n[* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on\nagreement (the \u201cRenewal Term\u201d).",
+              "reasoning": "Section 2.1 defines the term: the Agreement starts on the Effective Date and runs until the end of the 'Initial Term', but the actual Initial Term duration is redacted ([* * *]). The clause also describes an automatic continuation mechanism (the 'Renewal Term') with its length redacted. Because the explicit term length is redacted, a usable expiration/term value cannot be determined from the text.",
+              "normalized_value": ""
+            },
+            "renewal_term": {
+              "raw_snippet": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of\n[* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on\nagreement (the \u201cRenewal Term\u201d).",
+              "reasoning": "Section 2.1 contains the automatic continuation/renewal provision describing the 'Renewal Term' and its maximum duration, but the specific period(s) are redacted ([* * *]). Therefore the renewal term is described but its length is not available from the document.",
+              "normalized_value": ""
+            }
+          },
+          "usage": {
+            "model": "gpt-5-mini-2025-08-07",
+            "input_tokens": 26534,
+            "output_tokens": 2587
+          },
+          "latency_seconds": 39.54574203491211
+        },
+        "flash": {
+          "source_file": "10_outsourcing_paratek.txt",
+          "provider": "gemini",
+          "model": "flash",
+          "eval_id": "eval_flash_20251127_163038_038fe6d4",
+          "timestamp": "2025-11-27T16:32:23.632305",
+          "extraction": {
+            "parties": {
+              "raw_snippet": "Between Paratek Pharmaceuticals, Inc.\nand\nCARBOGEN AMCIS AG\nDate\n30 December 2016\nSource: PARATEK PHARMACEUTICALS, INC., 10-K/A, 5/5/2017\n\nTHIS EXHIBIT HAS BEEN REDACTED AND IS THE SUBJECT OF A CONFIDENTIAL TREATMENT REQUEST. REDACTED MATERIAL IS\nMARKED WITH [* * *] AND HAS BEEN FILED SEPARATELY WITH THE SECURITIES AND EXCHANGE COMMISSION.\nExecution Version\nOutsourcing Agreement\nBetween\nParatek Pharmaceuticals, Inc., a company having a place of business at 75 Park Plaza, 4th Floor, Boston, MA 02116, USA (\u201cCustomer\u201d)\nAND:\nCARBOGEN AMCIS AG, a company having a place of business at Hauptstrasse 171, CH 4416 Bubendorf, Switzerland (\u201cSupplier\u201d and, collectively\nwith Customer, the \u201cParties\u201d, and each, a \u201cParty).",
+              "reasoning": "The parties are explicitly identified at the beginning of the agreement as 'Paratek Pharmaceuticals, Inc.' and 'CARBOGEN AMCIS AG', with their respective roles as 'Customer' and 'Supplier'.",
+              "normalized_value": [
+                "Paratek Pharmaceuticals, Inc.",
+                "CARBOGEN AMCIS AG"
+              ]
+            },
+            "contract_type": {
+              "raw_snippet": "Outsourcing Agreement\nBetween\nParatek Pharmaceuticals, Inc.\nand\nCARBOGEN AMCIS AG\nDate\n30 December 2016\nSource: PARATEK PHARMACEUTICALS, INC., 10-K/A, 5/5/2017\n\nWHEREAS:\nA. Customer is the owner of certain technology and patent rights regarding the Product (as defined herein) having the description set out in Exhibit\nA (Description of Product) and Exhibit B (Chemical Synthesis);\nB. Customer has filed / intends to file for approval with the United States Food and Drug Administration and/or its foreign equivalents, an\nInvestigational New Drug Application (\u201cIND\u201d) and a New Drug Application (\u201cNDA\u201d), and/or the foreign equivalents thereof, for certain\nformulations containing the Product;\nC. Supplier is engaged in the business of performing contracted process development, Manufacturing and supply services of active pharmaceutical\ningredients (\u201cAPIs\u201d) and intermediates; and\nD. Customer desires that Supplier Manufacture the Product in bulk quantities, and Supplier desires to perform such services, each on the terms and\nconditions set out in this Agreement.",
+              "reasoning": "The document is titled 'Outsourcing Agreement'. The 'WHEREAS' clauses further clarify that the Supplier will perform 'Manufacturing and supply services' for the Customer, where the Customer 'desires that Supplier Manufacture the Product in bulk quantities'. This clearly defines an outsourcing relationship for manufacturing and supply.",
+              "normalized_value": "Outsourcing Agreement"
+            },
+            "notice_period": {
+              "raw_snippet": "Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term;",
+              "reasoning": "Article 2.1 states the agreement will 'automatically stay in force for a maximum of [* * *]' if a follow-on agreement is not reached, 'unless otherwise set forth in Section 18.1(a)'. Section 18.1(a) specifies that Customer can deliver written notice of termination 'at least [* * *] prior to the expiration date of the Initial Term' to make termination effective as of the Initial Term's expiration. This notice prevents the automatic 'stay in force'. The specific period is redacted.",
+              "normalized_value": "[* * *] prior to expiration of Initial Term"
+            },
+            "expiration_date": {
+              "raw_snippet": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \u201cInitial Term\u201d).",
+              "reasoning": "Article 2.1 explicitly defines the 'Initial Term' as valid 'until the [* * *]' from the Effective Date (December 30, 2016). The specific duration or date is redacted.",
+              "normalized_value": "until the [* * *] from the Effective Date"
+            },
+            "renewal_term": {
+              "raw_snippet": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \u201cRenewal Term\u201d).",
+              "reasoning": "Article 2.1 describes the 'Renewal Term' as the agreement automatically staying in force for a maximum of a redacted period if a subsequent long-term agreement is not reached by a certain redacted date.",
+              "normalized_value": "automatically stay in force for a maximum of [* * *]"
+            }
+          },
+          "usage": {
+            "model": "gemini-2.5-flash",
+            "input_tokens": 26057,
+            "output_tokens": 1136
+          },
+          "latency_seconds": 15.535525798797607
+        }
+      }
+    }
+  ]
+}

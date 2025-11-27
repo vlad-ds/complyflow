@@ -2,42 +2,42 @@
   "source_file": "06_license_morganstanley.txt",
   "provider": "openai",
   "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_151221_f01b2d60",
-  "timestamp": "2025-11-27T15:15:47.792941",
+  "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
+  "timestamp": "2025-11-27T16:57:06.352748",
   "extraction": {
     "parties": {
       "raw_snippet": "This TRADEMARK LICENSE AGREEMENT (the \u201cAgreement\u201d) is effective as of the [\u00b7] day of [\u00b7], 2019 (\u201cEffective Date\u201d) between\nMorgan Stanley Investment Management Inc. (\u201cLicensor\u201d), and Morgan Stanley Direct Lending Fund, a Delaware corporation (\u201cLicensee\u201d).",
-      "reasoning": "The opening paragraph explicitly names the contracting parties and identifies their roles (Licensor and Licensee). These are the primary parties to the agreement.",
+      "reasoning": "The opening recitals identify the parties to the Agreement explicitly, naming Morgan Stanley Investment Management Inc. as \u201cLicensor\u201d and Morgan Stanley Direct Lending Fund as \u201cLicensee.\u201d These are the two contracting entities.",
       "normalized_value": [
         "Morgan Stanley Investment Management Inc.",
         "Morgan Stanley Direct Lending Fund"
       ]
     },
     "contract_type": {
-      "raw_snippet": "TRADEMARK LICENSE AGREEMENT",
-      "reasoning": "The document title at the top identifies the type of contract as a license agreement concerning a trademark.",
+      "raw_snippet": "Section 1.1.License Grant. Subject to the terms and conditions herein, Licensor hereby grants to Licensee a non-exclusive, non-transferable, and (subject to Section 1.2 hereof) non-sublicensable license for the use of the Brand solely for the Permitted Activity.",
+      "reasoning": "The economic substance of the agreement is the grant of trademark rights: Licensor grants Licensee a license to use the Brand for specified Permitted Activity. This is a license of intellectual property (trademark), so the appropriate category is a License Agreement.",
       "normalized_value": "License Agreement"
     },
     "notice_period": {
       "raw_snippet": "",
-      "reasoning": "The agreement contains no clause requiring advance notice to prevent an automatic renewal. Instead, Section 4.1 states the term continues \"in perpetuity,\" so there is no renewal-notice-to-prevent-auto-renewal requirement to extract.",
+      "reasoning": "The contract contains no clause requiring advance notice to prevent an automatic renewal (there is no automatic renewal mechanism). The term is stated to continue \"in perpetuity\" and termination provisions are immediate or conditional; therefore there is no \"notice period to prevent renewal.\"",
       "normalized_value": ""
     },
     "expiration_date": {
       "raw_snippet": "Section 4.1.Term. The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
-      "reasoning": "Section 4.1 explicitly states the agreement \"continues in perpetuity,\" which is explicit language supporting a perpetual term.",
+      "reasoning": "Section 4.1 explicitly states the agreement \"continues in perpetuity,\" which is explicit language of indefinite/perpetual term.",
       "normalized_value": "perpetual"
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "No renewal or automatic renewal term language appears in the agreement; the term is stated as continuing in perpetuity and there is no renewal-period provision to extract.",
+      "reasoning": "No renewal or renewal-term language is present. The agreement states it continues in perpetuity and contains termination provisions, but does not specify any renewal periods or automatic renewals.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 5002,
-    "output_tokens": 1074
+    "input_tokens": 5120,
+    "output_tokens": 1120
   },
-  "latency_seconds": 19.338093996047974
+  "latency_seconds": 22.555086612701416
 }

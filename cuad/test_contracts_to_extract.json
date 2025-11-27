@@ -1,0 +1,52 @@
+[
+  {
+    "file": "01_service_mplx.pdf",
+    "match": "MPLXLP_06_17_2015-EX-10.1-TRANSPORTATION SERVICES AGREEMENT",
+    "type": "Service Agreement"
+  },
+  {
+    "file": "02_service_martinmidstream.pdf",
+    "match": "MARTINMIDSTREAMPARTNERSLP_01_23_2004-EX-10.3-TRANSPORTATION SERVICES AGREEMENT",
+    "type": "Service Agreement"
+  },
+  {
+    "file": "03_service_blackstonegsolo.pdf",
+    "match": "BLACKSTONEGSOLONG-SHORTCREDITINCOMEFUND_05_11_2020-EX-99.(K)(1)-SERVICE AGREEMENT",
+    "type": "Service Agreement"
+  },
+  {
+    "file": "04_service_atmosenergy.pdf",
+    "match": "ATMOSENERGYCORP_11_22_2002-EX-10.17-TRANSPORTATION SERVICE AGREEMENT",
+    "type": "Service Agreement"
+  },
+  {
+    "file": "05_license_pacificapentert.pdf",
+    "match": "PacificapEntertainmentHoldingsInc_20051115_8-KA_EX-1.01_4300894_EX-1.01_Content License Agreement",
+    "type": "License Agreement"
+  },
+  {
+    "file": "06_license_midwestenergyem.pdf",
+    "match": "MidwestEnergyEmissionsCorp_20080604_8-K_EX-10.2_3093976_EX-10.2_Content License Agreement",
+    "type": "License Agreement"
+  },
+  {
+    "file": "07_license_gpaqacquisition.pdf",
+    "match": "GpaqAcquisitionHoldingsInc_20200123_S-4A_EX-10.6_11951677_EX-10.6_License Agreement",
+    "type": "License Agreement"
+  },
+  {
+    "file": "08_license_euromediaholdin.pdf",
+    "match": "EuromediaHoldingsCorp_20070215_10SB12G_EX-10.B(01)_525118_EX-10.B(01)_Content License Agreement",
+    "type": "License Agreement"
+  },
+  {
+    "file": "09_outsourcing_sykeshealthplan.pdf",
+    "match": "SYKESHEALTHPLANSERVICESINC_04_24_1998-EX-10.14-OUTSOURCING AGREEMENT",
+    "type": "Outsourcing Agreement"
+  },
+  {
+    "file": "10_outsourcing_ofgban.pdf",
+    "match": "OFGBANCORP_03_28_2007-EX-10.23-OUTSOURCING AGREEMENT",
+    "type": "Outsourcing Agreement"
+  }
+]

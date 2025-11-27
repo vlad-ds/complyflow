@@ -2,42 +2,42 @@
   "source_file": "10_outsourcing_paratek.txt",
   "provider": "openai",
   "model": "gpt-5",
-  "eval_id": "eval_gpt-5_20251127_152256_11b14ee2",
-  "timestamp": "2025-11-27T15:30:27.937422",
+  "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+  "timestamp": "2025-11-27T16:53:58.970857",
   "extraction": {
     "parties": {
       "raw_snippet": "BETWEEN:\nParatek Pharmaceuticals, Inc., a company having a place of business at 75 Park Plaza, 4th Floor, Boston, MA 02116, USA (\u201cCustomer\u201d)\nAND:\nCARBOGEN AMCIS AG, a company having a place of business at Hauptstrasse 171, CH 4416 Bubendorf, Switzerland (\u201cSupplier\u201d and, collectively\nwith Customer, the \u201cParties\u201d, and each, a \u201cParty).",
-      "reasoning": "The parties are explicitly listed in the \u201cBETWEEN/AND\u201d block identifying each company and role.",
+      "reasoning": "The parties are explicitly listed in the BETWEEN section identifying Paratek Pharmaceuticals, Inc. as Customer and CARBOGEN AMCIS AG as Supplier.",
       "normalized_value": [
         "Paratek Pharmaceuticals, Inc.",
         "CARBOGEN AMCIS AG"
       ]
     },
     "contract_type": {
-      "raw_snippet": "Outsourcing Agreement",
-      "reasoning": "The document title states \u201cOutsourcing Agreement,\u201d which indicates the agreement type despite an internal definition referencing a supply agreement.",
-      "normalized_value": "Outsourcing Agreement"
+      "raw_snippet": "b) \u201cAgreement\u201d means this Supply Agreement for the Product, including all Exhibits attached hereto\u037e",
+      "reasoning": "Despite the title \"Outsourcing Agreement,\" the agreement\u2019s definition clause explicitly characterizes it as a Supply Agreement, and the substance centers on manufacturing and supplying product under purchase orders.",
+      "normalized_value": "Supply Agreement"
     },
     "notice_period": {
-      "raw_snippet": "",
-      "reasoning": "The agreement describes term and a one-time Renewal Term with certain termination notices (Section 18.1) but does not include an auto-renew provision requiring advance notice to prevent automatic renewal. Therefore, there is no specific \u201cnotice to prevent auto-renewal\u201d period to extract.",
+      "raw_snippet": "a) Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term\u037e",
+      "reasoning": "This clause provides the advance notice required to terminate at the end of the Initial Term, thereby preventing the automatic continuation into the Renewal Term. The specific period is redacted, so the exact number of days cannot be normalized.",
       "normalized_value": ""
     },
     "expiration_date": {
       "raw_snippet": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \u201cInitial Term\u201d).",
-      "reasoning": "This clause sets the expiration as the end of the Initial Term, but the specific date/duration is redacted, so a precise date cannot be computed.",
-      "normalized_value": "Initial Term ends on a redacted date (duration/date not disclosed)"
+      "reasoning": "This is the primary term/expiration statement. The specific end point is redacted, so no calculable or relative duration can be normalized.",
+      "normalized_value": ""
     },
     "renewal_term": {
-      "raw_snippet": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \u201cRenewal Term\u201d).",
-      "reasoning": "This sentence defines a Renewal Term that automatically continues for a maximum redacted period if no follow-on agreement is signed.",
-      "normalized_value": "automatic continuation for a maximum (redacted) Renewal Term"
+      "raw_snippet": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of\n[* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on\nagreement (the \u201cRenewal Term\u201d).",
+      "reasoning": "This clause defines an automatic continuation as a Renewal Term with a maximum duration, but the exact duration is redacted.",
+      "normalized_value": ""
     }
   },
   "usage": {
     "model": "gpt-5-2025-08-07",
-    "input_tokens": 26416,
-    "output_tokens": 4708
+    "input_tokens": 26534,
+    "output_tokens": 2893
   },
-  "latency_seconds": 74.98398089408875
+  "latency_seconds": 72.75094699859619
 }

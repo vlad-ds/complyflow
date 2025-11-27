@@ -3,7 +3,7 @@
 Extract metadata from CUAD dataset for selected contracts.
 
 Usage:
-    python extract_metadata.py
+    python extract_metadata.py [train|test]
 
 Requires CUAD_v1.zip in parent directory. Download from:
 https://www.atticusprojectai.org/cuad
@@ -13,16 +13,32 @@ import json
 import csv
 import zipfile
 import shutil
+import sys
 from pathlib import Path
+
+# Parse split argument
+SPLIT = sys.argv[1] if len(sys.argv) > 1 else "train"
+if SPLIT not in ("train", "test"):
+    print(f"Usage: python extract_metadata.py [train|test]")
+    print(f"Invalid split: {SPLIT}")
+    sys.exit(1)
 
 # Paths
 SCRIPT_DIR = Path(__file__).parent
 CUAD_ZIP = SCRIPT_DIR / "CUAD_v1.zip"
 CUAD_DIR = SCRIPT_DIR / "CUAD_v1"
-CONTRACTS_JSON = SCRIPT_DIR / "contracts_to_extract.json"
-CONTRACTS_DIR = SCRIPT_DIR / "contracts"
-OUTPUT_JSON = SCRIPT_DIR / "metadata.json"
-OUTPUT_CSV = SCRIPT_DIR / "metadata.csv"
+
+# Split-specific paths
+if SPLIT == "train":
+    CONTRACTS_JSON = SCRIPT_DIR / "contracts_to_extract.json"
+    CONTRACTS_DIR = SCRIPT_DIR / "train" / "contracts"
+    OUTPUT_JSON = SCRIPT_DIR / "train" / "metadata.json"
+    OUTPUT_CSV = SCRIPT_DIR / "train" / "metadata.csv"
+else:
+    CONTRACTS_JSON = SCRIPT_DIR / "test_contracts_to_extract.json"
+    CONTRACTS_DIR = SCRIPT_DIR / "test" / "contracts"
+    OUTPUT_JSON = SCRIPT_DIR / "test" / "metadata.json"
+    OUTPUT_CSV = SCRIPT_DIR / "test" / "metadata.csv"
 
 # Metadata fields to extract
 METADATA_FIELDS = [
@@ -60,12 +76,15 @@ def extract_cuad_zip():
 
 def copy_contracts(contracts):
     """Copy selected contract PDFs to contracts directory."""
-    CONTRACTS_DIR.mkdir(exist_ok=True)
+    CONTRACTS_DIR.mkdir(parents=True, exist_ok=True)
     pdf_dir = CUAD_DIR / "full_contract_pdf"
+
+    # Get all PDFs (case-insensitive)
+    all_pdfs = list(pdf_dir.rglob("*.pdf")) + list(pdf_dir.rglob("*.PDF"))
 
     for c in contracts:
         found = False
-        for pdf in pdf_dir.rglob("*.pdf"):
+        for pdf in all_pdfs:
             if c['match'] in pdf.name:
                 shutil.copy(pdf, CONTRACTS_DIR / c['file'])
                 found = True
@@ -151,13 +170,16 @@ def save_csv(results):
 
 
 def main():
-    print("CUAD Metadata Extractor\n")
+    print(f"CUAD Metadata Extractor ({SPLIT})\n")
 
     if not extract_cuad_zip():
         return
 
+    # Ensure output directory exists
+    CONTRACTS_DIR.parent.mkdir(parents=True, exist_ok=True)
+
     contracts = load_contracts_config()
-    print(f"Loaded {len(contracts)} contracts from contracts_to_extract.json")
+    print(f"Loaded {len(contracts)} contracts from {CONTRACTS_JSON.name}")
 
     print("Copying contract PDFs...")
     copy_contracts(contracts)

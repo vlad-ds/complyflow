@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Run extraction, generate reports, or create eval pairs.
+"""Run extraction, generate reports, judge accuracy, or create eval pairs.
 
 Usage:
     # Run extractions (idempotent - skips existing)
@@ -10,6 +10,9 @@ Usage:
 
     # Create eval pairs (after all extractions are done)
     python -m evaluation pairs
+
+    # Judge extraction accuracy using LLM-as-judge
+    python -m evaluation judge --eval-pairs output/eval_pairs/train_eval_pairs_xxx.json
 
     # Force re-extraction
     python -m evaluation extract --models flash --force
@@ -25,9 +28,15 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from evaluation.config import EVAL_MODELS, ModelConfig
+from evaluation.config import EVAL_MODELS, EVAL_PAIRS_DIR, ModelConfig
 from evaluation.runner import run_extractions
 from evaluation.report import save_comparison_report, save_eval_pairs
+from evaluation.judge import (
+    judge_eval_pairs,
+    export_results_to_csv,
+    fetch_langfuse_cost,
+    create_judge_summary,
+)
 
 
 def parse_models(models_str: str | None) -> list[ModelConfig] | None:
@@ -75,6 +84,125 @@ def cmd_pairs(args):
     print(f"Creating eval pairs for {args.split} split")
 
     save_eval_pairs(args.split, models)
+
+
+def cmd_judge(args):
+    """Judge extraction accuracy using LLM-as-judge."""
+    import json
+    from datetime import datetime
+
+    # Find eval pairs file
+    if args.eval_pairs:
+        eval_pairs_path = Path(args.eval_pairs)
+    else:
+        # Find most recent eval pairs file for the split
+        pattern = f"{args.split}_eval_pairs_*.json"
+        files = sorted(EVAL_PAIRS_DIR.glob(pattern), reverse=True)
+        if not files:
+            print(f"Error: No eval pairs found for split '{args.split}'")
+            print(f"Run 'python -m evaluation pairs --split {args.split}' first")
+            sys.exit(1)
+        eval_pairs_path = files[0]
+
+    if not eval_pairs_path.exists():
+        print(f"Error: Eval pairs file not found: {eval_pairs_path}")
+        sys.exit(1)
+
+    print(f"Loading eval pairs from: {eval_pairs_path}")
+    with open(eval_pairs_path) as f:
+        data = json.load(f)
+
+    eval_pairs = data["eval_pairs"]
+    models = args.models.split(",") if args.models else None
+
+    print(f"Judging {len(eval_pairs)} contracts")
+    if models:
+        print(f"Models: {models}")
+    print("=" * 80)
+
+    # Run judgments
+    results = judge_eval_pairs(eval_pairs, models=models)
+
+    eval_id = results.get("eval_id", "unknown")
+    duration = results.get("duration_seconds", 0)
+    llm_calls = results.get("llm_calls", 0)
+
+    # Print run info
+    print(f"\nEval ID: {eval_id}")
+    print(f"Duration: {duration:.1f}s")
+    print(f"LLM judge calls: {llm_calls}")
+
+    # Print overall metrics
+    overall = results.get("overall_stats", {})
+    print("\n" + "=" * 60)
+    print("OVERALL METRICS")
+    print("=" * 60)
+    print(f"Total: {overall.get('total', 0)} | Match: {overall.get('match', 0)} | No Match: {overall.get('no_match', 0)} | Error: {overall.get('error', 0)}")
+    print(f"Accuracy: {overall.get('accuracy', 0):.1%}")
+
+    # Print model metrics
+    print("\n" + "=" * 60)
+    print("MODEL METRICS")
+    print("=" * 60)
+    print(f"{'Model':<15} {'Match':<8} {'NoMatch':<10} {'Error':<8} {'Accuracy':<10}")
+    print("-" * 60)
+    for model, stats in sorted(results["model_stats"].items()):
+        print(f"{model:<15} {stats['match']:<8} {stats['no_match']:<10} {stats['error']:<8} {stats.get('accuracy', 0):.1%}")
+
+    # Print field metrics
+    print("\n" + "=" * 60)
+    print("FIELD METRICS")
+    print("=" * 60)
+    print(f"{'Field':<20} {'Match':<8} {'NoMatch':<10} {'Error':<8} {'Accuracy':<10}")
+    print("-" * 60)
+    for field, stats in results["field_stats"].items():
+        print(f"{field:<20} {stats['match']:<8} {stats['no_match']:<10} {stats['error']:<8} {stats.get('accuracy', 0):.1%}")
+
+    # Fetch Langfuse cost metrics (optional)
+    langfuse_metrics = None
+    if not args.no_langfuse:
+        print("\n" + "=" * 80)
+        print("FETCHING LANGFUSE COST METRICS")
+        print("=" * 80)
+        langfuse_metrics = fetch_langfuse_cost(eval_id, wait_seconds=5)
+        if langfuse_metrics.get("trace_count", 0) > 0:
+            print(f"Traces: {langfuse_metrics['trace_count']}")
+            print(f"Input tokens: {langfuse_metrics['total_input_tokens']:,}")
+            print(f"Output tokens: {langfuse_metrics['total_output_tokens']:,}")
+            print(f"Total cost: ${langfuse_metrics['total_cost_usd']:.4f}")
+        else:
+            print(f"Note: {langfuse_metrics.get('note', 'No traces found')}")
+
+    # Save outputs
+    output_dir = EVAL_PAIRS_DIR.parent / "judge_results"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # Save detailed results JSON
+    details_path = output_dir / f"judge_{args.split}_{timestamp}_details.json"
+    with open(details_path, "w") as f:
+        json.dump({
+            "eval_pairs_file": str(eval_pairs_path),
+            "generated_at": datetime.now().isoformat(),
+            **results,
+        }, f, indent=2)
+
+    # Save summary JSON
+    summary = create_judge_summary(results, str(eval_pairs_path), langfuse_metrics)
+    summary_path = output_dir / f"judge_{args.split}_{timestamp}_summary.json"
+    with open(summary_path, "w") as f:
+        json.dump(summary, f, indent=2)
+
+    # Save CSV for human review
+    csv_path = output_dir / f"judge_{args.split}_{timestamp}.csv"
+    export_results_to_csv(results, csv_path)
+
+    print("\n" + "=" * 80)
+    print("OUTPUT FILES")
+    print("=" * 80)
+    print(f"Summary:  {summary_path}")
+    print(f"Details:  {details_path}")
+    print(f"CSV:      {csv_path}")
 
 
 def main():
@@ -132,6 +260,25 @@ def main():
         help="Create eval pairs from existing extractions",
     )
     pairs_parser.set_defaults(func=cmd_pairs)
+
+    # Judge command
+    judge_parser = subparsers.add_parser(
+        "judge",
+        parents=[common],
+        help="Judge extraction accuracy using LLM-as-judge",
+    )
+    judge_parser.add_argument(
+        "--eval-pairs",
+        type=str,
+        default=None,
+        help="Path to eval pairs JSON (default: most recent for split)",
+    )
+    judge_parser.add_argument(
+        "--no-langfuse",
+        action="store_true",
+        help="Skip Langfuse cost metrics (faster)",
+    )
+    judge_parser.set_defaults(func=cmd_judge)
 
     args = parser.parse_args()
 

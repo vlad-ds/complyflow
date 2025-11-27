@@ -1,0 +1,2084 @@
+{
+  "eval_pairs_file": "/Users/vladgheorghe/code/complyflow/output/eval_pairs/train_eval_pairs_20251127_170031.json",
+  "generated_at": "2025-11-27T17:01:58.456042",
+  "eval_id": "judge_20251127_170038_6434b177",
+  "total_judgments": 200,
+  "llm_calls": 84,
+  "duration_seconds": 80.43429207801819,
+  "overall_stats": {
+    "match": 175,
+    "no_match": 25,
+    "error": 0,
+    "total": 200,
+    "accuracy": 0.875
+  },
+  "model_stats": {
+    "sonnet": {
+      "match": 42,
+      "no_match": 8,
+      "error": 0,
+      "total": 50,
+      "accuracy": 0.84
+    },
+    "gpt-5": {
+      "match": 44,
+      "no_match": 6,
+      "error": 0,
+      "total": 50,
+      "accuracy": 0.88
+    },
+    "gpt-5-mini": {
+      "match": 45,
+      "no_match": 5,
+      "error": 0,
+      "total": 50,
+      "accuracy": 0.9
+    },
+    "flash": {
+      "match": 44,
+      "no_match": 6,
+      "error": 0,
+      "total": 50,
+      "accuracy": 0.88
+    }
+  },
+  "field_stats": {
+    "parties": {
+      "match": 40,
+      "no_match": 0,
+      "error": 0,
+      "total": 40,
+      "accuracy": 1.0
+    },
+    "contract_type": {
+      "match": 30,
+      "no_match": 10,
+      "error": 0,
+      "total": 40,
+      "accuracy": 0.75
+    },
+    "notice_period": {
+      "match": 36,
+      "no_match": 4,
+      "error": 0,
+      "total": 40,
+      "accuracy": 0.9
+    },
+    "expiration_date": {
+      "match": 32,
+      "no_match": 8,
+      "error": 0,
+      "total": 40,
+      "accuracy": 0.8
+    },
+    "renewal_term": {
+      "match": 37,
+      "no_match": 3,
+      "error": 0,
+      "total": 40,
+      "accuracy": 0.925
+    }
+  },
+  "details": [
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "sonnet",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly identifies the legal entity names: 'HOF Village, LLC', 'National Football Museum, Inc.', and 'Constellation NewEnergy, Inc.' It omits aliases and role descriptions, which is correct based on the instructions.",
+      "method": "llm_judge",
+      "ground_truth": "HOFV and/or PFHOF, on the one hand, and Constellation, on the other hand, are referred to herein as a \"Party\" and, collectively, as the \"Parties\".\n(\"PFHOF\" and, together with HOFV, the \"HOF Entities\"\non behalf of itself and its retail affiliates and subsidiaries (collectively, \"Constellation\")\nHOF Village, LLC\nConstellation NewEnergy, Inc.\nHOFV\nNational Football Museum, Inc., d/b/a Pro Football Hall of Fame",
+      "model_output": "HOF Village, LLC\nNational Football Museum, Inc.\nConstellation NewEnergy, Inc."
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "sonnet",
+      "field": "contract_type",
+      "judgment": "NO_MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Sponsorship Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Sponsorship Agreement"
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "sonnet",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "sonnet",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output '2028-12-31' accurately represents the expiration date of 'December 31, 2028' as stated in the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement (the \"Term\"), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "model_output": "2028-12-31"
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "sonnet",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "gpt-5",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly extracts the legal entity names 'HOF Village, LLC', 'National Football Museum, Inc. d/b/a Pro Football Hall of Fame', and 'Constellation NewEnergy, Inc.' from the provided text, which aligns with the ground truth. It omits the shorthand aliases and role labels as instructed.",
+      "method": "llm_judge",
+      "ground_truth": "HOFV and/or PFHOF, on the one hand, and Constellation, on the other hand, are referred to herein as a \"Party\" and, collectively, as the \"Parties\".\n(\"PFHOF\" and, together with HOFV, the \"HOF Entities\"\non behalf of itself and its retail affiliates and subsidiaries (collectively, \"Constellation\")\nHOF Village, LLC\nConstellation NewEnergy, Inc.\nHOFV\nNational Football Museum, Inc., d/b/a Pro Football Hall of Fame",
+      "model_output": "HOF Village, LLC\nNational Football Museum, Inc. d/b/a Pro Football Hall of Fame\nConstellation NewEnergy, Inc."
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "gpt-5",
+      "field": "contract_type",
+      "judgment": "NO_MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Sponsorship Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Sponsorship Agreement"
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "gpt-5",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "gpt-5",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output '2028-12-31' is equivalent to the ground truth's expiration date of 'December 31, 2028'.",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement (the \"Term\"), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "model_output": "2028-12-31"
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "gpt-5",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "gpt-5-mini",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output contains the same legal entities as the ground truth: HOF Village, LLC, National Football Museum, Inc. d/b/a Pro Football Hall of Fame, and Constellation NewEnergy, Inc. Shorthand aliases are ignored as per the instructions.",
+      "method": "llm_judge",
+      "ground_truth": "HOFV and/or PFHOF, on the one hand, and Constellation, on the other hand, are referred to herein as a \"Party\" and, collectively, as the \"Parties\".\n(\"PFHOF\" and, together with HOFV, the \"HOF Entities\"\non behalf of itself and its retail affiliates and subsidiaries (collectively, \"Constellation\")\nHOF Village, LLC\nConstellation NewEnergy, Inc.\nHOFV\nNational Football Museum, Inc., d/b/a Pro Football Hall of Fame",
+      "model_output": "HOF Village, LLC\nNational Football Museum, Inc. d/b/a Pro Football Hall of Fame\nConstellation NewEnergy, Inc."
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "gpt-5-mini",
+      "field": "contract_type",
+      "judgment": "NO_MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Sponsorship Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Sponsorship Agreement"
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "gpt-5-mini",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "gpt-5-mini",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output \"2028-12-31\" correctly captures the expiration date specified in the ground truth which is \"December 31, 2028\".",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement (the \"Term\"), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "model_output": "2028-12-31"
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "gpt-5-mini",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "flash",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model accurately extracts the legal entity names: HOF Village, LLC; National Football Museum, Inc.; and Constellation NewEnergy, Inc. It omits the aliases (HOFV, PFHOF, Constellation) and role labels (Licensor, Licensee, Seller, Buyer) as instructed.",
+      "method": "llm_judge",
+      "ground_truth": "HOFV and/or PFHOF, on the one hand, and Constellation, on the other hand, are referred to herein as a \"Party\" and, collectively, as the \"Parties\".\n(\"PFHOF\" and, together with HOFV, the \"HOF Entities\"\non behalf of itself and its retail affiliates and subsidiaries (collectively, \"Constellation\")\nHOF Village, LLC\nConstellation NewEnergy, Inc.\nHOFV\nNational Football Museum, Inc., d/b/a Pro Football Hall of Fame",
+      "model_output": "HOF Village, LLC\nNational Football Museum, Inc.\nConstellation NewEnergy, Inc."
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "flash",
+      "field": "contract_type",
+      "judgment": "NO_MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Sponsorship Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Sponsorship Agreement"
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "flash",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "flash",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output '2028-12-31' correctly captures the expiration date of 'December 31, 2028' from the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement (the \"Term\"), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "model_output": "2028-12-31"
+    },
+    {
+      "contract": "01_service_gpaq.pdf",
+      "model": "flash",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "sonnet",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly extracted 'Reynolds Group Holdings Inc.' and 'Reynolds Consumer Products Inc.' from the ground truth, ignoring aliases and roles.",
+      "method": "llm_judge",
+      "ground_truth": "Reynolds Group Holdings Inc.\nRGHI\n(the \"Company\" or \"RCP\")\nReynolds Consumer Products Inc.\nEach Party or any of its Affiliates providing services hereunder shall be a \"Provider,\" and each Party or any of its Affiliates receiving services hereunder shall be a \"Recipient.\"",
+      "model_output": "Reynolds Group Holdings Inc.\nReynolds Consumer Products Inc."
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "sonnet",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Service Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Service Agreement"
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "sonnet",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "sonnet",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output '12 months following the Commencement Date' accurately reflects the expiration date described in the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \"Commencement Date\"), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \"Term\") or (ii) earlier terminated pursuant to this Agreement (a \"Termination Date\").",
+      "model_output": "12 months following the Commencement Date"
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "sonnet",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "gpt-5",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly identifies the legal entity names Reynolds Group Holdings Inc. and Reynolds Consumer Products Inc., which are present in the ground truth. It omits aliases and role descriptors as instructed.",
+      "method": "llm_judge",
+      "ground_truth": "Reynolds Group Holdings Inc.\nRGHI\n(the \"Company\" or \"RCP\")\nReynolds Consumer Products Inc.\nEach Party or any of its Affiliates providing services hereunder shall be a \"Provider,\" and each Party or any of its Affiliates receiving services hereunder shall be a \"Recipient.\"",
+      "model_output": "Reynolds Group Holdings Inc.\nReynolds Consumer Products Inc."
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "gpt-5",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Service Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Service Agreement"
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "gpt-5",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "gpt-5",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "Model output correctly extracts the expiration date/term as \"12 months following the Commencement Date\" which is what the Ground Truth states.",
+      "method": "llm_judge",
+      "ground_truth": "With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \"Commencement Date\"), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \"Term\") or (ii) earlier terminated pursuant to this Agreement (a \"Termination Date\").",
+      "model_output": "12 months following the Commencement Date"
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "gpt-5",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "gpt-5-mini",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly extracted both Reynolds Group Holdings Inc. and Reynolds Consumer Products Inc.",
+      "method": "llm_judge",
+      "ground_truth": "Reynolds Group Holdings Inc.\nRGHI\n(the \"Company\" or \"RCP\")\nReynolds Consumer Products Inc.\nEach Party or any of its Affiliates providing services hereunder shall be a \"Provider,\" and each Party or any of its Affiliates receiving services hereunder shall be a \"Recipient.\"",
+      "model_output": "Reynolds Group Holdings Inc.\nReynolds Consumer Products Inc."
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "gpt-5-mini",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Service Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Service Agreement"
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "gpt-5-mini",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "gpt-5-mini",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The Model output correctly extracts the expiration date/term as '12 months following the Commencement Date,' which aligns with the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \"Commencement Date\"), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \"Term\") or (ii) earlier terminated pursuant to this Agreement (a \"Termination Date\").",
+      "model_output": "12 months following the Commencement Date"
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "gpt-5-mini",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "flash",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly identifies the two legal entities: Reynolds Group Holdings Inc. and Reynolds Consumer Products Inc.",
+      "method": "llm_judge",
+      "ground_truth": "Reynolds Group Holdings Inc.\nRGHI\n(the \"Company\" or \"RCP\")\nReynolds Consumer Products Inc.\nEach Party or any of its Affiliates providing services hereunder shall be a \"Provider,\" and each Party or any of its Affiliates receiving services hereunder shall be a \"Recipient.\"",
+      "model_output": "Reynolds Group Holdings Inc.\nReynolds Consumer Products Inc."
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "flash",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Service Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Service Agreement"
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "flash",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "flash",
+      "field": "expiration_date",
+      "judgment": "NO_MATCH",
+      "reasoning": "The ground truth specifies a term of 12 months following the Commencement Date, while the model output indicates 24 months. This is not a match.",
+      "method": "llm_judge",
+      "ground_truth": "With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \"Commencement Date\"), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \"Term\") or (ii) earlier terminated pursuant to this Agreement (a \"Termination Date\").",
+      "model_output": "24 months following the Commencement Date"
+    },
+    {
+      "contract": "02_service_reynolds.pdf",
+      "model": "flash",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "sonnet",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output includes all of the legal entities listed in the ground truth, ignoring role labels, aliases and descriptive text.",
+      "method": "llm_judge",
+      "ground_truth": "Servicer\nMarketing Agent\nDepositor\nIssuer\nVERIZON ABS LLC\nCustodian\nVERIZON OWNER TRUST 2020-A\nCellco Partnership d/b/a Verizon Wireless\nCellco",
+      "model_output": "Verizon Owner Trust 2020-A\nVerizon ABS LLC\nCellco Partnership d/b/a Verizon Wireless"
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "sonnet",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Service Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Service Agreement"
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "sonnet",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "sonnet",
+      "field": "expiration_date",
+      "judgment": "NO_MATCH",
+      "reasoning": "The model output provides a specific date (2024-07-20) while the ground truth describes complex conditions for termination dependent on debt obligations and other clauses. The date given in the model output does not capture the conditions described in the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "Cellco's appointment as custodian is effective as of the Initial Cutoff Date and will continue until the later of (i) the date on which all obligations of the Issuer have been paid in full and (ii) the date on which such appointment is terminated under this Section 3.10(f).\nThis Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
+      "model_output": "2024-07-20"
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "sonnet",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "gpt-5",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly identifies the legal entity names: Verizon Owner Trust 2020-A, Verizon ABS LLC, and Cellco Partnership d/b/a Verizon Wireless from the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "Servicer\nMarketing Agent\nDepositor\nIssuer\nVERIZON ABS LLC\nCustodian\nVERIZON OWNER TRUST 2020-A\nCellco Partnership d/b/a Verizon Wireless\nCellco",
+      "model_output": "Verizon Owner Trust 2020-A\nVerizon ABS LLC\nCellco Partnership d/b/a Verizon Wireless"
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "gpt-5",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Service Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Service Agreement"
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "gpt-5",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "gpt-5",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output accurately summarizes the conditions for termination described in the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "Cellco's appointment as custodian is effective as of the Initial Cutoff Date and will continue until the later of (i) the date on which all obligations of the Issuer have been paid in full and (ii) the date on which such appointment is terminated under this Section 3.10(f).\nThis Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
+      "model_output": "earlier of last remaining Receivable paid/settled/sold/written off and Issuer termination under Trust Agreement Section 8.1"
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "gpt-5",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "gpt-5-mini",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output contains the same legal entity names as the ground truth, even though it omits \"Cellco\".",
+      "method": "llm_judge",
+      "ground_truth": "Servicer\nMarketing Agent\nDepositor\nIssuer\nVERIZON ABS LLC\nCustodian\nVERIZON OWNER TRUST 2020-A\nCellco Partnership d/b/a Verizon Wireless\nCellco",
+      "model_output": "VERIZON OWNER TRUST 2020-A\nVERIZON ABS LLC\nCellco Partnership d/b/a Verizon Wireless"
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "gpt-5-mini",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Service Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Service Agreement"
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "gpt-5-mini",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "gpt-5-mini",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly extracts the expiration date from the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "Cellco's appointment as custodian is effective as of the Initial Cutoff Date and will continue until the later of (i) the date on which all obligations of the Issuer have been paid in full and (ii) the date on which such appointment is terminated under this Section 3.10(f).\nThis Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
+      "model_output": "the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement"
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "gpt-5-mini",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "flash",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output contains the same legal entities as the ground truth, despite omitting 'Cellco'. Cellco is already included via Cellco Partnership d/b/a Verizon Wireless.",
+      "method": "llm_judge",
+      "ground_truth": "Servicer\nMarketing Agent\nDepositor\nIssuer\nVERIZON ABS LLC\nCustodian\nVERIZON OWNER TRUST 2020-A\nCellco Partnership d/b/a Verizon Wireless\nCellco",
+      "model_output": "VERIZON OWNER TRUST 2020-A\nVERIZON ABS LLC\nCellco Partnership d/b/a Verizon Wireless"
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "flash",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Service Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Service Agreement"
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "flash",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "flash",
+      "field": "expiration_date",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "Cellco's appointment as custodian is effective as of the Initial Cutoff Date and will continue until the later of (i) the date on which all obligations of the Issuer have been paid in full and (ii) the date on which such appointment is terminated under this Section 3.10(f).\nThis Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
+      "model_output": ""
+    },
+    {
+      "contract": "03_service_verizon.pdf",
+      "model": "flash",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "sonnet",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output includes the entities \"Integrity Short Term Government Fund\" and \"Integrity Funds Distributor, LLC\" which are present in the ground truth. The model output does not include \"Integrity\" and \"Fund\" which are present in the ground truth. Since the model output does not capture all of the legal entities from the ground truth, it is not a complete match, but given the instructions to focus on legal entity names, and to exclude shortened names like \"Fund\" and implied entities such as \"Integrity\" which likely refers to the Integrity fund company, it is marked as a MATCH.",
+      "method": "llm_judge",
+      "ground_truth": "Integrity Short Term Government Fund\nIntegrity\nIntegrity Funds Distributor, LLC\nFund",
+      "model_output": "Integrity Short Term Government Fund\nIntegrity Funds Distributor, LLC"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "sonnet",
+      "field": "contract_type",
+      "judgment": "NO_MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Distributor Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Distributor Agreement"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "sonnet",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "sonnet",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output '2022-01-18' correctly captures the initial expiration date of January 18, 2022, as stated in the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \"Qualified Trustees\"), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+      "model_output": "2022-01-18"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "sonnet",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "The model output accurately captures the key aspects of the renewal term: a 1-year renewal period and the condition that it's subject to annual Board approval.",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \"Qualified Trustees\"), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+      "model_output": "1 year, subject to annual Board approval"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "gpt-5",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output includes the legal entity names \"Integrity Short Term Government Fund\" and \"Integrity Funds Distributor, LLC\", which are present in the ground truth. While \"Integrity\" and \"Fund\" are present in ground truth, they are likely shorthand or incomplete names rather than the full legal entities. The model output captures the core legal entities.",
+      "method": "llm_judge",
+      "ground_truth": "Integrity Short Term Government Fund\nIntegrity\nIntegrity Funds Distributor, LLC\nFund",
+      "model_output": "Integrity Short Term Government Fund\nIntegrity Funds Distributor, LLC"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "gpt-5",
+      "field": "contract_type",
+      "judgment": "NO_MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Distributor Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Distributor Agreement"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "gpt-5",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "gpt-5",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output of '2022-01-18' accurately reflects the initial expiration date of 'January 18, 2022' mentioned in the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \"Qualified Trustees\"), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+      "model_output": "2022-01-18"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "gpt-5",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "The model output accurately summarizes the ground truth, capturing the key aspects of the auto-renewal and its 1-year duration, even though it omits the specific conditions for renewal approval.",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \"Qualified Trustees\"), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+      "model_output": "1 year auto-renewal"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "gpt-5-mini",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly identifies two of the legal entities: Integrity Short Term Government Fund and Integrity Funds Distributor, LLC. It omits 'Integrity' and 'Fund', which are shorthand names rather than full legal entity names.",
+      "method": "llm_judge",
+      "ground_truth": "Integrity Short Term Government Fund\nIntegrity\nIntegrity Funds Distributor, LLC\nFund",
+      "model_output": "Integrity Short Term Government Fund\nIntegrity Funds Distributor, LLC"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "gpt-5-mini",
+      "field": "contract_type",
+      "judgment": "NO_MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Distributor Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Distributor Agreement"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "gpt-5-mini",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "gpt-5-mini",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output '2022-01-18' correctly captures the initial expiration date mentioned in the ground truth 'January 18, 2022'.",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \"Qualified Trustees\"), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+      "model_output": "2022-01-18"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "gpt-5-mini",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "The model output accurately captures the essence of the ground truth, including the annual auto-renewal and the condition of approval by the Fund's Board and Qualified Trustees.",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \"Qualified Trustees\"), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+      "model_output": "1 year auto-renewal (successive annual periods ending Jan 18; subject to annual approval by Fund's Board and Qualified Trustees)"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "flash",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output includes the two key legal entities: Integrity Short Term Government Fund, and Integrity Funds Distributor, LLC. It excludes Integrity and Fund which are shorthand.",
+      "method": "llm_judge",
+      "ground_truth": "Integrity Short Term Government Fund\nIntegrity\nIntegrity Funds Distributor, LLC\nFund",
+      "model_output": "Integrity Short Term Government Fund\nIntegrity Funds Distributor, LLC"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "flash",
+      "field": "contract_type",
+      "judgment": "NO_MATCH",
+      "reasoning": "Exact match: 'Service Agreement' vs 'Distributor Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Service Agreement",
+      "model_output": "Distributor Agreement"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "flash",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "flash",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output \"2022-01-18\" correctly captures the initial expiration date mentioned in the ground truth: \"January 18, 2022\".",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \"Qualified Trustees\"), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+      "model_output": "2022-01-18"
+    },
+    {
+      "contract": "04_service_integrity.pdf",
+      "model": "flash",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "The model output accurately summarizes the renewal term described in the ground truth, capturing the key aspects of annual auto-renewal with specific board approval.",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \"Qualified Trustees\"), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+      "model_output": "1 year auto-renewal"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "sonnet",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly identifies the legal entities: PSiTech Corporation and Empirical Ventures, Inc.",
+      "method": "llm_judge",
+      "ground_truth": "PSiTech Corporation\nLicensor\nLicensee\nEmpirical Ventures, Inc.",
+      "model_output": "PSiTech Corporation\nEmpirical Ventures, Inc."
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "sonnet",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "sonnet",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "The model output '90 days' accurately reflects the notice period of ninety (90) days mentioned in the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+      "model_output": "90 days"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "sonnet",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output accurately summarizes the ground truth's description of the expiration date as 5 years from the Effective Date.",
+      "method": "llm_judge",
+      "ground_truth": "The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision of this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
+      "model_output": "5 years from Effective Date"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "sonnet",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "The model output captures the core information about the renewal term: its duration (3 years) and that it's an automatic renewal.",
+      "method": "llm_judge",
+      "ground_truth": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+      "model_output": "3 years auto-renewal"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "gpt-5",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly identifies the two legal entities: PSiTech Corporation and Empirical Ventures, Inc.",
+      "method": "llm_judge",
+      "ground_truth": "PSiTech Corporation\nLicensor\nLicensee\nEmpirical Ventures, Inc.",
+      "model_output": "PSiTech Corporation\nEmpirical Ventures, Inc."
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "gpt-5",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "gpt-5",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly extracts the notice period of 90 days.",
+      "method": "llm_judge",
+      "ground_truth": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+      "model_output": "90 days"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "gpt-5",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output accurately captures the expiration date as '5 years following the Effective Date', which is consistent with the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision of this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
+      "model_output": "5 years following the Effective Date"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "gpt-5",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "The model output accurately summarizes the renewal term, capturing the 3-year auto-renewal and mentioning it's for one additional term.",
+      "method": "llm_judge",
+      "ground_truth": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+      "model_output": "3 years auto-renewal (one additional term)"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "gpt-5-mini",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly identifies the two legal entity names, 'PSiTech Corporation' and 'Empirical Ventures, Inc.' from the ground truth. The roles 'Licensor' and 'Licensee' are correctly ignored.",
+      "method": "llm_judge",
+      "ground_truth": "PSiTech Corporation\nLicensor\nLicensee\nEmpirical Ventures, Inc.",
+      "model_output": "PSiTech Corporation\nEmpirical Ventures, Inc."
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "gpt-5-mini",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "gpt-5-mini",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "The model output exactly matches the ground truth's notice period for preventing automatic renewal.",
+      "method": "llm_judge",
+      "ground_truth": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+      "model_output": "90 days"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "gpt-5-mini",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output accurately captures the expiration date, which is five years following the Effective Date, as specified in the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision of this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
+      "model_output": "five (5) years following the Effective Date"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "gpt-5-mini",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly captures the auto-renewal for one additional three year term.",
+      "method": "llm_judge",
+      "ground_truth": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+      "model_output": "One (1) additional three (3) year automatic renewal"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "flash",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "Both the ground truth and model output contain the same LEGAL ENTITY NAMES: \"PSiTech Corporation\" and \"Empirical Ventures, Inc.\"",
+      "method": "llm_judge",
+      "ground_truth": "PSiTech Corporation\nLicensor\nLicensee\nEmpirical Ventures, Inc.",
+      "model_output": "PSiTech Corporation\nEmpirical Ventures, Inc."
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "flash",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "flash",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly extracts the notice period of 90 days.",
+      "method": "llm_judge",
+      "ground_truth": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+      "model_output": "90 days"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "flash",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output '5 years from the Effective Date' correctly captures the same information as the ground truth, which states the agreement continues until five years following the Effective Date.",
+      "method": "llm_judge",
+      "ground_truth": "The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision of this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
+      "model_output": "5 years from the Effective Date"
+    },
+    {
+      "contract": "05_license_gopage.pdf",
+      "model": "flash",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "The model output accurately summarizes the renewal term as a 3-year auto-renewal, capturing the key information from the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+      "model_output": "3 year auto-renewal"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "sonnet",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output contains the same legal entity names as the ground truth, despite omitting the role labels.",
+      "method": "llm_judge",
+      "ground_truth": "Morgan Stanley Investment Management Inc.\nLicensor\nLicensee\nMorgan Stanley Direct Lending Fund",
+      "model_output": "Morgan Stanley Investment Management Inc.\nMorgan Stanley Direct Lending Fund"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "sonnet",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "sonnet",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "sonnet",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly captures the concept of 'in perpetuity' with 'perpetual'.",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+      "model_output": "perpetual"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "sonnet",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "gpt-5",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly identifies the two legal entity names: 'Morgan Stanley Investment Management Inc.' and 'Morgan Stanley Direct Lending Fund'. It correctly excludes role labels.",
+      "method": "llm_judge",
+      "ground_truth": "Morgan Stanley Investment Management Inc.\nLicensor\nLicensee\nMorgan Stanley Direct Lending Fund",
+      "model_output": "Morgan Stanley Investment Management Inc.\nMorgan Stanley Direct Lending Fund"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "gpt-5",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "gpt-5",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "gpt-5",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "Model correctly extracts 'perpetual' which matches 'continues in perpetuity' in the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+      "model_output": "perpetual"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "gpt-5",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "gpt-5-mini",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly extracted 'Morgan Stanley Investment Management Inc.' and 'Morgan Stanley Direct Lending Fund'. The Ground Truth also contains role labels (Licensor, Licensee) that are ignored per instructions, therefore the model output matches the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "Morgan Stanley Investment Management Inc.\nLicensor\nLicensee\nMorgan Stanley Direct Lending Fund",
+      "model_output": "Morgan Stanley Investment Management Inc.\nMorgan Stanley Direct Lending Fund"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "gpt-5-mini",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "gpt-5-mini",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "gpt-5-mini",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output 'perpetual' accurately reflects the ground truth 'continues in perpetuity'.",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+      "model_output": "perpetual"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "gpt-5-mini",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "flash",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly identifies the legal entities 'Morgan Stanley Investment Management Inc.' and 'Morgan Stanley Direct Lending Fund'. It omits the role labels 'Licensor' and 'Licensee', which is correct according to the instructions.",
+      "method": "llm_judge",
+      "ground_truth": "Morgan Stanley Investment Management Inc.\nLicensor\nLicensee\nMorgan Stanley Direct Lending Fund",
+      "model_output": "Morgan Stanley Investment Management Inc.\nMorgan Stanley Direct Lending Fund"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "flash",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "flash",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "flash",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output \"perpetual\" correctly identifies that the agreement continues indefinitely, as stated in the ground truth \"continues in perpetuity\".",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+      "model_output": "perpetual"
+    },
+    {
+      "contract": "06_license_morganstanley.pdf",
+      "model": "flash",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "sonnet",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output includes all the correct legal entity names (Vyera Pharmaceuticals, LLC and CytoDyn Inc.). The ground truth includes Vyera and CytoDyn but they are also explicitly mentioned with the full legal entity names.",
+      "method": "llm_judge",
+      "ground_truth": "Vyera\nVyera Pharmaceuticals, LLC\nCytoDyn Inc.\nCytoDyn and Vyera are sometimes referred to herein individually as a \"Party\" and collectively as the \"Parties.\"\nCytoDyn",
+      "model_output": "Vyera Pharmaceuticals, LLC\nCytoDyn Inc."
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "sonnet",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "sonnet",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "sonnet",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output matches the ground truth. Both refer to the end date as the last day of the Royalty Term.",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement (\"Term\") shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term.",
+      "model_output": "on the last day of the Royalty Term"
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "sonnet",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "gpt-5",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly extracts the legal entity names 'Vyera Pharmaceuticals, LLC' and 'CytoDyn Inc.' from the provided text, which matches the ground truth. The fact that the ground truth has some repetitions ('Vyera', 'CytoDyn') doesn't change the correctness since we are evaluating the legal entity names.",
+      "method": "llm_judge",
+      "ground_truth": "Vyera\nVyera Pharmaceuticals, LLC\nCytoDyn Inc.\nCytoDyn and Vyera are sometimes referred to herein individually as a \"Party\" and collectively as the \"Parties.\"\nCytoDyn",
+      "model_output": "Vyera Pharmaceuticals, LLC\nCytoDyn Inc."
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "gpt-5",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "gpt-5",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "gpt-5",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "Both the ground truth and the model output identify the expiration date as being linked to the end of the Royalty Term. The model output provides a more detailed breakdown of what constitutes the Royalty Term, but fundamentally aligns with the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement (\"Term\") shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term.",
+      "model_output": "Expires on the last day of the Royalty Term: until the latest of (a) expiration of last Valid Claim; (b) 10 years from First Commercial Sale; (c) expiration of any Regulatory Exclusivity; (d) Biosimilar Entry Date"
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "gpt-5",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "gpt-5-mini",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly extracted the full legal entity names Vyera Pharmaceuticals, LLC and CytoDyn Inc.",
+      "method": "llm_judge",
+      "ground_truth": "Vyera\nVyera Pharmaceuticals, LLC\nCytoDyn Inc.\nCytoDyn and Vyera are sometimes referred to herein individually as a \"Party\" and collectively as the \"Parties.\"\nCytoDyn",
+      "model_output": "Vyera Pharmaceuticals, LLC\nCytoDyn Inc."
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "gpt-5-mini",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "gpt-5-mini",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "gpt-5-mini",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly identifies that the agreement expires on the last day of the Royalty Term, which matches the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement (\"Term\") shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term.",
+      "model_output": "expire on the last day of the Royalty Term (Royalty Term = period beginning with the First Commercial Sale and continuing until the latest of (a) expiration of the last Valid Claim covering the Licensed Product licensed to Vyera, (b) ten (10) years from the date of the First Commercial Sale, (c) expiration of any Regulatory Exclusivity for the Licensed Product, and (d) the Biosimilar Entry Date)"
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "gpt-5-mini",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "flash",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "Both the ground truth and the model output identify the same two legal entities: Vyera Pharmaceuticals, LLC and CytoDyn Inc.",
+      "method": "llm_judge",
+      "ground_truth": "Vyera\nVyera Pharmaceuticals, LLC\nCytoDyn Inc.\nCytoDyn and Vyera are sometimes referred to herein individually as a \"Party\" and collectively as the \"Parties.\"\nCytoDyn",
+      "model_output": "Vyera Pharmaceuticals, LLC\nCytoDyn Inc."
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "flash",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "flash",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "flash",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The model output describes the conditions that determine the expiration date, aligning with the ground truth's reference to the 'Royalty Term'.",
+      "method": "llm_judge",
+      "ground_truth": "The term of this Agreement (\"Term\") shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term.",
+      "model_output": "latest of (a) expiration of last Valid Claim, (b) 10 years from First Commercial Sale, (c) expiration of Regulatory Exclusivity, or (d) Biosimilar Entry Date"
+    },
+    {
+      "contract": "07_license_cytodyn.pdf",
+      "model": "flash",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "sonnet",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output contains \"ArTara, Inc.\" and \"The University of Iowa\" which are both legal entity names in the ground truth. The model output does not include \"University\" or \"ArTara\", which appear to be shorthand or incomplete versions of legal entity names found elsewhere in the ground truth.",
+      "method": "llm_judge",
+      "ground_truth": "University\nArTara, Inc.\nThe University of Iowa\nArTara",
+      "model_output": "ArTara, Inc.\nThe University of Iowa"
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "sonnet",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "sonnet",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "sonnet",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "sonnet",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "gpt-5",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output contains the same legal entities as the ground truth, even though it omits 'University' and 'ArTara'.",
+      "method": "llm_judge",
+      "ground_truth": "University\nArTara, Inc.\nThe University of Iowa\nArTara",
+      "model_output": "ArTara, Inc.\nThe University of Iowa"
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "gpt-5",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "gpt-5",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "gpt-5",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "gpt-5",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "gpt-5-mini",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly identifies \"ArTara, Inc.\" and \"The University of Iowa\", which are the same as the ground truth (the ground truth also includes \"University\" and \"ArTara\", which are shorter versions of the other names).",
+      "method": "llm_judge",
+      "ground_truth": "University\nArTara, Inc.\nThe University of Iowa\nArTara",
+      "model_output": "ArTara, Inc.\nThe University of Iowa"
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "gpt-5-mini",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "gpt-5-mini",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "gpt-5-mini",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "gpt-5-mini",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "flash",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output includes 'ArTara, Inc.' and 'The University of Iowa', which are both present in the ground truth. Although 'University' and 'ArTara' are in the ground truth, they are shorthand aliases, not full legal entity names, and are therefore not required in the model output.",
+      "method": "llm_judge",
+      "ground_truth": "University\nArTara, Inc.\nThe University of Iowa\nArTara",
+      "model_output": "ArTara, Inc.\nThe University of Iowa"
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "flash",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'License Agreement' vs 'License Agreement'",
+      "method": "exact_match",
+      "ground_truth": "License Agreement",
+      "model_output": "License Agreement"
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "flash",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "flash",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "08_license_artara.pdf",
+      "model": "flash",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "sonnet",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output correctly identifies all the legal entities specified in the ground truth, including variations of Photronics and Dai Nippon Printing Co., Ltd., as well as the joint venture and the Xiamen company. The model appropriately excludes shorthand aliases (e.g., DNP) and role labels, focusing solely on the legal entity names.",
+      "method": "llm_judge",
+      "ground_truth": "PDMC\nPhotronics\nCompany\nPhotronics, Inc.\nDai Nippon Printing Co., Ltd.\nPhotronics DNP Photomask Corporation\nDNP\nXiamen American Japan Photronics Mask Co., Ltd.\nEach of Photronics and DNP is hereinafter referred to as a \"Shareholder\" and collectively as the \"Shareholders\", each of the Shareholders and PDMC is hereinafter referred to as a \"Supplier\" and collectively as the \"Suppliers\", and each of the Suppliers and the Company is hereinafter referred to as a \"Party\" and collectively as the \"Parties.\"",
+      "model_output": "Photronics, Inc.\nDai Nippon Printing Co., Ltd.\nPhotronics DNP Photomask Corporation\nXiamen American Japan Photronics Mask Co., Ltd."
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "sonnet",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Outsourcing Agreement' vs 'Outsourcing Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Outsourcing Agreement",
+      "model_output": "Outsourcing Agreement"
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "sonnet",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "sonnet",
+      "field": "expiration_date",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
+      "model_output": ""
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "sonnet",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "gpt-5",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly identified the legal entities listed in the ground truth, excluding aliases and role labels. PDMC and Company were correctly omitted as they are not explicitly listed as names in the parties list.",
+      "method": "llm_judge",
+      "ground_truth": "PDMC\nPhotronics\nCompany\nPhotronics, Inc.\nDai Nippon Printing Co., Ltd.\nPhotronics DNP Photomask Corporation\nDNP\nXiamen American Japan Photronics Mask Co., Ltd.\nEach of Photronics and DNP is hereinafter referred to as a \"Shareholder\" and collectively as the \"Shareholders\", each of the Shareholders and PDMC is hereinafter referred to as a \"Supplier\" and collectively as the \"Suppliers\", and each of the Suppliers and the Company is hereinafter referred to as a \"Party\" and collectively as the \"Parties.\"",
+      "model_output": "Photronics, Inc.\nDai Nippon Printing Co., Ltd.\nPhotronics DNP Photomask Corporation\nXiamen American Japan Photronics Mask Co., Ltd."
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "gpt-5",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Outsourcing Agreement' vs 'Outsourcing Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Outsourcing Agreement",
+      "model_output": "Outsourcing Agreement"
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "gpt-5",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "gpt-5",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "Both the ground truth and the model output indicate that the agreement continues as long as Photronics and DNP (or their affiliates) remain shareholders of the company. Therefore, the model correctly captures the same information.",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
+      "model_output": "Continues so long as Photronics and DNP (or their Affiliates) each remains a Shareholder of the Company"
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "gpt-5",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "gpt-5-mini",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output contains all the legal entity names found in the ground truth, even if some are abbreviated or presented in a different order. The aliases and roles were correctly ignored. PDMC, Photronics Company, and DNP were either aliases of other entities or descriptions.",
+      "method": "llm_judge",
+      "ground_truth": "PDMC\nPhotronics\nCompany\nPhotronics, Inc.\nDai Nippon Printing Co., Ltd.\nPhotronics DNP Photomask Corporation\nDNP\nXiamen American Japan Photronics Mask Co., Ltd.\nEach of Photronics and DNP is hereinafter referred to as a \"Shareholder\" and collectively as the \"Shareholders\", each of the Shareholders and PDMC is hereinafter referred to as a \"Supplier\" and collectively as the \"Suppliers\", and each of the Suppliers and the Company is hereinafter referred to as a \"Party\" and collectively as the \"Parties.\"",
+      "model_output": "Photronics, Inc.\nDai Nippon Printing Co., Ltd.\nPhotronics DNP Photomask Corporation\nXiamen American Japan Photronics Mask Co., Ltd."
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "gpt-5-mini",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Outsourcing Agreement' vs 'Outsourcing Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Outsourcing Agreement",
+      "model_output": "Outsourcing Agreement"
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "gpt-5-mini",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "gpt-5-mini",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "The Model Output correctly captures the condition upon which the agreement will terminate, which is equivalent to the expiration date.",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
+      "model_output": "shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company."
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "gpt-5-mini",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "flash",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output captures the same legal entity names as the ground truth, even though it omits the shorthand aliases and role labels.",
+      "method": "llm_judge",
+      "ground_truth": "PDMC\nPhotronics\nCompany\nPhotronics, Inc.\nDai Nippon Printing Co., Ltd.\nPhotronics DNP Photomask Corporation\nDNP\nXiamen American Japan Photronics Mask Co., Ltd.\nEach of Photronics and DNP is hereinafter referred to as a \"Shareholder\" and collectively as the \"Shareholders\", each of the Shareholders and PDMC is hereinafter referred to as a \"Supplier\" and collectively as the \"Suppliers\", and each of the Suppliers and the Company is hereinafter referred to as a \"Party\" and collectively as the \"Parties.\"",
+      "model_output": "Photronics, Inc.\nDai Nippon Printing Co., Ltd.\nPhotronics DNP Photomask Corporation\nXiamen American Japan Photronics Mask Co., Ltd."
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "flash",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Outsourcing Agreement' vs 'Outsourcing Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Outsourcing Agreement",
+      "model_output": "Outsourcing Agreement"
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "flash",
+      "field": "notice_period",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "flash",
+      "field": "expiration_date",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
+      "model_output": ""
+    },
+    {
+      "contract": "09_outsourcing_photronics.pdf",
+      "model": "flash",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "Both ground truth and model output are empty",
+      "method": "empty_check",
+      "ground_truth": "",
+      "model_output": ""
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "sonnet",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly extracts the two legal entities 'Paratek Pharmaceuticals, Inc.' and 'CARBOGEN AMCIS AG' from the ground truth. The model excludes role labels like 'Customer' and 'Supplier' which is the desired behavior.",
+      "method": "llm_judge",
+      "ground_truth": "Paratek Pharmaceuticals, Inc.\nCustomer\nCARBOGEN AMCIS AG\n\"Supplier\" and, collectively with Customer, the \"Parties\", and each, a \"Party",
+      "model_output": "Paratek Pharmaceuticals, Inc.\nCARBOGEN AMCIS AG"
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "sonnet",
+      "field": "contract_type",
+      "judgment": "NO_MATCH",
+      "reasoning": "Exact match: 'Outsourcing Agreement' vs 'Manufacturing Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Outsourcing Agreement",
+      "model_output": "Manufacturing Agreement"
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "sonnet",
+      "field": "notice_period",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "This Agreement is effective as of the Effective Date and will expire in accordance with Section 2.1, unless, upon the occurrence of any of the following events, this Agreement is earlier terminated in accordance with this Section 18.1:\n\na) Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term;\n\nb) either Party delivers written notice of termination to the other Party at least [* * *] prior to the expiration date of the Renewal Term, which termination shall be effective as of the expiration date of the Renewal Term;",
+      "model_output": ""
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "sonnet",
+      "field": "expiration_date",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \"Initial Term\").",
+      "model_output": ""
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "sonnet",
+      "field": "renewal_term",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \"Renewal Term\").",
+      "model_output": ""
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "gpt-5",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly identified both legal entities: 'Paratek Pharmaceuticals, Inc.' and 'CARBOGEN AMCIS AG'. It omitted role labels and shorthand as instructed.",
+      "method": "llm_judge",
+      "ground_truth": "Paratek Pharmaceuticals, Inc.\nCustomer\nCARBOGEN AMCIS AG\n\"Supplier\" and, collectively with Customer, the \"Parties\", and each, a \"Party",
+      "model_output": "Paratek Pharmaceuticals, Inc.\nCARBOGEN AMCIS AG"
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "gpt-5",
+      "field": "contract_type",
+      "judgment": "NO_MATCH",
+      "reasoning": "Exact match: 'Outsourcing Agreement' vs 'Supply Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Outsourcing Agreement",
+      "model_output": "Supply Agreement"
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "gpt-5",
+      "field": "notice_period",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "This Agreement is effective as of the Effective Date and will expire in accordance with Section 2.1, unless, upon the occurrence of any of the following events, this Agreement is earlier terminated in accordance with this Section 18.1:\n\na) Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term;\n\nb) either Party delivers written notice of termination to the other Party at least [* * *] prior to the expiration date of the Renewal Term, which termination shall be effective as of the expiration date of the Renewal Term;",
+      "model_output": ""
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "gpt-5",
+      "field": "expiration_date",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \"Initial Term\").",
+      "model_output": ""
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "gpt-5",
+      "field": "renewal_term",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \"Renewal Term\").",
+      "model_output": ""
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "gpt-5-mini",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model output captures both legal entities identified in the ground truth, ignoring role labels and shorthand aliases.",
+      "method": "llm_judge",
+      "ground_truth": "Paratek Pharmaceuticals, Inc.\nCustomer\nCARBOGEN AMCIS AG\n\"Supplier\" and, collectively with Customer, the \"Parties\", and each, a \"Party",
+      "model_output": "Paratek Pharmaceuticals, Inc.\nCARBOGEN AMCIS AG"
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "gpt-5-mini",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Outsourcing Agreement' vs 'Outsourcing Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Outsourcing Agreement",
+      "model_output": "Outsourcing Agreement"
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "gpt-5-mini",
+      "field": "notice_period",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "This Agreement is effective as of the Effective Date and will expire in accordance with Section 2.1, unless, upon the occurrence of any of the following events, this Agreement is earlier terminated in accordance with this Section 18.1:\n\na) Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term;\n\nb) either Party delivers written notice of termination to the other Party at least [* * *] prior to the expiration date of the Renewal Term, which termination shall be effective as of the expiration date of the Renewal Term;",
+      "model_output": ""
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "gpt-5-mini",
+      "field": "expiration_date",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \"Initial Term\").",
+      "model_output": ""
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "gpt-5-mini",
+      "field": "renewal_term",
+      "judgment": "NO_MATCH",
+      "reasoning": "One is empty, other is not (GT empty=False, Model empty=True)",
+      "method": "empty_check",
+      "ground_truth": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \"Renewal Term\").",
+      "model_output": ""
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "flash",
+      "field": "parties",
+      "judgment": "MATCH",
+      "reasoning": "The model correctly identifies the two legal entity names (Paratek Pharmaceuticals, Inc. and CARBOGEN AMCIS AG), as specified in the ground truth. The model excludes the role labels and the collective name for the parties.",
+      "method": "llm_judge",
+      "ground_truth": "Paratek Pharmaceuticals, Inc.\nCustomer\nCARBOGEN AMCIS AG\n\"Supplier\" and, collectively with Customer, the \"Parties\", and each, a \"Party",
+      "model_output": "Paratek Pharmaceuticals, Inc.\nCARBOGEN AMCIS AG"
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "flash",
+      "field": "contract_type",
+      "judgment": "MATCH",
+      "reasoning": "Exact match: 'Outsourcing Agreement' vs 'Outsourcing Agreement'",
+      "method": "exact_match",
+      "ground_truth": "Outsourcing Agreement",
+      "model_output": "Outsourcing Agreement"
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "flash",
+      "field": "notice_period",
+      "judgment": "NO_MATCH",
+      "reasoning": "The model output captures the idea of providing notice prior to the expiration of the initial term. However, the specific notice period duration is missing, so it's impossible to determine if it matches the ground truth without that specific length of time.",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement is effective as of the Effective Date and will expire in accordance with Section 2.1, unless, upon the occurrence of any of the following events, this Agreement is earlier terminated in accordance with this Section 18.1:\n\na) Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term;\n\nb) either Party delivers written notice of termination to the other Party at least [* * *] prior to the expiration date of the Renewal Term, which termination shall be effective as of the expiration date of the Renewal Term;",
+      "model_output": "[* * *] prior to expiration of Initial Term"
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "flash",
+      "field": "expiration_date",
+      "judgment": "MATCH",
+      "reasoning": "Both the ground truth and the model output indicate that the agreement is valid until a certain term (the Initial Term) from the Effective Date.",
+      "method": "llm_judge",
+      "ground_truth": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \"Initial Term\").",
+      "model_output": "until the [* * *] from the Effective Date"
+    },
+    {
+      "contract": "10_outsourcing_paratek.pdf",
+      "model": "flash",
+      "field": "renewal_term",
+      "judgment": "MATCH",
+      "reasoning": "The model output captures the core aspect of the renewal, which is the automatic continuation of the agreement. While it doesn't include the specific condition of 'not agreeing by [* * *]', the essence of the automatic stay is present, making it a sufficient summary.",
+      "method": "llm_judge",
+      "ground_truth": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \"Renewal Term\").",
+      "model_output": "automatically stay in force for a maximum of [* * *]"
+    }
+  ]
+}

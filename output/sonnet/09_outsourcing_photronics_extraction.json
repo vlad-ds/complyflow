@@ -2,12 +2,12 @@
   "source_file": "09_outsourcing_photronics.txt",
   "provider": "anthropic",
   "model": "sonnet",
-  "eval_id": "eval_sonnet_20251127_151918_db585718",
-  "timestamp": "2025-11-27T15:22:15.776813",
+  "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+  "timestamp": "2025-11-27T16:29:18.332213",
   "extraction": {
     "parties": {
-      "raw_snippet": "This OUTSOURCING AGREEMENT (this \"Agreement\") is made and entered into as of the 16th day of May, 2017, by and among Photronics, Inc., a Connecticut corporation with its principal place of business at 15 Secor Road, Brookfield, Connecticut, U.S.A (\"Photronics\"), Dai Nippon Printing Co., Ltd., a Japanese corporation with its principal place of business at 1-1, Ichigaya Kagacho 1-chome, Shinjuku-ku, Tokyo, Japan (\"DNP\"), Photronics DNP Photomask Corporation, a company limited by shares organized and formed under the Company Act of the Republic of China with its principal place of business at 4f, #2, Li-Hsin Road, Science Park, Hsinchu, Taiwan, ROC (\"PDMC\"), and Xiamen American Japan Photronics Mask Co., Ltd., a limited liability company organized and formed under the People's Republic of China with its principal place of business at R203-95, South Building of Torch Square, No. 56-58 Torch Road, Gaoxin District, Xiamen, Fujian Province, Peoples Republic of China (the \"Company\").",
-      "reasoning": "The parties are identified in the opening paragraph of the agreement, listing all four entities entering into this outsourcing agreement.",
+      "raw_snippet": "Photronics, Inc., a Connecticut corporation with its principal place of business at 15 Secor Road, Brookfield, Connecticut, U.S.A (\"Photronics\"), Dai Nippon Printing Co., Ltd., a Japanese corporation with its principal place of business at 1-1, Ichigaya Kagacho 1-chome, Shinjuku-ku, Tokyo, Japan (\"DNP\"), Photronics DNP Photomask Corporation, a company limited by shares organized and formed under the Company Act of the Republic of China with its principal place of business at 4f, #2, Li-Hsin Road, Science Park, Hsinchu, Taiwan, ROC (\"PDMC\"), and Xiamen American Japan Photronics Mask Co., Ltd., a limited liability company organized and formed under the People's Republic of China with its principal place of business at R203-95, South Building of Torch Square, No. 56-58 Torch Road, Gaoxin District, Xiamen, Fujian Province, Peoples Republic of China (the \"Company\").",
+      "reasoning": "The parties are identified in the opening paragraph of the agreement, which lists all four entities entering into this outsourcing agreement.",
       "normalized_value": [
         "Photronics, Inc.",
         "Dai Nippon Printing Co., Ltd.",
@@ -16,30 +16,30 @@
       ]
     },
     "contract_type": {
-      "raw_snippet": "OUTSOURCING AGREEMENT",
-      "reasoning": "The title of the agreement clearly identifies this as an outsourcing agreement, and the content confirms it governs the outsourcing of products and services between the parties.",
+      "raw_snippet": "OUTSOURCING AGREEMENT This OUTSOURCING AGREEMENT (this \"Agreement\") is made and entered into as of the 16th day of May, 2017... the Company desires to outsource or [***]of the Company pursuant to the terms and conditions set forth herein... Subject to the terms and conditions mentioned hereunder, the Parties agree to the outsource model based on [***]... Suppliers will make good faith efforts to accept all [***]from the Company... The purchase price for the Product shall be as set forth in Schedule 2.",
+      "reasoning": "This is substantively an outsourcing agreement where the Company receives purchase orders from customers and outsources the manufacturing of photomasks to the Suppliers (Photronics, DNP, and PDMC). The primary economic substance is the outsourcing of production work, with detailed provisions for purchase orders, allocation rules, pricing, delivery, and warranty terms. While it has supply agreement elements, the core relationship is outsourcing production capacity.",
       "normalized_value": "Outsourcing Agreement"
     },
     "notice_period": {
       "raw_snippet": "",
-      "reasoning": "This agreement does not contain a notice period to prevent automatic renewal. Article 7.1 states the agreement continues 'for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company,' which is a condition-based term, not a renewal mechanism requiring notice to prevent renewal. Section 7.2 provides for termination with 30 days cure period after breach, but this is a termination-for-cause provision, not a notice to prevent renewal.",
+      "reasoning": "The agreement does not contain any notice period requirement to prevent automatic renewal. Article 7.1 states the agreement continues 'for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company' - this is a perpetual term tied to ownership status, not a renewable term requiring notice to prevent renewal. Section 7.2 provides for termination for cause with 30 days to cure, but this is not a notice period to prevent renewal.",
       "normalized_value": ""
     },
     "expiration_date": {
       "raw_snippet": "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
-      "reasoning": "Article 7.1 specifies that the agreement continues indefinitely based on a condition (shareholder status) rather than a fixed date. This is not perpetual in the explicit sense, but rather condition-based. Since there is no specific expiration date and the term is tied to shareholder status, I describe this as a relative term based on the condition.",
-      "normalized_value": "Continues while Photronics and DNP (or their Affiliates) each remain shareholders of the Company"
+      "reasoning": "Article 7.1 specifies the term of the agreement. The agreement does not have a fixed expiration date but rather continues indefinitely based on a condition (continued shareholding). This is not the same as 'perpetual' language - it's contingent on the shareholding relationship continuing. Since there is no fixed term or explicit perpetual language, and the duration is tied to an external condition, this is best represented as an empty string as it doesn't fit the standard expiration date patterns.",
+      "normalized_value": ""
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "The agreement does not contain any renewal provisions. Article 7.1 establishes that the agreement continues based on the condition of shareholder status, not through renewal mechanisms. There is no language about automatic renewal periods or renewal terms.",
+      "reasoning": "The agreement in Article 7.1 states it continues 'for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.' This is not a renewal term structure but rather a continuous term tied to a condition. There is no provision for periodic renewal (e.g., automatic 1-year renewals). The agreement simply continues based on the shareholding condition.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "claude-sonnet-4-5-20250929",
-    "input_tokens": 8551,
-    "output_tokens": 813
+    "input_tokens": 8685,
+    "output_tokens": 1018
   },
-  "latency_seconds": 20.82858419418335
+  "latency_seconds": 36.60684084892273
 }

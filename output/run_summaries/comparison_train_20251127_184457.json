@@ -1,0 +1,106 @@
+{
+  "generated_at": "2025-11-27T18:44:57.989123",
+  "split": "train",
+  "models": [
+    "sonnet",
+    "gpt-5",
+    "gpt-5-mini",
+    "flash"
+  ],
+  "model_reports": [
+    {
+      "model": "sonnet",
+      "provider": "anthropic",
+      "split": "train",
+      "generated_at": "2025-11-27T18:44:57.982675",
+      "contract_count": 10,
+      "local_metrics": {
+        "total_input_tokens": 233817,
+        "total_output_tokens": 8411,
+        "total_latency_seconds": 254.39170813560486,
+        "avg_input_tokens": 23381.7,
+        "avg_output_tokens": 841.1,
+        "avg_latency_seconds": 25.439170813560487
+      }
+    },
+    {
+      "model": "gpt-5",
+      "provider": "openai",
+      "split": "train",
+      "generated_at": "2025-11-27T18:44:57.984900",
+      "contract_count": 10,
+      "local_metrics": {
+        "total_input_tokens": 204270,
+        "total_output_tokens": 27788,
+        "total_latency_seconds": 688.6248614788055,
+        "avg_input_tokens": 20427.0,
+        "avg_output_tokens": 2778.8,
+        "avg_latency_seconds": 68.86248614788056
+      }
+    },
+    {
+      "model": "gpt-5-mini",
+      "provider": "openai",
+      "split": "train",
+      "generated_at": "2025-11-27T18:44:57.987511",
+      "contract_count": 10,
+      "local_metrics": {
+        "total_input_tokens": 204270,
+        "total_output_tokens": 20203,
+        "total_latency_seconds": 314.9318346977234,
+        "avg_input_tokens": 20427.0,
+        "avg_output_tokens": 2020.3,
+        "avg_latency_seconds": 31.49318346977234
+      }
+    },
+    {
+      "model": "flash",
+      "provider": "gemini",
+      "split": "train",
+      "generated_at": "2025-11-27T18:44:57.989119",
+      "contract_count": 10,
+      "local_metrics": {
+        "total_input_tokens": 202365,
+        "total_output_tokens": 7304,
+        "total_latency_seconds": 105.1986997127533,
+        "avg_input_tokens": 20236.5,
+        "avg_output_tokens": 730.4,
+        "avg_latency_seconds": 10.51986997127533
+      }
+    }
+  ],
+  "summary": [
+    {
+      "model": "sonnet",
+      "provider": "anthropic",
+      "contracts": 10,
+      "avg_latency_s": 25.439170813560487,
+      "avg_input_tokens": 23381.7,
+      "avg_output_tokens": 841.1
+    },
+    {
+      "model": "gpt-5",
+      "provider": "openai",
+      "contracts": 10,
+      "avg_latency_s": 68.86248614788056,
+      "avg_input_tokens": 20427.0,
+      "avg_output_tokens": 2778.8
+    },
+    {
+      "model": "gpt-5-mini",
+      "provider": "openai",
+      "contracts": 10,
+      "avg_latency_s": 31.49318346977234,
+      "avg_input_tokens": 20427.0,
+      "avg_output_tokens": 2020.3
+    },
+    {
+      "model": "flash",
+      "provider": "gemini",
+      "contracts": 10,
+      "avg_latency_s": 10.51986997127533,
+      "avg_input_tokens": 20236.5,
+      "avg_output_tokens": 730.4
+    }
+  ]
+}

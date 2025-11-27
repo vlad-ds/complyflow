@@ -2,42 +2,42 @@
   "source_file": "08_license_artara.txt",
   "provider": "anthropic",
   "model": "sonnet",
-  "eval_id": "eval_sonnet_20251127_151918_db585718",
-  "timestamp": "2025-11-27T15:21:54.925234",
+  "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+  "timestamp": "2025-11-27T16:28:41.694823",
   "extraction": {
     "parties": {
       "raw_snippet": "This Sponsored Research and License Agreement (this \"Agreement\") is entered into on November 28, 2018 (the \"Effective Date\"), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\"ArTara\"), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\"University\").",
-      "reasoning": "The parties are identified in the opening paragraph of the agreement, which specifies the two entities entering into the contract with their respective addresses.",
+      "reasoning": "The parties are explicitly identified in the opening paragraph of the agreement with their full legal names and addresses.",
       "normalized_value": [
         "ArTara, Inc.",
         "The University of Iowa"
       ]
     },
     "contract_type": {
-      "raw_snippet": "SPONSORED RESEARCH AND LICENSE AGREEMENT",
-      "reasoning": "The contract title explicitly identifies this as a 'Sponsored Research and License Agreement', which involves both research sponsorship and licensing of intellectual property rights, making it an IP Agreement with elements of collaboration.",
+      "raw_snippet": "SPONSORED RESEARCH AND LICENSE AGREEMENT\n\nWHEREAS, ArTara wishes to use the Program Data (as defined below) collected from the Program, conduct research analysis of the Data and potentially rely on said Program Data to support Regulatory Approvals (as defined below) for TARA-002 in the Territory (as defined below);\n\n4.2 License. University hereby grants to ArTara an exclusive license to use the Program Data solely for the Project and in Regulatory Filings in the Field in the Territory.\n\n4.3 Right of Reference and IND Assignment. University hereby grants to ArTara an exclusive Right of Reference to all Program Regulatory Filings by University in support of the Product.",
+      "reasoning": "While the title suggests both research and licensing components, the primary economic substance is the exclusive license granted by University to ArTara for Program Data and regulatory filings. The sponsored research component (Phase I-V) is a supporting activity to facilitate the main purpose: granting ArTara exclusive rights to use the Program Data for regulatory approvals. The payment structure (royalties on Net Sales, milestone payments) is characteristic of a license agreement. The research is being sponsored to support the licensed use of data.",
       "normalized_value": "License Agreement"
     },
     "notice_period": {
-      "raw_snippet": "This Agreement may be terminated by ArTara upon thirty (30) days prior written notice to University.",
-      "reasoning": "Section 8.1 provides the termination notice requirement, but this is for general termination at will by ArTara, not a notice to prevent automatic renewal. The agreement does not contain auto-renewal provisions with a notice period to terminate renewal. The contract addresses termination rights but not renewal prevention notice periods.",
+      "raw_snippet": "",
+      "reasoning": "This agreement does not contain an automatic renewal provision that requires advance notice to prevent renewal. Article 8.1 states 'This Agreement may be terminated by ArTara upon thirty (30) days prior written notice to University' and Section 8.2 states 'Either Party may terminate the Project and all commitments and obligations with respect thereto, subject to Section 8.3 herein, upon thirty (30) days written notice to the other Party.' These are general termination provisions, not notice periods to prevent automatic renewal. The agreement does not specify an initial term that auto-renews unless notice is given.",
       "normalized_value": ""
     },
     "expiration_date": {
       "raw_snippet": "",
-      "reasoning": "The contract does not specify a fixed term or expiration date. Section 8.1 allows ArTara to terminate upon 30 days notice, and Section 8.2 allows either party to terminate the Project upon 30 days notice, but there is no stated end date or term length for the agreement itself. The contract is terminable at will but does not have an explicit expiration date or perpetual language.",
+      "reasoning": "The agreement does not specify an expiration date or initial term. Article 8 addresses termination rights but does not establish when the agreement naturally expires. Section 8.1 allows ArTara to terminate upon 30 days notice, and Section 8.2 allows either party to terminate the Project upon 30 days notice, but there is no stated term or expiration date for the agreement itself. The agreement appears to continue until terminated by a party.",
       "normalized_value": ""
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "The contract does not contain any provisions for automatic renewal or renewal terms. It is terminable at will by either party upon 30 days notice (Sections 8.1 and 8.2), but there is no mechanism or language describing renewal periods.",
+      "reasoning": "The agreement does not contain any renewal provisions. There is no language indicating that the agreement automatically renews for successive terms or that either party has the option to renew. The agreement only addresses termination rights in Article 8, not renewal.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "claude-sonnet-4-5-20250929",
-    "input_tokens": 11345,
-    "output_tokens": 526
+    "input_tokens": 11479,
+    "output_tokens": 784
   },
-  "latency_seconds": 17.013405799865723
+  "latency_seconds": 22.8239688873291
 }

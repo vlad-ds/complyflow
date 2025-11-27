@@ -2,42 +2,42 @@
   "source_file": "02_service_reynolds.txt",
   "provider": "anthropic",
   "model": "sonnet",
-  "eval_id": "eval_sonnet_20251127_151918_db585718",
-  "timestamp": "2025-11-27T15:20:02.016265",
+  "eval_id": "eval_sonnet_20251127_162527_1d4ff408",
+  "timestamp": "2025-11-27T16:26:19.880104",
   "extraction": {
     "parties": {
       "raw_snippet": "TRANSITION SERVICES AGREEMENT (the \"Agreement\") dated as of [\u2022], 2020, between Reynolds Group Holdings Inc., a Delaware corporation (\"RGHI\"), and Reynolds Consumer Products Inc., a Delaware corporation, (the \"Company\" or \"RCP\").",
-      "reasoning": "The parties are identified in the preamble of the agreement as the two main contracting entities entering into this Transition Services Agreement.",
+      "reasoning": "The parties are identified in the preamble of the agreement, which clearly names the two contracting entities.",
       "normalized_value": [
         "Reynolds Group Holdings Inc.",
         "Reynolds Consumer Products Inc."
       ]
     },
     "contract_type": {
-      "raw_snippet": "TRANSITION SERVICES AGREEMENT",
-      "reasoning": "The document is titled 'TRANSITION SERVICES AGREEMENT' and describes services to be provided between the parties following a separation transaction. This is a Service Agreement where each party provides various transition services to the other.",
+      "raw_snippet": "B. In order to facilitate the separation of the Company and its Affiliates from RGHI and its Affiliates, (i) RGHI will provide, or cause its Affiliates to provide, certain services to the Company and its Affiliates, and (ii) the Company will provide, or cause its Affiliates to provide, certain services to RGHI and its Affiliates, all on the terms and conditions set forth herein.",
+      "reasoning": "While the title is 'Transition Services Agreement', the substance confirms this is a Service Agreement where both parties provide various services to each other (IT, HR, financial, legal, procurement, etc.) on a transitional basis following a corporate separation. The core obligation is service provision in exchange for fees, making this fundamentally a Service Agreement.",
       "normalized_value": "Service Agreement"
     },
     "notice_period": {
-      "raw_snippet": "",
-      "reasoning": "This agreement does not have an auto-renewal provision that requires notice to prevent renewal. Each service has a fixed Term that expires after a specified period (mostly 12 or 24 months from Commencement Date) and the services terminate at the end of their Term. Section 6.1 states services continue 'until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \"Term\") or (ii) earlier terminated pursuant to this Agreement.' Section 6.2 allows for early termination for convenience with 30 days' notice, but this is a termination provision, not a notice to prevent renewal. The agreement terminates when all services have reached their Termination Date (Section 6.3), without any auto-renewal mechanism requiring advance notice to prevent.",
+      "raw_snippet": "Company may terminate for convenience any Transition Service, and RGHI may terminate for convenience any Reverse Transition Service, upon 30 days' prior written notice of such termination",
+      "reasoning": "This contract does not have auto-renewal provisions that require notice to prevent renewal. The notice periods mentioned (30 days) relate to termination for convenience of individual services, not to preventing renewal of the agreement. The agreement terminates when all services expire, and each service has a fixed term (typically 12 or 24 months from commencement) without auto-renewal provisions.",
       "normalized_value": ""
     },
     "expiration_date": {
       "raw_snippet": "With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \"Commencement Date\"), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \"Term\") or (ii) earlier terminated pursuant to this Agreement (a \"Termination Date\").",
-      "reasoning": "The agreement does not have a single expiration date. Instead, each service has its own Term specified in Exhibits A and B, ranging from 12 to 24 months from the applicable Commencement Date. The overall agreement terminates when all individual services have reached their Termination Dates. Since the Commencement Date is specified as February 4, 2020, and most services run for 12 or 24 months, the expiration dates are relative to that date. However, different services have different terms, so there is no single expiration date for the entire agreement.",
-      "normalized_value": "Varies by service: between 12 to 24 months from Commencement Date (February 4, 2020)"
+      "reasoning": "The agreement does not have a single fixed expiration date. Instead, each service has its own term - generally 12 months from the Commencement Date, though some services specify 18 or 24 months. The overall agreement terminates when all services have terminated. This is a relative term structure, not a specific calendar date.",
+      "normalized_value": "12 months following the Commencement Date"
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "The agreement does not contain any renewal provisions. Section 6.1 specifies that each service continues for its specified Term and then terminates. Section 6.3 states 'This Agreement shall terminate when the Termination Date has occurred for all Services.' There is no language providing for automatic renewal or any renewal term. The agreement is structured as a fixed-term transition arrangement to facilitate the separation of the parties, not as a renewable ongoing relationship.",
+      "reasoning": "The contract does not contain any renewal provisions. Each service has a fixed term as specified in Exhibits A and B (typically 12, 18, or 24 months from commencement), and there is no language indicating automatic renewal. Section 6.1 states the term continues until the specified date or earlier termination, with no mention of renewal. Section 6.2 allows termination for convenience but does not establish renewal terms.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "claude-sonnet-4-5-20250929",
-    "input_tokens": 28793,
-    "output_tokens": 851
+    "input_tokens": 28927,
+    "output_tokens": 787
   },
-  "latency_seconds": 24.225677967071533
+  "latency_seconds": 27.803902864456177
 }

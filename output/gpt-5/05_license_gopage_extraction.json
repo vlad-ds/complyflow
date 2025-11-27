@@ -2,12 +2,12 @@
   "source_file": "05_license_gopage.txt",
   "provider": "openai",
   "model": "gpt-5",
-  "eval_id": "eval_gpt-5_20251127_152256_11b14ee2",
-  "timestamp": "2025-11-27T15:26:51.818261",
+  "eval_id": "eval_gpt-5_20251127_164230_96195d38",
+  "timestamp": "2025-11-27T16:47:58.284794",
   "extraction": {
     "parties": {
       "raw_snippet": "This Content License Agreement (\"Agreement\"), dated as of Feb 10, 2014 (the \"Effective Date\"), is by and between PSiTech Corporation, a BVI\nCorporation, with offices located at 303, 3rdFl, St. Georges Bldg, 2 Ice House St, Central, Hong Kong(\"Licensor\"), and Empirical Ventures, Inc., a\nNevada corporation with offices located at 100, 40 Lake Bellevue Dr, Bellevue, WA(\"Licensee\").",
-      "reasoning": "Identified the parties from the introductory paragraph stating the agreement is between PSiTech Corporation (Licensor) and Empirical Ventures, Inc. (Licensee).",
+      "reasoning": "The parties are identified in the opening paragraph as the entities entering into the agreement (the \u201cby and between\u201d clause). Roles (Licensor/Licensee) are excluded from the normalized names.",
       "normalized_value": [
         "PSiTech Corporation",
         "Empirical Ventures, Inc."
@@ -15,29 +15,29 @@
     },
     "contract_type": {
       "raw_snippet": "WEBSITE CONTENT LICENSE AGREEMENT",
-      "reasoning": "The document title explicitly states it is a website content license agreement.",
+      "reasoning": "The agreement\u2019s core substance is Licensor granting Licensee rights to reproduce, display, transmit, and distribute Licensed Content (Section 3.1) in exchange for license fees and royalties (Section 5). This is a license of IP/content, making it a License Agreement.",
       "normalized_value": "License Agreement"
     },
     "notice_period": {
-      "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
-      "reasoning": "This clause sets the advance notice required to prevent the automatic renewal of the agreement.",
+      "raw_snippet": "unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+      "reasoning": "Section 6.1 sets an automatic renewal and specifies the advance written notice required to prevent renewal: at least 90 days before expiration of the Initial Term.",
       "normalized_value": "90 days"
     },
     "expiration_date": {
-      "raw_snippet": "6.1 Term. The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision\nof this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
-      "reasoning": "The initial term ends 5 years from the Effective Date (Feb 10, 2014), which is Feb 10, 2019. The contract then may auto-renew, but the initial expiration date is computable.",
-      "normalized_value": "2019-02-10"
+      "raw_snippet": "6.1 Term. The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision of this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
+      "reasoning": "The contract specifies a relative initial term length (five years from the Effective Date) rather than a specific calendar date.",
+      "normalized_value": "5 years following the Effective Date"
     },
     "renewal_term": {
-      "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
-      "reasoning": "This sentence specifies the automatic renewal duration and that there is only one additional renewal term.",
+      "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\")",
+      "reasoning": "Section 6.1 states the agreement auto-renews for one additional three-year period after the Initial Term.",
       "normalized_value": "3 years auto-renewal (one additional term)"
     }
   },
   "usage": {
     "model": "gpt-5-2025-08-07",
-    "input_tokens": 9819,
-    "output_tokens": 2414
+    "input_tokens": 9937,
+    "output_tokens": 2518
   },
-  "latency_seconds": 56.538825035095215
+  "latency_seconds": 66.42811179161072
 }
