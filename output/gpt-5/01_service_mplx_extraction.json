@@ -1,0 +1,43 @@
+{
+  "source_file": "01_service_mplx.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_192324_1af065a3",
+  "timestamp": "2025-11-27T19:24:10.962878",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS TRANSPORTATION SERVICES AGREEMENT (this \u201cAgreement\u201d) is dated as of June 11, 2015, by and between Marathon Petroleum\nCompany LP (\u201cShipper\u201d) and Marathon Pipe Line LLC, a Delaware limited liability company (\u201cMPL\u201d), both referred to jointly as the \u201cParties\u201d and each\nindividually as a \u201cParty\u201d.",
+      "reasoning": "The opening paragraph explicitly names the two contracting parties by their legal names.",
+      "normalized_value": [
+        "Marathon Petroleum Company LP",
+        "Marathon Pipe Line LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "TRANSPORTATION SERVICES AGREEMENT",
+      "reasoning": "The agreement\u2019s title and substance describe pipeline transportation services with volume commitments and tariff rates.",
+      "normalized_value": "Transportation Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement will automatically renew for up to two (2) renewal terms of five (5) years each (each, an \u201cExtension Period\u201d) unless either Party provides the other Party with written notice of its intent to terminate this Agreement at least six (6) months prior to the end of the Initial Term or the then current Extension Period.",
+      "reasoning": "Section 2.2 sets an automatic renewal and specifies the advance written notice required to prevent renewal.",
+      "normalized_value": "6 months"
+    },
+    "expiration_date": {
+      "raw_snippet": "The Agreement shall continue through the project\u2019s in-service date and\nfor a period of fifteen (15) years after the project\u2019s in-service date (\u201cInitial Term\u201d).",
+      "reasoning": "Section 2.1 defines a relative term measured from the project\u2019s in-service date rather than a specific calendar date.",
+      "normalized_value": "15 years after the project's in-service date"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement will automatically renew for up to two (2) renewal terms of five (5) years each (each, an \u201cExtension Period\u201d)",
+      "reasoning": "Section 2.2 states the automatic renewal structure and length of each renewal term.",
+      "normalized_value": "5 years auto-renewal (up to two renewals)"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 13604,
+    "output_tokens": 3382
+  },
+  "latency_seconds": 46.522464990615845
+}

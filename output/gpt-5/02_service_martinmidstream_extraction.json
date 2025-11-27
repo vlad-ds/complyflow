@@ -1,0 +1,43 @@
+{
+  "source_file": "02_service_martinmidstream.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_192324_1af065a3",
+  "timestamp": "2025-11-27T19:24:52.756713",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS MARINE TRANSPORTATION AGREEMENT (this \u201cAgreement\u201d) is executed this 23rd day of December, 2003, by and between Martin\nOperating Partnership L.P., a Delaware limited partnership (\u201cOwner\u201d), and Midstream Fuel Service LLC, an Alabama limited liability company\n(\u201cCharterer\u201d),",
+      "reasoning": "The introductory paragraph explicitly states the parties by legal names and their roles (Owner and Charterer).",
+      "normalized_value": [
+        "Martin Operating Partnership L.P.",
+        "Midstream Fuel Service LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "in order to evidence the agreement of such parties with respect to Owner\u2019s provision of marine transportation services with respect\nto #2 fuel oil and high sulfur diesel on board its marine vessels under the following terms and conditions.",
+      "reasoning": "The core obligation is the Owner providing marine transportation services for fuel products. This is a transportation-focused services contract.",
+      "normalized_value": "Transportation Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement will automatically renew for successive one year terms\n(each a \u201cRenewal Term\u201d, and together with the Initial Term, the \u201cTerm\u201d), unless either Charterer or\nOwner elects not to renew this Agreement by providing the other party with written notice of such\nelection 30 days prior to the expiration of the Initial Term or Renewal Term, as applicable, at which\npoint this Agreement will automatically terminate.",
+      "reasoning": "This clause sets the advance written notice required to prevent automatic renewal: 30 days prior to the expiration of the then-current term.",
+      "normalized_value": "30 days"
+    },
+    "expiration_date": {
+      "raw_snippet": "The initial term of this Agreement shall be for 3 years (the \u201cInitial Term\u201d) commencing on the date\nfirst set forth above (the \u201cCommencement Date\u201d) and ending on the 3rd anniversary of the\nCommencement Date.",
+      "reasoning": "The agreement specifies a 3-year initial term ending on the 3rd anniversary of the Commencement Date.",
+      "normalized_value": "3 years from Commencement Date"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement will automatically renew for successive one year terms\n(each a \u201cRenewal Term\u201d, and together with the Initial Term, the \u201cTerm\u201d),",
+      "reasoning": "The agreement provides for automatic renewals in one-year increments.",
+      "normalized_value": "1 year auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 4369,
+    "output_tokens": 3251
+  },
+  "latency_seconds": 41.77406406402588
+}

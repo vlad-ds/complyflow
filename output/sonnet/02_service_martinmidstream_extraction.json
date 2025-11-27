@@ -1,0 +1,43 @@
+{
+  "source_file": "02_service_martinmidstream.txt",
+  "provider": "anthropic",
+  "model": "sonnet",
+  "eval_id": "eval_sonnet_20251127_191820_a942ebb2",
+  "timestamp": "2025-11-27T19:19:04.263703",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS MARINE TRANSPORTATION AGREEMENT (this \"Agreement\") is executed this 23rd day of December, 2003, by and between Martin Operating Partnership L.P., a Delaware limited partnership (\"Owner\"), and Midstream Fuel Service LLC, an Alabama limited liability company (\"Charterer\")",
+      "reasoning": "The parties are identified in the opening paragraph of the agreement, which states the agreement is between Martin Operating Partnership L.P. and Midstream Fuel Service LLC.",
+      "normalized_value": [
+        "Martin Operating Partnership L.P.",
+        "Midstream Fuel Service LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "THIS MARINE TRANSPORTATION AGREEMENT (this \"Agreement\") is executed this 23rd day of December, 2003, by and between Martin Operating Partnership L.P., a Delaware limited partnership (\"Owner\"), and Midstream Fuel Service LLC, an Alabama limited liability company (\"Charterer\"), in order to evidence the agreement of such parties with respect to Owner's provision of marine transportation services with respect to #2 fuel oil and high sulfur diesel on board its marine vessels",
+      "reasoning": "While titled as a Marine Transportation Agreement, analyzing the substance reveals this is a transportation services contract where Owner provides marine transportation services for fuel oil and diesel. The primary obligation is the provision of transportation services (Owner transports Charterer's products on marine vessels) in exchange for payment. This matches the definition of a Transportation Agreement.",
+      "normalized_value": "Transportation Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement will automatically renew for successive one year terms (each a \"Renewal Term\", and together with the Initial Term, the \"Term\"), unless either Charterer or Owner elects not to renew this Agreement by providing the other party with written notice of such election 30 days prior to the expiration of the Initial Term or Renewal Term, as applicable",
+      "reasoning": "The contract specifies that it automatically renews unless either party provides written notice 30 days prior to expiration to prevent renewal. This is the classic notice period to terminate renewal.",
+      "normalized_value": "30 days"
+    },
+    "expiration_date": {
+      "raw_snippet": "The initial term of this Agreement shall be for 3 years (the \"Initial Term\") commencing on the date first set forth above (the \"Commencement Date\") and ending on the 3rd anniversary of the Commencement Date.",
+      "reasoning": "The agreement specifies a relative term of 3 years from the Commencement Date (December 23, 2003). The contract describes this as ending on the 3rd anniversary of the Commencement Date, which is a relative term.",
+      "normalized_value": "3 years from December 23, 2003"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement will automatically renew for successive one year terms (each a \"Renewal Term\", and together with the Initial Term, the \"Term\"), unless either Charterer or Owner elects not to renew this Agreement by providing the other party with written notice of such election 30 days prior to the expiration of the Initial Term or Renewal Term, as applicable",
+      "reasoning": "The contract explicitly states that after the initial 3-year term, the agreement automatically renews for successive one-year terms unless either party provides notice not to renew.",
+      "normalized_value": "1 year auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "input_tokens": 5460,
+    "output_tokens": 746
+  },
+  "latency_seconds": 19.836325883865356
+}

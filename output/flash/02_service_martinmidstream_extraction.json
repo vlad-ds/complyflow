@@ -1,0 +1,43 @@
+{
+  "source_file": "02_service_martinmidstream.txt",
+  "provider": "gemini",
+  "model": "flash",
+  "eval_id": "eval_flash_20251127_192206_bb22bb13",
+  "timestamp": "2025-11-27T19:22:22.248824",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "Martin Operating Partnership L.P., a Delaware limited partnership (\u201cOwner\u201d), and Midstream Fuel Service LLC, an Alabama limited liability company (\u201cCharterer\u201d)",
+      "reasoning": "The parties are identified in the introductory paragraph of the agreement as Martin Operating Partnership L.P. and Midstream Fuel Service LLC.",
+      "normalized_value": [
+        "Martin Operating Partnership L.P.",
+        "Midstream Fuel Service LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "THIS MARINE TRANSPORTATION AGREEMENT (this \u201cAgreement\u201d) is executed this 23rd day of December, 2003, by and between Martin Operating Partnership L.P., a Delaware limited partnership (\u201cOwner\u201d), and Midstream Fuel Service LLC, an Alabama limited liability company (\u201cCharterer\u201d), in order to evidence the agreement of such parties with respect to Owner\u2019s provision of marine transportation services with respect to #2 fuel oil and high sulfur diesel on board its marine vessels under the following terms and conditions.",
+      "reasoning": "The title of the agreement is 'MARINE TRANSPORTATION AGREEMENT' and the purpose is explicitly stated as 'Owner\u2019s provision of marine transportation services'. This directly aligns with the 'Transportation Agreement' category.",
+      "normalized_value": "Transportation Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement will automatically renew for successive one year terms (each a \u201cRenewal Term\u201d, and together with the Initial Term, the \u201cTerm\u201d), unless either Charterer or Owner elects not to renew this Agreement by providing the other party with written notice of such election 30 days prior to the expiration of the Initial Term or Renewal Term, as applicable, at which point this Agreement will automatically terminate.",
+      "reasoning": "The contract specifies that notice of non-renewal must be provided '30 days prior to the expiration of the Initial Term or Renewal Term' to prevent automatic termination.",
+      "normalized_value": "30 days"
+    },
+    "expiration_date": {
+      "raw_snippet": "The initial term of this Agreement shall be for 3 years (the \u201cInitial Term\u201d) commencing on the date first set forth above (the \u201cCommencement Date\u201d) and ending on the 3rd anniversary of the Commencement Date.",
+      "reasoning": "The contract explicitly states the initial term is '3 years' commencing on the 'Commencement Date'. This is a relative term.",
+      "normalized_value": "3 years from Commencement Date"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement will automatically renew for successive one year terms (each a \u201cRenewal Term\u201d, and together with the Initial Term, the \u201cTerm\u201d), unless either Charterer or Owner elects not to renew this Agreement by providing the other party with written notice of such election 30 days prior to the expiration of the Initial Term or Renewal Term, as applicable, at which point this Agreement will automatically terminate.",
+      "reasoning": "The contract states that after the initial term, the agreement 'will automatically renew for successive one year terms'.",
+      "normalized_value": "1 year auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "gemini-2.5-flash",
+    "input_tokens": 3769,
+    "output_tokens": 699
+  },
+  "latency_seconds": 6.773015022277832
+}

@@ -1,0 +1,84 @@
+{
+  "eval_id": "judge_20251127_193636_17b6d649",
+  "generated_at": "2025-11-27T19:38:58.775131",
+  "eval_pairs_file": "/Users/vladgheorghe/code/complyflow/output/eval_pairs/test_eval_pairs_20251127_193627.json",
+  "run_info": {
+    "total_judgments": 200,
+    "llm_calls": 155,
+    "duration_seconds": 142.6908860206604
+  },
+  "overall_metrics": {
+    "match": 181,
+    "no_match": 19,
+    "error": 0,
+    "total": 200,
+    "accuracy": 0.905
+  },
+  "model_metrics": {
+    "sonnet": {
+      "match": 46,
+      "no_match": 4,
+      "error": 0,
+      "total": 50,
+      "accuracy": 0.92
+    },
+    "gpt-5": {
+      "match": 44,
+      "no_match": 6,
+      "error": 0,
+      "total": 50,
+      "accuracy": 0.88
+    },
+    "gpt-5-mini": {
+      "match": 46,
+      "no_match": 4,
+      "error": 0,
+      "total": 50,
+      "accuracy": 0.92
+    },
+    "flash": {
+      "match": 45,
+      "no_match": 5,
+      "error": 0,
+      "total": 50,
+      "accuracy": 0.9
+    }
+  },
+  "field_metrics": {
+    "parties": {
+      "match": 40,
+      "no_match": 0,
+      "error": 0,
+      "total": 40,
+      "accuracy": 1.0
+    },
+    "contract_type": {
+      "match": 27,
+      "no_match": 13,
+      "error": 0,
+      "total": 40,
+      "accuracy": 0.675
+    },
+    "notice_period": {
+      "match": 34,
+      "no_match": 6,
+      "error": 0,
+      "total": 40,
+      "accuracy": 0.85
+    },
+    "expiration_date": {
+      "match": 40,
+      "no_match": 0,
+      "error": 0,
+      "total": 40,
+      "accuracy": 1.0
+    },
+    "renewal_term": {
+      "match": 40,
+      "no_match": 0,
+      "error": 0,
+      "total": 40,
+      "accuracy": 1.0
+    }
+  }
+}

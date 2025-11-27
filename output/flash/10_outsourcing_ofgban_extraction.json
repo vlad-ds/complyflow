@@ -1,0 +1,43 @@
+{
+  "source_file": "10_outsourcing_ofgban.txt",
+  "provider": "gemini",
+  "model": "flash",
+  "eval_id": "eval_flash_20251127_192206_bb22bb13",
+  "timestamp": "2025-11-27T19:23:20.473935",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "Oriental Financial Group Inc., a Puerto Rico financial holding company (\u201cCustomer\u201d), and Metavante Corporation, a Wisconsin corporation (\u201cMetavante\u201d)",
+      "reasoning": "The parties are identified in the introductory paragraph as Oriental Financial Group Inc. and Metavante Corporation, along with their legal descriptions and short-hand names ('Customer' and 'Metavante').",
+      "normalized_value": [
+        "Oriental Financial Group Inc.",
+        "Metavante Corporation"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "TECHNOLOGY OUTSOURCING AGREEMENT This Master Agreement is made as of the 26 day of January, 2007 (the \u201cEffective Date\u201d), by and between Oriental Financial Group Inc., a Puerto Rico financial holding company (\u201cCustomer\u201d), and Metavante Corporation, a Wisconsin corporation (\u201cMetavante\u201d). Customer desires Metavante to provide to Customer the services and licenses as set forth in this Agreement and its amendments, and Metavante desires to provide such services and licenses to Customer, all as provided in this Agreement and its amendments.",
+      "reasoning": "The title of the agreement clearly states 'TECHNOLOGY OUTSOURCING AGREEMENT', and the introductory paragraphs describe the Customer desiring Metavante to provide services and licenses, which aligns with the definition of an outsourcing agreement.",
+      "normalized_value": "Outsourcing Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "Unless Customer notifies Metavante of its intent not to renew this Agreement in writing within a period of three (3) months following the Renewal Notice, this Agreement shall automatically renew at the end of the Initial Term on the same terms (including pricing terms) for one (1) twelve-month period.",
+      "reasoning": "Section 2.1 'Duration' states that Metavante provides a renewal notice, and then Customer must notify Metavante of its intent not to renew within three months of that notice to prevent automatic renewal.",
+      "normalized_value": "3 months"
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement shall commence on the Effective Date and end on November 30, 2014 (the \u201cInitial Term\u201d).",
+      "reasoning": "Section 2.1 'Duration' explicitly states that the agreement ends on 'November 30, 2014'.",
+      "normalized_value": "2014-11-30"
+    },
+    "renewal_term": {
+      "raw_snippet": "Unless Customer notifies Metavante of its intent not to renew this Agreement in writing within a period of three (3) months following the Renewal Notice, this Agreement shall automatically renew at the end of the Initial Term on the same terms (including pricing terms) for one (1) twelve-month period. Upon expiration of such twelve (12) -month extension, this Agreement shall expire unless renewed in writing by the parties",
+      "reasoning": "Section 2.1 'Duration' describes an automatic renewal for 'one (1) twelve-month period' after the initial term, provided certain conditions are not met by the customer.",
+      "normalized_value": "1 year auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "gemini-2.5-flash",
+    "input_tokens": 33800,
+    "output_tokens": 656
+  },
+  "latency_seconds": 6.6370909214019775
+}

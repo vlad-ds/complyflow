@@ -1,0 +1,43 @@
+{
+  "source_file": "08_license_euromediaholdin.txt",
+  "provider": "anthropic",
+  "model": "sonnet",
+  "eval_id": "eval_sonnet_20251127_191820_a942ebb2",
+  "timestamp": "2025-11-27T19:21:22.606728",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "Rogers Cable Communications Inc. (\"Rogers\") and\nEuroMedia Holdings Corp. (\"Licensor\")",
+      "reasoning": "The parties are clearly identified in the title section of the agreement, with Rogers Cable Communications Inc. as one party and EuroMedia Holdings Corp. as the other party.",
+      "normalized_value": [
+        "Rogers Cable Communications Inc.",
+        "EuroMedia Holdings Corp."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "VIDEO-ON-DEMAND CONTENT LICENSE AGREEMENT ... Licensor grants to Rogers the non-exclusive license and right to distribute and exhibit in Canada (the \"Territory\") all entertainment programming to which Licensor owns or controls the VOD distribution and exhibition rights in the Territory (collectively, \"Licensed Programs\") to residential subscribers of Rogers' digital cable television service on a Video-on-Demand (\"VOD\") basis.",
+      "reasoning": "The agreement is titled as a license agreement and the core obligation is Licensor granting Rogers a non-exclusive license to distribute and exhibit entertainment programming on a VOD basis. The primary economic substance involves licensing intellectual property rights (VOD distribution rights) for consideration. This is fundamentally a license agreement for content distribution rights.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "At Rogers' option, this Agreement shall renew for a subsequent term of two (2) years on the terms and conditions herein (the \"Renewal Term\"). Notwithstanding the foregoing, if, at the expiry of this Agreement following the Initial Term or the Renewal Term (if any), as applicable, Licensor and Rogers have not executed a new agreement governing the VOD distribution and exhibition of Licensed Programs and Rogers (or its permitted assigns) continues to distribute and exhibit Licensed Programs on the ROD Service following such expiry, such continued distribution and exhibition shall be governed by the terms of this Agreement in effect at the time of expiry, except that each of Licensor and Rogers shall have the right, on sixty (60) days' prior written notice, to terminate this Agreement, as so extended.",
+      "reasoning": "The renewal is at Rogers' option only - there is no automatic renewal that requires notice to prevent. The 60 days' prior written notice mentioned applies only to the extended period after expiry if parties continue operating without a new agreement, not to prevent an automatic renewal of the Initial or Renewal Term. Therefore, there is no notice period to terminate renewal as defined.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement (the \"Initial Term\") shall commence as of the Effective Date and, unless earlier terminated in accordance with this Agreement, shall terminate on June 30, 2010.",
+      "reasoning": "The agreement explicitly states a specific calendar date for termination of the Initial Term: June 30, 2010. This is a fixed expiration date, not a relative term.",
+      "normalized_value": "2010-06-30"
+    },
+    "renewal_term": {
+      "raw_snippet": "At Rogers' option, this Agreement shall renew for a subsequent term of two (2) years on the terms and conditions herein (the \"Renewal Term\").",
+      "reasoning": "The agreement includes an optional renewal term of 2 years, but it is at Rogers' sole option (not automatic). This means Rogers can choose to renew for 2 years, but there is no automatic renewal mechanism.",
+      "normalized_value": "2 years at Rogers' option"
+    }
+  },
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "input_tokens": 9198,
+    "output_tokens": 753
+  },
+  "latency_seconds": 24.64912176132202
+}

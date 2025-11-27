@@ -1,0 +1,43 @@
+{
+  "source_file": "03_service_blackstonegsolo.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_192324_1af065a3",
+  "timestamp": "2025-11-27T19:25:47.581243",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS SERVICE AGREEMENT FOR TRANSFER AGENT SERVICES (this \u201cAgreement\u201d) between Blackstone / GSO Long-Short Credit\nIncome Fund, a Delaware statutory trust (\u201cClient\u201d) and Mellon Investor Services LLC (operating with the service name BNY Mellon Shareowner\nServices), a New Jersey limited liability company (\u201cAgent\u201d), is dated as of January 26, 2011.",
+      "reasoning": "The introductory paragraph explicitly names the two parties to the agreement: the Client and the Agent, including their legal names and forms.",
+      "normalized_value": [
+        "Blackstone / GSO Long-Short Credit Income Fund",
+        "Mellon Investor Services LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "SERVICE AGREEMENT\nFOR\nTRANSFER AGENT SERVICES",
+      "reasoning": "The agreement appoints the Agent to provide transfer agent, registrar, and dividend disbursing services to the Client for fees as detailed in Exhibit B, which is characteristic of a services contract.",
+      "normalized_value": "Service Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "Unless either party gives written notice of termination of this Agreement at least 60 days prior to the end of the Initial\nTerm, or any successive three-year term, this Agreement shall automatically renew for successive additional three-year terms\u037e",
+      "reasoning": "This clause specifies the advance written notice required to prevent automatic renewal\u201460 days before the end of the current term.",
+      "normalized_value": "60 days"
+    },
+    "expiration_date": {
+      "raw_snippet": "Agent\u2019s appointment hereunder shall commence on the next business day after the later of (i) the date hereof, or (ii) the date\nAgent has confirmed that Client\u2019s records have been converted to Agent\u2019s system (the \u201cEffective Date\u201d), and shall continue for three years\nthereafter (the \u201cInitial Term\u201d).",
+      "reasoning": "The agreement defines a term that runs for three years from the Effective Date; no specific calendar date is provided.",
+      "normalized_value": "3 years from Effective Date"
+    },
+    "renewal_term": {
+      "raw_snippet": "Unless either party gives written notice of termination of this Agreement at least 60 days prior to the end of the Initial\nTerm, or any successive three-year term, this Agreement shall automatically renew for successive additional three-year terms\u037e",
+      "reasoning": "This clause states the contract will automatically renew for successive 3-year periods absent timely notice.",
+      "normalized_value": "3 year auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 12044,
+    "output_tokens": 2811
+  },
+  "latency_seconds": 54.81030893325806
+}

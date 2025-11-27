@@ -1,0 +1,43 @@
+{
+  "source_file": "09_outsourcing_sykeshealthplan.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_192324_1af065a3",
+  "timestamp": "2025-11-27T19:31:33.392378",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This Outsourcing Agreement (the \"Agreement\") is made and entered into\nas of January 1, 1998, by and between Sykes HealthPlan Services, Inc., a Florida\ncorporation (\"SHPS\"), and HealthPlan Services, Inc., a Florida corporation\n(\"HPS\").",
+      "reasoning": "The preamble explicitly states the contracting parties using the phrase \"by and between\" and provides their full legal names.",
+      "normalized_value": [
+        "Sykes HealthPlan Services, Inc.",
+        "HealthPlan Services, Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "1.1 AGREEMENT TO OUTSOURCE CARE MANAGEMENT SERVICES. HPS\nagrees to outsource to SHPS, and hereby appoints SHPS as the exclusive provider\nof, Care Management Services to the Clients, subject to the terms and conditions\nset forth in this Agreement.",
+      "reasoning": "The core obligation is that HPS outsources Care Management Services to SHPS, which will provide those services to clients. This indicates an outsourcing arrangement.",
+      "normalized_value": "Outsourcing Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "Unless either\nparty gives the other at least ninety days' prior written notice that it has\nelected not to extend the term of this Agreement beyond December 31, 1998, the\nterm of this Agreement will be automatically extended until December 31, 1999.\nThereafter this Agreement will automatically be renewed for successive\nadditional periods of one year, unless either party gives notice of cancellation\non or before October 1 of any such year.",
+      "reasoning": "Section 1.2 contains two renewal notice mechanisms: (1) at least 90 days\u2019 prior written notice to avoid the initial extension beyond 12/31/1998, and (2) thereafter, notice of cancellation on or before October 1 each year to prevent auto-renewal. For ongoing renewals, the operative notice is by October 1 each year.",
+      "normalized_value": "on or before October 1 each year"
+    },
+    "expiration_date": {
+      "raw_snippet": "1.2 TERM. The term of this Agreement will commence on January\n1, 1998 (the \"Effective Date\") and will end on December 31, 1998.",
+      "reasoning": "The agreement specifies a concrete end date for the initial term in Section 1.2.",
+      "normalized_value": "1998-12-31"
+    },
+    "renewal_term": {
+      "raw_snippet": "Thereafter this Agreement will automatically be renewed for successive\nadditional periods of one year, unless either party gives notice of cancellation\non or before October 1 of any such year.",
+      "reasoning": "Section 1.2 states the contract auto-renews for successive one-year periods unless timely notice is given.",
+      "normalized_value": "1 year auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 4069,
+    "output_tokens": 3850
+  },
+  "latency_seconds": 55.549063205718994
+}

@@ -1,0 +1,43 @@
+{
+  "source_file": "02_service_martinmidstream.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_193227_fdbec8ad",
+  "timestamp": "2025-11-27T19:33:20.959238",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS MARINE TRANSPORTATION AGREEMENT (this \u201cAgreement\u201d) is executed this 23rd day of December, 2003, by and between Martin Operating Partnership L.P., a Delaware limited partnership (\u201cOwner\u201d), and Midstream Fuel Service LLC, an Alabama limited liability company (\u201cCharterer\u201d), in order to evidence the agreement of such parties with respect to Owner\u2019s provision of marine transportation services with respect to #2 fuel oil and high sulfur diesel on board its marine vessels under the following terms and conditions.",
+      "reasoning": "The excerpt at the start of the Agreement explicitly names the two contracting parties and defines their roles (\"Owner\" and \"Charterer\"). This sentence identifies the parties to the contract.",
+      "normalized_value": [
+        "Martin Operating Partnership L.P.",
+        "Midstream Fuel Service LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "THIS MARINE TRANSPORTATION AGREEMENT (this \u201cAgreement\u201d) is executed this 23rd day of December, 2003, by and between Martin Operating Partnership L.P., a Delaware limited partnership (\u201cOwner\u201d), and Midstream Fuel Service LLC, an Alabama limited liability company (\u201cCharterer\u201d), in order to evidence the agreement of such parties with respect to Owner\u2019s provision of marine transportation services with respect to #2 fuel oil and high sulfur diesel on board its marine vessels under the following terms and conditions.",
+      "reasoning": "The substance of the agreement is the Owner's provision of marine transportation services for #2 fuel oil and high sulfur diesel; the parties' primary obligations are provision of vessel transportation services and payment for those services. This aligns with a transportation/service contract.",
+      "normalized_value": "Transportation Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement will automatically renew for successive one year terms (each a \u201cRenewal Term\", and together with the Initial Term, the \u201cTerm\u201d), unless either Charterer or Owner elects not to renew this Agreement by providing the other party with written notice of such election 30 days prior to the expiration of the Initial Term or Renewal Term, as applicable, at which point this Agreement will automatically terminate.",
+      "reasoning": "This sentence expressly sets the advance notice required to prevent automatic renewal: written notice 30 days prior to the expiration of the Initial Term or any Renewal Term.",
+      "normalized_value": "30 days"
+    },
+    "expiration_date": {
+      "raw_snippet": "The initial term of this Agreement shall be for 3 years (the \u201cInitial Term\u201d) commencing on the date first set forth above (the \u201cCommencement Date\u201d) and ending on the 3rd anniversary of the Commencement Date.",
+      "reasoning": "This clause defines the Initial Term as a three-year period measured from the Commencement Date and ending on its third anniversary; it is a relative term rather than a fixed calendar date.",
+      "normalized_value": "3 years commencing on the Commencement Date and ending on the 3rd anniversary of the Commencement Date"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement will automatically renew for successive one year terms (each a \u201cRenewal Term\", and together with the Initial Term, the \u201cTerm\u201d), unless either Charterer or Owner elects not to renew this Agreement by providing the other party with written notice of such election 30 days prior to the expiration of the Initial Term or Renewal Term, as applicable, at which point this Agreement will automatically terminate.",
+      "reasoning": "The Agreement states it will automatically renew for successive one-year terms (\"Renewal Term\") unless proper notice is given, so the renewal period is one year and renewals are automatic.",
+      "normalized_value": "1 year auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 4369,
+    "output_tokens": 2279
+  },
+  "latency_seconds": 26.325599908828735
+}

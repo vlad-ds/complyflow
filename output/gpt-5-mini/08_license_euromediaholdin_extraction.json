@@ -1,0 +1,43 @@
+{
+  "source_file": "08_license_euromediaholdin.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_193227_fdbec8ad",
+  "timestamp": "2025-11-27T19:35:26.398104",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "between\nRogers Cable Communications Inc. (\u201cRogers\u201d) and\nEuroMedia Holdings Corp. (\u201cLicensor\u201d) offering EurocinemaSM Video-on-Demand service\nmade as of July 11 , 2006 (the \u201cEffective Date\u201d)\n(the \u201cAgreement\")",
+      "reasoning": "The header of the agreement shows the contracting parties in the 'between' clause. These are the two named contracting entities: Rogers Cable Communications Inc. (referred to as \u201cRogers\u201d) and EuroMedia Holdings Corp. (referred to as \u201cLicensor\u201d).",
+      "normalized_value": [
+        "Rogers Cable Communications Inc.",
+        "EuroMedia Holdings Corp."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "VIDEO-ON-DEMAND CONTENT LICENSE AGREEMENT",
+      "reasoning": "The agreement's title and the substantive obligations show that Licensor grants Rogers a non-exclusive license and right to distribute and exhibit entertainment programming on a Video-on-Demand basis. The core subject is licensing of content for distribution, so this is a license agreement.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "There is no provision that requires advance notice to prevent an automatic renewal. Renewal occurs \"At Rogers\u2019 option\" for a two-year term; the contract does not state an automatic renewal that a party can prevent by giving notice. Therefore no \"notice to prevent automatic renewal\" period exists in the contract.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement (the \u201cInitial Term\u201d) shall commence as of the Effective Date and, unless earlier terminated in accordance with this Agreement, shall terminate on June 30, 2010.",
+      "reasoning": "Section 7 expressly states the Initial Term begins on the Effective Date and terminates on a specific calendar date (June 30, 2010). Because the contract provides a specific calendar expiration date, return it in ISO format.",
+      "normalized_value": "2010-06-30"
+    },
+    "renewal_term": {
+      "raw_snippet": "At Rogers\u2019 option, this Agreement shall renew for a subsequent term of two (2) years on the terms and conditions herein (the \u201cRenewal Term\u201d).",
+      "reasoning": "Section 7 grants Rogers the unilateral option to renew the agreement for a subsequent two-year term. This describes the renewal length and that renewal is at Rogers' option.",
+      "normalized_value": "2 year renewal at Rogers' option"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 7765,
+    "output_tokens": 2111
+  },
+  "latency_seconds": 21.68587303161621
+}

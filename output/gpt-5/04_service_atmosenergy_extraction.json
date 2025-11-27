@@ -1,0 +1,43 @@
+{
+  "source_file": "04_service_atmosenergy.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_192324_1af065a3",
+  "timestamp": "2025-11-27T19:26:39.493902",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS AGREEMENT (\"Agreement\"), entered into on May 20, 1992, is between\nArkansas Western Pipeline Company (\"Transporter\"), an Arkansas corporation, and\nAssociated Natural Gas Company, a division of Arkansas Western Gas Company,\n(\"Shipper\")\u037e",
+      "reasoning": "The introductory paragraph explicitly names the contracting parties and their roles (Transporter and Shipper).",
+      "normalized_value": [
+        "Arkansas Western Pipeline Company",
+        "Associated Natural Gas Company"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "TRANSPORTATION SERVICE AGREEMENT\nUNDER RATE SCHEDULE FTS OR ITS",
+      "reasoning": "The title and the agreement\u2019s substance show the primary purpose is transportation of natural gas services under firm/interruptible rate schedules.",
+      "normalized_value": "Transportation Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "Thereafter, this\n\nAgreement shall be effective month to month, until terminated\nby Transporter or Shipper upon the following written notice to\nthe other specifying a termination date: sixty (60) days for\ninterruptible transportation under Rate Schedule ITS and 180\ndays for firm transportation under Rate Schedule FTS.",
+      "reasoning": "After the primary term, the agreement continues month-to-month unless terminated with advance written notice; the specified notice to end the ongoing renewal is 60 days (ITS) or 180 days (FTS).",
+      "normalized_value": "60 days (ITS); 180 days (FTS)"
+    },
+    "expiration_date": {
+      "raw_snippet": "5.1 Subject to the General Terms and Conditions of Transporter's\nFERC Gas Tariff and Rate Schedule FTS/ITS, this Agreement\nshall be effective as of the date of physical completion of\nand initial deliveries on Transporter's pipeline and shall\ncontinue for a primary term of ten years.",
+      "reasoning": "This clause sets a relative effective date and a primary term of ten years; no fixed calendar expiration date is provided.",
+      "normalized_value": "10 years from the date of physical completion and initial deliveries on Transporter's pipeline"
+    },
+    "renewal_term": {
+      "raw_snippet": "Thereafter, this\n\nAgreement shall be effective month to month, until terminated\nby Transporter or Shipper upon the following written notice to\nthe other specifying a termination date: sixty (60) days for\ninterruptible transportation under Rate Schedule ITS and 180\ndays for firm transportation under Rate Schedule FTS.",
+      "reasoning": "Upon completing the primary term, the agreement converts to a month-to-month renewal until terminated with the stated notice.",
+      "normalized_value": "month-to-month"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 5541,
+    "output_tokens": 3671
+  },
+  "latency_seconds": 51.89364695549011
+}

@@ -1,0 +1,43 @@
+{
+  "source_file": "01_service_mplx.txt",
+  "provider": "gemini",
+  "model": "flash",
+  "eval_id": "eval_flash_20251127_192206_bb22bb13",
+  "timestamp": "2025-11-27T19:22:15.440096",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "by and between Marathon Petroleum Company LP (\u201cShipper\u201d) and Marathon Pipe Line LLC, a Delaware limited liability company (\u201cMPL\u201d), both referred to jointly as the \u201cParties\u201d and each individually as a \u201cParty\u201d.",
+      "reasoning": "The introductory paragraph explicitly identifies Marathon Petroleum Company LP and Marathon Pipe Line LLC as the parties to the agreement.",
+      "normalized_value": [
+        "Marathon Petroleum Company LP",
+        "Marathon Pipe Line LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "TRANSPORTATION SERVICES AGREEMENT",
+      "reasoning": "The title of the agreement is 'TRANSPORTATION SERVICES AGREEMENT', and the entire contract details the terms for the provision of transportation services for petroleum products.",
+      "normalized_value": "Transportation Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "unless either Party provides the other Party with written notice of its intent to terminate this Agreement at least six (6) months prior to the end of the Initial Term or the then current Extension Period.",
+      "reasoning": "Section 2.2 specifies that either party must provide written notice at least six (6) months prior to the end of the Initial Term or any Extension Period to prevent automatic renewal.",
+      "normalized_value": "6 months"
+    },
+    "expiration_date": {
+      "raw_snippet": "The Agreement shall continue through the project\u2019s in-service date and for a period of fifteen (15) years after the project\u2019s in-service date (\u201cInitial Term\u201d).",
+      "reasoning": "Section 2.1 states that the Initial Term is 'a period of fifteen (15) years after the project\u2019s in-service date'. This is a relative term tied to an event, not a fixed calendar date.",
+      "normalized_value": "15 years after the project's in-service date"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement will automatically renew for up to two (2) renewal terms of five (5) years each (each, an \u201cExtension Period\u201d)",
+      "reasoning": "Section 2.2 clearly states that the agreement will automatically renew for up to two (2) renewal terms, each lasting five (5) years.",
+      "normalized_value": "5 years auto-renewal, up to two times"
+    }
+  },
+  "usage": {
+    "model": "gemini-2.5-flash",
+    "input_tokens": 13230,
+    "output_tokens": 546
+  },
+  "latency_seconds": 9.01233172416687
+}

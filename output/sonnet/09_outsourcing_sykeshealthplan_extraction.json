@@ -1,0 +1,43 @@
+{
+  "source_file": "09_outsourcing_sykeshealthplan.txt",
+  "provider": "anthropic",
+  "model": "sonnet",
+  "eval_id": "eval_sonnet_20251127_191820_a942ebb2",
+  "timestamp": "2025-11-27T19:21:40.740308",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This Outsourcing Agreement (the \"Agreement\") is made and entered into as of January 1, 1998, by and between Sykes HealthPlan Services, Inc., a Florida corporation (\"SHPS\"), and HealthPlan Services, Inc., a Florida corporation (\"HPS\").",
+      "reasoning": "The parties are identified in the opening paragraph of the agreement, which clearly names both entities entering into the contract.",
+      "normalized_value": [
+        "Sykes HealthPlan Services, Inc.",
+        "HealthPlan Services, Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "This Outsourcing Agreement (the \"Agreement\") is made and entered into as of January 1, 1998, by and between Sykes HealthPlan Services, Inc., a Florida corporation (\"SHPS\"), and HealthPlan Services, Inc., a Florida corporation (\"HPS\")...HPS desires that SHPS provide, and SHPS is willing to provide, the Care Management Services to the Clients on behalf of HPS...HPS agrees to outsource to SHPS, and hereby appoints SHPS as the exclusive provider of, Care Management Services to the Clients",
+      "reasoning": "The document is titled 'Outsourcing Agreement' and the substance confirms this characterization. HPS is outsourcing its Care Management Services obligations to SHPS, who will perform these services on HPS's behalf. The primary economic substance is the delegation of operational services from one party to another, which is the essence of an outsourcing arrangement.",
+      "normalized_value": "Outsourcing Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "Unless either party gives the other at least ninety days' prior written notice that it has elected not to extend the term of this Agreement beyond December 31, 1998, the term of this Agreement will be automatically extended until December 31, 1999. Thereafter this Agreement will automatically be renewed for successive additional periods of one year, unless either party gives notice of cancellation on or before October 1 of any such year.",
+      "reasoning": "The contract specifies two notice periods to prevent automatic renewal: (1) 90 days' notice before December 31, 1998 to prevent the first extension, and (2) notice on or before October 1 to prevent subsequent annual renewals. The October 1 deadline effectively provides approximately 90 days' notice before the December 31 expiration of each renewal term.",
+      "normalized_value": "90 days"
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement will commence on January 1, 1998 (the \"Effective Date\") and will end on December 31, 1998.",
+      "reasoning": "The contract explicitly states that the initial term ends on December 31, 1998. While the agreement includes automatic renewal provisions, the initial expiration date is clearly stated as a specific calendar date.",
+      "normalized_value": "1998-12-31"
+    },
+    "renewal_term": {
+      "raw_snippet": "Unless either party gives the other at least ninety days' prior written notice that it has elected not to extend the term of this Agreement beyond December 31, 1998, the term of this Agreement will be automatically extended until December 31, 1999. Thereafter this Agreement will automatically be renewed for successive additional periods of one year, unless either party gives notice of cancellation on or before October 1 of any such year.",
+      "reasoning": "The contract provides for automatic renewal after the initial term. First, it extends to December 31, 1999 unless notice is given. Then it automatically renews for successive one-year periods unless notice of cancellation is provided.",
+      "normalized_value": "1 year auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "input_tokens": 5179,
+    "output_tokens": 825
+  },
+  "latency_seconds": 18.11986494064331
+}

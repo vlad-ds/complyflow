@@ -1,0 +1,45 @@
+{
+  "source_file": "06_license_midwestenergyem.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_193227_fdbec8ad",
+  "timestamp": "2025-11-27T19:34:45.235848",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS AGREEMENTis made as of this 2nd day of June, 2008 by and among Digicorp, Inc., a corporation\norganized under the laws of the State of Delaware, United States of America with offices at 4143 Glencoe\nAvenue, Unit B, Marina Del Rey, California 90291, U.S.A.( \"COMPANY\") and New China Media LLC, a\nFlorida limited liability company (a/k/a New China Media Limited) with offices at 400 Alton Road, Penthouse 7,\nMiami Beach, Florida 33139 (\"NCM\")\u037e YGP, LLC, a Florida limited liability company with offices at 4000\nHollywood Blvd, Suite 485 South, Hollywood, Florida, 33021 (\"YGP\") and TWK Holdings, LLC with offices at\nRoom 4301, 43/F, Jardine House , One Connaught Place, Central, Hong Kong (T\"WK\") (NCM, YGP and\nTWK shall be individually and collectively referred to as \"CONTENT PROVIDE\"R) (COMPANY and\nCONTENT PROVIDER are hereinafter sometimes collectively referred to as the \"Parties\").",
+      "reasoning": "The introductory recital (\"made as of... by and among\") lists the contracting entities and their defined short names. These are the principal parties to this Agreement.",
+      "normalized_value": [
+        "Digicorp, Inc.",
+        "New China Media LLC",
+        "YGP, LLC",
+        "TWK Holdings, LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "CONTENT LICENSE AGREEMENT",
+      "reasoning": "The agreement's title and the operative provisions (granting rights to use, reproduce, distribute, transmit and publicly display \"Content\" by means of the internet, sublicensing rights, and consideration for licensing) show the primary purpose is licensing content/IP.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement shall be automatically renewed for additional extended terms each of two\n(2) years duration unless either party notifies the other in writing of its intention not to renew the\nAgreement, such notification to be provided at least ninety (90) days prior to the expiration of the\nthen in-effect term.",
+      "reasoning": "Clause 8.A specifies automatic renewal and requires written notice to prevent renewal; the sentence explicitly states the advance notice required to avoid renewal.",
+      "normalized_value": "90 days"
+    },
+    "expiration_date": {
+      "raw_snippet": "This Agreement and the provisions hereof, except as otherwise provided, shall be in full force and\neffect commencing on the date of execution by both Parties and shall extend for an initial term of two\n(2) years. The initial two (2) year term as it might be extended herein is referred to herein as the\n\"Term.\"",
+      "reasoning": "Clause 8.A sets the agreement commencement and the initial duration as two (2) years from execution; this is the primary expiration/term language for the contract as a whole.",
+      "normalized_value": "initial term of two (2) years"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement shall be automatically renewed for additional extended terms each of two\n(2) years duration unless either party notifies the other in writing of its intention not to renew the\nAgreement, such notification to be provided at least ninety (90) days prior to the expiration of the\nthen in-effect term.",
+      "reasoning": "Clause 8.A describes the automatic renewal mechanism and specifies the duration of each renewal term as two (2) years.",
+      "normalized_value": "2 year auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 8528,
+    "output_tokens": 2232
+  },
+  "latency_seconds": 23.711124181747437
+}

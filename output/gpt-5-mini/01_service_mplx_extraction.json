@@ -1,0 +1,43 @@
+{
+  "source_file": "01_service_mplx.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_193227_fdbec8ad",
+  "timestamp": "2025-11-27T19:32:54.612968",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS TRANSPORTATION SERVICES AGREEMENT (this \u201cAgreement\u201d) is dated as of June 11, 2015, by and between Marathon Petroleum Company LP (\u201cShipper\u201d) and Marathon Pipe Line LLC, a Delaware limited liability company (\u201cMPL\u201d), both referred to jointly as the \u201cParties\u201d and each individually as a \u201cParty\u201d.",
+      "reasoning": "The opening paragraph identifies the contracting entities by name and labels them as the Parties; these are the two primary parties to the agreement.",
+      "normalized_value": [
+        "Marathon Petroleum Company LP",
+        "Marathon Pipe Line LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "TRANSPORTATION SERVICES AGREEMENT",
+      "reasoning": "The title and the substance of the agreement (commitments to transport specified volumes of Product on a pipeline, rate provisions, and related transportation obligations) indicate the primary purpose is transportation services for petroleum products.",
+      "normalized_value": "Transportation Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement will automatically renew for up to two (2) renewal terms of five (5) years each (each, an \u201cExtension Period\u201d) unless either Party provides the other Party with written notice of its intent to terminate this Agreement at least six (6) months prior to the end of the Initial Term or the then current Extension Period.",
+      "reasoning": "Section 2.2 sets an automatic renewal and specifies the advance notice required to prevent automatic renewal: written notice at least six (6) months prior to the end of the Initial Term or then-current Extension Period.",
+      "normalized_value": "6 months"
+    },
+    "expiration_date": {
+      "raw_snippet": "This Agreement is effective June 11, 2015 (the \u201cEffective Date\u201d). The Agreement shall continue through the project\u2019s in-service date and for a period of fifteen (15) years after the project\u2019s in-service date (\u201cInitial Term\u201d). MPL shall provide written notice to Shipper confirming the project\u2019s in-service date.",
+      "reasoning": "Section 2.1 defines the Effective Date and the Initial Term as continuing through the project's in-service date and for fifteen (15) years after that in-service date; this describes the contract expiration relative to the project in-service date.",
+      "normalized_value": "through the project\u2019s in-service date and for a period of fifteen (15) years after the project\u2019s in-service date"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement will automatically renew for up to two (2) renewal terms of five (5) years each (each, an \u201cExtension Period\u201d) unless either Party provides the other Party with written notice of its intent to terminate this Agreement at least six (6) months prior to the end of the Initial Term or the then current Extension Period.",
+      "reasoning": "Section 2.2 explicitly provides for automatic renewal: up to two extension periods, each five (5) years in length, subject to timely written notice to prevent renewal.",
+      "normalized_value": "Two (2) automatic renewal terms of five (5) years each"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 13604,
+    "output_tokens": 2284
+  },
+  "latency_seconds": 27.37753677368164
+}

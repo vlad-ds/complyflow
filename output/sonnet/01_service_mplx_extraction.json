@@ -1,0 +1,43 @@
+{
+  "source_file": "01_service_mplx.txt",
+  "provider": "anthropic",
+  "model": "sonnet",
+  "eval_id": "eval_sonnet_20251127_191820_a942ebb2",
+  "timestamp": "2025-11-27T19:18:44.410830",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS TRANSPORTATION SERVICES AGREEMENT (this \"Agreement\") is dated as of June 11, 2015, by and between Marathon Petroleum Company LP (\"Shipper\") and Marathon Pipe Line LLC, a Delaware limited liability company (\"MPL\"), both referred to jointly as the \"Parties\" and each individually as a \"Party\".",
+      "reasoning": "The parties are identified in the opening paragraph of the agreement, which clearly names the two contracting entities: Marathon Petroleum Company LP as Shipper and Marathon Pipe Line LLC as MPL.",
+      "normalized_value": [
+        "Marathon Petroleum Company LP",
+        "Marathon Pipe Line LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "THIS TRANSPORTATION SERVICES AGREEMENT (this \"Agreement\") is dated as of June 11, 2015, by and between Marathon Petroleum Company LP (\"Shipper\") and Marathon Pipe Line LLC, a Delaware limited liability company (\"MPL\")... WHEREAS, Shipper responded to the binding open season and desires to commit to transport a specified volume of Product (as defined below) on the Pipeline over a multi-year period to destinations as provided in Exhibit C, subject to and upon the terms and conditions of this Agreement; and WHEREAS, in exchange for the commitment by Shipper to transport a specific volume of Product on the Pipeline over a multi-year period, MPL will charge the rates as provided for in Exhibit B;",
+      "reasoning": "This is a Transportation Agreement. The core purpose is for MPL to provide transportation services for petroleum products through its pipeline system to Shipper, in exchange for Shipper committing to transport specified volumes and paying transportation charges. The agreement covers transportation of Product (condensate, natural gasoline, diluent, and butane) through the pipeline system, with detailed provisions on volume commitments, rates, and transportation service obligations.",
+      "normalized_value": "Transportation Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement will automatically renew for up to two (2) renewal terms of five (5) years each (each, an \"Extension Period\") unless either Party provides the other Party with written notice of its intent to terminate this Agreement at least six (6) months prior to the end of the Initial Term or the then current Extension Period.",
+      "reasoning": "This is the notice period required to prevent automatic renewal of the agreement. The contract automatically renews for extension periods unless a party provides notice at least 6 months before the end of the current term.",
+      "normalized_value": "6 months"
+    },
+    "expiration_date": {
+      "raw_snippet": "The Agreement shall continue through the project's in-service date and for a period of fifteen (15) years after the project's in-service date (\"Initial Term\").",
+      "reasoning": "The contract has a relative term of 15 years from the project's in-service date, not a specific calendar date. The in-service date is not specified as a calendar date in the agreement, so this remains a relative term.",
+      "normalized_value": "15 years from project in-service date"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement will automatically renew for up to two (2) renewal terms of five (5) years each (each, an \"Extension Period\") unless either Party provides the other Party with written notice of its intent to terminate this Agreement at least six (6) months prior to the end of the Initial Term or the then current Extension Period.",
+      "reasoning": "The agreement automatically renews for two successive 5-year extension periods unless either party provides notice to terminate at least 6 months prior to the end of the current term.",
+      "normalized_value": "5 years auto-renewal (up to two renewals)"
+    }
+  },
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "input_tokens": 15976,
+    "output_tokens": 826
+  },
+  "latency_seconds": 24.075625896453857
+}

@@ -1,0 +1,43 @@
+{
+  "source_file": "08_license_euromediaholdin.txt",
+  "provider": "gemini",
+  "model": "flash",
+  "eval_id": "eval_flash_20251127_192206_bb22bb13",
+  "timestamp": "2025-11-27T19:23:06.882478",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "Rogers Cable Communications Inc. (\u201cRogers\u201d) and EuroMedia Holdings Corp. (\u201cLicensor\u201d)",
+      "reasoning": "The parties are identified in the introductory section of the agreement, explicitly named as 'Rogers Cable Communications Inc.' and 'EuroMedia Holdings Corp.'. Their roles ('Rogers' and 'Licensor') are also provided.",
+      "normalized_value": [
+        "Rogers Cable Communications Inc.",
+        "EuroMedia Holdings Corp."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "VIDEO-ON-DEMAND CONTENT LICENSE AGREEMENT\nLicensor grants to Rogers the non-exclusive license and right to distribute and exhibit in Canada (the \u201cTerritory\u201d) all entertainment programming to which Licensor owns or controls the VOD distribution and exhibition rights in the Territory (collectively, \u201cLicensed Programs\u201d) to residential subscribers of Rogers\u2019 digital cable television service on a Video-on-Demand (\u201cVOD\u201d) basis.",
+      "reasoning": "The title of the agreement clearly states 'VIDEO-ON-DEMAND CONTENT LICENSE AGREEMENT'. Section 1, 'RIGHTS GRANTED', further confirms that the Licensor 'grants to Rogers the non-exclusive license and right to distribute and exhibit' content. This indicates that the primary purpose is the licensing of intellectual property for distribution.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The contract states, 'At Rogers\u2019 option, this Agreement shall renew for a subsequent term of two (2) years'. This means the renewal is not automatic, but rather contingent on Rogers exercising an option. Therefore, no notice period is required to prevent an automatic renewal.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement (the \u201cInitial Term\u201d) shall commence as of the Effective Date and, unless earlier terminated in accordance with this Agreement, shall terminate on June 30, 2010.",
+      "reasoning": "Section 7, 'TERM', explicitly states that the 'Initial Term' shall 'terminate on June 30, 2010'. This provides a specific calendar date for the initial expiration.",
+      "normalized_value": "2010-06-30"
+    },
+    "renewal_term": {
+      "raw_snippet": "At Rogers\u2019 option, this Agreement shall renew for a subsequent term of two (2) years on the terms and conditions herein (the \u201cRenewal Term\u201d).",
+      "reasoning": "Section 7, 'TERM', describes the renewal process, stating that the agreement 'shall renew for a subsequent term of two (2) years' if Rogers exercises its option.",
+      "normalized_value": "2 years (at Rogers' option)"
+    }
+  },
+  "usage": {
+    "model": "gemini-2.5-flash",
+    "input_tokens": 7400,
+    "output_tokens": 568
+  },
+  "latency_seconds": 7.526003122329712
+}

@@ -1,0 +1,43 @@
+{
+  "source_file": "10_outsourcing_ofgban.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_193227_fdbec8ad",
+  "timestamp": "2025-11-27T19:36:15.499836",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This Master Agreement is made as of the 26 day of January, 2007 (the \u201cEffective Date\u201d), by and between Oriental Financial Group\nInc., a Puerto Rico financial holding company (\u201cCustomer\u201d), and Metavante Corporation, a Wisconsin corporation (\u201cMetavante\u201d).",
+      "reasoning": "The opening recital expressly identifies the contracting parties by name and role. It names Oriental Financial Group Inc. and Metavante Corporation as the two parties to the Master Agreement.",
+      "normalized_value": [
+        "Oriental Financial Group Inc.",
+        "Metavante Corporation"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "TECHNOLOGY OUTSOURCING AGREEMENT\nThis Master Agreement is made as of the 26 day of January, 2007 (the \u201cEffective Date\u201d), by and between Oriental Financial Group\nInc., a Puerto Rico financial holding company (\u201cCustomer\u201d), and Metavante Corporation, a Wisconsin corporation (\u201cMetavante\u201d).\nCustomer desires Metavante to provide to Customer the services and licenses as set forth in this Agreement and its amendments, and\nMetavante desires to provide such services and licenses to Customer, all as provided in this Agreement and its amendments.",
+      "reasoning": "The title and the substantive recitals make clear the core transaction: Metavante will provide technology services and software/licenses to Customer. The contract governs provision of services, conversion, licenses, ongoing operations and support\u2014i.e., outsourcing of technology and processing services. Therefore the primary type is an Outsourcing Agreement.",
+      "normalized_value": "Outsourcing Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "Unless this Agreement has been earlier terminated, Metavante shall provide a written renewal notice to Customer at least\ntwelve (12) months prior to the expiration of the Initial Term (the \u201cRenewal Notice\u201d). Unless Customer notifies Metavante of its intent not\nto renew this Agreement in writing within a period of three (3) months following the Renewal Notice, this Agreement shall automatically\nrenew at the end of the Initial Term on the same terms (including pricing terms) for one (1) twelve-month period.",
+      "reasoning": "This paragraph in Section 2.1 sets out the renewal-notice process and specifically prescribes the timeframe in which Customer must give written notice to avoid automatic renewal: within three (3) months following Metavante's Renewal Notice (which Metavante must give at least 12 months prior to expiration). The requested field concerns the advance notice required to prevent automatic renewal, which is the three-month period specified for Customer to notify Metavante after receipt of the Renewal Notice.",
+      "normalized_value": "3 months (within three (3) months following the Renewal Notice)"
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement shall commence on the Effective Date and end on November 30, 2014 (the \u201cInitial Term\u201d).",
+      "reasoning": "This clause explicitly states the contract term end date as a calendar date (the Initial Term ends on November 30, 2014). Because an exact calendar date is provided, the normalized value is returned as an ISO date.",
+      "normalized_value": "2014-11-30"
+    },
+    "renewal_term": {
+      "raw_snippet": "Unless this Agreement has been earlier terminated, Metavante shall provide a written renewal notice to Customer at least\ntwelve (12) months prior to the expiration of the Initial Term (the \u201cRenewal Notice\u201d). Unless Customer notifies Metavante of its intent not\nto renew this Agreement in writing within a period of three (3) months following the Renewal Notice, this Agreement shall automatically\nrenew at the end of the Initial Term on the same terms (including pricing terms) for one (1) twelve-month period.",
+      "reasoning": "The clause specifies that if Customer does not timely decline renewal, the Agreement \"shall automatically renew ... for one (1) twelve-month period.\" That describes a single 12-month automatic renewal term.",
+      "normalized_value": "1 year auto-renewal (one (1) twelve-month period)"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 33608,
+    "output_tokens": 2242
+  },
+  "latency_seconds": 24.30313801765442
+}

@@ -1,0 +1,43 @@
+{
+  "source_file": "03_service_blackstonegsolo.txt",
+  "provider": "gemini",
+  "model": "flash",
+  "eval_id": "eval_flash_20251127_192206_bb22bb13",
+  "timestamp": "2025-11-27T19:22:29.748038",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "Blackstone / GSO Long-Short Credit Income Fund, a Delaware statutory trust (\u201cClient\u201d) and Mellon Investor Services LLC (operating with the service name BNY Mellon Shareowner Services), a New Jersey limited liability company (\u201cAgent\u201d)",
+      "reasoning": "The introductory paragraph explicitly identifies the two entities entering into the agreement and their designated roles as 'Client' and 'Agent'.",
+      "normalized_value": [
+        "Blackstone / GSO Long-Short Credit Income Fund",
+        "Mellon Investor Services LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "SERVICE AGREEMENT FOR TRANSFER AGENT SERVICES",
+      "reasoning": "The title of the document clearly states 'SERVICE AGREEMENT FOR TRANSFER AGENT SERVICES,' which accurately reflects the primary purpose of the contract.",
+      "normalized_value": "Service Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "at least 60 days prior to the end of the Initial Term, or any successive three-year term",
+      "reasoning": "Section 2, 'Term of Agreement,' specifies that termination notice must be given 'at least 60 days prior' to the end of the current term to prevent automatic renewal.",
+      "normalized_value": "60 days"
+    },
+    "expiration_date": {
+      "raw_snippet": "and shall continue for three years thereafter (the \u201cInitial Term\u201d).",
+      "reasoning": "Section 2, 'Term of Agreement,' explicitly states that the agreement shall continue for 'three years' after the 'Effective Date,' establishing the initial term's duration.",
+      "normalized_value": "3 years from Effective Date"
+    },
+    "renewal_term": {
+      "raw_snippet": "this Agreement shall automatically renew for successive additional three-year terms",
+      "reasoning": "Section 2, 'Term of Agreement,' clearly states that the agreement will 'automatically renew for successive additional three-year terms' unless terminated.",
+      "normalized_value": "3 year auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "gemini-2.5-flash",
+    "input_tokens": 11531,
+    "output_tokens": 469
+  },
+  "latency_seconds": 7.461719989776611
+}

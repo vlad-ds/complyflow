@@ -1,0 +1,45 @@
+{
+  "source_file": "06_license_midwestenergyem.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_192324_1af065a3",
+  "timestamp": "2025-11-27T19:28:49.126409",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS AGREEMENTis made as of this 2nd day of June, 2008 by and among Digicorp, Inc., a corporation\norganized under the laws of the State of Delaware, United States of America with offices at 4143 Glencoe\nAvenue, Unit B, Marina Del Rey, California 90291, U.S.A.( \"COMPANY\") and New China Media LLC, a\nFlorida limited liability company (a/k/a New China Media Limited) with offices at 400 Alton Road, Penthouse 7,\nMiami Beach, Florida 33139 (\"NCM\")\u037e YGP, LLC, a Florida limited liability company with offices at 4000\nHollywood Blvd, Suite 485 South, Hollywood, Florida, 33021 (\"YGP\") and TWK Holdings, LLC with offices at\nRoom 4301, 43/F, Jardine House , One Connaught Place, Central, Hong Kong (T\"WK\") (NCM, YGP and\nTWK shall be individually and collectively referred to as \"CONTENT PROVIDE\"R) (COMPANY and\nCONTENT PROVIDER are hereinafter sometimes collectively referred to as the \"Parties\").",
+      "reasoning": "The opening recital lists all entities entering the agreement and their roles, which identifies the parties to the contract.",
+      "normalized_value": [
+        "Digicorp, Inc.",
+        "New China Media LLC",
+        "YGP, LLC",
+        "TWK Holdings, LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "1. LICENSE\nA. Subject to the terms and conditions of this Agreement, CONTENT PROVIDER hereby grants and\nassigns by means of present assignment to COMPANY and COMPANY hereby assumes for the\nTerm of this Agreement (as set forth in paragraph 8, below), CONTENT PROVIDER\u2019S rights and\nobligations regarding the Content from Licensors as set forth in Exhibit A with respect to the right and\nlicense for the territory of the People Republic of China to use, reproduce, distribute, transmit and\npublicly display the Current Content and the Future Content by means of the internet in accordance\nwith Exhibit A and this Agreement.",
+      "reasoning": "The core obligation is CONTENT PROVIDER granting COMPANY a license to use and exploit content online; the title also states Content License Agreement. The economic substance is a license of IP/content with royalties to licensors.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement shall be automatically renewed for additional extended terms each of two\n(2) years duration unless either party notifies the other in writing of its intention not to renew the\nAgreement, such notification to be provided at least ninety (90) days prior to the expiration of the\nthen in-effect term.",
+      "reasoning": "This specifies the advance written notice required to prevent automatic renewal: at least 90 days before expiration.",
+      "normalized_value": "90 days"
+    },
+    "expiration_date": {
+      "raw_snippet": "This Agreement and the provisions hereof, except as otherwise provided, shall be in full force and\neffect commencing on the date of execution by both Parties and shall extend for an initial term of two\n(2) years.",
+      "reasoning": "The term clause sets a relative initial term starting on execution and lasting two years; no absolute calendar date is provided.",
+      "normalized_value": "2 years from date of execution"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement shall be automatically renewed for additional extended terms each of two\n(2) years duration unless either party notifies the other in writing of its intention not to renew the\nAgreement, such notification to be provided at least ninety (90) days prior to the expiration of the\nthen in-effect term.",
+      "reasoning": "The agreement auto-renews for successive two-year terms unless timely non-renewal notice is given.",
+      "normalized_value": "2 years auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 8528,
+    "output_tokens": 5149
+  },
+  "latency_seconds": 66.84372901916504
+}

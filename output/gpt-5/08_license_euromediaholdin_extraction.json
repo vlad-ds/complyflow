@@ -1,0 +1,43 @@
+{
+  "source_file": "08_license_euromediaholdin.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_192324_1af065a3",
+  "timestamp": "2025-11-27T19:30:37.825525",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "VIDEO-ON-DEMAND CONTENT LICENSE AGREEMENT\nbetween\nRogers Cable Communications Inc. (\u201cRogers\u201d) and\nEuroMedia Holdings Corp. (\u201cLicensor\u201d) offering EurocinemaSM Video-on-Demand service",
+      "reasoning": "The parties are explicitly identified in the 'between' clause naming the entities entering the agreement.",
+      "normalized_value": [
+        "Rogers Cable Communications Inc.",
+        "EuroMedia Holdings Corp."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "Licensor grants to Rogers the non-exclusive license and right to distribute and exhibit in Canada (the \u201cTerritory\u201d) all entertainment\nprogramming to which Licensor owns or controls the VOD distribution and exhibition rights in the Territory (collectively, \u201cLicensed\nPrograms\u201d) to residential subscribers of Rogers\u2019 digital cable television service on a Video-on-Demand (\u201cVOD\u201d) basis.",
+      "reasoning": "The core obligation is a grant of a non-exclusive license to distribute and exhibit content on a VOD basis, indicating a license of IP/content rights.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "There is no automatic renewal requiring advance notice to prevent renewal. Renewal is at Rogers\u2019 option and no notice period to prevent renewal is specified. Other 60-day notices relate to general termination or post-expiry continuation, not renewal prevention.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement (the \u201cInitial Term\u201d) shall commence as of the Effective Date and, unless earlier terminated in accordance with this Agreement, shall terminate on June 30, 2010.",
+      "reasoning": "This sentence specifies the exact calendar date on which the Initial Term ends.",
+      "normalized_value": "2010-06-30"
+    },
+    "renewal_term": {
+      "raw_snippet": "At Rogers\u2019 option, this Agreement shall renew for a subsequent term of two (2) years on the terms and conditions herein (the \u201cRenewal Term\u201d).",
+      "reasoning": "This clause provides a single renewal option for a two-year term at Rogers\u2019 discretion.",
+      "normalized_value": "2 years renewal at Rogers' option"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 7765,
+    "output_tokens": 2550
+  },
+  "latency_seconds": 58.89017391204834
+}

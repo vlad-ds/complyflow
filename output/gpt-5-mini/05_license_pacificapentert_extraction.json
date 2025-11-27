@@ -1,0 +1,43 @@
+{
+  "source_file": "05_license_pacificapentert.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_193227_fdbec8ad",
+  "timestamp": "2025-11-27T19:34:21.501825",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This Content License Agreement is between THE HENRY FILM AND ENTERTAINMENT CORPORATION, located at 2809 Unicornio, Carlsbad,\nCA, 92009 and PACIFICAP ENTERTAINMENT\u2019 located at 12868 Via Latina, Del Mar, CA 92014\nLicensor: PACIFICAP ENTERTAINMENT\nLicensee THE HENRY FILM AND ENTERTAINMENT CORPORATION",
+      "reasoning": "The opening paragraph of the agreement explicitly states the two contracting parties and labels PACIFICAP ENTERTAINMENT as Licensor and THE HENRY FILM AND ENTERTAINMENT CORPORATION as Licensee.",
+      "normalized_value": [
+        "THE HENRY FILM AND ENTERTAINMENT CORPORATION",
+        "PACIFICAP ENTERTAINMENT"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "Subject to the terms and conditions of this Agreement, PACIFICAP ENTERTAINMENT hereby grants to THE HENRY FILM AND\nENTERTAINMENT CORPORATION, under PACIFICAP ENTERTAINMENT\u2019S full ownership and or fully authorized licensing Rights of Content\n(a) A 10 year exclusive, worldwide license to use, modify, reproduce, distribute, display and transmit any and all PACIFICAP\nENTERTAINMENT nostalgic television show library Content.",
+      "reasoning": "The core economic substance is the grant of an exclusive, worldwide license to use PACIFICAP ENTERTAINMENT's content for a range of media and distribution methods; the primary obligations and consideration relate to licensing content and revenue-sharing. This identifies the agreement as a license of IP/content.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "After the Initial Term, this Agreement will be automatically renewed for successive additional 3~year periods (\u201cExtension Terms\u201d), unless\notherwise terminated by either party by giving notice to the other party not less than sixty (60) days prior to the end of a Term.",
+      "reasoning": "This sentence in the Term and Termination section specifies the automatic renewal and the advance notice required to prevent renewal: \"not less than sixty (60) days prior to the end of a Term.\" It directly addresses the notice period to prevent automatic renewal.",
+      "normalized_value": "60 days"
+    },
+    "expiration_date": {
+      "raw_snippet": "This Agreement will become effective as of the last date of signature (Effective Date) and shall, unless sooner terminated as provided below or as otherwise agreed, remain effective for an initial term of 10 Years following the first date of public availability of the PACIFICAP ENTERTAINMENT Content within a THE HENRY FILM AND ENTERTAINMENT CORPORATION Property (the \u201cInitial Term\u201d).",
+      "reasoning": "The Term and Termination section defines the Initial Term as a relative period: an initial term of 10 Years measured from the first date of public availability of the PACIFICAP ENTERTAINMENT Content within a THE HENRY FILM AND ENTERTAINMENT CORPORATION Property. This is a relative term rather than a specific calendar date.",
+      "normalized_value": "initial term of 10 Years following the first date of public availability of the PACIFICAP ENTERTAINMENT Content within a THE HENRY FILM AND ENTERTAINMENT CORPORATION Property"
+    },
+    "renewal_term": {
+      "raw_snippet": "After the Initial Term, this Agreement will be automatically renewed for successive additional 3~year periods (\u201cExtension Terms\u201d), unless\notherwise terminated by either party by giving notice to the other party not less than sixty (60) days prior to the end of a Term.",
+      "reasoning": "The same Term and Termination sentence specifies that after the Initial Term the agreement automatically renews for successive additional 3~year periods (Extension Terms). That describes the renewal term.",
+      "normalized_value": "3-year automatic renewal (successive extension terms)"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 5562,
+    "output_tokens": 2187
+  },
+  "latency_seconds": 23.248719930648804
+}
