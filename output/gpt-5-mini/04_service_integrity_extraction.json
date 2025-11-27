@@ -1,0 +1,43 @@
+{
+  "source_file": "04_service_integrity.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_151221_f01b2d60",
+  "timestamp": "2025-11-27T15:14:56.902481",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This is to confirm that, in consideration of the agreements hereinafter contained, the undersigned, the Integrity Short Term\nGovernment Fund, (the \u201cFund\u201d), an open-end, diversified, management investment company organized as a series of The Integrity\nFunds, a Delaware statutory trust, has agreed that Integrity Funds Distributor, LLC, (\u201cIntegrity\u201d), shall be, for the period of this\ndistribution agreement (the \u201cAgreement\u201d), the principal underwriter of shares issued by the Fund, including such classes of shares\nas may now or hereafter be authorized (the \u201cShares\u201d).",
+      "reasoning": "The opening paragraph names the contracting entities: \"the Integrity Short Term Government Fund\" (the Fund) and \"Integrity Funds Distributor, LLC\" (Integrity) and describes the agreement between them. These are the principal parties to the Agreement.",
+      "normalized_value": [
+        "Integrity Short Term Government Fund",
+        "Integrity Funds Distributor, LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "DISTRIBUTION AND SERVICES AGREEMENT",
+      "reasoning": "The document title at the top explicitly names the agreement type as a Distribution and Services Agreement, which indicates a distributorship relationship.",
+      "normalized_value": "Distributor Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "Section 7.1 provides that continuance/renewal is subject to specific annual approval by the Fund's Board and Qualified Trustees rather than a unilateral notice to prevent renewal. Although Section 7.1 also contains termination notice periods (60 days by Qualified Trustees; 90 days by Integrity), the renewal itself requires board/trustee approval. Per instructions, where renewal requires Board approval rather than a notice to prevent automatic renewal, the notice_period field should be empty.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "Section 7.1 This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual\nperiods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s\nBoard of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons\n(as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this\nAgreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the\npurpose of voting on such approval. This Agreement is terminable with respect to the Fund, without penalty, (a) on 60 days\u2019\nwritten notice, by vote of a majority of the Qualified Trustees or by vote of a majority (as defined in the 1940 Act) of the\noutstanding voting securities of the Fund or (b) on 90 days\u2019 written notice by Integrity. This Agreement will also terminate\nautomatically in the event of its assignment (as defined in the 1940 Act).",
+      "reasoning": "Section 7.1 explicitly states a fixed initial term end date: \"shall continue until January 18, 2022.\" That is a specific calendar date which can be normalized to ISO format.",
+      "normalized_value": "2022-01-18"
+    },
+    "renewal_term": {
+      "raw_snippet": "and thereafter shall continue automatically for successive annual\nperiods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s\nBoard of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons\n(as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this\nAgreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the\npurpose of voting on such approval.",
+      "reasoning": "The Agreement states that after the initial term it \"shall continue automatically for successive annual periods ending on January 18th of each year,\" which indicates one-year automatic renewal periods, but each renewal is conditioned on specific annual approvals by the Fund's Board and Qualified Trustees.",
+      "normalized_value": "1 year auto-renewal (subject to annual approval by Fund Board and Qualified Trustees)"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 6236,
+    "output_tokens": 2575
+  },
+  "latency_seconds": 41.5849289894104
+}

@@ -1,0 +1,43 @@
+{
+  "source_file": "10_outsourcing_paratek.txt",
+  "provider": "anthropic",
+  "model": "sonnet",
+  "eval_id": "eval_sonnet_20251127_151918_db585718",
+  "timestamp": "2025-11-27T15:22:45.883193",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "Paratek Pharmaceuticals, Inc., a company having a place of business at 75 Park Plaza, 4th Floor, Boston, MA 02116, USA (\"Customer\")\n\nAND:\n\nCARBOGEN AMCIS AG, a company having a place of business at Hauptstrasse 171, CH 4416 Bubendorf, Switzerland (\"Supplier\"",
+      "reasoning": "The parties are identified in the introductory section of the agreement, following the 'BETWEEN:' and 'AND:' headers. These are the two main contracting parties.",
+      "normalized_value": [
+        "Paratek Pharmaceuticals, Inc.",
+        "CARBOGEN AMCIS AG"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "Outsourcing Agreement\nBetween\nParatek Pharmaceuticals, Inc.\nand\nCARBOGEN AMCIS AG",
+      "reasoning": "The document title clearly identifies this as an 'Outsourcing Agreement' where Supplier will manufacture and supply products for Customer on a contracted basis.",
+      "normalized_value": "Outsourcing Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term",
+      "reasoning": "Section 18.1(a) specifies that Customer must provide written notice at least [* * *] before the Initial Term expiration to prevent the agreement from continuing. However, the specific time period is redacted. Section 18.1(b) contains similar language for the Renewal Term but is also redacted. This represents the notice period to prevent renewal/continuation.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \"Initial Term\").",
+      "reasoning": "Section 2.1 indicates the agreement has an Initial Term that expires at a specific point, but the exact date or duration is redacted [* * *]. The Effective Date is December 30, 2016, but without the term length, I cannot calculate a specific expiration date.",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \"Renewal Term\").",
+      "reasoning": "Section 2.1 describes that if parties do not execute a follow-on agreement by a specified date, the agreement automatically continues for a maximum period (the 'Renewal Term'). However, both the trigger date and the renewal period duration are redacted [* * *]. This indicates automatic renewal, but the specific terms are not disclosed.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "input_tokens": 29462,
+    "output_tokens": 702
+  },
+  "latency_seconds": 30.07898497581482
+}

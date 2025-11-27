@@ -1,0 +1,43 @@
+{
+  "source_file": "02_service_reynolds.txt",
+  "provider": "gemini",
+  "model": "flash",
+  "eval_id": "eval_flash_20251127_150143_2f19796b",
+  "timestamp": "2025-11-27T15:02:04.284190",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "Reynolds Group Holdings Inc., a Delaware corporation(\"RGHI\"), and Reynolds Consumer Products Inc., a Delaware corporation, (the \"Company\" or \"RCP\")",
+      "reasoning": "The parties are identified in the introductory paragraph of the agreement.",
+      "normalized_value": [
+        "Reynolds Group Holdings Inc.",
+        "Reynolds Consumer Products Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "TRANSITION SERVICES AGREEMENT",
+      "reasoning": "The contract title clearly states 'TRANSITION SERVICES AGREEMENT', which falls under the 'Service Agreement' category.",
+      "normalized_value": "Service Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The contract outlines specific terms for services (e.g., 12 months, 24 months) and allows for termination for convenience with 30 days' notice (Section 6.2). However, it does not contain a clause describing an automatic renewal that requires a notice period to prevent it from renewing. The notice periods found are for general termination, not specifically to stop a renewal.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "TRANSITION SERVICES AGREEMENT (the \u201cAgreement\u201d) dated as of [\u2022], 2020, between Reynolds Group Holdings Inc., a Delaware corporation\n(\u201cRGHI\u201d), and Reynolds Consumer Products Inc., a Delaware corporation, (the \u201cCompany\u201d or \u201cRCP\u201d). Each Party or any of its Affiliates providing\nservices hereunder shall be a \u201cProvider,\u201d and each Party or any of its Affiliates receiving services hereunder shall be \u201cRecipient.\u201d\nPRELIMINARY STATEMENT\nA. Prior to the Commencement Date, RGHI and the Company were wholly owned subsidiaries of Reynolds Group Holdings Limited, a company\norganized under the laws of New Zealand (\u201cRGHL\u201d). Effective February 4, 2020 (the \u201cCommencement Date\u201d), RCP is undertaking an initial public offering\nof shares of common stock and thereafter the Company will no longer be a subsidiary of RGHL.\nSection 6.1 Term of Services. With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a\ndifferent date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \u201cCommencement Date\u201d), and shall\ncontinue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in\nthis Agreement or on Exhibit A or Exhibit B, as applicable (the \u201cTerm\u201d) or (ii) earlier terminated pursuant to this Agreement (a \u201cTermination Date\u201d).\nSection 6.3 Termination of Agreement. This Agreement shall terminate when the Termination Date has occurred for all Services.\nExhibit A: Term: 24 months from the Commencement Date for various services (e.g., G1.1, G1.2, G1.4, G4.2, G4.3, G4.5, G4.6, G8.1, G8.2, G8.3, G8.4). Term: 18 months from the Commencement Date for G3.3 and G3.6.",
+      "reasoning": "The 'Commencement Date' is February 4, 2020. Section 6.1 states that the term for each service will continue for '12 months following the Commencement Date' unless a different date or term is specified in Exhibit A or B. Section 6.3 states the Agreement terminates when the 'Termination Date has occurred for all Services'. Reviewing Exhibit A, several services (e.g., G1.1, G1.2, G1.4, G4.2, G4.3, G4.5, G4.6, G8.1, G8.2, G8.3, G8.4) have a term of '24 months from the Commencement Date'. Since the overall agreement terminates only when all services have ended, the longest service term dictates the effective expiration date for the agreement. 24 months from February 4, 2020, is February 4, 2022.",
+      "normalized_value": "2022-02-04"
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "The contract defines specific terms for services (e.g., 12 months, 24 months) and outlines termination conditions. It does not include any language indicating automatic renewal of the agreement or individual services.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gemini-2.5-flash",
+    "input_tokens": 25552,
+    "output_tokens": 1039
+  },
+  "latency_seconds": 10.456552028656006
+}

@@ -1,0 +1,43 @@
+{
+  "source_file": "08_license_artara.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_151221_f01b2d60",
+  "timestamp": "2025-11-27T15:16:52.410553",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d). ArTara and University may individually be referred to herein as a \u201cParty,\u201d and collectively as \u201cParties.\u201d",
+      "reasoning": "The opening paragraph explicitly states the contracting entities, giving full names and addresses and labeling them as \"ArTara\" and \"University.\" These are the two Parties to the Agreement.",
+      "normalized_value": [
+        "ArTara, Inc.",
+        "The University of Iowa"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "SPONSORED RESEARCH AND LICENSE AGREEMENT",
+      "reasoning": "The document title at the top names the agreement type directly as a \"Sponsored Research and License Agreement.\" The presence of a license component indicates classification under the provided list as a \"License Agreement.\"",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The contract contains general termination notice periods (e.g., Section 8.1 and 8.2 allow termination on thirty (30) days' written notice) but contains no language about preventing automatic renewal or an advance notice required to stop an auto-renewal. There is no automatic renewal clause to which a notice-to-prevent-renewal would apply.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "",
+      "reasoning": "The agreement provides an Effective Date (November 28, 2018) and permits termination by notice but does not state a fixed term or explicit expiration date or language indicating it continues \"in perpetuity\". Therefore the contract is silent on a specific expiration date.",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "There is no clause describing any renewal or automatic renewal terms in the agreement. No renewal period or renewal mechanism is specified.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 9677,
+    "output_tokens": 1227
+  },
+  "latency_seconds": 25.478816032409668
+}

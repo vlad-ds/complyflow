@@ -1,0 +1,43 @@
+{
+  "source_file": "06_license_morganstanley.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_152256_11b14ee2",
+  "timestamp": "2025-11-27T15:27:32.911833",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This TRADEMARK LICENSE AGREEMENT (the \u201cAgreement\u201d) is effective as of the [\u00b7] day of [\u00b7], 2019 (\u201cEffective Date\u201d) between\nMorgan Stanley Investment Management Inc. (\u201cLicensor\u201d), and Morgan Stanley Direct Lending Fund, a Delaware corporation (\u201cLicensee\u201d).",
+      "reasoning": "The preamble explicitly states the parties to the agreement, identifying each by name and role.",
+      "normalized_value": [
+        "Morgan Stanley Investment Management Inc.",
+        "Morgan Stanley Direct Lending Fund"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "TRADEMARK LICENSE AGREEMENT",
+      "reasoning": "The document title clearly identifies it as a license agreement related to trademarks.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "There is no auto-renewal provision requiring advance notice to prevent renewal; the agreement continues in perpetuity and can be terminated under specified conditions.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "Section 4.1.Term. The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+      "reasoning": "This clause explicitly states the agreement continues in perpetuity unless terminated.",
+      "normalized_value": "perpetual"
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "No renewal mechanism or auto-renewal term is specified; the agreement is perpetual unless terminated.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 5002,
+    "output_tokens": 2424
+  },
+  "latency_seconds": 41.07011103630066
+}

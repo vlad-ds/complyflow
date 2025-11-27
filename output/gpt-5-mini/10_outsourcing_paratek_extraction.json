@@ -1,0 +1,43 @@
+{
+  "source_file": "10_outsourcing_paratek.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_151221_f01b2d60",
+  "timestamp": "2025-11-27T15:18:12.047822",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS AGREEMENT (this \u201cAgreement\u201d), dated December 30, 2016 (the \u201cEffective Date\u201d), is\nBETWEEN:\nParatek Pharmaceuticals, Inc., a company having a place of business at 75 Park Plaza, 4th Floor, Boston, MA 02116, USA (\u201cCustomer\u201d)\nAND:\nCARBOGEN AMCIS AG, a company having a place of business at Hauptstrasse 171, CH 4416 Bubendorf, Switzerland (\u201cSupplier\u201d and, collectively\nwith Customer, the \u201cParties\u201d, and each, a \u201cParty).",
+      "reasoning": "The parties are identified in the introductory \"BETWEEN:/AND:\" section that names each contracting entity and their roles (\"Customer\" and \"Supplier\").",
+      "normalized_value": [
+        "Paratek Pharmaceuticals, Inc.",
+        "CARBOGEN AMCIS AG"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "Outsourcing Agreement",
+      "reasoning": "The document is titled and repeatedly referenced as an \"Outsourcing Agreement\" (header and opening lines).",
+      "normalized_value": "Outsourcing Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "a) Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term;",
+      "reasoning": "Section 18.1(a) specifies the advance written notice required to terminate prior to the Initial Term expiration (i.e., notice to prevent continuation/renewal). The actual period is redacted ([* * *]).",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "[* * *]\nThis Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \u201cInitial Term\u201d). Both Parties shall use reasonably\ndiligent efforts to come to a subsequent long-term agreement, including good faith negotiations regarding minimum volume-based Product\ncommitments from Customer to Supplier, no later than [* * *] to replace this Agreement and serve as a long-term supply agreement between the\nParties. Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of\n[* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on\nagreement (the \u201cRenewal Term\u201d).",
+      "reasoning": "Section 2.1 defines the Initial Term and describes automatic continuation into a Renewal Term, but the specific term lengths/dates are redacted. The Effective Date is stated elsewhere as December 30, 2016, but the duration of the Initial Term is not disclosed.",
+      "normalized_value": "Initial Term: unspecified (redacted) commencing 2016-12-30; Renewal: automatic extension if no follow-on agreement, maximum period redacted"
+    },
+    "renewal_term": {
+      "raw_snippet": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \u201cRenewal Term\u201d).\n\nb) either Party delivers written notice of termination to the other Party at least [* * *] prior to the expiration date of the Renewal Term, which termination shall be effective as of the expiration date of the Renewal Term;",
+      "reasoning": "Section 2.1 expressly describes an automatic continuation into a 'Renewal Term' and Section 18.1(b) references termination notice for the Renewal Term. However, the renewal length and the notice period are redacted ([* * *]).",
+      "normalized_value": "Automatic renewal for a maximum period (term length redacted)"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 26416,
+    "output_tokens": 3114
+  },
+  "latency_seconds": 49.425171852111816
+}

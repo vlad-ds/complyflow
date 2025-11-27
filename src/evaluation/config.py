@@ -18,10 +18,11 @@ class ModelConfig:
 
 
 # Models to evaluate
+# Note: Haiku 4.5 doesn't support structured outputs yet (coming soon per Anthropic)
 EVAL_MODELS: list[ModelConfig] = [
     # Anthropic
     ModelConfig(provider="anthropic", model="sonnet"),
-    ModelConfig(provider="anthropic", model="haiku"),
+    # ModelConfig(provider="anthropic", model="haiku"),  # No structured output support yet
     # OpenAI
     ModelConfig(provider="openai", model="gpt-5"),
     ModelConfig(provider="openai", model="gpt-5-mini"),

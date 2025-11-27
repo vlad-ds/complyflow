@@ -1,0 +1,44 @@
+{
+  "source_file": "03_service_verizon.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_152256_11b14ee2",
+  "timestamp": "2025-11-27T15:25:05.895340",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "TRANSFER AND SERVICING AGREEMENT, dated as of January 29, 2020 (this \u201cAgreement\u201d), among VERIZON OWNER TRUST 2020-A,\na Delaware statutory trust, as issuer (the \u201cIssuer\u201d), VERIZON ABS LLC, a Delaware limited liability company, as depositor (the \u201cDepositor\u201d), and\nCellco Partnership d/b/a Verizon Wireless, a Delaware general partnership (\u201cCellco\u201d), as servicer (in such capacity, the \u201cServicer\u201d), as marketing\nagent (in such capacity, the \u201cMarketing Agent\u201d) and as custodian (in such capacity, the \u201cCustodian\u201d).",
+      "reasoning": "The introductory paragraph of the agreement explicitly lists the contracting parties and their roles.",
+      "normalized_value": [
+        "Verizon Owner Trust 2020-A",
+        "Verizon ABS LLC",
+        "Cellco Partnership d/b/a Verizon Wireless"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "FORM OF TRANSFER AND SERVICING AGREEMENT",
+      "reasoning": "The document title identifies it as a Transfer and Servicing Agreement, which falls under a service-type agreement in the provided categories.",
+      "normalized_value": "Service Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The agreement contains no auto-renewal provision or notice requirement to prevent automatic renewal; notices relate to operational events, not renewal termination.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "Section 8.3 Termination. This Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
+      "reasoning": "This clause defines when the agreement ends; it is event-based rather than a fixed date.",
+      "normalized_value": "earlier of (a) last remaining Receivable paid in full, settled, sold or written off (and amounts applied); and (b) Issuer termination under Trust Agreement \u00a78.1"
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "No renewal or auto-renewal terms are provided in the agreement.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 64471,
+    "output_tokens": 2443
+  },
+  "latency_seconds": 54.505664110183716
+}

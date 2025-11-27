@@ -1,0 +1,44 @@
+{
+  "source_file": "01_service_gpaq.txt",
+  "provider": "anthropic",
+  "model": "sonnet",
+  "eval_id": "eval_sonnet_20251127_151918_db585718",
+  "timestamp": "2025-11-27T15:19:37.777311",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This SPONSORSHIP AND SERVICES AGREEMENT (the \"Agreement\") is made and entered into as of the 19th day of December, 2018, by and among HOF Village, LLC, a Delaware limited liability company (\"HOFV\"), National Football Museum, Inc., d/b/a Pro Football Hall of Fame, an Ohio corporation (\"PFHOF\" and, together with HOFV, the \"HOF Entities\") and Constellation NewEnergy, Inc., a Delaware corporation, on behalf of itself and its retail affiliates and subsidiaries (collectively, \"Constellation\").",
+      "reasoning": "The parties are identified in the opening paragraph of the agreement, which lists the legal entities entering into the contract with their legal structures and states of incorporation.",
+      "normalized_value": [
+        "HOF Village, LLC",
+        "National Football Museum, Inc.",
+        "Constellation NewEnergy, Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "SPONSORSHIP AND SERVICES AGREEMENT",
+      "reasoning": "The title of the agreement clearly identifies it as a Sponsorship and Services Agreement. The agreement grants Constellation sponsorship rights at the Hall of Fame Village in exchange for sponsorship fees and also includes service provisions for energy products.",
+      "normalized_value": "Sponsorship Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "This contract has a fixed term ending December 31, 2028 (Section 4.1) and does not contain any automatic renewal provisions or notice requirements to prevent renewal. The contract includes various termination provisions for breach and other circumstances, but no notice period specifically for terminating renewal. The contract simply expires at the end of the stated term.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement (the \"Term\"), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "reasoning": "Section 4.1 explicitly states that the agreement expires on December 31, 2028. The agreement was made on December 19, 2018, and has a fixed expiration date.",
+      "normalized_value": "2028-12-31"
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "The agreement contains no automatic renewal provisions. Section 4.1 states the term 'shall expire on December 31, 2028' and only mentions that it may be 'mutually extended by written agreement of the Parties', which indicates any extension requires affirmative action by both parties rather than automatic renewal.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "input_tokens": 15112,
+    "output_tokens": 580
+  },
+  "latency_seconds": 19.15537977218628
+}

@@ -387,13 +387,24 @@ def save_eval_pairs(
     Returns:
         Path to the saved eval pairs JSON.
     """
+    models = models or EVAL_MODELS
     eval_pairs = create_eval_pairs(split, models)
 
+    # Wrap in metadata
+    output_data = {
+        "generated_at": datetime.now().isoformat(),
+        "split": split,
+        "models": [m.model for m in models],
+        "contract_count": len(eval_pairs),
+        "eval_pairs": eval_pairs,
+    }
+
     EVAL_PAIRS_DIR.mkdir(parents=True, exist_ok=True)
-    output_path = EVAL_PAIRS_DIR / f"{split}_eval_pairs.json"
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_path = EVAL_PAIRS_DIR / f"{split}_eval_pairs_{timestamp}.json"
 
     with open(output_path, "w") as f:
-        json.dump(eval_pairs, f, indent=2)
+        json.dump(output_data, f, indent=2)
 
     print(f"Saved {len(eval_pairs)} eval pairs to: {output_path}")
     return output_path

@@ -1,0 +1,44 @@
+{
+  "source_file": "03_service_verizon.txt",
+  "provider": "anthropic",
+  "model": "sonnet",
+  "eval_id": "eval_sonnet_20251127_151918_db585718",
+  "timestamp": "2025-11-27T15:20:24.988684",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "TRANSFER AND SERVICING AGREEMENT, dated as of January 29, 2020 (this \"Agreement\"), among VERIZON OWNER TRUST 2020-A, a Delaware statutory trust, as issuer (the \"Issuer\"), VERIZON ABS LLC, a Delaware limited liability company, as depositor (the \"Depositor\"), and Cellco Partnership d/b/a Verizon Wireless, a Delaware general partnership (\"Cellco\"), as servicer (in such capacity, the \"Servicer\"), as marketing agent (in such capacity, the \"Marketing Agent\") and as custodian (in such capacity, the \"Custodian\").",
+      "reasoning": "The parties are identified in the opening paragraph of the agreement, listing the three main entities entering into the Transfer and Servicing Agreement.",
+      "normalized_value": [
+        "Verizon Owner Trust 2020-A",
+        "Verizon ABS LLC",
+        "Cellco Partnership d/b/a Verizon Wireless"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "FORM OF TRANSFER AND SERVICING AGREEMENT",
+      "reasoning": "The document is titled as a 'Transfer and Servicing Agreement' which relates to the transfer of receivables and servicing obligations in an asset-backed securities transaction. This type of agreement involves servicing financial assets and falls under the Service Agreement category.",
+      "normalized_value": "Service Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "This is a Transfer and Servicing Agreement for asset-backed securities with specific termination provisions but no automatic renewal mechanism requiring advance notice to prevent renewal. The agreement has defined maturity dates for the Notes and termination provisions under Article VIII, but these are not 'notice to prevent renewal' scenarios. The agreement terminates when receivables are paid off or the Issuer is terminated, not through a renewal/non-renewal mechanism requiring advance notice.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "This Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
+      "reasoning": "Section 8.3 provides the termination provisions. The agreement does not have a fixed expiration date but rather terminates upon certain events occurring (payment of all receivables or termination of the Issuer). This is an event-driven termination rather than a date-certain or perpetual term.",
+      "normalized_value": "Upon payment in full of all Receivables or termination of Issuer under Trust Agreement Section 8.1"
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "This Transfer and Servicing Agreement does not contain any automatic renewal provisions. It terminates upon specific events (payment of receivables or Issuer termination) as stated in Section 8.3. There is no provision for the agreement to renew for additional terms.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "input_tokens": 73658,
+    "output_tokens": 703
+  },
+  "latency_seconds": 22.956578969955444
+}

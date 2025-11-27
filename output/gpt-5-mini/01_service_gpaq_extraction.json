@@ -1,0 +1,44 @@
+{
+  "source_file": "01_service_gpaq.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_151221_f01b2d60",
+  "timestamp": "2025-11-27T15:12:59.054979",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This SPONSORSHIP AND SERVICES AGREEMENT (the \u201cAgreement\u201d) is made and entered into as of the 19th day of December, 2018, by and among HOF Village, LLC, a Delaware limited liability company (\u201cHOFV\u201d), National Football Museum, Inc., d/b/a Pro Football Hall of Fame, an Ohio corporation (\u201cPFHOF\u201d and, together with HOFV, the \u201cHOF Entities\u201d) and Constellation NewEnergy, Inc., a Delaware corporation, on behalf of itself and its retail affiliates and subsidiaries (collectively, \u201cConstellation\u201d). HOFV and/or PFHOF, on the one hand, and Constellation, on the other hand, are referred to herein as a \u201cParty\u201d and, collectively, as the \u201cParties\u201d.",
+      "reasoning": "The quoted paragraph at the start of the Agreement explicitly names the contracting entities and identifies their trade names and collective references. It is the clearest statement of the parties to the contract.",
+      "normalized_value": [
+        "HOF Village, LLC",
+        "National Football Museum, Inc. (d/b/a Pro Football Hall of Fame)",
+        "Constellation NewEnergy, Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "SPONSORSHIP AND SERVICES AGREEMENT",
+      "reasoning": "This exact title appears at the top of the document and describes the nature of the agreement (sponsorship rights plus provision of services/products).",
+      "normalized_value": "Sponsorship Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The contract does not contain any clause that requires advance notice to prevent an automatic renewal (there is a fixed expiration date and an option to extend by mutual written agreement, but no 'notice to prevent renewal' provision). Therefore no notice-to-prevent-auto-renewal period is present.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "reasoning": "Section 4.1 explicitly states the Agreement expires on December 31, 2028. The sentence also notes the Term may be mutually extended or terminated earlier, but the stated expiration date is specific.",
+      "normalized_value": "2028-12-31"
+    },
+    "renewal_term": {
+      "raw_snippet": "The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "reasoning": "There is no automatic renewal language. The Agreement may be extended only by mutual written agreement of the Parties, as stated in the Term clause.",
+      "normalized_value": "No automatic renewal; may be extended by mutual written agreement"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 13341,
+    "output_tokens": 2145
+  },
+  "latency_seconds": 37.90355205535889
+}

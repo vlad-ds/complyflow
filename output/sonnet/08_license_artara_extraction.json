@@ -1,0 +1,43 @@
+{
+  "source_file": "08_license_artara.txt",
+  "provider": "anthropic",
+  "model": "sonnet",
+  "eval_id": "eval_sonnet_20251127_151918_db585718",
+  "timestamp": "2025-11-27T15:21:54.925234",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This Sponsored Research and License Agreement (this \"Agreement\") is entered into on November 28, 2018 (the \"Effective Date\"), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\"ArTara\"), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\"University\").",
+      "reasoning": "The parties are identified in the opening paragraph of the agreement, which specifies the two entities entering into the contract with their respective addresses.",
+      "normalized_value": [
+        "ArTara, Inc.",
+        "The University of Iowa"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "SPONSORED RESEARCH AND LICENSE AGREEMENT",
+      "reasoning": "The contract title explicitly identifies this as a 'Sponsored Research and License Agreement', which involves both research sponsorship and licensing of intellectual property rights, making it an IP Agreement with elements of collaboration.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement may be terminated by ArTara upon thirty (30) days prior written notice to University.",
+      "reasoning": "Section 8.1 provides the termination notice requirement, but this is for general termination at will by ArTara, not a notice to prevent automatic renewal. The agreement does not contain auto-renewal provisions with a notice period to terminate renewal. The contract addresses termination rights but not renewal prevention notice periods.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "",
+      "reasoning": "The contract does not specify a fixed term or expiration date. Section 8.1 allows ArTara to terminate upon 30 days notice, and Section 8.2 allows either party to terminate the Project upon 30 days notice, but there is no stated end date or term length for the agreement itself. The contract is terminable at will but does not have an explicit expiration date or perpetual language.",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "The contract does not contain any provisions for automatic renewal or renewal terms. It is terminable at will by either party upon 30 days notice (Sections 8.1 and 8.2), but there is no mechanism or language describing renewal periods.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "input_tokens": 11345,
+    "output_tokens": 526
+  },
+  "latency_seconds": 17.013405799865723
+}

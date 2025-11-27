@@ -1,0 +1,44 @@
+{
+  "source_file": "01_service_gpaq.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_152256_11b14ee2",
+  "timestamp": "2025-11-27T15:23:34.717734",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This SPONSORSHIP AND SERVICES AGREEMENT (the \u201cAgreement\u201d) is made and entered into as of the 19th day of December, 2018, by and among HOF Village, LLC, a Delaware limited liability company (\u201cHOFV\u201d), National Football Museum, Inc., d/b/a Pro Football Hall of Fame, an Ohio corporation (\u201cPFHOF\u201d and, together with HOFV, the \u201cHOF Entities\u201d) and Constellation NewEnergy, Inc., a Delaware corporation, on behalf of itself and its retail affiliates and subsidiaries (collectively, \u201cConstellation\u201d).",
+      "reasoning": "The introductory paragraph lists all parties entering into the agreement.",
+      "normalized_value": [
+        "HOF Village, LLC",
+        "National Football Museum, Inc., d/b/a Pro Football Hall of Fame",
+        "Constellation NewEnergy, Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "SPONSORSHIP AND SERVICES AGREEMENT",
+      "reasoning": "The document title explicitly states the nature of the agreement. Among the provided categories, Sponsorship Agreement best fits.",
+      "normalized_value": "Sponsorship Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The agreement states a fixed expiration date and contains no auto-renewal clause or notice to prevent renewal.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "4.1 Term. The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "reasoning": "Section 4.1 explicitly provides the expiration date.",
+      "normalized_value": "2028-12-31"
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "No automatic renewal term is specified; only potential mutual extension, which is not a defined renewal term.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 13341,
+    "output_tokens": 1997
+  },
+  "latency_seconds": 38.01439309120178
+}

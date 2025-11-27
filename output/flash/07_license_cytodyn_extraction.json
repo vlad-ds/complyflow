@@ -1,0 +1,43 @@
+{
+  "source_file": "07_license_cytodyn.txt",
+  "provider": "gemini",
+  "model": "flash",
+  "eval_id": "eval_flash_20251127_150143_2f19796b",
+  "timestamp": "2025-11-27T15:02:55.202884",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "Vyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d).",
+      "reasoning": "The introductory paragraph of the agreement explicitly identifies the parties entering into the contract.",
+      "normalized_value": [
+        "Vyera Pharmaceuticals, LLC",
+        "CytoDyn Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "COMMERCIALIZATION AND LICENSE AGREEMENT",
+      "reasoning": "The title of the document clearly states its type.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The contract does not contain any provisions for automatic renewal of the entire agreement that would require a notice period to prevent such renewal. The agreement's term is defined by specific conditions, not an auto-renewal clause.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement (\u201cTerm\u201d) shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term. \u201cRoyalty Term\u201d means the time period beginning with the First Commercial Sale of the Licensed Product in the Territory and continuing until the latest of (a) the expiration of the last Valid Claim Covering the Licensed Product and included in a CytoDyn Patent licensed to Vyera under this Agreement, (b) the date that is ten (10) years from the date of the First Commercial Sale, (c) the expiration of any Regulatory Exclusivity with respect to the Licensed Product and (d) the Biosimilar Entry Date.",
+      "reasoning": "The contract explicitly states the term commences on the Effective Date (December 17, 2019) and expires on the last day of the Royalty Term. The Royalty Term is defined by the latest of several conditions related to commercialization, intellectual property, and regulatory status, which cannot be determined as a specific calendar date at the time of signing.",
+      "normalized_value": "Until the last day of the Royalty Term, which is the latest of: expiration of last Valid Claim, 10 years from First Commercial Sale, expiration of Regulatory Exclusivity, or Biosimilar Entry Date."
+    },
+    "renewal_term": {
+      "raw_snippet": "Upon the expiration of the Royalty Term, the license granted to Vyera under Section 2.1 of this Agreement shall become non-exclusive, fully-paid, royalty free, perpetual and irrevocable. Notwithstanding the foregoing, if Vyera exercises the Continuation Right (as defined in the Supply Agreement), then Vyera shall continue to purchase Licensed Product from CytoDyn pursuant to the Supply Agreement and shall pay CytoDyn for such Licensed Product the price specified in the Supply Agreement and a royalty equal to [***], provided that after the exercise of the Continuation Right, CytoDyn will not be obligated to supply Licensed Product exclusively to Vyera in the Field in the Territory.",
+      "reasoning": "The agreement does not specify a renewal term for the contract itself. Instead, it states that upon the expiration of the Royalty Term, the license granted to Vyera transitions to a non-exclusive, fully-paid, royalty-free, perpetual, and irrevocable status, which is a change in the nature of the license rather than a renewal of the agreement's term.",
+      "normalized_value": "The license becomes non-exclusive, fully-paid, royalty free, perpetual and irrevocable upon expiration of the Royalty Term."
+    }
+  },
+  "usage": {
+    "model": "gemini-2.5-flash",
+    "input_tokens": 35690,
+    "output_tokens": 792
+  },
+  "latency_seconds": 13.545467138290405
+}

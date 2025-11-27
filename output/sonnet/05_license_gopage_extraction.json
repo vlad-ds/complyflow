@@ -1,0 +1,43 @@
+{
+  "source_file": "05_license_gopage.txt",
+  "provider": "anthropic",
+  "model": "sonnet",
+  "eval_id": "eval_sonnet_20251127_151918_db585718",
+  "timestamp": "2025-11-27T15:21:01.304639",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This Content License Agreement (\"Agreement\"), dated as of Feb 10, 2014 (the \"Effective Date\"), is by and between PSiTech Corporation, a BVI Corporation, with offices located at 303, 3rdFl, St. Georges Bldg, 2 Ice House St, Central, Hong Kong(\"Licensor\"), and Empirical Ventures, Inc., a Nevada corporation with offices located at 100, 40 Lake Bellevue Dr, Bellevue, WA(\"Licensee\").",
+      "reasoning": "The parties are identified in the opening recital of the agreement, which names PSiTech Corporation as Licensor and Empirical Ventures, Inc. as Licensee. These are the two contracting parties.",
+      "normalized_value": [
+        "PSiTech Corporation",
+        "Empirical Ventures, Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "WEBSITE CONTENT LICENSE AGREEMENT",
+      "reasoning": "The document is titled 'WEBSITE CONTENT LICENSE AGREEMENT' and grants Licensee rights to use Licensed Content on their website. This is clearly a license agreement where one party licenses content to another.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term",
+      "reasoning": "Section 6.1 states that after the Initial Term, the agreement auto-renews for a Renewal Term unless either party provides written notice of non-renewal at least 90 days before the Initial Term expires. This is the notice period to prevent automatic renewal.",
+      "normalized_value": "90 days"
+    },
+    "expiration_date": {
+      "raw_snippet": "The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision of this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
+      "reasoning": "The Initial Term is 5 years from the Effective Date of Feb 10, 2014. Adding 5 years to Feb 10, 2014 yields Feb 10, 2019 as the expiration date of the Initial Term (though the agreement may auto-renew after that).",
+      "normalized_value": "2019-02-10"
+    },
+    "renewal_term": {
+      "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term",
+      "reasoning": "Section 6.1 specifies that after the Initial Term, the agreement automatically renews for one additional 3-year period unless either party provides 90 days notice of non-renewal before the Initial Term expires.",
+      "normalized_value": "3 years auto-renewal"
+    }
+  },
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "input_tokens": 11696,
+    "output_tokens": 667
+  },
+  "latency_seconds": 18.26870608329773
+}

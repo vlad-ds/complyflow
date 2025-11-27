@@ -1,0 +1,43 @@
+{
+  "source_file": "07_license_cytodyn.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_152256_11b14ee2",
+  "timestamp": "2025-11-27T15:28:04.979677",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This Commercialization and License Agreement (this \u201cAgreement\u201d) is made effective as of December 17, 2019 (the \u201cEffective Date\u201d) by and between\nVyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d). CytoDyn and Vyera\nare sometimes referred to herein individually as a \u201cParty\u201d and collectively as the \u201cParties.\u201d",
+      "reasoning": "The introductory paragraph explicitly names the parties entering into the agreement.",
+      "normalized_value": [
+        "Vyera Pharmaceuticals, LLC",
+        "CytoDyn Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "COMMERCIALIZATION AND LICENSE AGREEMENT",
+      "reasoning": "The document title states it is a commercialization and license agreement; the core grant in Section 2.1 confirms it is a license.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The agreement contains no automatic renewal clause and no notice requirement to prevent renewal. Termination notice periods provided are for other scenarios (e.g., at-will after a certain time or for cause) and are excluded per instructions.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "11.1 Term. The term of this Agreement (\u201cTerm\u201d) shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall\nexpire on the last day of the Royalty Term.\n\n1.94 \u201cRoyalty Term\u201d means the time period beginning with the First Commercial Sale of the Licensed Product in the Territory and continuing until the\nlatest of (a) the expiration of the last Valid Claim Covering the Licensed Product and included in a CytoDyn Patent licensed to Vyera under this\nAgreement, (b) the date that is ten (10) years from the date of the First Commercial Sale, (c) the expiration of any Regulatory Exclusivity with respect to\nthe Licensed Product and (d) the Biosimilar Entry Date.",
+      "reasoning": "Section 11.1 sets expiration as the end of the Royalty Term; Section 1.94 defines the Royalty Term. No specific calendar date can be computed.",
+      "normalized_value": "Expires at the end of the Royalty Term (latest of patent expiry, 10 years from First Commercial Sale, expiration of Regulatory Exclusivity, or Biosimilar Entry Date)"
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "The agreement does not include an automatic renewal provision or any renewal term language.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 35619,
+    "output_tokens": 1879
+  },
+  "latency_seconds": 32.045284271240234
+}

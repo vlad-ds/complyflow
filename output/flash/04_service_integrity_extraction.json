@@ -1,0 +1,43 @@
+{
+  "source_file": "04_service_integrity.txt",
+  "provider": "gemini",
+  "model": "flash",
+  "eval_id": "eval_flash_20251127_150143_2f19796b",
+  "timestamp": "2025-11-27T15:02:29.346434",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "the Integrity Short Term Government Fund, (the \u201cFund\u201d)... has agreed that Integrity Funds Distributor, LLC, (\u201cIntegrity\u201d), shall be",
+      "reasoning": "The preamble explicitly identifies 'the Integrity Short Term Government Fund' and 'Integrity Funds Distributor, LLC' as the parties entering into the agreement, with their respective defined terms 'the Fund' and 'Integrity'. The signature block confirms these entities.",
+      "normalized_value": [
+        "Integrity Short Term Government Fund",
+        "Integrity Funds Distributor, LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "DISTRIBUTION AND SERVICES AGREEMENT",
+      "reasoning": "The title of the document clearly states 'DISTRIBUTION AND SERVICES AGREEMENT'. From the provided categories, 'Distributor Agreement' is the most fitting description.",
+      "normalized_value": "Distributor Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+      "reasoning": "The contract states that continuation for successive annual periods is 'provided such continuance is specifically approved' by the Board of Trustees and Qualified Trustees. This is a condition requiring affirmative action (approval) for renewal, rather than an automatic renewal that requires notice to prevent. Therefore, there is no notice period for preventing an automatic renewal in the sense requested.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "This Agreement shall continue until January 18, 2022",
+      "reasoning": "Section 7.1 explicitly states the agreement 'shall continue until January 18, 2022', which is the initial fixed expiration date.",
+      "normalized_value": "2022-01-18"
+    },
+    "renewal_term": {
+      "raw_snippet": "and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+      "reasoning": "While the contract mentions 'successive annual periods', its continuation is conditional upon specific annual approval by the Board of Trustees and Qualified Trustees. This is not a standard automatic renewal where the term rolls over unless terminated by notice; instead, it requires an active decision (approval) to continue. Therefore, it does not fit the definition of a 'renewal_term' that automatically takes effect.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gemini-2.5-flash",
+    "input_tokens": 5747,
+    "output_tokens": 803
+  },
+  "latency_seconds": 12.772387266159058
+}

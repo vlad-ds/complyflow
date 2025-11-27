@@ -1,0 +1,120 @@
+{
+  "generated_at": "2025-11-27T15:03:26.496340",
+  "split": "train",
+  "models": [
+    "flash"
+  ],
+  "model_reports": [
+    {
+      "model": "flash",
+      "provider": "gemini",
+      "split": "train",
+      "generated_at": "2025-11-27T15:03:18.715360",
+      "contract_count": 10,
+      "local_metrics": {
+        "total_input_tokens": 201085,
+        "total_output_tokens": 6429,
+        "total_latency_seconds": 95.24599170684814,
+        "avg_input_tokens": 20108.5,
+        "avg_output_tokens": 642.9,
+        "avg_latency_seconds": 9.524599170684814
+      },
+      "langfuse_metrics": {
+        "eval_ids": [
+          "eval_flash_20251127_150143_2f19796b"
+        ],
+        "trace_count": 9,
+        "total_input_tokens": 175156,
+        "total_output_tokens": 16810,
+        "total_cost_usd": 0.0945718,
+        "avg_cost_per_contract": 0.009457179999999999,
+        "by_eval_id": [
+          {
+            "eval_id": "eval_flash_20251127_150143_2f19796b",
+            "trace_count": 9,
+            "total_input_tokens": 175156,
+            "total_output_tokens": 16810,
+            "total_cost_usd": 0.0945718,
+            "traces": [
+              {
+                "trace_id": "7947e0df1b1f5b01a7361e257d1b0182",
+                "name": "extraction-gemini",
+                "input_tokens": 6621,
+                "output_tokens": 1405,
+                "cost_usd": 0.0054988
+              },
+              {
+                "trace_id": "8fd0ea2991d8198f5f2bb46f268ec5a1",
+                "name": "extraction-gemini",
+                "input_tokens": 9314,
+                "output_tokens": 2061,
+                "cost_usd": 0.0079467
+              },
+              {
+                "trace_id": "349a6c564b58c360853926f41a24a52c",
+                "name": "extraction-gemini",
+                "input_tokens": 35690,
+                "output_tokens": 2360,
+                "cost_usd": 0.016607
+              },
+              {
+                "trace_id": "42c8c056689850648d75fa372deaee5a",
+                "name": "extraction-gemini",
+                "input_tokens": 4473,
+                "output_tokens": 1118,
+                "cost_usd": 0.0041369
+              },
+              {
+                "trace_id": "8f30448b8cf6f402f20f75229a349e94",
+                "name": "extraction-gemini",
+                "input_tokens": 9582,
+                "output_tokens": 1116,
+                "cost_usd": 0.0056646
+              },
+              {
+                "trace_id": "0652d585f382a504843eca4577f8282b",
+                "name": "extraction-gemini",
+                "input_tokens": 5747,
+                "output_tokens": 2535,
+                "cost_usd": 0.0080616
+              },
+              {
+                "trace_id": "f30f855c879a7287950d13de7611b3a8",
+                "name": "extraction-gemini",
+                "input_tokens": 65296,
+                "output_tokens": 2008,
+                "cost_usd": 0.0246088
+              },
+              {
+                "trace_id": "7b55c0cd617bf45a31af3441a0de11a2",
+                "name": "extraction-gemini",
+                "input_tokens": 25552,
+                "output_tokens": 2053,
+                "cost_usd": 0.0127981
+              },
+              {
+                "trace_id": "c0c866539a0a266a049a77259e2631cd",
+                "name": "extraction-gemini",
+                "input_tokens": 12881,
+                "output_tokens": 2154,
+                "cost_usd": 0.0092493
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "summary": [
+    {
+      "model": "flash",
+      "provider": "gemini",
+      "contracts": 10,
+      "avg_latency_s": 9.524599170684814,
+      "avg_input_tokens": 20108.5,
+      "avg_output_tokens": 642.9,
+      "total_cost_usd": 0.0945718,
+      "avg_cost_usd": 0.009457179999999999
+    }
+  ]
+}

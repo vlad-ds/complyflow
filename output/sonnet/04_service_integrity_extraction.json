@@ -1,0 +1,43 @@
+{
+  "source_file": "04_service_integrity.txt",
+  "provider": "anthropic",
+  "model": "sonnet",
+  "eval_id": "eval_sonnet_20251127_151918_db585718",
+  "timestamp": "2025-11-27T15:20:43.010928",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "the undersigned, the Integrity Short Term Government Fund, (the \"Fund\"), an open-end, diversified, management investment company organized as a series of The Integrity Funds, a Delaware statutory trust, has agreed that Integrity Funds Distributor, LLC, (\"Integrity\"), shall be, for the period of this distribution agreement",
+      "reasoning": "The parties are identified in the opening paragraph of the agreement, which establishes the contractual relationship between the Fund and the Distributor.",
+      "normalized_value": [
+        "Integrity Short Term Government Fund",
+        "Integrity Funds Distributor, LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "DISTRIBUTION AND SERVICES AGREEMENT",
+      "reasoning": "The document is explicitly titled 'DISTRIBUTION AND SERVICES AGREEMENT' and establishes Integrity Funds Distributor, LLC as the principal underwriter for distribution of Fund shares.",
+      "normalized_value": "Distributor Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement is terminable with respect to the Fund, without penalty, (a) on 60 days' written notice, by vote of a majority of the Qualified Trustees or by vote of a majority (as defined in the 1940 Act) of the outstanding voting securities of the Fund or (b) on 90 days' written notice by Integrity.",
+      "reasoning": "Section 7.1 specifies the notice periods required for termination. However, this relates to general termination at will, not specifically to preventing automatic renewal. The agreement states it 'shall continue automatically for successive annual periods' but requires annual board approval rather than notice to prevent renewal. Therefore, there is no notice period to terminate renewal in the traditional sense.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually",
+      "reasoning": "Section 7.1 specifies the initial term ends on January 18, 2022. This is a specific date stated in the contract.",
+      "normalized_value": "2022-01-18"
+    },
+    "renewal_term": {
+      "raw_snippet": "thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund's Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund's Trustees who are not interested persons",
+      "reasoning": "Section 7.1 describes the renewal mechanism. After the initial term, the agreement renews annually on January 18th, subject to annual board approval. The renewal is automatic if approved but requires specific board action.",
+      "normalized_value": "1 year auto-renewal subject to annual board approval"
+    }
+  },
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "input_tokens": 7528,
+    "output_tokens": 626
+  },
+  "latency_seconds": 17.998048067092896
+}

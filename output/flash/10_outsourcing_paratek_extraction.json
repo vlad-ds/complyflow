@@ -1,0 +1,43 @@
+{
+  "source_file": "10_outsourcing_paratek.txt",
+  "provider": "gemini",
+  "model": "flash",
+  "eval_id": "eval_flash_20251127_150143_2f19796b",
+  "timestamp": "2025-11-27T15:03:18.710666",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "Between Paratek Pharmaceuticals, Inc. and CARBOGEN AMCIS AG",
+      "reasoning": "The parties are identified in the introductory section of the agreement, immediately below the contract type.",
+      "normalized_value": [
+        "Paratek Pharmaceuticals, Inc.",
+        "CARBOGEN AMCIS AG"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "Outsourcing Agreement",
+      "reasoning": "The title of the agreement explicitly states 'Outsourcing Agreement'.",
+      "normalized_value": "Outsourcing Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall be effective as of the expiration date of the Initial Term; b) either Party delivers written notice of termination to the other Party at least [* * *] prior to the expiration date of the Renewal Term, which termination shall be effective as of the expiration date of the Renewal Term;",
+      "reasoning": "Section 18.1 'Termination' clause (b) explicitly states that 'either Party delivers written notice of termination to the other Party at least [* * *] prior to the expiration date of the Renewal Term'. The specific duration is redacted, but the mechanism is present.",
+      "normalized_value": "Redacted"
+    },
+    "expiration_date": {
+      "raw_snippet": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \u201cInitial Term\u201d).",
+      "reasoning": "Article 2.1 'Term' states the agreement commences on the Effective Date (December 30, 2016) and is valid until a redacted date, defining the 'Initial Term'. Since the exact date is redacted, I cannot provide an ISO date.",
+      "normalized_value": "Redacted until the end of the Initial Term from the Effective Date"
+    },
+    "renewal_term": {
+      "raw_snippet": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \u201cRenewal Term\u201d).",
+      "reasoning": "Article 2.1 'Term' describes an automatic renewal for a maximum of a redacted period if a follow-on agreement is not signed by a certain date.",
+      "normalized_value": "Automatic renewal for a maximum of a redacted period"
+    }
+  },
+  "usage": {
+    "model": "gemini-2.5-flash",
+    "input_tokens": 25929,
+    "output_tokens": 592
+  },
+  "latency_seconds": 5.342321872711182
+}

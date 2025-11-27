@@ -1,21 +1,21 @@
 #!/usr/bin/env python
-"""Run extraction and/or generate reports.
+"""Run extraction, generate reports, or create eval pairs.
 
 Usage:
     # Run extractions (idempotent - skips existing)
-    python -m evaluation.run_evaluation extract --models flash
+    python -m evaluation extract --models flash
 
     # Generate comparison report (queries Langfuse for costs)
-    python -m evaluation.run_evaluation report --models flash
+    python -m evaluation report --models flash
 
-    # Run both extraction and report
-    python -m evaluation.run_evaluation all --models flash
+    # Create eval pairs (after all extractions are done)
+    python -m evaluation pairs
 
     # Force re-extraction
-    python -m evaluation.run_evaluation extract --models flash --force
+    python -m evaluation extract --models flash --force
 
     # Run all models
-    python -m evaluation.run_evaluation extract
+    python -m evaluation extract
 """
 
 import argparse
@@ -67,16 +67,14 @@ def cmd_report(args):
     print(f"Generating report for {args.split} split")
 
     save_comparison_report(models, args.split, fetch_langfuse=not args.no_langfuse)
+
+
+def cmd_pairs(args):
+    """Create eval pairs from existing extractions."""
+    models = parse_models(args.models)
+    print(f"Creating eval pairs for {args.split} split")
+
     save_eval_pairs(args.split, models)
-
-
-def cmd_all(args):
-    """Run extractions then generate report."""
-    cmd_extract(args)
-    print("\n" + "=" * 60)
-    print("GENERATING REPORT")
-    print("=" * 60)
-    cmd_report(args)
 
 
 def main():
@@ -127,23 +125,13 @@ def main():
     )
     report_parser.set_defaults(func=cmd_report)
 
-    # All command (extract + report)
-    all_parser = subparsers.add_parser(
-        "all",
+    # Pairs command
+    pairs_parser = subparsers.add_parser(
+        "pairs",
         parents=[common],
-        help="Run extractions then generate report",
+        help="Create eval pairs from existing extractions",
     )
-    all_parser.add_argument(
-        "--force",
-        action="store_true",
-        help="Force re-extraction",
-    )
-    all_parser.add_argument(
-        "--no-langfuse",
-        action="store_true",
-        help="Skip Langfuse metrics",
-    )
-    all_parser.set_defaults(func=cmd_all)
+    pairs_parser.set_defaults(func=cmd_pairs)
 
     args = parser.parse_args()
 

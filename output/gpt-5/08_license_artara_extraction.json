@@ -1,0 +1,43 @@
+{
+  "source_file": "08_license_artara.txt",
+  "provider": "openai",
+  "model": "gpt-5",
+  "eval_id": "eval_gpt-5_20251127_152256_11b14ee2",
+  "timestamp": "2025-11-27T15:28:37.499273",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and\nbetween ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of\nSponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
+      "reasoning": "Identified the parties from the introductory paragraph specifying the entities entering into the agreement.",
+      "normalized_value": [
+        "ArTara, Inc.",
+        "The University of Iowa"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "SPONSORED RESEARCH AND LICENSE AGREEMENT",
+      "reasoning": "The document title indicates it is a sponsored research agreement that includes a license grant; among the provided categories, this best aligns with a License Agreement.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The agreement contains termination notice periods (e.g., 30 days) but no automatic renewal or notice required to prevent renewal. Therefore, no notice-to-terminate-renewal provision exists.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "",
+      "reasoning": "The agreement does not specify a fixed term or expiration date; it only provides termination rights. As instructed, leave blank when the contract is silent on expiration.",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "No auto-renewal language is present; the agreement does not describe renewal terms.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-2025-08-07",
+    "input_tokens": 9677,
+    "output_tokens": 1491
+  },
+  "latency_seconds": 32.50205111503601
+}

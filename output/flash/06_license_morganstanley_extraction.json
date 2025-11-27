@@ -1,0 +1,43 @@
+{
+  "source_file": "06_license_morganstanley.txt",
+  "provider": "gemini",
+  "model": "flash",
+  "eval_id": "eval_flash_20251127_150143_2f19796b",
+  "timestamp": "2025-11-27T15:02:41.629802",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "Morgan Stanley Investment Management Inc. (\u201cLicensor\u201d), and Morgan Stanley Direct Lending Fund, a Delaware corporation (\u201cLicensee\u201d).",
+      "reasoning": "The introductory paragraph of the agreement identifies the parties involved in the contract.",
+      "normalized_value": [
+        "Morgan Stanley Investment Management Inc.",
+        "Morgan Stanley Direct Lending Fund"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "TRADEMARK LICENSE AGREEMENT",
+      "reasoning": "The title of the document clearly states 'TRADEMARK LICENSE AGREEMENT'.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The agreement states it continues in perpetuity and outlines various termination conditions, but it does not describe an auto-renewal mechanism that requires a notice period to prevent renewal.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+      "reasoning": "Section 4.1 explicitly states that the agreement 'continues in perpetuity'.",
+      "normalized_value": "perpetual"
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "The agreement states it continues in perpetuity, rather than having specific renewal terms. Therefore, no distinct renewal term is present.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gemini-2.5-flash",
+    "input_tokens": 4473,
+    "output_tokens": 364
+  },
+  "latency_seconds": 6.488574028015137
+}

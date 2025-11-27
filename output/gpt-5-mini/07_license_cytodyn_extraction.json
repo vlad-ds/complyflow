@@ -1,0 +1,43 @@
+{
+  "source_file": "07_license_cytodyn.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_151221_f01b2d60",
+  "timestamp": "2025-11-27T15:16:26.911350",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This Commercialization and License Agreement (this \u201cAgreement\u201d) is made effective as of December 17, 2019 (the \u201cEffective Date\u201d) by and between Vyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d). CytoDyn and Vyera are sometimes referred to herein individually as a \u201cParty\u201d and collectively as the \u201cParties.\u201d",
+      "reasoning": "The introductory paragraph identifies the contracting entities and their legal forms and conventional short names; these are the principal parties to the Agreement.",
+      "normalized_value": [
+        "Vyera Pharmaceuticals, LLC",
+        "CytoDyn Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "COMMERCIALIZATION AND LICENSE AGREEMENT",
+      "reasoning": "The document title at the top explicitly names the agreement type as a Commercialization and License Agreement, which falls under a license agreement category.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The contract does not contain an automatic renewal clause requiring advance notice to prevent renewal. Term/termination provisions describe expiry tied to the \"Royalty Term\" and various termination rights, but no clause was found that requires a specific advance notice to prevent automatic renewal.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "11.1 Term. The term of this Agreement (\u201cTerm\u201d) shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term. Upon the expiration of the Royalty Term, the license granted to Vyera under Section 2.1 of this Agreement shall become non-exclusive, fully-paid, royalty free, perpetual and irrevocable. Notwithstanding the foregoing, if Vyera exercises the Continuation Right (as defined in the Supply Agreement), then Vyera shall continue to purchase Licensed Product from CytoDyn pursuant to the Supply Agreement and shall pay CytoDyn for such Licensed Product the price specified in the Supply Agreement and a royalty equal to [***], provided that after the exercise of the Continuation Right, CytoDyn will not be obligated to supply Licensed Product exclusively to Vyera in the Field in the Territory.\n\n1.94 \u201cRoyalty Term\u201d means the time period beginning with the First Commercial Sale of the Licensed Product in the Territory and continuing until the latest of (a) the expiration of the last Valid Claim Covering the Licensed Product and included in a CytoDyn Patent licensed to Vyera under this Agreement, (b) the date that is ten (10) years from the date of the First Commercial Sale, (c) the expiration of any Regulatory Exclusivity with respect to the Licensed Product and (d) the Biosimilar Entry Date.",
+      "reasoning": "Section 11.1 states the Agreement expires on the last day of the \"Royalty Term.\" Section 1.94 defines \"Royalty Term\" as beginning at First Commercial Sale and continuing until the latest of four specified events. Because the actual calendar date depends on when First Commercial Sale occurs and patent/regulatory events, a specific ISO date cannot be computed.",
+      "normalized_value": "Expire on the last day of the Royalty Term (i.e., the Term begins at the Effective Date and expires at the end of the Royalty Term; the Royalty Term begins with the First Commercial Sale and continues until the latest of: (a) expiration of the last Valid Claim covering the Licensed Product licensed to Vyera, (b) ten (10) years from the date of the First Commercial Sale, (c) expiration of any Regulatory Exclusivity, or (d) the Biosimilar Entry Date)."
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "No automatic renewal clause or renewal term language (e.g., \"automatically renews for X period unless notice given\") was found in the Agreement. Term is defined to run until the end of the Royalty Term, with no stated renewal mechanics.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 35619,
+    "output_tokens": 2299
+  },
+  "latency_seconds": 39.09455418586731
+}

@@ -1,0 +1,43 @@
+{
+  "source_file": "02_service_reynolds.txt",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "eval_id": "eval_gpt-5-mini_20251127_151221_f01b2d60",
+  "timestamp": "2025-11-27T15:13:36.543881",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "TRANSITION SERVICES AGREEMENT (the \u201cAgreement\u201d) dated as of [\u2022], 2020, between Reynolds Group Holdings Inc., a Delaware corporation\n(\u201cRGHI\u201d), and Reynolds Consumer Products Inc., a Delaware corporation, (the \u201cCompany\u201d or \u201cRCP\u201d).",
+      "reasoning": "The preamble identifies the contracting entities by name and immediately labels them with abbreviations. These are the two primary parties to the Agreement.",
+      "normalized_value": [
+        "Reynolds Group Holdings Inc.",
+        "Reynolds Consumer Products Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "TRANSITION SERVICES AGREEMENT",
+      "reasoning": "The document title is 'TRANSITION SERVICES AGREEMENT' and the preamble repeats this phrasing, indicating the contract type is a services agreement for transitional arrangements.",
+      "normalized_value": "Service Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "I searched for language that creates an automatic renewal and a specific advance notice period required to prevent renewal. The Agreement sets fixed service terms (generally 12 months) and provides termination-for-convenience notice (e.g., 30 days for certain terminations) but does not contain an automatic renewal clause nor a notice-to-prevent-renewal provision. Therefore there is no notice period to prevent automatic renewal to extract.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \u201cCommencement Date\u201d), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \u201cTerm\u201d) or (ii) earlier terminated pursuant to this Agreement (a \u201cTermination Date\u201d).",
+      "reasoning": "Section 6.1 explicitly defines the general term/expiration for each Service as continuing until 12 months following the Commencement Date, while also noting that certain Services may specify different dates on the Exhibits. This is the operative statement of term/expiration.",
+      "normalized_value": "12 months from the Commencement Date (unless a different date is specified for a Service on Exhibit A or Exhibit B)"
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "The Agreement does not include any clause describing automatic renewal or a renewal term (e.g., \"will renew for X period unless...\"), so there is no renewal term to extract.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 25452,
+    "output_tokens": 1636
+  },
+  "latency_seconds": 37.46233010292053
+}

@@ -1,0 +1,43 @@
+{
+  "source_file": "06_license_morganstanley.txt",
+  "provider": "anthropic",
+  "model": "sonnet",
+  "eval_id": "eval_sonnet_20251127_151918_db585718",
+  "timestamp": "2025-11-27T15:21:16.631289",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This TRADEMARK LICENSE AGREEMENT (the \"Agreement\") is effective as of the [\u00b7] day of [\u00b7], 2019 (\"Effective Date\") between Morgan Stanley Investment Management Inc. (\"Licensor\"), and Morgan Stanley Direct Lending Fund, a Delaware corporation (\"Licensee\").",
+      "reasoning": "The parties are clearly identified in the opening paragraph of the agreement, with their full legal names and jurisdictions where applicable.",
+      "normalized_value": [
+        "Morgan Stanley Investment Management Inc.",
+        "Morgan Stanley Direct Lending Fund"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "TRADEMARK LICENSE AGREEMENT",
+      "reasoning": "The document is explicitly titled as a 'TRADEMARK LICENSE AGREEMENT' and involves the licensing of trademark rights for the 'Morgan Stanley' brand, making it clearly a License Agreement.",
+      "normalized_value": "License Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "This agreement does not contain a notice period to prevent automatic renewal. The agreement continues 'in perpetuity' (Section 4.1) and can be terminated by Licensor at any time for convenience (Section 4.2) or for specific breach conditions (Section 4.3), but there is no automatic renewal provision that requires advance notice to prevent renewal. The termination provisions are about ending the perpetual agreement, not about preventing a renewal cycle.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "Section 4.1.Term. The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+      "reasoning": "Section 4.1 explicitly states that the agreement 'continues in perpetuity' unless terminated under specific provisions. This is express language indicating an indefinite term.",
+      "normalized_value": "perpetual"
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "The agreement does not have a renewal term because it is structured as a perpetual agreement from Section 4.1. There are no renewal provisions; instead, the agreement continues indefinitely unless terminated under the specified termination provisions in Sections 4.2 through 4.4.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "input_tokens": 6294,
+    "output_tokens": 488
+  },
+  "latency_seconds": 15.294706106185913
+}
