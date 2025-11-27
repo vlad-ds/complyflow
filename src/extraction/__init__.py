@@ -1,6 +1,6 @@
 """Contract metadata extraction module."""
 
-from extraction.extract_with_citations import (
+from extraction.extract import (
     extract_contract_metadata,
     format_extraction_result,
 )

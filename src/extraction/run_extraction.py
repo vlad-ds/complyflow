@@ -1,11 +1,20 @@
 #!/usr/bin/env python
 """Run contract metadata extraction on a text file.
 
-Usage:
-    python -m extraction.run_extraction <contract_path> [--output <output_path>]
+Supports multiple LLM providers (Anthropic, OpenAI, Gemini) with model selection.
 
-Example:
-    python -m extraction.run_extraction temp/extracted_text/06_license_morganstanley.txt
+Usage:
+    python -m extraction.run_extraction <contract_path> [--provider <provider>] [--model <model>]
+
+Examples:
+    # Use default (Anthropic Sonnet)
+    python -m extraction.run_extraction temp/extracted_text/train/06_license_morganstanley.txt
+
+    # Use OpenAI GPT-4.1
+    python -m extraction.run_extraction temp/extracted_text/train/06_license_morganstanley.txt --provider openai
+
+    # Use Gemini Flash
+    python -m extraction.run_extraction temp/extracted_text/train/06_license_morganstanley.txt --provider gemini --model flash
 """
 
 import argparse
@@ -20,18 +29,33 @@ load_dotenv()
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from extraction import extract_contract_metadata, format_extraction_result
-from llm import get_anthropic_client
+from extraction.extract import extract_contract_metadata, format_extraction_result
+from llm import get_provider, PROVIDERS
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Extract contract metadata")
+    parser = argparse.ArgumentParser(
+        description="Extract contract metadata using LLM providers"
+    )
     parser.add_argument("contract_path", type=Path, help="Path to contract text file")
+    parser.add_argument(
+        "--provider", "-p",
+        type=str,
+        default="anthropic",
+        choices=list(PROVIDERS.keys()),
+        help="LLM provider (default: anthropic)",
+    )
+    parser.add_argument(
+        "--model", "-m",
+        type=str,
+        default=None,
+        help="Model to use (provider-specific, uses default if not specified)",
+    )
     parser.add_argument(
         "--output", "-o",
         type=Path,
         default=None,
-        help="Output JSON path (default: output/<contract_name>_extraction.json)"
+        help="Output JSON path (default: output/<provider>/<contract_name>_extraction.json)",
     )
     args = parser.parse_args()
 
@@ -44,27 +68,33 @@ def main():
         print(f"Error: Contract file not found: {contract_path}")
         sys.exit(1)
 
-    # Default output path
-    output_dir = Path(__file__).parent.parent.parent / "output"
-    output_dir.mkdir(exist_ok=True)
+    # Default output path with provider subfolder
+    output_dir = Path(__file__).parent.parent.parent / "output" / args.provider
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     output_path = args.output
     if output_path is None:
         output_path = output_dir / f"{contract_path.stem}_extraction.json"
 
+    # Initialize provider
+    provider = get_provider(args.provider, model=args.model)
+
     # Run extraction
+    print(f"Provider: {args.provider}")
+    print(f"Model: {args.model or provider.default_model}")
     print(f"Extracting from: {contract_path.name}")
     print("-" * 60)
 
-    client = get_anthropic_client()
-    result = extract_contract_metadata(client, contract_path)
+    result = extract_contract_metadata(provider, contract_path, model=args.model)
 
     # Print formatted result
     print(format_extraction_result(result))
 
     # Build JSON output
+    llm_resp = getattr(result, "_llm_response", None)
     output_data = {
         "source_file": contract_path.name,
+        "provider": args.provider,
         "extraction": {
             "parties": {
                 "raw_snippet": result.parties.raw_snippet,
@@ -93,9 +123,9 @@ def main():
             },
         },
         "usage": {
-            "model": result._raw_response.model if hasattr(result, "_raw_response") else None,
-            "input_tokens": result._raw_response.usage.input_tokens if hasattr(result, "_raw_response") else None,
-            "output_tokens": result._raw_response.usage.output_tokens if hasattr(result, "_raw_response") else None,
+            "model": llm_resp.model if llm_resp else None,
+            "input_tokens": llm_resp.input_tokens if llm_resp else None,
+            "output_tokens": llm_resp.output_tokens if llm_resp else None,
         },
     }
 
