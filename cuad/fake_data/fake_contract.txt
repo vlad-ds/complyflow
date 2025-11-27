@@ -1,0 +1,25 @@
+SERVICE AGREEMENT
+
+This Service Agreement ("Agreement") is entered into as of January 15, 2024 (the "Effective Date") by and between:
+
+Acme Corporation, a Delaware corporation ("Provider")
+and
+Beta Industries LLC, a California limited liability company ("Client")
+
+(collectively, the "Parties")
+
+1. SERVICES
+Provider agrees to provide consulting services to Client as described in Exhibit A.
+
+2. TERM AND TERMINATION
+The initial term of this Agreement shall commence on the Effective Date and continue for two (2) years.
+
+This Agreement shall automatically renew for successive one (1) year periods unless either party provides written notice of non-renewal at least sixty (60) days prior to the end of the then-current term.
+
+3. COMPENSATION
+Client shall pay Provider $10,000 per month for the services rendered.
+
+4. GOVERNING LAW
+This Agreement shall be governed by the laws of the State of Delaware.
+
+IN WITNESS WHEREOF, the Parties have executed this Agreement as of the date first written above.

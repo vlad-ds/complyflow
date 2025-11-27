@@ -35,27 +35,53 @@ class ContractType(str, Enum):
     TRANSPORTATION = "Transportation Agreement"
 
 
-class ExtractedContractMetadata(BaseModel):
-    """Metadata extracted from contract PDF by LLM.
+# --- Extraction response schemas (with raw_snippet + reasoning) ---
+# NOTE: We avoid nullable types (str | None) to reduce anyOf branches in JSON schema,
+# which Anthropic's structured output limits to 8. Use empty string "" for missing values.
 
-    All fields map directly to CUAD ground truth for evaluation.
-    """
 
-    parties: list[str] = Field(
-        description="All named parties to the contract"
+class ExtractedFieldBase(BaseModel):
+    """Base for extracted fields with raw snippet and reasoning."""
+
+    raw_snippet: str = Field(
+        default="",
+        description="Exact verbatim text copied from the document. Empty string if not found."
     )
-    contract_type: ContractType = Field(
-        description="Type of contract from predefined categories"
+    reasoning: str = Field(
+        description="Brief explanation of how the value was identified and interpreted."
     )
-    notice_period: str | None = Field(
-        default=None,
-        description="Notice period required to terminate or not renew (e.g., '90 days prior written notice')",
+
+
+class PartiesExtraction(ExtractedFieldBase):
+    """Parties field extraction."""
+
+    normalized_value: list[str] = Field(
+        description="List of party names (company/person names only, not roles like 'Licensor')"
     )
-    expiration_date: str | None = Field(
-        default=None,
-        description="When the contract expires or terminates, as stated in the document",
+
+
+class ContractTypeExtraction(ExtractedFieldBase):
+    """Contract type field extraction."""
+
+    normalized_value: str = Field(
+        description="Contract type from predefined categories"
     )
-    renewal_term: str | None = Field(
-        default=None,
-        description="Auto-renewal terms, if any (e.g., 'successive one-year periods')",
+
+
+class StringFieldExtraction(ExtractedFieldBase):
+    """Generic string field extraction (notice_period, expiration_date, renewal_term)."""
+
+    normalized_value: str = Field(
+        default="",
+        description="Standardized/normalized value, or empty string if not found"
     )
+
+
+class ExtractionResponse(BaseModel):
+    """Full extraction response from LLM."""
+
+    parties: PartiesExtraction
+    contract_type: ContractTypeExtraction
+    notice_period: StringFieldExtraction
+    expiration_date: StringFieldExtraction
+    renewal_term: StringFieldExtraction

@@ -39,6 +39,31 @@ MVP schema in `src/extraction/schema.py` with 5 fields, all matching CUAD ground
 - `counterparty` - primary external party (redundant with parties for now)
 - `risk` - manual assignment
 
+## Architecture
+
+### Modular Pipeline
+
+The extraction pipeline is modular - each step is separate:
+
+1. **PDF Text Extraction** (`src/extraction/pdf_text.py`)
+   - Uses pdfplumber to extract text from PDFs
+   - Pre-extracted text stored in `temp/extracted_text/*.txt`
+   - Run once per PDF, reuse the text files
+
+2. **LLM Extraction** (`src/extraction/extract_with_citations.py`)
+   - Takes **text files** as input (NOT PDFs directly)
+   - Sends to Anthropic API with citations enabled
+   - Returns structured data with source citations
+
+This separation keeps costs low - text extraction is free, and we only pay for the actual text tokens sent to the LLM (not raw PDF bytes).
+
+### Pre-extracted Text Files
+
+All CUAD contracts have been extracted to `temp/extracted_text/`:
+- `01_service_gpaq.txt` through `10_outsourcing_paratek.txt`
+
+Use these text files for LLM extraction, not the original PDFs.
+
 ## Tech Stack (TBD)
 
 - Python backend (uv for package management)
