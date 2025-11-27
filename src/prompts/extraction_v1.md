@@ -18,18 +18,21 @@ For each field, provide:
 - normalized_value: Must be one of: {contract_types}
 
 ### notice_period
-- raw_snippet: Copy the exact notice requirement text, or null if not found
+- raw_snippet: Copy the exact notice requirement text, or empty string if not found
 - reasoning: How you identified this (or why it's not found)
-- normalized_value: Standardized period (e.g., "90 days") or null
+- normalized_value: Standardized period (e.g., "90 days") or empty string if not found
+- IMPORTANT: Only extract GENERAL notice periods that apply to standard termination or non-renewal. Do NOT extract contextual or conditional notice periods that only apply in specific circumstances (e.g., notice periods tied to other agreements terminating).
 
 ### expiration_date
-- raw_snippet: Copy the exact expiration/term text, or null if not found
+- raw_snippet: Copy the exact expiration/term text, or empty string if not found
 - reasoning: How you determined the date (if relative, explain the calculation)
-- normalized_value: ISO date (YYYY-MM-DD) if you can compute it, or describe the relative term if not (e.g., "2 years from Effective Date"). Return null if not specified.
+- normalized_value: One of the following:
+  - ISO date (YYYY-MM-DD) if you can compute a specific date
+  - "perpetual" if the agreement continues indefinitely/in perpetuity
+  - A description of the relative term if you cannot compute (e.g., "2 years from Effective Date")
+  - Empty string if not specified
 
 ### renewal_term
-- raw_snippet: Copy the exact renewal text, or null if not found
+- raw_snippet: Copy the exact renewal text, or empty string if not found
 - reasoning: How you identified this (or why it's not found)
-- normalized_value: Standardized term (e.g., "1 year auto-renewal") or null
-
-IMPORTANT: For expiration_date, if the date is relative (like "5 years from Effective Date"), compute it if you have the reference date, otherwise describe the relative term.
+- normalized_value: Standardized term (e.g., "1 year auto-renewal") or empty string if not found
