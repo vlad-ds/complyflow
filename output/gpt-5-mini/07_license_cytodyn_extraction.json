@@ -1,13 +1,10 @@
 {
   "source_file": "07_license_cytodyn.txt",
   "provider": "openai",
-  "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
-  "timestamp": "2025-11-27T16:57:41.785497",
   "extraction": {
     "parties": {
-      "raw_snippet": "This Commercialization and License Agreement (this \u201cAgreement\u201d) is made effective as of December 17, 2019 (the \u201cEffective Date\u201d) by and between Vyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d).",
-      "reasoning": "The introductory paragraph explicitly identifies the contracting entities and their legal forms and short names; these are the primary parties to the Agreement.",
+      "raw_snippet": "This Commercialization and License Agreement (this \u201cAgreement\u201d) is made effective as of December 17, 2019 (the \u201cEffective Date\u201d) by and between\nVyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d).",
+      "reasoning": "The introductory paragraph identifies the contracting parties by name and legal form (Vyera Pharmaceuticals, LLC and CytoDyn Inc.) as the parties to the Agreement.",
       "normalized_value": [
         "Vyera Pharmaceuticals, LLC",
         "CytoDyn Inc."
@@ -15,29 +12,43 @@
     },
     "contract_type": {
       "raw_snippet": "CytoDyn hereby grants to Vyera, and Vyera hereby accepts, an exclusive royalty-bearing license (or sublicense, as the case may be), under the CytoDyn Patents, the CytoDyn Know-How and the Inventions (if any) solely to Commercialize, use, have used, offer for sale and sell Licensed Products in the Field in the Territory.",
-      "reasoning": "Substance of the agreement: CytoDyn grants Vyera an exclusive royalty-bearing license to intellectual property (Patents, Know-How, Inventions) to commercialize, offer for sale and sell the Licensed Product in the Field and Territory. The primary economic/core obligations are an IP license from CytoDyn and commercialization obligations/payments (royalties/milestones) from Vyera, so this is principally a license agreement with commercialization obligations.",
+      "reasoning": "The core economic substance is a grant of an exclusive, royalty-bearing license to Vyera to commercialize the licensed product in the defined field and territory. Although the title references commercialization, the primary legal mechanism is a license under CytoDyn Patents/Know-How to enable commercialization by Vyera.",
       "normalized_value": "License Agreement"
+    },
+    "agreement_date": {
+      "raw_snippet": "This Commercialization and License Agreement (this \u201cAgreement\u201d) is made effective as of December 17, 2019 (the \u201cEffective Date\u201d) by and between\nVyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d).",
+      "reasoning": "The contract opening states the Agreement is \"made effective as of December 17, 2019\" which is the explicit date the agreement was made/dated in the introductory paragraph.",
+      "normalized_value": "2019-12-17"
+    },
+    "effective_date": {
+      "raw_snippet": "This Commercialization and License Agreement (this \u201cAgreement\u201d) is made effective as of December 17, 2019 (the \u201cEffective Date\u201d) by and between\nVyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d).",
+      "reasoning": "The same introductory sentence explicitly defines \"Effective Date\" as December 17, 2019.",
+      "normalized_value": "2019-12-17"
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement (\u201cTerm\u201d) shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall\nexpire on the last day of the Royalty Term.",
+      "reasoning": "Section 11.1 defines the Term and states the Agreement expires on the last day of the Royalty Term; this is a relative expiration tied to the royalty term rather than a fixed calendar date.",
+      "normalized_value": "commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term."
+    },
+    "governing_law": {
+      "raw_snippet": "This Agreement and all disputes arising out of or related to this Agreement or any breach hereof shall be governed by and\nconstrued in accordance with the laws of the State of New York, without giving effect to any choice of law principles that would result in the application\nof the laws of any other jurisdiction. The United Nations Convention on Contracts for the International Sale of Goods shall not apply to the transactions\ncontemplated by this Agreement",
+      "reasoning": "Section 14.2 explicitly states the governing law as \"the laws of the State of New York\" for the Agreement and related disputes.",
+      "normalized_value": "New York"
     },
     "notice_period": {
       "raw_snippet": "",
-      "reasoning": "The contract does not include any clause that establishes an advance notice period to prevent automatic renewal (there is no auto-renewal clause). The Agreement's Term is defined to expire at the end of the Royalty Term; termination-at-will notice periods (e.g., Section 11.2(c) 180 days' notice) are present but are not notice-to-prevent-renewal language, so this field is empty.",
+      "reasoning": "The contract contains various notice periods for termination (e.g., 180 days' notice for Vyera termination under Section 11.2(c)), but it does not include any clause that establishes an advance notice period to prevent an automatic renewal (i.e., there is no auto-renewal/renewal-prevention notice requirement). Therefore there is no \"notice period to terminate renewal\" to extract.",
       "normalized_value": ""
-    },
-    "expiration_date": {
-      "raw_snippet": "The term of this Agreement (\u201cTerm\u201d) shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term.\n\n\u201cRoyalty Term\u201d means the time period beginning with the First Commercial Sale of the Licensed Product in the Territory and continuing until the latest of (a) the expiration of the last Valid Claim Covering the Licensed Product and included in a CytoDyn Patent licensed to Vyera under this Agreement, (b) the date that is ten (10) years from the date of the First Commercial Sale, (c) the expiration of any Regulatory Exclusivity with respect to the Licensed Product and (d) the Biosimilar Entry Date.",
-      "reasoning": "Section 11.1 defines the Term as expiring on the last day of the Royalty Term. Section 1.94 defines \"Royalty Term\" as a relative period tied to First Commercial Sale and the latest of several listed events. This is a relative/conditional termination (not a fixed calendar date).",
-      "normalized_value": "expire on the last day of the Royalty Term (Royalty Term = period beginning with the First Commercial Sale and continuing until the latest of (a) expiration of the last Valid Claim covering the Licensed Product licensed to Vyera, (b) ten (10) years from the date of the First Commercial Sale, (c) expiration of any Regulatory Exclusivity for the Licensed Product, and (d) the Biosimilar Entry Date)"
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "The Agreement contains no explicit automatic renewal clause or specified renewal term. It defines a term tied to the Royalty Term and contains termination rights, but no renewal period or automatic renewal mechanics are stated.",
+      "reasoning": "The Agreement does not contain any automatic renewal clause or specified renewal term; the Term runs until the last day of the Royalty Term and contains termination provisions, but no renewal mechanics are specified.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 35737,
-    "output_tokens": 2578
-  },
-  "latency_seconds": 35.406981229782104
+    "input_tokens": 36481,
+    "output_tokens": 2309
+  }
 }

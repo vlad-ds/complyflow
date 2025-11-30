@@ -146,8 +146,11 @@ def format_extraction_result(result: ExtractionResponse) -> str:
 
     lines.extend(format_field("parties", result.parties))
     lines.extend(format_field("contract_type", result.contract_type))
-    lines.extend(format_field("notice_period", result.notice_period))
+    lines.extend(format_field("agreement_date", result.agreement_date))
+    lines.extend(format_field("effective_date", result.effective_date))
     lines.extend(format_field("expiration_date", result.expiration_date))
+    lines.extend(format_field("governing_law", result.governing_law))
+    lines.extend(format_field("notice_period", result.notice_period))
     lines.extend(format_field("renewal_term", result.renewal_term))
 
     # Usage stats from LLM response if available

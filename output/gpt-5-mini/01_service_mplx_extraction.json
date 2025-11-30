@@ -2,42 +2,57 @@
   "source_file": "01_service_mplx.txt",
   "provider": "openai",
   "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_193227_fdbec8ad",
-  "timestamp": "2025-11-27T19:32:54.612968",
+  "eval_id": "eval_gpt-5-mini_20251130_124702_1e6480fd",
+  "timestamp": "2025-11-30T12:47:40.416644",
   "extraction": {
     "parties": {
-      "raw_snippet": "THIS TRANSPORTATION SERVICES AGREEMENT (this \u201cAgreement\u201d) is dated as of June 11, 2015, by and between Marathon Petroleum Company LP (\u201cShipper\u201d) and Marathon Pipe Line LLC, a Delaware limited liability company (\u201cMPL\u201d), both referred to jointly as the \u201cParties\u201d and each individually as a \u201cParty\u201d.",
-      "reasoning": "The opening paragraph identifies the contracting entities by name and labels them as the Parties; these are the two primary parties to the agreement.",
+      "raw_snippet": "THIS TRANSPORTATION SERVICES AGREEMENT (this \u201cAgreement\u201d) is dated as of June 11, 2015, by and between Marathon Petroleum\nCompany LP (\u201cShipper\u201d) and Marathon Pipe Line LLC, a Delaware limited liability company (\u201cMPL\u201d), both referred to jointly as the \u201cParties\u201d and each\nindividually as a \u201cParty\u201d.",
+      "reasoning": "The opening paragraph of the agreement explicitly names the two contracting entities and labels them \"Shipper\" and \"MPL\". This is the standard place to identify the contracting parties.",
       "normalized_value": [
         "Marathon Petroleum Company LP",
         "Marathon Pipe Line LLC"
       ]
     },
     "contract_type": {
-      "raw_snippet": "TRANSPORTATION SERVICES AGREEMENT",
-      "reasoning": "The title and the substance of the agreement (commitments to transport specified volumes of Product on a pipeline, rate provisions, and related transportation obligations) indicate the primary purpose is transportation services for petroleum products.",
+      "raw_snippet": "TRANSPORTATION SERVICES AGREEMENT\n...\nShipper responded to the binding open season and desires to commit to transport a specified volume of Product (as defined below) on the\nPipeline over a multi-year period to destinations as provided in Exhibit C, subject to and upon the terms and conditions of this Agreement;",
+      "reasoning": "The title and the operative sentence describe that one party commits to transport specified volumes of product on the pipeline and the other provides transportation services and rates. The core obligations are transport services and volume commitments.",
       "normalized_value": "Transportation Agreement"
     },
     "notice_period": {
       "raw_snippet": "This Agreement will automatically renew for up to two (2) renewal terms of five (5) years each (each, an \u201cExtension Period\u201d) unless either Party provides the other Party with written notice of its intent to terminate this Agreement at least six (6) months prior to the end of the Initial Term or the then current Extension Period.",
-      "reasoning": "Section 2.2 sets an automatic renewal and specifies the advance notice required to prevent automatic renewal: written notice at least six (6) months prior to the end of the Initial Term or then-current Extension Period.",
+      "reasoning": "This sentence in Section 2.2 sets the advance written notice required to avoid automatic renewal (i.e., notice to terminate before renewal). It specifies \"at least six (6) months prior\" to the end of the term/extension period.",
       "normalized_value": "6 months"
     },
     "expiration_date": {
-      "raw_snippet": "This Agreement is effective June 11, 2015 (the \u201cEffective Date\u201d). The Agreement shall continue through the project\u2019s in-service date and for a period of fifteen (15) years after the project\u2019s in-service date (\u201cInitial Term\u201d). MPL shall provide written notice to Shipper confirming the project\u2019s in-service date.",
-      "reasoning": "Section 2.1 defines the Effective Date and the Initial Term as continuing through the project's in-service date and for fifteen (15) years after that in-service date; this describes the contract expiration relative to the project in-service date.",
+      "raw_snippet": "2.1 This Agreement is effective June 11, 2015 (the \u201cEffective Date\u201d). The Agreement shall continue through the project\u2019s in-service date and\nfor a period of fifteen (15) years after the project\u2019s in-service date (\u201cInitial Term\u201d). MPL shall provide written notice to Shipper confirming the project\u2019s in-service date.",
+      "reasoning": "Section 2.1 describes the duration (Initial Term) as continuing through the project's in-service date and for fifteen (15) years after that in-service date. This is the primary expiration/term language (relative term).",
       "normalized_value": "through the project\u2019s in-service date and for a period of fifteen (15) years after the project\u2019s in-service date"
     },
     "renewal_term": {
       "raw_snippet": "This Agreement will automatically renew for up to two (2) renewal terms of five (5) years each (each, an \u201cExtension Period\u201d) unless either Party provides the other Party with written notice of its intent to terminate this Agreement at least six (6) months prior to the end of the Initial Term or the then current Extension Period.",
-      "reasoning": "Section 2.2 explicitly provides for automatic renewal: up to two extension periods, each five (5) years in length, subject to timely written notice to prevent renewal.",
-      "normalized_value": "Two (2) automatic renewal terms of five (5) years each"
+      "reasoning": "Section 2.2 explicitly states that the agreement automatically renews for up to two renewal terms of five years each, subject to the notice described. This is the renewal mechanism and term.",
+      "normalized_value": "Up to two automatic renewals of 5 years each"
+    },
+    "agreement_date": {
+      "raw_snippet": "THIS TRANSPORTATION SERVICES AGREEMENT (this \u201cAgreement\u201d) is dated as of June 11, 2015, by and between Marathon Petroleum\nCompany LP (\u201cShipper\u201d) and Marathon Pipe Line LLC, a Delaware limited liability company (\u201cMPL\u201d), both referred to jointly as the \u201cParties\u201d and each\nindividually as a \u201cParty\u201d.",
+      "reasoning": "The opening clause uses the phrase \"is dated as of June 11, 2015,\" which states when the agreement is dated/signed.",
+      "normalized_value": "2015-06-11"
+    },
+    "effective_date": {
+      "raw_snippet": "2.1 This Agreement is effective June 11, 2015 (the \u201cEffective Date\u201d).",
+      "reasoning": "Section 2.1 explicitly defines the Effective Date as June 11, 2015.",
+      "normalized_value": "2015-06-11"
+    },
+    "governing_law": {
+      "raw_snippet": "This Agreement shall be construed and interpreted in accordance with the laws of the State of Ohio, without recourse to any principles of law governing\nconflicts of law, which might otherwise be applicable.",
+      "reasoning": "Section 14 contains the governing law clause specifying the state's laws to apply.",
+      "normalized_value": "Ohio"
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 13604,
-    "output_tokens": 2284
+    "input_tokens": 14348,
+    "output_tokens": 2530
   },
-  "latency_seconds": 27.37753677368164
+  "latency_seconds": 37.666752099990845
 }

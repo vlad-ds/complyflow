@@ -1,43 +1,54 @@
 {
   "source_file": "04_service_integrity.txt",
   "provider": "openai",
-  "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
-  "timestamp": "2025-11-27T16:56:23.181871",
   "extraction": {
     "parties": {
-      "raw_snippet": "This is to confirm that, in consideration of the agreements hereinafter contained, the undersigned, the Integrity Short Term\nGovernment Fund, (the \u201cFund\u201d), an open-end, diversified, management investment company organized as a series of The Integrity\nFunds, a Delaware statutory trust, has agreed that Integrity Funds Distributor, LLC, (\u201cIntegrity\u201d), shall be, for the period of this\ndistribution agreement (the \u201cAgreement\u201d), the principal underwriter of shares issued by the Fund, including such classes of shares\nas may now or hereafter be authorized (the \u201cShares\u201d).",
-      "reasoning": "The opening paragraph explicitly names the contracting parties: the Integrity Short Term Government Fund (the Fund) and Integrity Funds Distributor, LLC (Integrity). These are the primary parties who agree the Fund appoints Integrity as principal underwriter.",
+      "raw_snippet": "the undersigned, the Integrity Short Term\nGovernment Fund, (the \u201cFund\u201d), an open-end, diversified, management investment company organized as a series of The Integrity\nFunds, a Delaware statutory trust, has agreed that Integrity Funds Distributor, LLC, (\u201cIntegrity\u201d), shall be, for the period of this\ndistribution agreement (the \u201cAgreement\u201d), the principal underwriter of shares issued by the Fund, including such classes of shares\nas may now or hereafter be authorized (the \u201cShares\u201d).",
+      "reasoning": "The opening paragraph identifies the contracting entities: the Integrity Short Term Government Fund (referred to as the \u201cFund\u201d) and Integrity Funds Distributor, LLC (referred to as \u201cIntegrity\u201d). These are the parties entering the agreement and performing the obligations (Fund issuing shares; Integrity acting as underwriter/distributor).",
       "normalized_value": [
         "Integrity Short Term Government Fund",
         "Integrity Funds Distributor, LLC"
       ]
     },
     "contract_type": {
-      "raw_snippet": "DISTRIBUTION AND SERVICES AGREEMENT\n\nSection 1.1 Integrity will act as principal underwriter for the distribution of the Shares covered by the registration statement, prospectus, and statement of additional information then in effect of the Fund (the \u201cRegistration Statement\u201d) under the Securities Act of 1933, as amended (the \u201c1933 Act\u201d), and the Investment Company Act of 1940, as amended (the \u201c1940 Act\u201d).",
-      "reasoning": "The title and Section 1.1 show the core economic substance: Integrity's role is to act as principal underwriter/distributor of the Fund's shares and to perform distribution-related services. This is primarily a distribution (underwriting) arrangement rather than, for example, a pure services or licensing agreement.",
+      "raw_snippet": "DISTRIBUTION AND SERVICES AGREEMENT",
+      "reasoning": "The agreement's title and the substantive obligations (Section 1.1: Integrity will act as principal underwriter for the distribution of the Shares; Sections describing solicitation, distribution expenses, and distribution/service fees) show the primary purpose is to appoint a distributor/underwriter to distribute fund shares.",
       "normalized_value": "Distributor Agreement"
     },
-    "notice_period": {
-      "raw_snippet": "",
-      "reasoning": "Section 7.1 provides that continuance after the initial term \"shall continue automatically for successive annual periods... provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority ... of the Fund\u2019s Trustees who are not interested persons (the 'Qualified Trustees').\" Because renewal depends on specific annual approvals rather than a notice-to-prevent-auto-renewal mechanism, there is no discrete \"notice period to prevent automatic renewal\" to extract.",
-      "normalized_value": ""
+    "agreement_date": {
+      "raw_snippet": "January 18, 2020",
+      "reasoning": "The date appears at the top of the contract under the title and is also repeated in the signature block as the date of the agreement; this is the date the agreement was signed/made.",
+      "normalized_value": "2020-01-18"
+    },
+    "effective_date": {
+      "raw_snippet": "In Witness Whereof, the parties hereto have caused this Agreement to be executed as of the date first set forth herein.",
+      "reasoning": "The execution clause states the agreement is executed \"as of the date first set forth herein,\" which is the header date \"January 18, 2020.\" Therefore the effective date is the agreement/signature date.",
+      "normalized_value": "2020-01-18"
     },
     "expiration_date": {
       "raw_snippet": "Section 7.1 This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual\nperiods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s\nBoard of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons\n(as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this\nAgreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the\npurpose of voting on such approval.",
-      "reasoning": "Section 7.1 explicitly states the initial term end date: \"shall continue until January 18, 2022,\" which is a calendar date and thus convertible to ISO format.",
+      "reasoning": "Section 7.1 explicitly sets the initial term to a calendar date (until January 18, 2022) and then describes the post-term renewal mechanism. The explicit calendar date is the stated expiration of the initial term.",
       "normalized_value": "2022-01-18"
     },
+    "governing_law": {
+      "raw_snippet": "Section 8.3 This Agreement shall be construed in accordance with the laws of the State of Kansas.",
+      "reasoning": "Section 8.3 contains the governing law clause specifying which jurisdiction's laws govern the agreement.",
+      "normalized_value": "Kansas"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement is terminable with respect to the Fund, without penalty, (a) on 60 days\u2019 written notice, by vote of a majority of the Qualified Trustees or by vote of a majority (as defined in the 1940 Act) of the outstanding voting securities of the Fund or (b) on 90 days\u2019 written notice by Integrity.",
+      "reasoning": "Section 7.1 provides the notice periods for termination which would prevent continuation/renewal: 60 days' written notice (by the Fund via specified votes) and 90 days' written notice (by Integrity). There is no separate clause stating a different advance-notice-before-renewal requirement.",
+      "normalized_value": "60 days (Fund) / 90 days (Integrity)"
+    },
     "renewal_term": {
-      "raw_snippet": "and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons (as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this Agreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the purpose of voting on such approval.",
-      "reasoning": "This clause describes the renewal mechanism: automatic continuation in successive annual periods (ending January 18 each year) but conditioned on specific annual approval by the Fund\u2019s Board and the Qualified Trustees. The renewal period is therefore one year, subject to the stated approval condition.",
-      "normalized_value": "1 year auto-renewal (successive annual periods ending Jan 18; subject to annual approval by Fund's Board and Qualified Trustees)"
+      "raw_snippet": "and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees ... (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+      "reasoning": "Section 7.1 states the contract will continue automatically after the initial term in successive annual periods (each ending January 18th), i.e., one-year automatic renewals, subject to specified annual approvals.",
+      "normalized_value": "1 year auto-renewal (successive annual periods)"
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 6354,
-    "output_tokens": 2666
-  },
-  "latency_seconds": 38.015321016311646
+    "input_tokens": 7098,
+    "output_tokens": 3585
+  }
 }

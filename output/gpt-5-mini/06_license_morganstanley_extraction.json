@@ -1,43 +1,54 @@
 {
   "source_file": "06_license_morganstanley.txt",
   "provider": "openai",
-  "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
-  "timestamp": "2025-11-27T16:57:06.352748",
   "extraction": {
     "parties": {
       "raw_snippet": "This TRADEMARK LICENSE AGREEMENT (the \u201cAgreement\u201d) is effective as of the [\u00b7] day of [\u00b7], 2019 (\u201cEffective Date\u201d) between\nMorgan Stanley Investment Management Inc. (\u201cLicensor\u201d), and Morgan Stanley Direct Lending Fund, a Delaware corporation (\u201cLicensee\u201d).",
-      "reasoning": "The opening recitals identify the parties to the Agreement explicitly, naming Morgan Stanley Investment Management Inc. as \u201cLicensor\u201d and Morgan Stanley Direct Lending Fund as \u201cLicensee.\u201d These are the two contracting entities.",
+      "reasoning": "The clause explicitly names the two contracting entities and labels their roles (Licensor and Licensee). These are the primary parties to the Agreement.",
       "normalized_value": [
         "Morgan Stanley Investment Management Inc.",
         "Morgan Stanley Direct Lending Fund"
       ]
     },
     "contract_type": {
-      "raw_snippet": "Section 1.1.License Grant. Subject to the terms and conditions herein, Licensor hereby grants to Licensee a non-exclusive, non-transferable, and (subject to Section 1.2 hereof) non-sublicensable license for the use of the Brand solely for the Permitted Activity.",
-      "reasoning": "The economic substance of the agreement is the grant of trademark rights: Licensor grants Licensee a license to use the Brand for specified Permitted Activity. This is a license of intellectual property (trademark), so the appropriate category is a License Agreement.",
+      "raw_snippet": "TRADEMARK LICENSE AGREEMENT\n\nSection 1.1.License Grant. Subject to the terms and conditions herein, Licensor hereby grants to Licensee a non-exclusive, non-transferable, and (subject to Section 1.2 hereof) non-sublicensable license for the use of the Brand solely for the Permitted Activity.",
+      "reasoning": "The title identifies this as a trademark license and Section 1.1 describes the core economic substance: Licensor granting a license to use intellectual property (the Brand) to Licensee. This is an agreement primarily about licensing IP.",
       "normalized_value": "License Agreement"
     },
-    "notice_period": {
-      "raw_snippet": "",
-      "reasoning": "The contract contains no clause requiring advance notice to prevent an automatic renewal (there is no automatic renewal mechanism). The term is stated to continue \"in perpetuity\" and termination provisions are immediate or conditional; therefore there is no \"notice period to prevent renewal.\"",
+    "agreement_date": {
+      "raw_snippet": "This TRADEMARK LICENSE AGREEMENT (the \u201cAgreement\u201d) is effective as of the [\u00b7] day of [\u00b7], 2019 (\u201cEffective Date\u201d)",
+      "reasoning": "The contract header contains the only date-related text; it uses placeholders ([\u00b7]) rather than a specific signing date. No explicit executed/signature date is provided elsewhere.",
+      "normalized_value": ""
+    },
+    "effective_date": {
+      "raw_snippet": "This TRADEMARK LICENSE AGREEMENT (the \u201cAgreement\u201d) is effective as of the [\u00b7] day of [\u00b7], 2019 (\u201cEffective Date\u201d)",
+      "reasoning": "The header defines the \"Effective Date\" as the [\u00b7] day of [\u00b7], 2019, but the actual day/month are placeholders, so no specific ISO date can be extracted.",
       "normalized_value": ""
     },
     "expiration_date": {
       "raw_snippet": "Section 4.1.Term. The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
-      "reasoning": "Section 4.1 explicitly states the agreement \"continues in perpetuity,\" which is explicit language of indefinite/perpetual term.",
+      "reasoning": "Section 4.1 explicitly states the term continues \"in perpetuity,\" which is an explicit expression of indefinite/perpetual duration.",
       "normalized_value": "perpetual"
+    },
+    "governing_law": {
+      "raw_snippet": "Section 9.4.Governing Law. THIS AGREEMENT SHALL BE GOVERNED BY, AND CONSTRUED AND INTERPRETED IN ACCORDANCE WITH, THE LAW OF THE STATE OF NEW YORK. EACH OF THE PARTIES IRREVOCABLY AND UNCONDITIONALLY SUBMITS TO THE EXCLUSIVE JURISDICTION OF THE STATE AND FEDERAL COURTS LOCATED IN NEW YORK CITY FOR THE PURPOSE OF ANY ACTION RELATING TO OR ARISING OUT OF THIS AGREEMENT.",
+      "reasoning": "Section 9.4 is the governing law clause and explicitly states the law to be applied: the law of the State of New York.",
+      "normalized_value": "New York"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The contract contains termination provisions (including immediate termination on notice or termination for breach) but does not include any clause requiring advance notice to prevent an automatic renewal or any automatic renewal mechanism. Therefore there is no \"notice period to prevent renewal\" to extract.",
+      "normalized_value": ""
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "No renewal or renewal-term language is present. The agreement states it continues in perpetuity and contains termination provisions, but does not specify any renewal periods or automatic renewals.",
+      "reasoning": "The Agreement states the term continues \"in perpetuity\" and contains termination provisions but does not provide any renewal or automatic renewal mechanism or renewal-term language.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 5120,
-    "output_tokens": 1120
-  },
-  "latency_seconds": 22.555086612701416
+    "input_tokens": 5864,
+    "output_tokens": 2353
+  }
 }

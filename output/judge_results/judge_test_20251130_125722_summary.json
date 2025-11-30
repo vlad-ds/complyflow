@@ -1,0 +1,83 @@
+{
+  "eval_id": "judge_20251130_125632_b079e0dd",
+  "generated_at": "2025-11-30T12:57:22.441652",
+  "eval_pairs_file": "/Users/vladgheorghe/code/complyflow/output/eval_pairs/test_eval_pairs_20251130_125626.json",
+  "run_info": {
+    "total_judgments": 70,
+    "llm_calls": 57,
+    "duration_seconds": 44.39721703529358
+  },
+  "overall_metrics": {
+    "match": 64,
+    "no_match": 6,
+    "error": 0,
+    "total": 70,
+    "accuracy": 0.9142857142857143
+  },
+  "model_metrics": {
+    "gpt-5-mini": {
+      "match": 64,
+      "no_match": 6,
+      "error": 0,
+      "total": 70,
+      "accuracy": 0.9142857142857143
+    }
+  },
+  "field_metrics": {
+    "parties": {
+      "match": 10,
+      "no_match": 0,
+      "error": 0,
+      "total": 10,
+      "accuracy": 1.0
+    },
+    "contract_type": {
+      "match": 7,
+      "no_match": 3,
+      "error": 0,
+      "total": 10,
+      "accuracy": 0.7
+    },
+    "agreement_date": {
+      "match": 9,
+      "no_match": 1,
+      "error": 0,
+      "total": 10,
+      "accuracy": 0.9
+    },
+    "expiration_date": {
+      "match": 10,
+      "no_match": 0,
+      "error": 0,
+      "total": 10,
+      "accuracy": 1.0
+    },
+    "governing_law": {
+      "match": 9,
+      "no_match": 1,
+      "error": 0,
+      "total": 10,
+      "accuracy": 0.9
+    },
+    "notice_period": {
+      "match": 9,
+      "no_match": 1,
+      "error": 0,
+      "total": 10,
+      "accuracy": 0.9
+    },
+    "renewal_term": {
+      "match": 10,
+      "no_match": 0,
+      "error": 0,
+      "total": 10,
+      "accuracy": 1.0
+    }
+  },
+  "cost_metrics": {
+    "error": "Failed to fetch traces: status_code: 400, body: {'message': 'Invalid request data', 'error': [{'origin': 'number', 'code': 'too_big', 'maximum': 100, 'inclusive': True, 'path': ['limit'], 'message': 'Too big: expected number to be <=100'}]}",
+    "total_input_tokens": 0,
+    "total_output_tokens": 0,
+    "total_cost_usd": 0.0
+  }
+}

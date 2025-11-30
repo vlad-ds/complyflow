@@ -1,43 +1,54 @@
 {
   "source_file": "02_service_reynolds.txt",
   "provider": "openai",
-  "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
-  "timestamp": "2025-11-27T16:55:17.115227",
   "extraction": {
     "parties": {
       "raw_snippet": "TRANSITION SERVICES AGREEMENT (the \u201cAgreement\u201d) dated as of [\u2022], 2020, between Reynolds Group Holdings Inc., a Delaware corporation\n(\u201cRGHI\u201d), and Reynolds Consumer Products Inc., a Delaware corporation, (the \u201cCompany\u201d or \u201cRCP\u201d).",
-      "reasoning": "The preamble identifies the two contracting entities by name and corporate form and uses the conventional 'between <Party A> and <Party B>' phrasing to name the parties to the Agreement.",
+      "reasoning": "The parties are identified in the opening/preamble of the Agreement where the contracting entities are named as the parties to the Agreement.",
       "normalized_value": [
         "Reynolds Group Holdings Inc.",
         "Reynolds Consumer Products Inc."
       ]
     },
     "contract_type": {
-      "raw_snippet": "B. In order to facilitate the separation of the Company and its Affiliates from RGHI and its Affiliates, (i) RGHI will provide, or cause its Affiliates to\nprovide, certain services to the Company and its Affiliates, and (ii) the Company will provide, or cause its Affiliates to provide, certain services to RGHI\nand its Affiliates, all on the terms and conditions set forth herein.",
-      "reasoning": "The core economic substance is reciprocal provision of transitional services to facilitate separation following the Commencement Date. The primary obligations are service provision (Transition Services and Reverse Transition Services), so the agreement is properly classified as a Service Agreement.",
+      "raw_snippet": "TRANSITION SERVICES AGREEMENT",
+      "reasoning": "The document title and the substance (Section 2.1 and related provisions) show reciprocal provisioning of transitional operational services (IT, HR, finance, etc.) between the parties \u2014 i.e., a services arrangement to support separation. Therefore this is a Service Agreement.",
       "normalized_value": "Service Agreement"
+    },
+    "agreement_date": {
+      "raw_snippet": "TRANSITION SERVICES AGREEMENT (the \u201cAgreement\u201d) dated as of [\u2022], 2020, between Reynolds Group Holdings Inc., a Delaware corporation\n(\u201cRGHI\u201d), and Reynolds Consumer Products Inc., a Delaware corporation, (the \u201cCompany\u201d or \u201cRCP\u201d).",
+      "reasoning": "The agreement date appears in the document header as a 'dated as of' clause but contains a placeholder ([\u2022]) instead of a specific day/month, so no specific signed date is provided.",
+      "normalized_value": ""
+    },
+    "effective_date": {
+      "raw_snippet": "Effective February 4, 2020 (the \u201cCommencement Date\u201d), RCP is undertaking an initial public offering of shares of common stock and thereafter the Company will no longer be a subsidiary of RGHL.",
+      "reasoning": "The preamble defines 'Commencement Date' and explicitly states 'Effective February 4, 2020 (the \u201cCommencement Date\u201d)', which indicates the contract's operative commencement reference date.",
+      "normalized_value": "2020-02-04"
+    },
+    "expiration_date": {
+      "raw_snippet": "With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \u201cCommencement Date\u201d), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \u201cTerm\u201d) or (ii) earlier terminated pursuant to this Agreement (a \u201cTermination Date\u201d).",
+      "reasoning": "Section 6.1 sets out the duration/expiration: services run until '12 months following the Commencement Date' (unless another termination date is specified or earlier termination occurs). This is a relative term rather than a fixed calendar date.",
+      "normalized_value": "12 months following the Commencement Date"
+    },
+    "governing_law": {
+      "raw_snippet": "This Agreement shall be governed in all respects, including as to validity, interpretation and effect, by the Laws of the State of Illinois, without giving effect to its principles or rules of conflict of laws, to the extent such principles or rules are not mandatorily applicable by statute and would permit or require the application of the Laws of another jurisdiction.",
+      "reasoning": "Section 10.8(a) contains the governing law clause specifying the laws to govern the Agreement. The applicable jurisdiction named is the State of Illinois.",
+      "normalized_value": "Illinois"
     },
     "notice_period": {
       "raw_snippet": "",
-      "reasoning": "The contract contains termination-for-convenience notice periods (e.g., Section 6.2 provides 30 days' prior written notice to terminate specific Services), but it contains no language about automatic renewal or an advance notice required to prevent automatic renewal of the agreement. Because this field specifically asks for the notice period to prevent automatic renewal, and no such renewal-notice language exists, the field is left empty.",
+      "reasoning": "The contract does not contain any clause that describes an advance notice period specifically required to PREVENT an automatic renewal; there is no automatic-renewal language. General termination-for-convenience notice (e.g., 30 days to terminate a Service) exists but does not relate to preventing renewal, so notice_period is not applicable.",
       "normalized_value": ""
-    },
-    "expiration_date": {
-      "raw_snippet": "Section 6.1 Term of Services. With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a\ndifferent date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \u201cCommencement Date\u201d), and shall\ncontinue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in\nthis Agreement or on Exhibit A or Exhibit B, as applicable (the \u201cTerm\u201d) or (ii) earlier terminated pursuant to this Agreement (a \u201cTermination Date\u201d).",
-      "reasoning": "Section 6.1 sets out the general term for Services: they run from the Commencement Date and continue until '12 months following the Commencement Date' unless a different termination date is specified for a particular Service in the Exhibits or earlier termination applies. This is a relative-term specification, so it is preserved as written.",
-      "normalized_value": "12 months following the Commencement Date"
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "The agreement does not include any clause describing automatic renewal or renewal terms for the overall Agreement or Services. Exhibit entries specify fixed terms for many Services (e.g., '24 months from the Commencement Date' for certain services), but there is no renewal mechanism or automatic extension language to extract. Therefore this field is empty.",
+      "reasoning": "No automatic renewal or renewal-term language is present. The term is defined as a 12-month period following the Commencement Date (subject to other specified dates) and services may be terminated per the Agreement, but there is no express renewal clause.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 25570,
-    "output_tokens": 2032
-  },
-  "latency_seconds": 38.53089189529419
+    "input_tokens": 26314,
+    "output_tokens": 2699
+  }
 }

@@ -71,7 +71,7 @@ def _run_single_extraction(
     """
     provider = get_provider(model_config.provider, model=model_config.model)
 
-    print(f"    Extracting with {model_config.provider}/{model_config.model}...")
+    print(f"    Extracting with {model_config.provider}/{model_config.model}...", flush=True)
 
     start_time = time.time()
     try:
@@ -113,6 +113,21 @@ def _run_single_extraction(
                     "raw_snippet": result.renewal_term.raw_snippet,
                     "reasoning": result.renewal_term.reasoning,
                     "normalized_value": result.renewal_term.normalized_value,
+                },
+                "agreement_date": {
+                    "raw_snippet": result.agreement_date.raw_snippet,
+                    "reasoning": result.agreement_date.reasoning,
+                    "normalized_value": result.agreement_date.normalized_value,
+                },
+                "effective_date": {
+                    "raw_snippet": result.effective_date.raw_snippet,
+                    "reasoning": result.effective_date.reasoning,
+                    "normalized_value": result.effective_date.normalized_value,
+                },
+                "governing_law": {
+                    "raw_snippet": result.governing_law.raw_snippet,
+                    "reasoning": result.governing_law.reasoning,
+                    "normalized_value": result.governing_law.normalized_value,
                 },
             },
             "usage": {
@@ -161,11 +176,11 @@ def run_model_extraction(
 
     # Generate unique eval ID for this run
     eval_id = _generate_eval_id(model_config.model)
-    print(f"\n{'='*60}")
-    print(f"Model: {model_config.provider}/{model_config.model}")
-    print(f"Eval ID: {eval_id}")
-    print(f"Split: {split} ({len(ground_truth)} contracts)")
-    print(f"{'='*60}")
+    print(f"\n{'='*60}", flush=True)
+    print(f"Model: {model_config.provider}/{model_config.model}", flush=True)
+    print(f"Eval ID: {eval_id}", flush=True)
+    print(f"Split: {split} ({len(ground_truth)} contracts)", flush=True)
+    print(f"{'='*60}", flush=True)
 
     start_time = time.time()
     extracted_count = 0
@@ -181,7 +196,7 @@ def run_model_extraction(
             error_count += 1
             continue
 
-        print(f"\n  Contract: {contract_file}")
+        print(f"\n  Contract: {contract_file}", flush=True)
         output_path = _get_output_path(model_config, contract_file)
         output_path.parent.mkdir(parents=True, exist_ok=True)
 

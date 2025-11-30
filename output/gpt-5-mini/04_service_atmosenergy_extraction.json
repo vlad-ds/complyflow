@@ -2,12 +2,12 @@
   "source_file": "04_service_atmosenergy.txt",
   "provider": "openai",
   "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_193227_fdbec8ad",
-  "timestamp": "2025-11-27T19:33:58.236136",
+  "eval_id": "eval_gpt-5-mini_20251130_124702_1e6480fd",
+  "timestamp": "2025-11-30T12:50:23.418206",
   "extraction": {
     "parties": {
-      "raw_snippet": "THIS AGREEMENT (\"Agreement\"), entered into on May 20, 1992, is between\nArkansas Western Pipeline Company (\"Transporter\"), an Arkansas corporation, and\nAssociated Natural Gas Company, a division of Arkansas Western Gas Company,\n(\"Shipper\")\u037e",
-      "reasoning": "The opening recitals identify the contracting entities. They explicitly name Arkansas Western Pipeline Company as \"Transporter\" and Associated Natural Gas Company (a division of Arkansas Western Gas Company) as \"Shipper.\" These are the main parties to the agreement.",
+      "raw_snippet": "THIS AGREEMENT (\"Agreement\"), entered into on May 20, 1992, is between\nArkansas Western Pipeline Company (\"Transporter\"), an Arkansas corporation, and\nAssociated Natural Gas Company, a division of Arkansas Western Gas Company,\n(\"Shipper\");",
+      "reasoning": "The opening paragraph identifies the contracting parties by name and their roles (Transporter and Shipper). This is the standard place where parties to an agreement are declared.",
       "normalized_value": [
         "Arkansas Western Pipeline Company",
         "Associated Natural Gas Company"
@@ -15,29 +15,44 @@
     },
     "contract_type": {
       "raw_snippet": "TRANSPORTATION SERVICE AGREEMENT\nUNDER RATE SCHEDULE FTS OR ITS",
-      "reasoning": "The document's title and the substantive provisions (e.g., Article II describing Transporter's obligations to transport and redeliver natural gas and Shipper's obligations to tender gas) show the primary purpose is the transportation of natural gas service. Therefore it is a Transportation Agreement.",
+      "reasoning": "The title and the agreement provisions describe Transporter's obligation to transport and redeliver natural gas for Shipper; the core economic substance is provision of transportation service for natural gas.",
       "normalized_value": "Transportation Agreement"
     },
     "notice_period": {
-      "raw_snippet": "Thereafter, this Agreement shall be effective month to month, until terminated\nby Transporter or Shipper upon the following written notice to\nthe other specifying a termination date: sixty (60) days for\ninterruptible transportation under Rate Schedule ITS and 180\ndays for firm transportation under Rate Schedule FTS.",
-      "reasoning": "This clause sets the advance written notice required to terminate the month-to-month continuation after the primary term; it is the notice required to stop the continuing (renewed) month-to-month arrangement. It specifies 60 days for interruptible service and 180 days for firm service.",
-      "normalized_value": "60 days (interruptible) / 180 days (firm)"
+      "raw_snippet": "Thereafter, this Agreement shall be effective month to month, until terminated by Transporter or Shipper upon the following written notice to the other specifying a termination date: sixty (60) days for interruptible transportation under Rate Schedule ITS and 180 days for firm transportation under Rate Schedule FTS.",
+      "reasoning": "Article V.1 provides the advance written notice required to terminate the month-to-month continuation: 60 days for interruptible (ITS) and 180 days for firm (FTS). These are the notice periods to end the renewal/month-to-month continuation.",
+      "normalized_value": "60 days (interruptible ITS); 180 days (firm FTS)"
     },
     "expiration_date": {
-      "raw_snippet": "Subject to the General Terms and Conditions of Transporter's\nFERC Gas Tariff and Rate Schedule FTS/ITS, this Agreement\nshall be effective as of the date of physical completion of\nand initial deliveries on Transporter's pipeline and shall\ncontinue for a primary term of ten years. Thereafter, this\n\nAgreement shall be effective month to month, until terminated\nby Transporter or Shipper upon the following written notice to\nthe other specifying a termination date: sixty (60) days for\ninterruptible transportation under Rate Schedule ITS and 180\ndays for firm transportation under Rate Schedule FTS.",
-      "reasoning": "Article V.1 defines the term: effectiveness begins on the date of physical completion and initial deliveries and continues for a primary term of ten years, then continues month-to-month thereafter. This is a relative term (primary term of ten years then month-to-month).",
-      "normalized_value": "primary term of ten years; thereafter month-to-month"
+      "raw_snippet": "Subject to the General Terms and Conditions of Transporter's FERC Gas Tariff and Rate Schedule FTS/ITS, this Agreement shall be effective as of the date of physical completion of and initial deliveries on Transporter's pipeline and shall continue for a primary term of ten years.",
+      "reasoning": "The same provision specifies the primary duration: 'shall continue for a primary term of ten years.' This is a relative term rather than a calendar date.",
+      "normalized_value": "primary term of ten years"
     },
     "renewal_term": {
-      "raw_snippet": "Thereafter, this\n\nAgreement shall be effective month to month, until terminated\nby Transporter or Shipper upon the following written notice to\nthe other specifying a termination date: sixty (60) days for\ninterruptible transportation under Rate Schedule ITS and 180\ndays for firm transportation under Rate Schedule FTS.",
-      "reasoning": "The clause states that after the initial ten-year primary term the agreement continues on a month-to-month basis (i.e., it renews/continues automatically each month until proper notice is given). That is a month-to-month renewal term.",
-      "normalized_value": "month-to-month renewal (automatic continuation after ten-year primary term)"
+      "raw_snippet": "Thereafter, this Agreement shall be effective month to month, until terminated by Transporter or Shipper upon the following written notice to the other specifying a termination date:",
+      "reasoning": "The clause states that after the primary ten-year term the agreement continues 'month to month' (i.e., month-to-month renewal) until properly terminated.",
+      "normalized_value": "month-to-month auto-renewal"
+    },
+    "agreement_date": {
+      "raw_snippet": "THIS AGREEMENT (\"Agreement\"), entered into on May 20, 1992, is between",
+      "reasoning": "The phrase 'entered into on May 20, 1992' explicitly states when the agreement was made/signed.",
+      "normalized_value": "1992-05-20"
+    },
+    "effective_date": {
+      "raw_snippet": "Subject to the General Terms and Conditions of Transporter's FERC Gas Tariff and Rate Schedule FTS/ITS, this Agreement shall be effective as of the date of physical completion of and initial deliveries on Transporter's pipeline and shall continue for a primary term of ten years.",
+      "reasoning": "Article V.1 defines the Agreement's effectiveness as contingent on 'the date of physical completion of and initial deliveries on Transporter's pipeline' rather than a specific calendar date.",
+      "normalized_value": ""
+    },
+    "governing_law": {
+      "raw_snippet": "This Agreement and the rights and duties of Transporter and Shipper hereunder shall be governed by and interpreted in accordance with the laws of the State of Arkansas, without recourse to the law governing conflict of laws.",
+      "reasoning": "Article 8.2 explicitly sets the governing law as 'the laws of the State of Arkansas.'",
+      "normalized_value": "Arkansas"
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 5541,
-    "output_tokens": 1630
+    "input_tokens": 6285,
+    "output_tokens": 2621
   },
-  "latency_seconds": 16.056260108947754
+  "latency_seconds": 47.05898189544678
 }

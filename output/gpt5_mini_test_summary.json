@@ -1,0 +1,89 @@
+{
+  "model": "gpt-5-mini",
+  "test_set": {
+    "contracts": 10,
+    "accuracy": 0.914,
+    "fields_evaluated": 7,
+    "excluded_fields": [
+      "effective_date"
+    ],
+    "field_accuracy": {
+      "parties": 1.0,
+      "contract_type": 0.7,
+      "agreement_date": 0.9,
+      "expiration_date": 1.0,
+      "governing_law": 0.9,
+      "notice_period": 0.9,
+      "renewal_term": 1.0
+    },
+    "tokens": {
+      "input": 113997,
+      "output": 27660
+    },
+    "latency_seconds": 491.6,
+    "estimated_cost_usd": 0.0337,
+    "contracts_detail": [
+      {
+        "file": "01_service_mplx_extraction.json",
+        "input_tokens": 14348,
+        "output_tokens": 2530,
+        "latency_seconds": 37.7
+      },
+      {
+        "file": "02_service_martinmidstream_extraction.json",
+        "input_tokens": 5113,
+        "output_tokens": 3130,
+        "latency_seconds": 68.2
+      },
+      {
+        "file": "03_service_blackstonegsolo_extraction.json",
+        "input_tokens": 12788,
+        "output_tokens": 2689,
+        "latency_seconds": 47.6
+      },
+      {
+        "file": "04_service_atmosenergy_extraction.json",
+        "input_tokens": 6285,
+        "output_tokens": 2621,
+        "latency_seconds": 47.1
+      },
+      {
+        "file": "05_license_pacificapentert_extraction.json",
+        "input_tokens": 6306,
+        "output_tokens": 2719,
+        "latency_seconds": 52.0
+      },
+      {
+        "file": "06_license_midwestenergyem_extraction.json",
+        "input_tokens": 9272,
+        "output_tokens": 3207,
+        "latency_seconds": 67.5
+      },
+      {
+        "file": "07_license_gpaqacquisition_extraction.json",
+        "input_tokens": 12211,
+        "output_tokens": 2860,
+        "latency_seconds": 45.9
+      },
+      {
+        "file": "08_license_euromediaholdin_extraction.json",
+        "input_tokens": 8509,
+        "output_tokens": 2295,
+        "latency_seconds": 33.4
+      },
+      {
+        "file": "09_outsourcing_sykeshealthplan_extraction.json",
+        "input_tokens": 4813,
+        "output_tokens": 2947,
+        "latency_seconds": 54.0
+      },
+      {
+        "file": "10_outsourcing_ofgban_extraction.json",
+        "input_tokens": 34352,
+        "output_tokens": 2662,
+        "latency_seconds": 38.2
+      }
+    ],
+    "avg_latency_seconds": 49.2
+  }
+}

@@ -1,13 +1,10 @@
 {
   "source_file": "08_license_artara.txt",
   "provider": "openai",
-  "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
-  "timestamp": "2025-11-27T16:58:03.313476",
   "extraction": {
     "parties": {
-      "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
-      "reasoning": "The quoted paragraph at the start of the Agreement explicitly names the contracting entities and their defined short names (\u201cArTara\u201d and \u201cUniversity\u201d), identifying them as the Parties to the Agreement.",
+      "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d). ArTara and University may individually be referred to herein as a \u201cParty,\u201d and collectively as \u201cParties.\u201d",
+      "reasoning": "The opening paragraph explicitly names the contracting entities and provides their addresses and defined short names (\u201cArTara\u201d and \u201cUniversity\u201d). These are the two Parties to the Agreement.",
       "normalized_value": [
         "ArTara, Inc.",
         "The University of Iowa"
@@ -15,29 +12,43 @@
     },
     "contract_type": {
       "raw_snippet": "SPONSORED RESEARCH AND LICENSE AGREEMENT",
-      "reasoning": "The document title and the substance show ArTara funds and sponsors research (payments, Project phases) and obtains exclusive license/right-of-reference to University Program Data for regulatory filings and commercialization. The primary economic substance is granting ArTara licensing and regulatory rights to use Program Data to support product approvals, so the agreement is best classified as a License Agreement.",
-      "normalized_value": "License Agreement"
+      "reasoning": "The agreement both funds/sponsors clinical research (ArTara provides funding and manages a Project) and grants ArTara exclusive license/right of reference to Program Data for regulatory filings, plus milestone/royalty payments. The primary economic substance is sponsorship of research enabling a license/right-to-use data for regulatory approval. The document title reflects that dual nature; the primary transactional driver is ArTara sponsoring research to obtain licensed rights to Program Data.",
+      "normalized_value": "Sponsorship Agreement"
     },
-    "notice_period": {
-      "raw_snippet": "",
-      "reasoning": "The contract contains termination-at-will notice provisions (e.g., 30 days to terminate) but contains no language about automatic renewal or a notice period required to prevent automatic renewal. Therefore there is no 'notice period to terminate renewal' specified.",
-      "normalized_value": ""
+    "agreement_date": {
+      "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
+      "reasoning": "The clause begins 'is entered into on November 28, 2018' which is the signing/formation date of the Agreement.",
+      "normalized_value": "2018-11-28"
+    },
+    "effective_date": {
+      "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
+      "reasoning": "The same clause defines November 28, 2018 as the \u201cEffective Date.\u201d",
+      "normalized_value": "2018-11-28"
     },
     "expiration_date": {
       "raw_snippet": "",
-      "reasoning": "The agreement does not state a fixed expiration date or an explicit term (it contains termination rights but no explicit contract term length or 'perpetual' language). Therefore no expiration/term statement is present to extract.",
+      "reasoning": "The Agreement does not state a fixed term or calendar expiration date nor explicitly state it continues \"in perpetuity\". It provides termination rights (e.g., Section 8.1 and 8.2) allowing termination on notice, but contains no explicit expiration or fixed term language to extract.",
+      "normalized_value": ""
+    },
+    "governing_law": {
+      "raw_snippet": "Governing Law. This Agreement shall be governed by the laws of the State of Iowa.",
+      "reasoning": "Section 9.4 explicitly states the governing law as the laws of the State of Iowa.",
+      "normalized_value": "Iowa"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "There is no clause specifying a notice period to prevent automatic renewal (no automatic renewal mechanism is present). The Agreement contains general termination-on-notice provisions (e.g., thirty (30) days' notice to terminate) but no 'notice to terminate renewal' requirement tied to an auto-renewal, so this field is not applicable.",
       "normalized_value": ""
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "There is no provision describing automatic renewal or any renewal term. Renewal is not addressed, so no renewal term can be extracted.",
+      "reasoning": "The contract contains no automatic renewal language or renewal term; renewals are not described. Termination is by notice but no renewal mechanics are specified.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 9795,
-    "output_tokens": 1267
-  },
-  "latency_seconds": 21.500367879867554
+    "input_tokens": 10539,
+    "output_tokens": 2289
+  }
 }
