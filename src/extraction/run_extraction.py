@@ -104,35 +104,25 @@ def main():
 
     # Build JSON output
     llm_resp = getattr(result, "_llm_response", None)
+    def field_to_dict(field):
+        return {
+            "raw_snippet": field.raw_snippet,
+            "reasoning": field.reasoning,
+            "normalized_value": field.normalized_value,
+        }
+
     output_data = {
         "source_file": contract_path.name,
         "provider": args.provider,
         "extraction": {
-            "parties": {
-                "raw_snippet": result.parties.raw_snippet,
-                "reasoning": result.parties.reasoning,
-                "normalized_value": result.parties.normalized_value,
-            },
-            "contract_type": {
-                "raw_snippet": result.contract_type.raw_snippet,
-                "reasoning": result.contract_type.reasoning,
-                "normalized_value": result.contract_type.normalized_value,
-            },
-            "notice_period": {
-                "raw_snippet": result.notice_period.raw_snippet,
-                "reasoning": result.notice_period.reasoning,
-                "normalized_value": result.notice_period.normalized_value,
-            },
-            "expiration_date": {
-                "raw_snippet": result.expiration_date.raw_snippet,
-                "reasoning": result.expiration_date.reasoning,
-                "normalized_value": result.expiration_date.normalized_value,
-            },
-            "renewal_term": {
-                "raw_snippet": result.renewal_term.raw_snippet,
-                "reasoning": result.renewal_term.reasoning,
-                "normalized_value": result.renewal_term.normalized_value,
-            },
+            "parties": field_to_dict(result.parties),
+            "contract_type": field_to_dict(result.contract_type),
+            "agreement_date": field_to_dict(result.agreement_date),
+            "effective_date": field_to_dict(result.effective_date),
+            "expiration_date": field_to_dict(result.expiration_date),
+            "governing_law": field_to_dict(result.governing_law),
+            "notice_period": field_to_dict(result.notice_period),
+            "renewal_term": field_to_dict(result.renewal_term),
         },
         "usage": {
             "model": llm_resp.model if llm_resp else None,

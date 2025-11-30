@@ -1,13 +1,10 @@
 {
   "source_file": "03_service_verizon.txt",
   "provider": "openai",
-  "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
-  "timestamp": "2025-11-27T16:55:45.152337",
   "extraction": {
     "parties": {
       "raw_snippet": "TRANSFER AND SERVICING AGREEMENT, dated as of January 29, 2020 (this \u201cAgreement\u201d), among VERIZON OWNER TRUST 2020-A, a Delaware statutory trust, as issuer (the \u201cIssuer\u201d), VERIZON ABS LLC, a Delaware limited liability company, as depositor (the \u201cDepositor\u201d), and Cellco Partnership d/b/a Verizon Wireless, a Delaware general partnership (\u201cCellco\u201d), as servicer (in such capacity, the \u201cServicer\u201d), as marketing agent (in such capacity, the \u201cMarketing Agent\u201d) and as custodian (in such capacity, the \u201cCustodian\u201d).",
-      "reasoning": "This paragraph expressly identifies the contracting parties, their legal forms and the capacities in which they act. It appears in the introductory recitals and names the Issuer, the Depositor and Cellco (the Servicer/Marketing Agent/Custodian).",
+      "reasoning": "The header/introductory paragraph of the agreement explicitly lists the contracting parties and their roles; I copied the paragraph that names each entity and its capacity.",
       "normalized_value": [
         "VERIZON OWNER TRUST 2020-A",
         "VERIZON ABS LLC",
@@ -15,30 +12,44 @@
       ]
     },
     "contract_type": {
-      "raw_snippet": "The Issuer will engage the Servicer to service the Receivables.",
-      "reasoning": "Although the document title is 'Transfer and Servicing Agreement', the core economic substance is that the Issuer acquires pools of receivables and engages Cellco to service those receivables (collection, administration, reporting, etc.). That makes this primarily a services arrangement (servicing of receivables).",
+      "raw_snippet": "TRANSFER AND SERVICING AGREEMENT, dated as of January 29, 2020 (this \u201cAgreement\u201d), among VERIZON OWNER TRUST 2020-A, a Delaware statutory trust, as issuer (the \u201cIssuer\u201d), VERIZON ABS LLC, a Delaware limited liability company, as depositor (the \u201cDepositor\u201d), and Cellco Partnership d/b/a Verizon Wireless, a Delaware general partnership (\u201cCellco\u201d), as servicer (in such capacity, the \u201cServicer\u201d), as marketing agent (in such capacity, the \u201cMarketing Agent\u201d) and as custodian (in such capacity, the \u201cCustodian\u201d).",
+      "reasoning": "The document title and the core obligations (see Section 3.1: the Issuer engages Cellco as the Servicer of the Receivables) show the primary purpose is servicing and transfer of receivables \u2014 i.e., a service arrangement for servicing receivables. Therefore classifies as a Service Agreement.",
       "normalized_value": "Service Agreement"
+    },
+    "agreement_date": {
+      "raw_snippet": "Dated as of January 29, 2020",
+      "reasoning": "The contract header and the clause immediately preceding the Agreement state 'Dated as of January 29, 2020' and the Agreement is repeatedly described as 'dated as of January 29, 2020.' This is the signing/date-of-agreement.",
+      "normalized_value": "2020-01-29"
+    },
+    "effective_date": {
+      "raw_snippet": "Closing Date means January 29, 2020.",
+      "reasoning": "There is no separate \"Effective Date\" phrase; the Agreement is 'dated as of January 29, 2020' and many provisions are stated to be effective on the \"Closing Date.\" Appendix A defines \"Closing Date\" as January 29, 2020, which therefore functions as the effective date.",
+      "normalized_value": "2020-01-29"
+    },
+    "expiration_date": {
+      "raw_snippet": "Section 8.3 Termination. This Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
+      "reasoning": "Section 8.3 provides the termination rule for the Agreement \u2014 it terminates upon the earlier of the final collection/write-off of Receivables or termination of the Issuer per the Trust Agreement. This is a relative termination formulation rather than a fixed calendar date.",
+      "normalized_value": "the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement"
+    },
+    "governing_law": {
+      "raw_snippet": "Section 10.5 GOVERNING LAW. THIS AGREEMENT, INCLUDING THE RIGHTS AND DUTIES OF THE PARTIES HERETO, SHALL BE GOVERNED BY, AND CONSTRUED IN ACCORDANCE WITH, THE INTERNAL LAWS OF THE STATE OF NEW YORK (INCLUDING SECTIONS 5-1401 AND 5-1402 OF THE GENERAL OBLIGATIONS LAW OF THE STATE OF NEW YORK, BUT WITHOUT REGARD TO ANY OTHERWISE APPLICABLE CONFLICTS OF LAW PRINCIPLES). FOR PURPOSES OF THE UCC, NEW YORK SHALL BE DEEMED TO BE THE SECURITIES INTERMEDIARY\u2019S JURISDICTION, AND THE LAW OF THE STATE OF NEW YORK SHALL GOVERN ALL ISSUES SPECIFIED IN ARTICLE 2(1) OF THE HAGUE SECURITIES CONVENTION. NOTWITHSTANDING SECTION 10.1 OF THIS AGREEMENT, THE PARTIES WILL NOT AGREE TO AMEND THIS AGREEMENT TO CHANGE THE GOVERNING LAW TO ANY LAW OTHER THAN THE LAWS OF THE STATE OF NEW YORK.",
+      "reasoning": "Section 10.5 is the governing law clause and explicitly names the state whose laws govern the Agreement.",
+      "normalized_value": "New York"
     },
     "notice_period": {
       "raw_snippet": "",
-      "reasoning": "I searched for any clause that creates an automatic renewal and an advance notice requirement to prevent renewal. The agreement contains termination, resignation and replacement provisions, and termination on final payment, but it does not contain language describing an automatic renewal term requiring advance notice to prevent renewal. Therefore there is no \"notice period to prevent automatic renewal\" to extract.",
+      "reasoning": "I searched the Agreement for any clause requiring advance notice to prevent automatic renewal or stating an auto-renewal with a notice-to-terminate window. The document contains termination, resignation and replacement provisions but no automatic renewal or a notice period to prevent renewal; therefore no applicable \"notice period to terminate renewal\" is found.",
       "normalized_value": ""
-    },
-    "expiration_date": {
-      "raw_snippet": "This Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
-      "reasoning": "Section 8.3 explicitly states when the Agreement terminates \u2014 it is tied to the final payment/settlement/write-off of the last Receivable or termination of the Issuer under the Trust Agreement. This is a relative/contingent termination provision rather than a fixed calendar date.",
-      "normalized_value": "the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement"
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "No automatic renewal or renewal-term clause was found. The agreement contemplates termination upon certain events (e.g., final payment of Receivables, servicer resignation/termination), but does not provide for renewal terms or automatic extension periods.",
+      "reasoning": "The Agreement does not include any automatic renewal language or specify renewal terms. Termination is tied to final collection or Issuer termination rather than renewal, so there is no renewal term to extract.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 64589,
-    "output_tokens": 1880
-  },
-  "latency_seconds": 28.01185894012451
+    "input_tokens": 65333,
+    "output_tokens": 3014
+  }
 }

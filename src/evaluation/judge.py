@@ -29,14 +29,26 @@ FIELD_GUIDANCE_PATH = PROMPTS_DIR / "judge_field_guidance.md"
 EXACT_MATCH_FIELDS = {"contract_type"}
 
 # All fields we evaluate
-EVAL_FIELDS = ["parties", "contract_type", "notice_period", "expiration_date", "renewal_term"]
+EVAL_FIELDS = [
+    "parties",
+    "contract_type",
+    "agreement_date",
+    "effective_date",
+    "expiration_date",
+    "governing_law",
+    "notice_period",
+    "renewal_term",
+]
 
 # Mapping from our field names to CUAD ground truth field names
 FIELD_TO_GT = {
     "parties": "Parties",
     "contract_type": "contract_type",
-    "notice_period": "Notice Period To Terminate Renewal",
+    "agreement_date": "Agreement Date",
+    "effective_date": "Effective Date",
     "expiration_date": "Expiration Date",
+    "governing_law": "Governing Law",
+    "notice_period": "Notice Period To Terminate Renewal",
     "renewal_term": "Renewal Term",
 }
 

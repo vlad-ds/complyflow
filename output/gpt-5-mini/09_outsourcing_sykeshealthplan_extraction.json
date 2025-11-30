@@ -2,42 +2,57 @@
   "source_file": "09_outsourcing_sykeshealthplan.txt",
   "provider": "openai",
   "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_193227_fdbec8ad",
-  "timestamp": "2025-11-27T19:35:51.177597",
+  "eval_id": "eval_gpt-5-mini_20251130_124702_1e6480fd",
+  "timestamp": "2025-11-30T12:54:36.343677",
   "extraction": {
     "parties": {
       "raw_snippet": "This Outsourcing Agreement (the \"Agreement\") is made and entered into as of January 1, 1998, by and between Sykes HealthPlan Services, Inc., a Florida corporation (\"SHPS\"), and HealthPlan Services, Inc., a Florida corporation (\"HPS\").",
-      "reasoning": "The opening recital identifies the contracting parties using the phrase \"by and between\" and names the two corporate entities along with their short-form abbreviations. This is the clearest statement of the parties to the agreement.",
+      "reasoning": "The opening paragraph explicitly names the two contracting parties and provides their corporate names and abbreviations. This is the standard location for identifying parties in agreements.",
       "normalized_value": [
         "Sykes HealthPlan Services, Inc.",
         "HealthPlan Services, Inc."
       ]
     },
     "contract_type": {
-      "raw_snippet": "1.1 AGREEMENT TO OUTSOURCE CARE MANAGEMENT SERVICES. HPS agrees to outsource to SHPS, and hereby appoints SHPS as the exclusive provider of, Care Management Services to the Clients, subject to the terms and conditions set forth in this Agreement.",
-      "reasoning": "The core economic substance is that HPS is outsourcing its Care Management Services to SHPS, and SHPS will provide those services to clients. The primary obligations are service provision (Care Management Services) by SHPS and payment/fee arrangements by HPS, matching an outsourcing arrangement.",
+      "raw_snippet": "HPS agrees to outsource to SHPS, and hereby appoints SHPS as the exclusive provider of, Care Management Services to the Clients, subject to the terms and conditions set forth in this Agreement.",
+      "reasoning": "The core economic substance is that HPS is outsourcing Care Management Services to SHPS and appointing SHPS as the exclusive provider. That demonstrates this is an outsourcing arrangement (services outsourced from one party to another).",
       "normalized_value": "Outsourcing Agreement"
     },
     "notice_period": {
       "raw_snippet": "Unless either party gives the other at least ninety days' prior written notice that it has elected not to extend the term of this Agreement beyond December 31, 1998, the term of this Agreement will be automatically extended until December 31, 1999. Thereafter this Agreement will automatically be renewed for successive additional periods of one year, unless either party gives notice of cancellation on or before October 1 of any such year.",
-      "reasoning": "This paragraph contains the advance notice required to prevent automatic renewal. The initial prevention period is specified as \"at least ninety days' prior written notice\" to avoid extension beyond Dec 31, 1998. For subsequent years the contract requires notice of cancellation on or before a calendar deadline (October 1) to prevent the one-year automatic renewals.",
-      "normalized_value": "90 days (to prevent initial extension); subsequent years: notice on or before October 1"
+      "reasoning": "This paragraph in Section 1.2 sets the advance notice required to prevent the automatic extension beyond the initial term ('at least ninety days' prior written notice') and also provides the ongoing renewal cancellation deadline ('on or before October 1'). The required advance notice to prevent the initial automatic renewal is explicitly 90 days.",
+      "normalized_value": "90 days"
     },
     "expiration_date": {
       "raw_snippet": "The term of this Agreement will commence on January 1, 1998 (the \"Effective Date\") and will end on December 31, 1998.",
-      "reasoning": "This sentence explicitly states the effective date and the calendar date on which the initial term ends (December 31, 1998). Because a specific calendar date is given, the normalized value is returned as an ISO date.",
+      "reasoning": "Section 1.2 explicitly states the initial end date of the term as 'will end on December 31, 1998', which is a calendar expiration date.",
       "normalized_value": "1998-12-31"
     },
     "renewal_term": {
       "raw_snippet": "Unless either party gives the other at least ninety days' prior written notice that it has elected not to extend the term of this Agreement beyond December 31, 1998, the term of this Agreement will be automatically extended until December 31, 1999. Thereafter this Agreement will automatically be renewed for successive additional periods of one year, unless either party gives notice of cancellation on or before October 1 of any such year.",
-      "reasoning": "The clause first provides an automatic extension to December 31, 1999 if not declined, and then specifies automatic renewal for successive one-year periods thereafter unless notice is given by the stated deadline. The economic effect is yearly automatic renewal after the initial extension.",
-      "normalized_value": "1 year auto-renewal (after initial extension to 1999-12-31)"
+      "reasoning": "Section 1.2 provides that the term will automatically extend to December 31, 1999 and thereafter 'automatically be renewed for successive additional periods of one year.' This indicates one-year automatic renewal periods.",
+      "normalized_value": "1 year auto-renewal"
+    },
+    "agreement_date": {
+      "raw_snippet": "This Outsourcing Agreement (the \"Agreement\") is made and entered into as of January 1, 1998, by and between Sykes HealthPlan Services, Inc., a Florida corporation (\"SHPS\"), and HealthPlan Services, Inc., a Florida corporation (\"HPS\").",
+      "reasoning": "The phrase 'is made and entered into as of January 1, 1998' explicitly states the date the agreement was made/signed.",
+      "normalized_value": "1998-01-01"
+    },
+    "effective_date": {
+      "raw_snippet": "The term of this Agreement will commence on January 1, 1998 (the \"Effective Date\") and will end on December 31, 1998.",
+      "reasoning": "Section 1.2 defines the Effective Date by stating the term 'will commence on January 1, 1998 (the \"Effective Date\")'. This explicitly defines when the agreement takes effect.",
+      "normalized_value": "1998-01-01"
+    },
+    "governing_law": {
+      "raw_snippet": "This Agreement shall be governed by and construed in accordance with the laws, other than choice of law rules, of the state of Florida.",
+      "reasoning": "Section 4.12 is the governing law clause and explicitly names the controlling jurisdiction as the state of Florida.",
+      "normalized_value": "Florida"
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 4069,
-    "output_tokens": 2597
+    "input_tokens": 4813,
+    "output_tokens": 2947
   },
-  "latency_seconds": 24.75967788696289
+  "latency_seconds": 54.03583884239197
 }

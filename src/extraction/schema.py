@@ -82,6 +82,9 @@ class ExtractionResponse(BaseModel):
 
     parties: PartiesExtraction
     contract_type: ContractTypeExtraction
-    notice_period: StringFieldExtraction
+    agreement_date: StringFieldExtraction
+    effective_date: StringFieldExtraction
     expiration_date: StringFieldExtraction
+    governing_law: StringFieldExtraction
+    notice_period: StringFieldExtraction
     renewal_term: StringFieldExtraction

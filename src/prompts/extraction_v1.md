@@ -20,6 +20,38 @@ For each field, provide:
   - Titles can be misleading - look at the actual substance of the agreement
 - normalized_value: Must be one of: {contract_types}
 
+### agreement_date
+- raw_snippet: Copy the exact text stating when the agreement was signed/made
+- reasoning: How you identified the signing date
+- normalized_value: ISO date (YYYY-MM-DD) if a specific date is given, or empty string if not found
+- IMPORTANT: This is when the contract was SIGNED/MADE, not when it becomes effective. Look for phrases like:
+  - "This Agreement is made as of..."
+  - "dated as of [date]"
+  - "entered into on [date]"
+  - The date in the contract header or signature block
+- If the date contains placeholders like "[•]" or "____", return empty string
+
+### effective_date
+- raw_snippet: Copy the exact text stating when the agreement takes effect
+- reasoning: How you identified the effective date
+- normalized_value: ISO date (YYYY-MM-DD) if a specific date is given, or empty string if not found
+- IMPORTANT: This is when the contract TAKES EFFECT, which may differ from the agreement date. Look for:
+  - "effective as of..."
+  - "shall commence on..."
+  - "Effective Date" definition
+- If effective date equals the agreement date or is defined as the agreement date, still extract it
+- If the date contains placeholders like "[•]" or "____", return empty string
+
+### governing_law
+- raw_snippet: Copy the exact governing law/jurisdiction clause
+- reasoning: How you identified the governing jurisdiction
+- normalized_value: The state or jurisdiction name (e.g., "Delaware", "New York", "State of Florida")
+- IMPORTANT: Extract only the governing law jurisdiction, not:
+  - Venue/forum selection clauses
+  - Arbitration locations
+  - Place of incorporation
+- Normalize to the jurisdiction name only (remove "State of", "laws of", etc.)
+
 ### notice_period
 - raw_snippet: Copy the exact notice requirement text, or empty string if not found
 - reasoning: How you identified this (or why it's not found)

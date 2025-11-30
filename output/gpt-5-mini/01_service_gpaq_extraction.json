@@ -1,13 +1,10 @@
 {
   "source_file": "01_service_gpaq.txt",
   "provider": "openai",
-  "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_165358_a4231512",
-  "timestamp": "2025-11-27T16:54:38.565401",
   "extraction": {
     "parties": {
       "raw_snippet": "This SPONSORSHIP AND SERVICES AGREEMENT (the \u201cAgreement\u201d) is made and entered into as of the 19th day of December, 2018, by and among HOF Village, LLC, a Delaware limited liability company (\u201cHOFV\u201d), National Football Museum, Inc., d/b/a Pro Football Hall of Fame, an Ohio corporation (\u201cPFHOF\u201d and, together with HOFV, the \u201cHOF Entities\u201d) and Constellation NewEnergy, Inc., a Delaware corporation, on behalf of itself and its retail affiliates and subsidiaries (collectively, \u201cConstellation\u201d). HOFV and/or PFHOF, on the one hand, and Constellation, on the other hand, are referred to herein as a \u201cParty\u201d and, collectively, as the \u201cParties\u201d.",
-      "reasoning": "The quoted paragraph in the preamble explicitly names the contracting entities and their corporate forms and trade names; it identifies the three main parties to the Agreement.",
+      "reasoning": "The opening paragraph of the agreement explicitly names the contracting entities and describes how they are referred to in the Agreement. It lists HOF Village, LLC (HOFV), National Football Museum, Inc. d/b/a Pro Football Hall of Fame (PFHOF), and Constellation NewEnergy, Inc.",
       "normalized_value": [
         "HOF Village, LLC",
         "National Football Museum, Inc. d/b/a Pro Football Hall of Fame",
@@ -15,30 +12,44 @@
       ]
     },
     "contract_type": {
-      "raw_snippet": "SPONSORSHIP AND SERVICES AGREEMENT\n\nWHEREAS, Constellation desires to become a sponsor of the Village and to obtain the rights set forth herein in connection with such sponsorship.",
-      "reasoning": "The document title describes the agreement as a 'Sponsorship and Services' agreement and the WHEREAS clause expressly states Constellation's desire to become a sponsor and obtain sponsorship rights. Substantively the contract grants sponsorship/branding rights to Constellation in exchange for sponsorship fees and also sets out Constellation's obligation to provide products and services (energy-related supply and services). The primary commercial exchange centers on sponsorship/branding rights plus related service/supply obligations, so 'Sponsorship Agreement' best captures the primary purpose.",
+      "raw_snippet": "SPONSORSHIP AND SERVICES AGREEMENT",
+      "reasoning": "The document title and the substance of the agreement show two primary elements: (1) Constellation will provide Products & Services (energy supply/services) to the HOF Entities and (2) Constellation receives sponsorship rights and advertising benefits in return (including sponsorship fees). Given the combination but the clear emphasis on sponsorship rights/fees and branding throughout (Article 3) alongside services (Articles 1\u20132), the primary contract type is best categorized as a Sponsorship Agreement.",
       "normalized_value": "Sponsorship Agreement"
     },
-    "notice_period": {
-      "raw_snippet": "",
-      "reasoning": "The contract does not contain any clause stating that the agreement will automatically renew unless notice is given, nor does it specify an advance notice period to prevent renewal. The Term is a fixed calendar end date (December 31, 2028) with no automatic renewal language.",
-      "normalized_value": ""
+    "agreement_date": {
+      "raw_snippet": "This SPONSORSHIP AND SERVICES AGREEMENT (the \u201cAgreement\u201d) is made and entered into as of the 19th day of December, 2018, by and among HOF Village, LLC, a Delaware limited liability company (\u201cHOFV\u201d), National Football Museum, Inc., d/b/a Pro Football Hall of Fame, an Ohio corporation (\u201cPFHOF\u201d and, together with HOFV, the \u201cHOF Entities\u201d) and Constellation NewEnergy, Inc., a Delaware corporation, on behalf of itself and its retail affiliates and subsidiaries (collectively, \u201cConstellation\u201d).",
+      "reasoning": "The prefatory clause begins with 'is made and entered into as of the 19th day of December, 2018,' which is the standard explicit agreement/signature date.",
+      "normalized_value": "2018-12-19"
+    },
+    "effective_date": {
+      "raw_snippet": "The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "reasoning": "Section 4.1 explicitly states the Term 'shall commence effective as of the date hereof.' Since the agreement date is given as December 19, 2018, the effective date is the same ('date hereof').",
+      "normalized_value": "2018-12-19"
     },
     "expiration_date": {
       "raw_snippet": "The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
-      "reasoning": "Section 4.1 explicitly states the agreement's expiration as a calendar date: 'shall expire on December 31, 2028.' This is an explicit calendar date so it can be normalized to ISO format.",
+      "reasoning": "Section 4.1 explicitly states the expiration date as 'shall expire on December 31, 2028.'",
       "normalized_value": "2028-12-31"
+    },
+    "governing_law": {
+      "raw_snippet": "This Agreement shall be governed by and construed in accordance with the laws of the State of Ohio, without reference to principles of conflicts of law.",
+      "reasoning": "Section 6.5 contains the governing law clause specifying the laws to be applied to the Agreement.",
+      "normalized_value": "Ohio"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The contract does not contain any clause specifying an advance notice period to prevent an automatic renewal (there is a fixed expiration date and provisions for mutual written extension, but no auto-renewal or 'notice to prevent renewal' language). Therefore no notice-to-prevent-renewal period is present.",
+      "normalized_value": ""
     },
     "renewal_term": {
       "raw_snippet": "",
-      "reasoning": "There is no language in the Agreement providing for automatic renewal or specifying renewal terms (only that the Term may be 'mutually extended by written agreement of the Parties'). Therefore no renewal term is specified.",
+      "reasoning": "The Agreement provides that the Term 'may [be] mutually extended by written agreement of the Parties' but contains no automatic renewal clause or defined renewal term. Because no renewal term is specified, this field is left empty.",
       "normalized_value": ""
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 13459,
-    "output_tokens": 2388
-  },
-  "latency_seconds": 39.57147812843323
+    "input_tokens": 14203,
+    "output_tokens": 2515
+  }
 }

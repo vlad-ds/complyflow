@@ -2,42 +2,57 @@
   "source_file": "03_service_blackstonegsolo.txt",
   "provider": "openai",
   "model": "gpt-5-mini",
-  "eval_id": "eval_gpt-5-mini_20251127_193227_fdbec8ad",
-  "timestamp": "2025-11-27T19:33:42.156873",
+  "eval_id": "eval_gpt-5-mini_20251130_124702_1e6480fd",
+  "timestamp": "2025-11-30T12:49:36.334618",
   "extraction": {
     "parties": {
       "raw_snippet": "THIS SERVICE AGREEMENT FOR TRANSFER AGENT SERVICES (this \u201cAgreement\u201d) between Blackstone / GSO Long-Short Credit Income Fund, a Delaware statutory trust (\u201cClient\u201d) and Mellon Investor Services LLC (operating with the service name BNY Mellon Shareowner Services), a New Jersey limited liability company (\u201cAgent\u201d), is dated as of January 26, 2011.",
-      "reasoning": "The opening paragraph of the Agreement explicitly names the two contracting entities and labels their roles (Client and Agent). This is the clearest identification of the parties.",
+      "reasoning": "The opening sentence of the Agreement expressly states the parties by name and their roles (Client and Agent). This is the conventional location and wording used to identify contracting parties.",
       "normalized_value": [
         "Blackstone / GSO Long-Short Credit Income Fund",
         "Mellon Investor Services LLC"
       ]
     },
     "contract_type": {
-      "raw_snippet": "Client appoints Agent as its transfer agent, registrar and dividend disbursing agent and Agent accepts such appointment in accordance with and subject to the following terms and conditions for all authorized shares of each class of stock listed in Exhibit A hereto (the \u201cShares\u201d).",
-      "reasoning": "The core obligations are that the Agent will act as transfer agent, registrar and dividend disbursing agent and provide the services listed in the exhibits. This shows the agreement is for provision of services (transfer-agent/registrar/disbursing services), i.e., a Service Agreement.",
+      "raw_snippet": "SERVICE AGREEMENT\nFOR\nTRANSFER AGENT SERVICES\nTO\nBLACKSTONE / GSO LONG-SHORT CREDIT INCOME FUND",
+      "reasoning": "The document title and repeated substantive provisions (e.g., appointment of Agent as transfer agent, registrar and dividend disbursing agent, and detailed services in Exhibit B) indicate the primary purpose is a services arrangement under which Agent provides transfer-agent and related services to Client.",
       "normalized_value": "Service Agreement"
     },
     "notice_period": {
       "raw_snippet": "Unless either party gives written notice of termination of this Agreement at least 60 days prior to the end of the Initial Term, or any successive three-year term, this Agreement shall automatically renew for successive additional three-year terms\u037e",
-      "reasoning": "This sentence in Section 2 specifies the advance written notice required to prevent automatic renewal of the contract: at least 60 days prior to the end of the Initial Term or any successive three-year term.",
+      "reasoning": "Section 2 contains the auto-renewal prevention clause requiring written notice \"at least 60 days prior to the end of the Initial Term, or any successive three-year term.\" This is the advance notice required to prevent automatic renewal.",
       "normalized_value": "60 days"
     },
     "expiration_date": {
       "raw_snippet": "Agent\u2019s appointment hereunder shall commence on the next business day after the later of (i) the date hereof, or (ii) the date Agent has confirmed that Client\u2019s records have been converted to Agent\u2019s system (the \u201cEffective Date\u201d), and shall continue for three years thereafter (the \u201cInitial Term\u201d).",
-      "reasoning": "Section 2 defines the term as continuing for three years after the Effective Date (the Initial Term). This is a relative term (three years from the Effective Date), not a specific calendar date.",
-      "normalized_value": "three years from the Effective Date"
+      "reasoning": "Section 2 specifies the initial term as continuing \"for three years thereafter (the 'Initial Term'),\" which describes the contract's expiration relative to the Effective Date (a relative term, not a calendar date).",
+      "normalized_value": "three years from Effective Date"
     },
     "renewal_term": {
       "raw_snippet": "Unless either party gives written notice of termination of this Agreement at least 60 days prior to the end of the Initial Term, or any successive three-year term, this Agreement shall automatically renew for successive additional three-year terms\u037e",
-      "reasoning": "The same Section 2 language states that the Agreement \"shall automatically renew for successive additional three-year terms,\" indicating the renewal period and that renewal is automatic unless timely notice is given.",
-      "normalized_value": "3-year automatic renewal"
+      "reasoning": "Section 2 states the Agreement \"shall automatically renew for successive additional three-year terms\" unless timely notice is given, which defines the automatic renewal period.",
+      "normalized_value": "3 year auto-renewal"
+    },
+    "agreement_date": {
+      "raw_snippet": "is dated as of January 26, 2011.",
+      "reasoning": "The signature/introductory sentence states the agreement \"is dated as of January 26, 2011,\" which is the date the contract was signed/made.",
+      "normalized_value": "2011-01-26"
+    },
+    "effective_date": {
+      "raw_snippet": "Agent\u2019s appointment hereunder shall commence on the next business day after the later of (i) the date hereof, or (ii) the date Agent has confirmed that Client\u2019s records have been converted to Agent\u2019s system (the \u201cEffective Date\u201d), and shall continue for three years thereafter (the \u201cInitial Term\u201d).",
+      "reasoning": "Section 2 defines \"Effective Date\" as the next business day after the later of the agreement date or the date Agent confirms conversion of Client records; this is a contingent/relative definition rather than a specific calendar date.",
+      "normalized_value": ""
+    },
+    "governing_law": {
+      "raw_snippet": "This Agreement shall be governed by, construed and interpreted in accordance with the laws of the State of New York, without regard to principles of conflicts of law.",
+      "reasoning": "Section 19(b) explicitly states the governing law for the Agreement as the laws of the State of New York.",
+      "normalized_value": "New York"
     }
   },
   "usage": {
     "model": "gpt-5-mini-2025-08-07",
-    "input_tokens": 12044,
-    "output_tokens": 1961
+    "input_tokens": 12788,
+    "output_tokens": 2689
   },
-  "latency_seconds": 21.17452120780945
+  "latency_seconds": 47.631091356277466
 }

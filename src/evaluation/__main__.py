@@ -90,6 +90,7 @@ def cmd_judge(args):
     """Judge extraction accuracy using LLM-as-judge."""
     import json
     from datetime import datetime
+    from evaluation.judge import EVAL_FIELDS
 
     # Find eval pairs file
     if args.eval_pairs:
@@ -115,13 +116,23 @@ def cmd_judge(args):
     eval_pairs = data["eval_pairs"]
     models = args.models.split(",") if args.models else None
 
+    # Handle field exclusion
+    fields = EVAL_FIELDS.copy()
+    excluded_fields = []
+    if args.exclude_fields:
+        excluded_fields = [f.strip() for f in args.exclude_fields.split(",")]
+        fields = [f for f in fields if f not in excluded_fields]
+
     print(f"Judging {len(eval_pairs)} contracts")
     if models:
         print(f"Models: {models}")
+    if excluded_fields:
+        print(f"Excluded fields: {excluded_fields}")
+    print(f"Evaluating fields: {fields}")
     print("=" * 80)
 
     # Run judgments
-    results = judge_eval_pairs(eval_pairs, models=models)
+    results = judge_eval_pairs(eval_pairs, models=models, fields=fields)
 
     eval_id = results.get("eval_id", "unknown")
     duration = results.get("duration_seconds", 0)
@@ -277,6 +288,12 @@ def main():
         "--no-langfuse",
         action="store_true",
         help="Skip Langfuse cost metrics (faster)",
+    )
+    judge_parser.add_argument(
+        "--exclude-fields",
+        type=str,
+        default=None,
+        help="Comma-separated fields to exclude from evaluation (e.g., 'effective_date')",
     )
     judge_parser.set_defaults(func=cmd_judge)
 
