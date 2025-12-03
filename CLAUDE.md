@@ -102,11 +102,89 @@ PYTHONPATH=src uv run python -m extraction.date_review \
   --format csv
 ```
 
+## Contract Intake API
+
+FastAPI server for contract upload, extraction, and Airtable storage.
+
+### API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/contracts/upload` | POST | Upload PDF, extract metadata, store in Airtable |
+| `/contracts/{id}` | GET | Get contract by Airtable record ID |
+| `/contracts/{id}/review` | PATCH | Mark contract as reviewed |
+| `/contracts` | GET | List contracts (filter by `?status=under_review`) |
+| `/health` | GET | Health check |
+
+### Running the API
+
+```bash
+# Start development server
+PYTHONPATH=src uv run uvicorn api.main:app --reload --port 8000
+
+# Test upload
+curl -X POST http://localhost:8000/contracts/upload \
+  -F file=@cuad/train/contracts/01_service_gpaq.pdf
+```
+
+### Testing Components
+
+```bash
+# Test PDF extraction + Airtable connection
+PYTHONPATH=src uv run python scripts/test_api.py
+
+# Full pipeline test (extraction + date computation, ~60s)
+PYTHONPATH=src uv run python scripts/test_api.py --full
+```
+
+## Airtable
+
+**Base ID:** `appN3qGux4iVHtdU8`
+**Table:** `Contracts`
+
+### Schema (15 fields)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| filename | Text | Original PDF filename |
+| parties | Long text | JSON array of party names |
+| contract_type | Single select | One of 26 types (services, license, etc.) |
+| agreement_date | Date | When signed |
+| effective_date | Date | When takes effect |
+| expiration_date | Date | When expires |
+| expiration_type | Single select | absolute, perpetual, conditional |
+| notice_deadline | Date | When to send renewal notice |
+| first_renewal_date | Date | First auto-renewal date |
+| governing_law | Text | Jurisdiction |
+| notice_period | Text | Raw notice period |
+| renewal_term | Long text | Renewal clause |
+| status | Single select | under_review, reviewed |
+| reviewed_at | Date | When reviewed |
+| raw_extraction | Long text | Full extraction JSON |
+
+### Setup (one-time)
+
+```bash
+# Create the Contracts table (already done)
+PYTHONPATH=src uv run python -m api.setup_airtable
+```
+
+### Environment Variables
+
+Required in `.env`:
+```
+AIRTABLE_API_KEY=patXXX...
+AIRTABLE_BASE_ID=appN3qGux4iVHtdU8
+SLACK_WEBHOOK_URL=https://hooks.slack.com/...  # Optional
+```
+
 ## Tech Stack
 
 - Python backend (uv for package management)
+- API: FastAPI + uvicorn
 - Vector store: TBD
 - LLM: OpenAI GPT-5-mini (extraction + date computation)
+- Database: Airtable
 - Integrations: Airtable API, Slack API
 - Frontend: TBD
 
@@ -118,6 +196,9 @@ uv sync
 
 # Run scripts
 uv run python script.py
+
+# Start API server
+PYTHONPATH=src uv run uvicorn api.main:app --reload --port 8000
 ```
 
 ## Claude Instructions
