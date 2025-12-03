@@ -25,9 +25,17 @@ from api.models import (
     ErrorResponse,
     HealthResponse,
 )
+from api.logging import get_logger, log_error
 from api.services.airtable import AirtableService
 from api.services.extraction import process_contract
 from api.services.slack import notify_new_contract
+from api.utils.retry import LLMRetryExhaustedError, LLMTimeoutError
+
+# Constants
+MAX_FILE_SIZE_MB = 50
+MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024
+
+logger = get_logger(__name__)
 
 
 # Global service instances
@@ -45,17 +53,21 @@ def get_airtable() -> AirtableService:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan - initialize services on startup."""
+    logger.info("Starting ComplyFlow API...")
+
     # Initialize Airtable service
     global _airtable
     try:
         _airtable = AirtableService()
-        print("Airtable service initialized")
+        logger.info("Airtable service initialized")
     except Exception as e:
-        print(f"Warning: Could not initialize Airtable: {e}")
+        logger.warning(f"Could not initialize Airtable: {type(e).__name__}: {e}")
 
+    logger.info("ComplyFlow API ready")
     yield
 
     # Cleanup on shutdown
+    logger.info("Shutting down ComplyFlow API...")
     _airtable = None
 
 
@@ -85,7 +97,12 @@ async def health():
 @app.post(
     "/contracts/upload",
     response_model=ContractUploadResponse,
-    responses={400: {"model": ErrorResponse}, 500: {"model": ErrorResponse}},
+    responses={
+        400: {"model": ErrorResponse, "description": "Invalid input (bad file, empty, too large)"},
+        500: {"model": ErrorResponse, "description": "Internal server error"},
+        502: {"model": ErrorResponse, "description": "LLM service error after retries"},
+        504: {"model": ErrorResponse, "description": "LLM timeout"},
+    },
     tags=["Contracts"],
 )
 async def upload_contract(
@@ -101,29 +118,76 @@ async def upload_contract(
     4. Stores the contract in Airtable with status "under_review"
     5. Sends a Slack notification (if configured)
     """
-    # Validate file type
+    # Validate filename
     if not file.filename:
+        logger.warning("Upload rejected: no filename provided")
         raise HTTPException(status_code=400, detail="No filename provided")
 
-    if not file.filename.lower().endswith(".pdf"):
-        raise HTTPException(status_code=400, detail="Only PDF files are supported")
+    filename = file.filename
+    logger.info(f"Upload started: {filename}")
+
+    # Validate file extension
+    if not filename.lower().endswith(".pdf"):
+        logger.warning(f"Upload rejected: invalid extension for {filename}")
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid file type: expected .pdf, got .{filename.split('.')[-1] if '.' in filename else 'none'}",
+        )
 
     # Read file content
     try:
         pdf_bytes = await file.read()
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Could not read file: {e}")
+        log_error(logger, "File read failed", e, filename=filename)
+        raise HTTPException(
+            status_code=400,
+            detail=f"Could not read uploaded file: {type(e).__name__}",
+        )
 
+    # Validate file size
+    file_size_mb = len(pdf_bytes) / (1024 * 1024)
     if len(pdf_bytes) == 0:
-        raise HTTPException(status_code=400, detail="Empty file")
+        logger.warning(f"Upload rejected: empty file {filename}")
+        raise HTTPException(status_code=400, detail="Uploaded file is empty")
+
+    if len(pdf_bytes) > MAX_FILE_SIZE_BYTES:
+        logger.warning(
+            f"Upload rejected: file too large {filename} ({file_size_mb:.1f}MB > {MAX_FILE_SIZE_MB}MB)"
+        )
+        raise HTTPException(
+            status_code=400,
+            detail=f"File too large: {file_size_mb:.1f}MB exceeds {MAX_FILE_SIZE_MB}MB limit",
+        )
+
+    logger.info(f"File validated: {filename} ({file_size_mb:.2f}MB)")
 
     # Process contract (extraction + date computation)
     try:
-        contract_data = process_contract(pdf_bytes, file.filename)
+        contract_data = process_contract(pdf_bytes, filename)
     except ValueError as e:
+        # ValueError = expected errors like scanned PDFs
+        logger.warning(f"Extraction rejected for {filename}: {e}")
         raise HTTPException(status_code=400, detail=str(e))
+    except LLMTimeoutError as e:
+        log_error(logger, "LLM timeout", e, filename=filename)
+        raise HTTPException(
+            status_code=504,
+            detail=f"LLM extraction timed out after {e.timeout_seconds}s. Please try again.",
+        )
+    except LLMRetryExhaustedError as e:
+        log_error(logger, "LLM retry exhausted", e, filename=filename)
+        raise HTTPException(
+            status_code=502,
+            detail=f"LLM extraction failed after {e.attempts} attempts: {type(e.last_error).__name__}",
+        )
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Extraction failed: {e}")
+        log_error(logger, "Extraction failed", e, filename=filename)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Extraction failed: {type(e).__name__}: {e}",
+        )
+
+    logger.info(f"Extraction complete for {filename}")
 
     # Store in Airtable
     try:
@@ -131,18 +195,26 @@ async def upload_contract(
         record = airtable.create_contract(contract_data)
         record_id = record["id"]
         airtable_url = airtable.get_airtable_url(record_id)
+        logger.info(f"Stored in Airtable: {filename} -> {record_id}")
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Airtable storage failed: {e}")
+        log_error(logger, "Airtable storage failed", e, filename=filename)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Database storage failed: {type(e).__name__}: {e}",
+        )
 
     # Send Slack notification (fire and forget, don't fail if Slack fails)
     try:
         await notify_new_contract(contract_data, record_id, airtable_url)
+        logger.info(f"Slack notification sent for {filename}")
     except Exception as e:
-        print(f"Slack notification failed (non-fatal): {e}")
+        log_error(logger, "Slack notification failed (non-fatal)", e, filename=filename)
+
+    logger.info(f"Upload complete: {filename} -> {record_id}")
 
     return ContractUploadResponse(
         contract_id=record_id,
-        filename=file.filename,
+        filename=filename,
         extraction=contract_data["extraction"],
         computed_dates=contract_data["computed_dates"],
         status="under_review",

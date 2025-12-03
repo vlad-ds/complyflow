@@ -7,19 +7,70 @@ All LLM calls are tagged with "source:api" for Langfuse tracking.
 
 import io
 import json
-import tempfile
-from pathlib import Path
 from typing import Any
 
 import pdfplumber
+from openai import APIError, APITimeoutError, RateLimitError
 
-from extraction.extract import extract_contract_metadata, _get_json_schema, _get_contract_types_str
+from api.logging import get_logger
+from api.utils.retry import llm_retry
+from extraction.extract import _get_json_schema, _get_contract_types_str
 from extraction.schema import ExtractionResponse
 from llm.openai_provider import OpenAIProvider, DateComputationResponse
+from llm.base import LLMResponse
 from prompts import load_prompt
+
+logger = get_logger(__name__)
 
 # Tag for all API-originated LLM calls
 API_TAGS = ["source:api"]
+
+# Exceptions that should trigger a retry
+RETRYABLE_EXCEPTIONS = (APIError, APITimeoutError, RateLimitError)
+
+
+@llm_retry(
+    timeout_seconds=120.0,
+    max_retries=3,
+    retry_delay_seconds=2.0,
+    retryable_exceptions=RETRYABLE_EXCEPTIONS,
+)
+def _call_extract_json(
+    provider: OpenAIProvider,
+    prompt: str,
+    document: str,
+    json_schema: dict,
+    model: str,
+) -> LLMResponse:
+    """Wrapped LLM call for extraction with retry logic."""
+    return provider.extract_json(
+        prompt=prompt,
+        document=document,
+        json_schema=json_schema,
+        model=model,
+        tags=API_TAGS,
+    )
+
+
+@llm_retry(
+    timeout_seconds=120.0,
+    max_retries=3,
+    retry_delay_seconds=2.0,
+    retryable_exceptions=RETRYABLE_EXCEPTIONS,
+)
+def _call_compute_dates(
+    provider: OpenAIProvider,
+    prompt: str,
+    contract_data: dict,
+    model: str,
+) -> DateComputationResponse:
+    """Wrapped LLM call for date computation with retry logic."""
+    return provider.compute_dates(
+        prompt=prompt,
+        contract_data=contract_data,
+        model=model,
+        tags=API_TAGS,
+    )
 
 
 def extract_text_from_bytes(pdf_bytes: bytes) -> str:
@@ -43,7 +94,7 @@ def extract_text_from_bytes(pdf_bytes: bytes) -> str:
 
 def extract_metadata_from_text(text: str, model: str = "gpt-5-mini") -> dict:
     """
-    Run LLM extraction on contract text.
+    Run LLM extraction on contract text with timeout and retry.
 
     Args:
         text: Contract text content
@@ -51,6 +102,10 @@ def extract_metadata_from_text(text: str, model: str = "gpt-5-mini") -> dict:
 
     Returns:
         Dict with extraction results
+
+    Raises:
+        LLMTimeoutError: If extraction times out after all retries
+        LLMRetryExhaustedError: If extraction fails after all retries
     """
     provider = OpenAIProvider(model=model)
 
@@ -61,20 +116,25 @@ def extract_metadata_from_text(text: str, model: str = "gpt-5-mini") -> dict:
     # Get JSON schema
     json_schema = _get_json_schema()
 
-    # Call LLM with API tags for Langfuse tracking
-    llm_response = provider.extract_json(
+    logger.info(f"Starting metadata extraction with model={model}")
+
+    # Call with retry decorator
+    llm_response = _call_extract_json(
+        provider=provider,
         prompt=prompt,
         document=text,
         json_schema=json_schema,
         model=model,
-        tags=API_TAGS,
     )
 
     # Parse response
     result = ExtractionResponse.model_validate_json(llm_response.content)
-
-    # Convert to dict for JSON serialization
     extraction_dict = result.model_dump()
+
+    logger.info(
+        f"Extraction complete: {llm_response.input_tokens} input tokens, "
+        f"{llm_response.output_tokens} output tokens"
+    )
 
     return {
         "extraction": extraction_dict,
@@ -134,7 +194,7 @@ def prepare_date_fields(extraction: dict) -> dict:
 
 def compute_dates_from_extraction(extraction: dict, model: str = "gpt-5-mini") -> dict:
     """
-    Compute dates from extraction results.
+    Compute dates from extraction results with timeout and retry.
 
     Args:
         extraction: Extraction dict (the "extraction" key)
@@ -142,6 +202,10 @@ def compute_dates_from_extraction(extraction: dict, model: str = "gpt-5-mini") -
 
     Returns:
         Dict with computed dates
+
+    Raises:
+        LLMTimeoutError: If date computation times out after all retries
+        LLMRetryExhaustedError: If date computation fails after all retries
     """
     provider = OpenAIProvider(model=model)
 
@@ -151,12 +215,19 @@ def compute_dates_from_extraction(extraction: dict, model: str = "gpt-5-mini") -
     # Prepare date fields
     date_fields = prepare_date_fields(extraction)
 
-    # Compute dates with API tags for Langfuse tracking
-    response: DateComputationResponse = provider.compute_dates(
+    logger.info(f"Starting date computation with model={model}")
+
+    # Call with retry decorator
+    response = _call_compute_dates(
+        provider=provider,
         prompt=prompt,
         contract_data=date_fields,
         model=model,
-        tags=API_TAGS,
+    )
+
+    logger.info(
+        f"Date computation complete: {response.input_tokens} input tokens, "
+        f"{response.output_tokens} output tokens, {response.latency_seconds:.2f}s"
     )
 
     return {
