@@ -1,0 +1,31 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+.venv
+venv
+*.egg-info
+
+# IDE
+.vscode
+.idea
+
+# Test/Dev
+tests/
+pytest.ini
+.pytest_cache
+
+# Data
+cuad/
+output/
+temp/
+*.pdf
+
+# Misc
+.env
+*.md
+docs/
