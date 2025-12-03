@@ -200,10 +200,55 @@ To see only API-originated token usage in Langfuse:
 
 This separates API production usage from batch evaluation runs.
 
+## Deployment
+
+### Railway (Production)
+
+**URL:** https://complyflow-production.up.railway.app
+
+**Configuration files:**
+- `Dockerfile` - Docker build config
+- `railway.json` - Railway config (builder, start command, health checks)
+- `requirements.txt` - Python dependencies (generated from `uv pip compile`)
+
+**Deploy via CLI:**
+```bash
+# Install Railway CLI
+brew install railway
+
+# Login and link project
+railway login
+railway link
+
+# Deploy
+railway up --detach
+
+# Check logs
+railway logs -n 50        # Deploy logs
+railway logs -b -n 50     # Build logs
+
+# Redeploy
+railway redeploy -y
+```
+
+**Environment variables (set in Railway dashboard):**
+- `AIRTABLE_API_KEY`
+- `AIRTABLE_BASE_ID`
+- `OPENAI_API_KEY`
+- `LANGFUSE_PUBLIC_KEY`
+- `LANGFUSE_SECRET_KEY`
+- `SLACK_WEBHOOK_URL` (optional)
+
+**Key learnings:**
+- Use `railway.json` (not `.toml`) with `"builder": "DOCKERFILE"`
+- Start command needs shell wrapper for `$PORT` expansion: `/bin/sh -c 'uvicorn ...'`
+- Use `--loop asyncio` to avoid uvloop C extension issues in slim Docker images
+
 ## Tech Stack
 
 - Python backend (uv for package management)
 - API: FastAPI + uvicorn
+- Deployment: Railway (Docker)
 - Observability: Langfuse
 - Vector store: TBD
 - LLM: OpenAI GPT-5-mini (extraction + date computation)
