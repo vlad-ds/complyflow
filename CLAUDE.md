@@ -178,10 +178,33 @@ AIRTABLE_BASE_ID=appN3qGux4iVHtdU8
 SLACK_WEBHOOK_URL=https://hooks.slack.com/...  # Optional
 ```
 
+## Langfuse Tracing
+
+All LLM calls are traced in Langfuse for observability and cost tracking.
+
+### Tags
+
+| Tag | Description |
+|-----|-------------|
+| `source:api` | Calls originating from the Contract Intake API |
+| `extraction` | Contract metadata extraction calls |
+| `date-computation` | Date computation calls |
+| `provider:openai` | OpenAI provider calls |
+| `split:train` / `split:test` | Batch evaluation runs |
+
+### Filtering API Usage
+
+To see only API-originated token usage in Langfuse:
+1. Go to Traces
+2. Filter by tag: `source:api`
+
+This separates API production usage from batch evaluation runs.
+
 ## Tech Stack
 
 - Python backend (uv for package management)
 - API: FastAPI + uvicorn
+- Observability: Langfuse
 - Vector store: TBD
 - LLM: OpenAI GPT-5-mini (extraction + date computation)
 - Database: Airtable
