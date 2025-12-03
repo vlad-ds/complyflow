@@ -6,14 +6,19 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "anthropic>=0.75.0",
+    "fastapi>=0.115.0",
     "google-cloud-aiplatform[tokenization]>=1.128.0",
     "google-genai>=1.0.0",
+    "httpx>=0.28.0",
     "langfuse>=3.10.1",
     "openai>=2.8.1",
     "openinference-instrumentation-google-genai>=0.1.0",
     "opentelemetry-instrumentation-anthropic>=0.49.3",
     "opentelemetry-instrumentation-openai>=0.49.3",
     "pdfplumber>=0.11.8",
+    "pyairtable>=3.0.0",
     "python-dotenv>=1.2.1",
+    "python-multipart>=0.0.20",
     "tiktoken>=0.12.0",
+    "uvicorn>=0.34.0",
 ]
