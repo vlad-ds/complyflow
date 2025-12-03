@@ -1,0 +1,54 @@
+{
+  "source_file": "09_outsourcing_ferroglobe.txt",
+  "provider": "openai",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "Parties to this agreement\nSILICON SMELTERS \u00ab Pty \u00bb Ltd, registration nr 1998/019036/07, VAT n\u00b0 4310178506, Registered office at Beyersnek Road, PO Box 657 Polokwane \u2013 South Africa, represented by Benoit Emile Norbert Ollivier, Managing Director, acting pursuant to the powers granted to him by the Board on the 22nd\nof May, 2008 (hereinafter referred to as \u201cthe Customer\u201d),\nAND\nESPACIO INFORMATION TECHNOLOGY, SA., a public limited company with place of business in P\u00b0 de la Castellana, N\u00b0 259, 28046, Madrid, SPAIN,\nand represented by Mr. Carlos Lafitte as Chief Executive, in virtue of his powers, currently in force, conferred to him the 23rd of January of 1996\n(Protocol No. 134), before Mr. Jose Maria Lucena Conde, Notary Public in Madrid, (hereinafter referred to as \u201cEIT\u201d).",
+      "reasoning": "The paragraph headed 'Parties to this agreement' names the two contracting entities and their representatives; these are the main parties to the contract.",
+      "normalized_value": [
+        "Silicon Smelters Pty Ltd",
+        "Espacio Information Technology, S.A."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "OUTSOURCING AGREEMENT",
+      "reasoning": "The document title is 'OUTSOURCING AGREEMENT' and the substance of the contract is that EIT will provide IT management/outsourcing services to the Customer (service delivery, monitoring, backups, applications, servers, etc.). The primary obligations are service provision (by EIT) and payment (by the Customer), which aligns with an outsourcing/service arrangement.",
+      "normalized_value": "Outsourcing Agreement"
+    },
+    "agreement_date": {
+      "raw_snippet": "This Outsourcing Agreement (hereinafter \u201cAgreement\u201d) is effective as from the 1st day of January, 2009, by and between:",
+      "reasoning": "There is no separate signature date; the contract states it \"is effective as from the 1st day of January, 2009\" and the signature block refers to execution \"on the date first above written,\" which indicates the agreement date is 1 January 2009.",
+      "normalized_value": "2009-01-01"
+    },
+    "effective_date": {
+      "raw_snippet": "This Outsourcing Agreement (hereinafter \u201cAgreement\u201d) is effective as from the 1st day of January, 2009, by and between:",
+      "reasoning": "The contract explicitly states it \"is effective as from the 1st day of January, 2009.\" This is the effective date of the Agreement.",
+      "normalized_value": "2009-01-01"
+    },
+    "expiration_date": {
+      "raw_snippet": "13.1. The present Agreement is effective as from 1 January 2009. It is established by calendar year and renewed tacitly every year.",
+      "reasoning": "Clause 13.1 defines the term: the agreement is established by calendar year and is tacitly renewed annually rather than specifying a single calendar expiration date.",
+      "normalized_value": "1 year (auto-renewing annually)"
+    },
+    "governing_law": {
+      "raw_snippet": "17.1. This Agreement shall be governed by, and construed in accordance with the laws of Spain.",
+      "reasoning": "Clause 17.1 expressly states the governing law for the Agreement.",
+      "normalized_value": "Spain"
+    },
+    "notice_period": {
+      "raw_snippet": "13.2. The Agreement rests, for all that, cancellable at any time by any of the parties before the expiry date of the Agreement or any of its renewals, upon three months prior written notice.",
+      "reasoning": "Clause 13.2 prescribes the advance written notice required to cancel the Agreement before the expiry date or any renewal, which is the notice needed to prevent/terminate a renewal.",
+      "normalized_value": "3 months"
+    },
+    "renewal_term": {
+      "raw_snippet": "13.1. The present Agreement is effective as from 1 January 2009. It is established by calendar year and renewed tacitly every year.",
+      "reasoning": "Clause 13.1 states the agreement is established by calendar year and \"renewed tacitly every year,\" i.e., it automatically renews annually.",
+      "normalized_value": "1 year auto-renewal (tacit renewal annually)"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 9172,
+    "output_tokens": 3710
+  }
+}

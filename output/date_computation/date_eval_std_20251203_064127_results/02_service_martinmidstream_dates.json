@@ -1,0 +1,58 @@
+{
+  "source_file": "02_service_martinmidstream_extraction.json",
+  "input_data": {
+    "agreement_date": {
+      "raw_snippet": "THIS MARINE TRANSPORTATION AGREEMENT (this \u201cAgreement\u201d) is executed this 23rd day of December, 2003, by and between Martin Operating Partnership L.P., a Delaware limited partnership (\u201cOwner\u201d), and Midstream Fuel Service LLC, an Alabama limited liability company (\u201cCharterer\u201d), ...",
+      "normalized_value": "2003-12-23"
+    },
+    "effective_date": {
+      "raw_snippet": "The initial term of this Agreement shall be for 3 years (the \u201cInitial Term\u201d) commencing on the date first set forth above (the \u201cCommencement Date\u201d) and ending on the 3rd anniversary of the Commencement Date.",
+      "normalized_value": "2003-12-23"
+    },
+    "expiration_date": {
+      "raw_snippet": "The initial term of this Agreement shall be for 3 years (the \u201cInitial Term\u201d) commencing on the date first set forth above (the \u201cCommencement Date\u201d) and ending on the 3rd anniversary of the Commencement Date.",
+      "normalized_value": "3 years (ending on the 3rd anniversary of the Commencement Date)"
+    },
+    "notice_period": {
+      "raw_snippet": "This Agreement will automatically renew for successive one year terms (each a \u201cRenewal Term\u201d, and together with the Initial Term, the \u201cTerm\u201d), unless either Charterer or Owner elects not to renew this Agreement by providing the other party with written notice of such election 30 days prior to the expiration of the Initial Term or Renewal Term, as applicable, at which point this Agreement will automatically terminate.",
+      "normalized_value": "30 days"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement will automatically renew for successive one year terms (each a \u201cRenewal Term\", and together with the Initial Term, the \u201cTerm\u201d), unless either Charterer or Owner elects not to renew this Agreement by providing the other party with written notice of such election 30 days prior to the expiration of the Initial Term or Renewal Term, as applicable, at which point this Agreement will automatically terminate.",
+      "normalized_value": "1 year auto-renewal"
+    }
+  },
+  "computed_dates": {
+    "agreement_date": {
+      "year": 2003,
+      "month": 12,
+      "day": 23
+    },
+    "effective_date": {
+      "year": 2003,
+      "month": 12,
+      "day": 23
+    },
+    "expiration_date": {
+      "year": 2006,
+      "month": 12,
+      "day": 23
+    },
+    "notice_deadline": {
+      "year": 2006,
+      "month": 11,
+      "day": 23
+    },
+    "first_renewal_date": {
+      "year": 2006,
+      "month": 12,
+      "day": 23
+    }
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "input_tokens": 2561,
+  "output_tokens": 427,
+  "latency_seconds": 6.742863893508911,
+  "code_interpreter_used": false,
+  "eval_id": "date_eval_std_20251203_064127"
+}

@@ -64,11 +64,49 @@ All CUAD contracts have been extracted to `temp/extracted_text/`:
 
 Use these text files for LLM extraction, not the original PDFs.
 
-## Tech Stack (TBD)
+## Current Work: Date Computation Pipeline
+
+Working with **GPT-5-mini** extractions on 20 contracts (10 train + 10 test).
+
+### Extraction Outputs
+
+Primary extraction outputs are in `output/gpt-5-mini/`:
+- 20 contracts extracted with GPT-5-mini (our model of choice)
+- Format: `{nn}_{type}_{name}_extraction.json`
+
+### Date Computation
+
+Transforms extracted date fields into structured `{year, month, day}` objects:
+
+| Output Field | Source |
+|--------------|--------|
+| `agreement_date` | Direct from extraction |
+| `effective_date` | Direct from extraction |
+| `expiration_date` | Computed (handles relative terms like "5 years from Effective Date") |
+| `notice_deadline` | Derived: expiration - notice_period |
+| `first_renewal_date` | Derived: equals expiration if auto-renewal exists |
+
+**Run date computation:**
+```bash
+PYTHONPATH=src uv run python -m extraction.compute_dates \
+  --extractions-dir output/gpt-5-mini \
+  --split train \
+  --no-code-interpreter
+```
+
+**Generate review table:**
+```bash
+PYTHONPATH=src uv run python -m extraction.date_review \
+  --results-dir output/date_computation/<eval_id>_results \
+  --output output/date_computation/train_review.csv \
+  --format csv
+```
+
+## Tech Stack
 
 - Python backend (uv for package management)
 - Vector store: TBD
-- LLM: Claude (model tiering based on task complexity)
+- LLM: OpenAI GPT-5-mini (extraction + date computation)
 - Integrations: Airtable API, Slack API
 - Frontend: TBD
 

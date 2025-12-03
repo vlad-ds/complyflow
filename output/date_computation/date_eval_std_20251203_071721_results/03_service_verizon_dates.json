@@ -1,0 +1,47 @@
+{
+  "source_file": "03_service_verizon_extraction.json",
+  "input_data": {
+    "agreement_date": {
+      "raw_snippet": "Dated as of January 29, 2020",
+      "normalized_value": "2020-01-29"
+    },
+    "effective_date": {
+      "raw_snippet": "Closing Date means January 29, 2020.",
+      "normalized_value": "2020-01-29"
+    },
+    "expiration_date": {
+      "raw_snippet": "Section 8.3 Termination. This Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
+      "normalized_value": "the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "normalized_value": ""
+    }
+  },
+  "computed_dates": {
+    "agreement_date": {
+      "year": 2020,
+      "month": 1,
+      "day": 29
+    },
+    "effective_date": {
+      "year": 2020,
+      "month": 1,
+      "day": 29
+    },
+    "expiration_date": "conditional",
+    "notice_deadline": null,
+    "first_renewal_date": null,
+    "needs_review": true
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "input_tokens": 2924,
+  "output_tokens": 302,
+  "latency_seconds": 4.733852386474609,
+  "code_interpreter_used": false,
+  "eval_id": "date_eval_std_20251203_071721"
+}

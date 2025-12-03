@@ -1,0 +1,59 @@
+{
+  "source_file": "04_distributor_scansource.txt",
+  "provider": "openai",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "THIS ADDENDUM (\u201cAddendum\u201d) is made on the 4th day of February 2019 (\u201cEffective Date\u201d) between the following parties:\nZebra Technologies International, LLC, with an office at 3 Overlook Point, Lincolnshire IL 60069 (\u201cZebra\u201d)\u037e\nZebra Technologies do Brasil - Com\u00e9rcio de Produtos de Inform\u00e5tica Ltda., a company incorporated and organized under the laws of Brazil, with\noffices at Av. Magalh\u00e4es de Castro, 4800, sala 72-A, Cidade Jardim, CEP 05676-120, S\u00e4o Paulo, sp (\"Zebra Brazil\")\nXplore Technologies Corporation of America, a company with its principal place of business at 8601 RR 2222, Building 2, Suite #100, Austin, Texas\n78730, U.S.A. (\u201cXplore\u201d)\u037e\n(collectively \"Zebra\")\nAND\nScanSource, Inc., a company incorporated in South Carolina, with its registered office at 6 Logue Court, Greenville, South Carolina 29615\n(\"ScanSource\").\nScanSource Latin America, Inc. a ScanSource Affiliate incorporated in Florida, whose registered business address is 1935 NW 87 Avenue, Miami,\nFlorida 33172 (\"ScanSource Latin America\")\nScanSource Brazil Distribuidora de Technologias, Ltda., a ScanSource Affiliate incorporated and organized under the laws of Brazil, with offices\nin the City of S\u00e4o Jos\u00e9 dos Pinhais, State of Paran\u00e5, at Avenida Rui Barbosa, 2529, Modulos 11 and 12, Bairro Jardim Ip\u00e9, CEP: 83055-320, enrolled\nwith the Taxpayer Register (CNPJ/MF) under No. 05.607.657/0001-35 (\"ScanSource Brazil\")\nSCANSOURCE DE MEXICO S. DE R.L. DE C.V., a ScanSource Affiliate incorporated in Mexico, whose registered business address is Calle 4 No.\n298, Colonia Franccionamiento Industrial Alce Blanco, Naucalpan de Juarez, Estado de M\u00e9xico 53370 (\"ScanSource Mexico\")\n(Collectively \"Distributor')\n\"Zebra\" and the \"Distributor\" are referred to collectively as 'Parties\" and individually as a \"Party\".",
+      "reasoning": "The document lists the contracting entities immediately after the 'THIS ADDENDUM ... between the following parties:' sentence. I copied the full block that names Zebra entities, Xplore, and the various ScanSource entities and the collective labels.",
+      "normalized_value": [
+        "Zebra Technologies International, LLC",
+        "Zebra Technologies do Brasil - Com\u00e9rcio de Produtos de Inform\u00e5tica Ltda.",
+        "Xplore Technologies Corporation of America",
+        "ScanSource, Inc.",
+        "ScanSource Latin America, Inc.",
+        "ScanSource Brazil Distribuidora de Technologias, Ltda.",
+        "SCANSOURCE DE MEXICO S. DE R.L. DE C.V."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "ZEBRA\u00ae PARTNERCONNECT PROGRAM\nADDENDUM TO\nZEBRA\u00ae PARTNERCONNECT DISTRIBUTOR AGREEMENT",
+      "reasoning": "The title identifies this document as an Addendum to the Zebra PartnerConnect Distributor Agreement and the substance of the Addendum governs the sale/purchase/distribution of Xplore Products to Distributor \u2014 i.e., distribution/resale of goods. The primary obligations are Xplore/Zebra selling products and Distributor purchasing/reselling them under the Distributor Agreement.",
+      "normalized_value": "Distributor Agreement"
+    },
+    "agreement_date": {
+      "raw_snippet": "THIS ADDENDUM (\u201cAddendum\u201d) is made on the 4th day of February 2019 (\u201cEffective Date\u201d) between the following parties:",
+      "reasoning": "The phrase 'is made on the 4th day of February 2019' explicitly states when the addendum was made/signed; it identifies the agreement date and also defines the Effective Date.",
+      "normalized_value": "2019-02-04"
+    },
+    "effective_date": {
+      "raw_snippet": "THIS ADDENDUM (\u201cAddendum\u201d) is made on the 4th day of February 2019 (\u201cEffective Date\u201d) between the following parties:",
+      "reasoning": "The same sentence both states the date the addendum is made and labels that date as the 'Effective Date', so the effective date is 4th February 2019.",
+      "normalized_value": "2019-02-04"
+    },
+    "expiration_date": {
+      "raw_snippet": "7. Term and Termination. This Addendum may be terminated at any time by either Party in accordance with the termination provisions of the\nDistribution Agreement. The Addendum shall not have an Initial Period.",
+      "reasoning": "The clause addresses term and termination but does not establish a fixed term or expiration date; it states the Addendum has no initial period and may be terminated per the Distribution Agreement. Because no explicit expiration or fixed relative term is provided, the expiration_date is not specified.",
+      "normalized_value": ""
+    },
+    "governing_law": {
+      "raw_snippet": "8. Governing Law and Dispute Resolution. The terms of the Governing Law and Dispute Resolution provisions of the Distribution\nAgreement will apply to this Addendum.",
+      "reasoning": "The Addendum defers to the Distribution Agreement for governing law; it does not itself specify a jurisdiction. Therefore the governing jurisdiction is not stated in this Addendum.",
+      "normalized_value": ""
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The Addendum contains no clause specifying an advance notice period required to prevent an automatic renewal (there is no automatic renewal language). Termination is governed by the Distribution Agreement, but no renewal-prevention notice period is stated here.",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "The Addendum does not include any renewal or automatic renewal language; it instead defers term/termination matters to the Distribution Agreement and states there is no Initial Period. Therefore no renewal term is specified in this Addendum.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 5379,
+    "output_tokens": 3664
+  }
+}

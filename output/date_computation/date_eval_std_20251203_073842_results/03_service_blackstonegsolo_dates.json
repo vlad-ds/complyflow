@@ -1,0 +1,59 @@
+{
+  "source_file": "03_service_blackstonegsolo_extraction.json",
+  "input_data": {
+    "agreement_date": {
+      "raw_snippet": "is dated as of January 26, 2011.",
+      "normalized_value": "2011-01-26"
+    },
+    "effective_date": {
+      "raw_snippet": "Agent\u2019s appointment hereunder shall commence on the next business day after the later of (i) the date hereof, or (ii) the date Agent has confirmed that Client\u2019s records have been converted to Agent\u2019s system (the \u201cEffective Date\u201d), and shall continue for three years thereafter (the \u201cInitial Term\u201d).",
+      "normalized_value": ""
+    },
+    "effective_date_inferred": {
+      "normalized_value": "2011-01-26",
+      "was_inferred": true
+    },
+    "expiration_date": {
+      "raw_snippet": "Agent\u2019s appointment hereunder shall commence on the next business day after the later of (i) the date hereof, or (ii) the date Agent has confirmed that Client\u2019s records have been converted to Agent\u2019s system (the \u201cEffective Date\u201d), and shall continue for three years thereafter (the \u201cInitial Term\u201d).",
+      "normalized_value": "three years from Effective Date"
+    },
+    "notice_period": {
+      "raw_snippet": "Unless either party gives written notice of termination of this Agreement at least 60 days prior to the end of the Initial Term, or any successive three-year term, this Agreement shall automatically renew for successive additional three-year terms\u037e",
+      "normalized_value": "60 days"
+    },
+    "renewal_term": {
+      "raw_snippet": "Unless either party gives written notice of termination of this Agreement at least 60 days prior to the end of the Initial Term, or any successive three-year term, this Agreement shall automatically renew for successive additional three-year terms\u037e",
+      "normalized_value": "3 year auto-renewal"
+    }
+  },
+  "computed_dates": {
+    "agreement_date": {
+      "year": 2011,
+      "month": 1,
+      "day": 26
+    },
+    "effective_date": null,
+    "expiration_date": {
+      "year": 2014,
+      "month": 1,
+      "day": 26
+    },
+    "notice_deadline": {
+      "year": 2013,
+      "month": 11,
+      "day": 27
+    },
+    "first_renewal_date": {
+      "year": 2014,
+      "month": 1,
+      "day": 26
+    },
+    "needs_review": true
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "input_tokens": 3235,
+  "output_tokens": 987,
+  "latency_seconds": 14.225300788879395,
+  "code_interpreter_used": false,
+  "eval_id": "date_eval_std_20251203_073842"
+}

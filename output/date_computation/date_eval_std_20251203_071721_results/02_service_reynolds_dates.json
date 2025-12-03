@@ -1,0 +1,47 @@
+{
+  "source_file": "02_service_reynolds_extraction.json",
+  "input_data": {
+    "agreement_date": {
+      "raw_snippet": "TRANSITION SERVICES AGREEMENT (the \u201cAgreement\u201d) dated as of [\u2022], 2020, between Reynolds Group Holdings Inc., a Delaware corporation\n(\u201cRGHI\u201d), and Reynolds Consumer Products Inc., a Delaware corporation, (the \u201cCompany\u201d or \u201cRCP\u201d).",
+      "normalized_value": ""
+    },
+    "effective_date": {
+      "raw_snippet": "Effective February 4, 2020 (the \u201cCommencement Date\u201d), RCP is undertaking an initial public offering of shares of common stock and thereafter the Company will no longer be a subsidiary of RGHL.",
+      "normalized_value": "2020-02-04"
+    },
+    "expiration_date": {
+      "raw_snippet": "With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \u201cCommencement Date\u201d), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \u201cTerm\u201d) or (ii) earlier terminated pursuant to this Agreement (a \u201cTermination Date\u201d).",
+      "normalized_value": "12 months following the Commencement Date"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "normalized_value": ""
+    }
+  },
+  "computed_dates": {
+    "agreement_date": null,
+    "effective_date": {
+      "year": 2020,
+      "month": 2,
+      "day": 4
+    },
+    "expiration_date": {
+      "year": 2021,
+      "month": 2,
+      "day": 4
+    },
+    "notice_deadline": null,
+    "first_renewal_date": null,
+    "needs_review": true
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "input_tokens": 3046,
+  "output_tokens": 429,
+  "latency_seconds": 6.456563949584961,
+  "code_interpreter_used": false,
+  "eval_id": "date_eval_std_20251203_071721"
+}

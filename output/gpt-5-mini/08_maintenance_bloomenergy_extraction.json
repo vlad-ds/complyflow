@@ -1,0 +1,54 @@
+{
+  "source_file": "08_maintenance_bloomenergy.txt",
+  "provider": "openai",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "MASTER OPERATION AND MAINTENANCE AGREEMENT\nby and between\nDIAMOND STATE GENERATION PARTNERS, LLC\nand\nBLOOM ENERGY CORPORATION\ndated as of April 13, 2012",
+      "reasoning": "The header of the document identifies the two contracting parties; the recital and the main Agreement paragraph also define BE as Bloom Energy Corporation (Operator) and Owner as Diamond State Generation Partners, LLC.",
+      "normalized_value": [
+        "DIAMOND STATE GENERATION PARTNERS, LLC",
+        "BLOOM ENERGY CORPORATION"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "MASTER OPERATION AND MAINTENANCE AGREEMENT\n...\nWHEREAS, Operator has agreed to provide certain operation and maintenance services to Owner subject to the conditions of this Agreement.",
+      "reasoning": "The document title is 'Master Operation and Maintenance Agreement' and the recitals (quoted) state the Operator will provide operation and maintenance services to Owner. The primary obligations are ongoing operation and maintenance services for the Facilities (service performance), so this is a maintenance/service arrangement.",
+      "normalized_value": "Maintenance Agreement"
+    },
+    "agreement_date": {
+      "raw_snippet": "This MASTER OPERATION AND MAINTENANCE AGREEMENT (this \u201cAgreement\u201d), dated as of April 13, 2012, between BLOOM ENERGY CORPORATION, a Delaware corporation (\u201cBE\u201d or, in its capacity as operator hereunder, \u201cOperator\u201d), and DIAMOND STATE GENERATION PARTNERS, LLC, a Delaware limited liability company (\u201cOwner\u201d)",
+      "reasoning": "The Agreement text explicitly states 'dated as of April 13, 2012' in the opening paragraph, which is the signing/making date of the contract.",
+      "normalized_value": "2012-04-13"
+    },
+    "effective_date": {
+      "raw_snippet": "Section 3.1 Term. The term of this Agreement (the \u201cTerm\u201d) (a) shall commence on the first day of the Warranty Period for the first Bloom System to achieve Commencement of Operation and (b) shall, unless terminated earlier under Section 4.1 of this Agreement or unless extended by mutual agreement of the Parties, terminate on the date that is the last day of the Warranty Period for the last Bloom System to achieve Commencement of Operation.",
+      "reasoning": "There is no single stated calendar 'effective' date; the Agreement's operative term expressly commences when the first Bloom System's Warranty Period begins (i.e., first system Commencement of Operations). Therefore the effective date is defined by that event rather than a fixed calendar date.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "Section 3.1 Term. The term of this Agreement (the \u201cTerm\") (a) shall commence on the first day of the Warranty Period for the first Bloom System to achieve Commencement of Operation and (b) shall, unless terminated earlier under Section 4.1 of this Agreement or unless extended by mutual agreement of the Parties, terminate on the date that is the last day of the Warranty Period for the last Bloom System to achieve Commencement of Operation.",
+      "reasoning": "The Agreement specifies termination as the last day of the Warranty Period for the last Bloom System to achieve Commencement of Operation. This is a relative/contract-defined expiration rather than a fixed calendar date.",
+      "normalized_value": "terminate on the date that is the last day of the Warranty Period for the last Bloom System to achieve Commencement of Operation"
+    },
+    "governing_law": {
+      "raw_snippet": "Section 9.6 Governing Law, Jurisdiction, Venue. THIS AGREEMENT SHALL BE GOVERNED BY AND INTERPRETED IN ACCORDANCE WITH THE LAWS OF THE STATE OF NEW YORK WITHOUT REGARD TO CONFLICTS OF LAW PRINCIPLES (OTHER THAN SECTION 5-1401 OF THE NEW YORK GENERAL OBLIGATIONS LAW). THE PARTIES HEREBY IRREVOCABLY SUBMIT TO THE EXCLUSIVE JURISDICTION OF ANY STATE OR FEDERAL COURT IN NEW YORK COUNTY, NEW YORK WITH RESPECT TO ANY ACTION OR PROCEEDING ARISING OUT OF OR RELATING TO THIS AGREEMENT. EACH PARTY IRREVOCABLY AND UNCONDITIONALLY WAIVES TRIAL BY JURY IN ANY ACTION, SUIT OR PROCEEDING RELATING TO A DISPUTE AND FOR ANY COUNTERCLAIM WITH RESPECT THERETO.",
+      "reasoning": "Section 9.6 explicitly states the governing law is 'the laws of the State of New York.'",
+      "normalized_value": "New York"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The contract does not contain a clause specifying an advance notice period to prevent automatic renewal; there is no automatic renewal provision or a specified \"notice to prevent renewal\" timeframe. Term is defined to end upon the last Warranty Period ending, not by renewal notice.",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "No renewal or automatic renewal language appears in the Agreement. The Term ends as defined in Section 3.1 and may be extended only by mutual agreement; there is no fixed renewal term specified.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 25627,
+    "output_tokens": 2947
+  }
+}

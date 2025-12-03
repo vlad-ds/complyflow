@@ -1,0 +1,11 @@
+contract,agreement_input,agreement_output,effective_input,effective_output,expiration_input,expiration_output,notice_period,notice_deadline,renewal_term,first_renewal_date,needs_review,code_interpreter,latency_s
+01_service_gpaq,2018-12-19,2018-12-19,2018-12-19,2018-12-19,2028-12-31,2028-12-31,,null,,null,FALSE,FALSE,5.9
+02_service_reynolds,,null,2020-02-04,2020-02-04,12 months following the Commencement Date,2021-02-04,,null,,null,TRUE,FALSE,6.5
+03_service_verizon,2020-01-29,2020-01-29,2020-01-29,2020-01-29,"the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement",conditional,,null,,null,TRUE,FALSE,4.7
+04_service_integrity,2020-01-18,2020-01-18,2020-01-18,2020-01-18,2022-01-18,2022-01-18,60 days (Fund) / 90 days (Integrity),2021-10-20,1 year auto-renewal (successive annual periods),2022-01-18,TRUE,FALSE,10.4
+05_license_gopage,2014-02-10,2014-02-10,2014-02-10,2014-02-10,five (5) years following the Effective Date,2019-02-10,90 days,2018-11-12,3 year auto-renewal,2019-02-10,TRUE,FALSE,9.0
+06_license_morganstanley,,null,,null,perpetual,perpetual,,null,,null,TRUE,FALSE,4.4
+07_license_cytodyn,2019-12-17,2019-12-17,2019-12-17,2019-12-17,"commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term.",conditional,,null,,null,TRUE,FALSE,6.0
+08_license_artara,2018-11-28,2018-11-28,2018-11-28,2018-11-28,,null,,null,,null,TRUE,FALSE,7.1
+09_outsourcing_photronics,2017-05-16,2017-05-16,2017-05-16,2017-05-16,"shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",conditional,,null,,null,TRUE,FALSE,5.3
+10_outsourcing_paratek,2016-12-30,2016-12-30,2016-12-30,2016-12-30,,null,,null,,null,TRUE,FALSE,16.6

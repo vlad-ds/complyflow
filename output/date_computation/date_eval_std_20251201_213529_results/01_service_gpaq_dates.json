@@ -1,0 +1,50 @@
+{
+  "source_file": "01_service_gpaq_extraction.json",
+  "input_data": {
+    "agreement_date": {
+      "raw_snippet": "This SPONSORSHIP AND SERVICES AGREEMENT (the \u201cAgreement\u201d) is made and entered into as of the 19th day of December, 2018, by and among HOF Village, LLC, a Delaware limited liability company (\u201cHOFV\u201d), National Football Museum, Inc., d/b/a Pro Football Hall of Fame, an Ohio corporation (\u201cPFHOF\u201d and, together with HOFV, the \u201cHOF Entities\u201d) and Constellation NewEnergy, Inc., a Delaware corporation, on behalf of itself and its retail affiliates and subsidiaries (collectively, \u201cConstellation\u201d).",
+      "normalized_value": "2018-12-19"
+    },
+    "effective_date": {
+      "raw_snippet": "The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "normalized_value": "2018-12-19"
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "normalized_value": "2028-12-31"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "normalized_value": ""
+    }
+  },
+  "computed_dates": {
+    "agreement_date": {
+      "year": 2018,
+      "month": 12,
+      "day": 19
+    },
+    "effective_date": {
+      "year": 2018,
+      "month": 12,
+      "day": 19
+    },
+    "expiration_date": {
+      "year": 2028,
+      "month": 12,
+      "day": 31
+    },
+    "notice_deadline": null,
+    "first_renewal_date": null
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "input_tokens": 2364,
+  "output_tokens": 270,
+  "latency_seconds": 6.100962162017822,
+  "code_interpreter_used": false,
+  "eval_id": "date_eval_std_20251201_213529"
+}

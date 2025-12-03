@@ -1,0 +1,42 @@
+{
+  "source_file": "04_service_atmosenergy_extraction.json",
+  "input_data": {
+    "agreement_date": {
+      "raw_snippet": "THIS AGREEMENT (\"Agreement\"), entered into on May 20, 1992, is between",
+      "normalized_value": "1992-05-20"
+    },
+    "effective_date": {
+      "raw_snippet": "Subject to the General Terms and Conditions of Transporter's FERC Gas Tariff and Rate Schedule FTS/ITS, this Agreement shall be effective as of the date of physical completion of and initial deliveries on Transporter's pipeline and shall continue for a primary term of ten years.",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "Subject to the General Terms and Conditions of Transporter's FERC Gas Tariff and Rate Schedule FTS/ITS, this Agreement shall be effective as of the date of physical completion of and initial deliveries on Transporter's pipeline and shall continue for a primary term of ten years.",
+      "normalized_value": "primary term of ten years"
+    },
+    "notice_period": {
+      "raw_snippet": "Thereafter, this Agreement shall be effective month to month, until terminated by Transporter or Shipper upon the following written notice to the other specifying a termination date: sixty (60) days for interruptible transportation under Rate Schedule ITS and 180 days for firm transportation under Rate Schedule FTS.",
+      "normalized_value": "60 days (interruptible ITS); 180 days (firm FTS)"
+    },
+    "renewal_term": {
+      "raw_snippet": "Thereafter, this Agreement shall be effective month to month, until terminated by Transporter or Shipper upon the following written notice to the other specifying a termination date:",
+      "normalized_value": "month-to-month auto-renewal"
+    }
+  },
+  "computed_dates": {
+    "agreement_date": {
+      "year": 1992,
+      "month": 5,
+      "day": 20
+    },
+    "effective_date": null,
+    "expiration_date": "10 years from the Effective Date (date of physical completion/initial deliveries)",
+    "notice_deadline": null,
+    "first_renewal_date": null
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "input_tokens": 2400,
+  "output_tokens": 902,
+  "latency_seconds": 14.02336597442627,
+  "code_interpreter_used": false,
+  "eval_id": "date_eval_std_20251203_064127"
+}

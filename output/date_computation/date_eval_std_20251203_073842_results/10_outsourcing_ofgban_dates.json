@@ -1,0 +1,63 @@
+{
+  "source_file": "10_outsourcing_ofgban_extraction.json",
+  "input_data": {
+    "agreement_date": {
+      "raw_snippet": "This Master Agreement is made as of the 26 day of January, 2007 (the \u201cEffective Date\u201d), by and between Oriental Financial Group Inc., a Puerto Rico financial holding company (\u201cCustomer\u201d), and Metavante Corporation, a Wisconsin corporation (\u201cMetavante\u201d).",
+      "normalized_value": "2007-01-26"
+    },
+    "effective_date": {
+      "raw_snippet": "This Master Agreement is made as of the 26 day of January, 2007 (the \u201cEffective Date\u201d), by and between Oriental Financial Group Inc., a Puerto Rico financial holding company (\u201cCustomer\u201d), and Metavante Corporation, a Wisconsin corporation (\u201cMetavante\u201d).",
+      "normalized_value": "2007-01-26"
+    },
+    "effective_date_inferred": {
+      "normalized_value": "2007-01-26",
+      "was_inferred": false
+    },
+    "expiration_date": {
+      "raw_snippet": "The term of this Agreement shall commence on the Effective Date and end on November 30, 2014 (the \u201cInitial Term\u201d).",
+      "normalized_value": "2014-11-30"
+    },
+    "notice_period": {
+      "raw_snippet": "Metavante shall provide a written renewal notice to Customer at least twelve (12) months prior to the expiration of the Initial Term (the \u201cRenewal Notice\u201d). Unless Customer notifies Metavante of its intent not to renew this Agreement in writing within a period of three (3) months following the Renewal Notice, this Agreement shall automatically renew at the end of the Initial Term on the same terms (including pricing terms) for one (1) twelve-month period.",
+      "normalized_value": "3 months"
+    },
+    "renewal_term": {
+      "raw_snippet": "Unless Customer notifies Metavante of its intent not to renew this Agreement in writing within a period of three (3) months following the Renewal Notice, this Agreement shall automatically renew at the end of the Initial Term on the same terms (including pricing terms) for one (1) twelve-month period.",
+      "normalized_value": "1 year auto-renewal"
+    }
+  },
+  "computed_dates": {
+    "agreement_date": {
+      "year": 2007,
+      "month": 1,
+      "day": 26
+    },
+    "effective_date": {
+      "year": 2007,
+      "month": 1,
+      "day": 26
+    },
+    "expiration_date": {
+      "year": 2014,
+      "month": 11,
+      "day": 30
+    },
+    "notice_deadline": {
+      "year": 2014,
+      "month": 8,
+      "day": 30
+    },
+    "first_renewal_date": {
+      "year": 2014,
+      "month": 11,
+      "day": 30
+    },
+    "needs_review": true
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "input_tokens": 3308,
+  "output_tokens": 1074,
+  "latency_seconds": 14.82190203666687,
+  "code_interpreter_used": false,
+  "eval_id": "date_eval_std_20251203_073842"
+}

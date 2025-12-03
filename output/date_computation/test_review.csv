@@ -1,0 +1,11 @@
+contract,agreement_input,agreement_output,effective_input,effective_output,expiration_input,expiration_output,notice_period,notice_deadline,renewal_term,first_renewal_date,needs_review,code_interpreter,latency_s
+01_service_mplx,2015-06-11,2015-06-11,2015-06-11,2015-06-11,through the project’s in-service date and for a period of fifteen (15) years after the project’s in-service date,conditional,6 months,null,Up to two automatic renewals of 5 years each,null,TRUE,FALSE,7.6
+02_service_martinmidstream,2003-12-23,2003-12-23,2003-12-23,2003-12-23,3 years (ending on the 3rd anniversary of the Commencement Date),2006-12-23,30 days,2006-11-23,1 year auto-renewal,2006-12-23,TRUE,FALSE,8.4
+03_service_blackstonegsolo,2011-01-26,2011-01-26,,null,three years from Effective Date,2014-01-26,60 days,2013-11-27,3 year auto-renewal,2014-01-26,TRUE,FALSE,14.2
+04_service_atmosenergy,1992-05-20,1992-05-20,,null,primary term of ten years,2002-05-20,60 days (interruptible ITS); 180 days (firm FTS),2001-11-21,month-to-month auto-renewal,2002-05-20,TRUE,FALSE,17.4
+05_license_pacificapentert,2005-11-03,2005-11-03,,null,Initial Term: 10 Years following the first date of public availability of the PACIFICAP ENTERTAINMENT Content within a THE HENRY FILM AND ENTERTAINMENT CORPORATION Property,conditional,60 days,null,3 year auto-renewal,null,TRUE,FALSE,11.8
+06_license_midwestenergyem,2008-06-02,2008-06-02,2008-06-02,2008-06-02,initial term of two (2) years; automatically renewed for additional extended terms each of two (2) years duration,2010-06-02,90 days,2010-03-04,automatic renewal for additional two (2) year terms,2010-06-02,TRUE,FALSE,11.2
+07_license_gpaqacquisition,,null,,null,2034-12-31,2034-12-31,6 months,2034-06-30,5 year auto-renewal,2034-12-31,FALSE,FALSE,10.0
+08_license_euromediaholdin,2006-07-11,2006-07-11,2006-07-11,2006-07-11,2010-06-30,2010-06-30,,null,2 years (Rogers' option),null,FALSE,FALSE,9.3
+09_outsourcing_sykeshealthplan,1998-01-01,1998-01-01,1998-01-01,1998-01-01,1998-12-31,1998-12-31,90 days,1998-10-02,1 year auto-renewal,1998-12-31,FALSE,FALSE,17.0
+10_outsourcing_ofgban,2007-01-26,2007-01-26,2007-01-26,2007-01-26,2014-11-30,2014-11-30,3 months,2014-08-30,1 year auto-renewal,2014-11-30,TRUE,FALSE,14.8

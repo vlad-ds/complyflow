@@ -8,11 +8,34 @@ Requires environment variables:
 - LANGFUSE_SECRET_KEY: Your Langfuse secret key (for tracing)
 """
 
-from langfuse import observe
+# Load .env BEFORE importing langfuse (it reads env vars at import time)
+from dotenv import load_dotenv
+load_dotenv()
+
+import json
+import time
+from dataclasses import dataclass
+from typing import Any
+
+from langfuse import get_client, observe
 from openai import OpenAI
 from opentelemetry.instrumentation.openai import OpenAIInstrumentor
 
+from extraction.schema import DateComputationResult
 from llm.base import BaseLLMProvider, LLMResponse
+
+
+@dataclass
+class DateComputationResponse:
+    """Response from date computation."""
+
+    content: dict  # The computed dates
+    model: str
+    input_tokens: int
+    output_tokens: int
+    latency_seconds: float
+    code_interpreter_used: bool
+    raw_response: Any = None
 
 # Initialize instrumentation once at module load
 _instrumentor = OpenAIInstrumentor()
@@ -102,5 +125,79 @@ class OpenAIProvider(BaseLLMProvider):
             model=response.model,
             input_tokens=response.usage.prompt_tokens,
             output_tokens=response.usage.completion_tokens,
+            raw_response=response,
+        )
+
+    @observe(name="date-computation-standard")
+    def compute_dates(
+        self,
+        prompt: str,
+        contract_data: dict,
+        tags: list[str] | None = None,
+        model: str | None = None,
+    ) -> DateComputationResponse:
+        """Compute dates using standard chat completion (no code interpreter).
+
+        Args:
+            prompt: The date computation prompt template.
+            contract_data: Dict with agreement_date, effective_date, expiration_date fields.
+            tags: Optional Langfuse tags for tracking.
+            model: Optional model override.
+
+        Returns:
+            DateComputationResponse with computed dates and usage metadata.
+        """
+        start_time = time.time()
+        model = self._resolve_model(model) if model else self._model
+
+        # Update Langfuse trace with tags
+        langfuse = get_client()
+        base_tags = ["date-computation", "code-interpreter:false"]
+        all_tags = base_tags + (tags or [])
+        langfuse.update_current_trace(
+            name="date-computation-standard",
+            tags=all_tags,
+            metadata={
+                "model": model,
+                "provider": self.provider_name,
+                "code_interpreter": False,
+            },
+        )
+
+        # Format the prompt with contract data
+        contract_data_str = json.dumps(contract_data, indent=2)
+        full_prompt = prompt.format(contract_data=contract_data_str)
+
+        # Get JSON schema from Pydantic model
+        date_schema = DateComputationResult.model_json_schema()
+
+        response = self._client.chat.completions.create(
+            model=model,
+            messages=[
+                {
+                    "role": "user",
+                    "content": full_prompt,
+                }
+            ],
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "date_computation_response",
+                    "strict": True,
+                    "schema": date_schema,
+                },
+            },
+        )
+
+        latency = time.time() - start_time
+        computed_dates = json.loads(response.choices[0].message.content)
+
+        return DateComputationResponse(
+            content=computed_dates,
+            model=response.model,
+            input_tokens=response.usage.prompt_tokens,
+            output_tokens=response.usage.completion_tokens,
+            latency_seconds=latency,
+            code_interpreter_used=False,
             raw_response=response,
         )
