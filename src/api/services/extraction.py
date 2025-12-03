@@ -2,6 +2,7 @@
 Contract extraction service that wraps the existing extraction pipeline.
 
 Processes PDFs in-memory without saving to disk.
+All LLM calls are tagged with "source:api" for Langfuse tracking.
 """
 
 import io
@@ -16,6 +17,9 @@ from extraction.extract import extract_contract_metadata, _get_json_schema, _get
 from extraction.schema import ExtractionResponse
 from llm.openai_provider import OpenAIProvider, DateComputationResponse
 from prompts import load_prompt
+
+# Tag for all API-originated LLM calls
+API_TAGS = ["source:api"]
 
 
 def extract_text_from_bytes(pdf_bytes: bytes) -> str:
@@ -57,12 +61,13 @@ def extract_metadata_from_text(text: str, model: str = "gpt-5-mini") -> dict:
     # Get JSON schema
     json_schema = _get_json_schema()
 
-    # Call LLM
+    # Call LLM with API tags for Langfuse tracking
     llm_response = provider.extract_json(
         prompt=prompt,
         document=text,
         json_schema=json_schema,
         model=model,
+        tags=API_TAGS,
     )
 
     # Parse response
@@ -146,11 +151,12 @@ def compute_dates_from_extraction(extraction: dict, model: str = "gpt-5-mini") -
     # Prepare date fields
     date_fields = prepare_date_fields(extraction)
 
-    # Compute dates
+    # Compute dates with API tags for Langfuse tracking
     response: DateComputationResponse = provider.compute_dates(
         prompt=prompt,
         contract_data=date_fields,
         model=model,
+        tags=API_TAGS,
     )
 
     return {

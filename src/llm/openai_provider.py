@@ -86,6 +86,7 @@ class OpenAIProvider(BaseLLMProvider):
         document: str,
         json_schema: dict,
         model: str | None = None,
+        tags: list[str] | None = None,
     ) -> LLMResponse:
         """Extract structured JSON using OpenAI's structured output.
 
@@ -94,11 +95,23 @@ class OpenAIProvider(BaseLLMProvider):
             document: The document text to extract from.
             json_schema: JSON schema defining the expected output structure.
             model: Optional model override.
+            tags: Optional Langfuse tags for tracking.
 
         Returns:
             LLMResponse with the JSON string and usage metadata.
         """
         model = self._resolve_model(model) if model else self._model
+
+        # Update Langfuse trace with tags if provided
+        if tags:
+            langfuse = get_client()
+            base_tags = ["extraction", f"provider:{self.provider_name}"]
+            all_tags = base_tags + tags
+            langfuse.update_current_trace(
+                name="openai-extraction",
+                tags=all_tags,
+                metadata={"model": model, "provider": self.provider_name},
+            )
 
         full_prompt = f"<contract>\n{document}\n</contract>\n\n{prompt}"
 
