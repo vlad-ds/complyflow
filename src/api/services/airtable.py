@@ -1,0 +1,190 @@
+"""
+Airtable service for contract CRUD operations.
+"""
+
+import json
+import os
+from datetime import datetime
+from typing import Any
+
+from pyairtable import Api, Table
+
+
+def date_to_iso(d: dict | str | None) -> str | None:
+    """Convert date dict {year, month, day} to ISO format string."""
+    if d is None:
+        return None
+    if isinstance(d, str):
+        # Already a string, check if it's a special value
+        if d in ("perpetual", "conditional"):
+            return None
+        return d
+    if isinstance(d, dict) and "year" in d:
+        return f"{d['year']}-{d['month']:02d}-{d['day']:02d}"
+    return None
+
+
+def get_expiration_type(expiration_date: Any) -> str | None:
+    """Determine expiration type from the date value."""
+    if expiration_date is None:
+        return None
+    if isinstance(expiration_date, str):
+        if expiration_date == "perpetual":
+            return "perpetual"
+        if expiration_date == "conditional":
+            return "conditional"
+    if isinstance(expiration_date, dict) and "year" in expiration_date:
+        return "absolute"
+    return None
+
+
+def normalize_contract_type(contract_type: str | None) -> str | None:
+    """
+    Normalize contract type to match Airtable single select options.
+
+    Extraction returns: "Sponsorship Agreement", "Service Agreement", etc.
+    Airtable expects: "sponsorship", "services", etc.
+    """
+    if not contract_type:
+        return None
+
+    # Remove " Agreement" suffix and lowercase
+    normalized = contract_type.lower().replace(" agreement", "").strip()
+
+    # Handle special cases
+    type_mapping = {
+        "service": "services",
+        "co-branding": "co-branding",
+        "non-compete": "non-compete",
+        "joint venture": "joint venture",
+        "strategic alliance": "strategic alliance",
+    }
+
+    return type_mapping.get(normalized, normalized)
+
+
+class AirtableService:
+    """Service for interacting with Airtable Contracts table."""
+
+    def __init__(self):
+        api_key = os.environ.get("AIRTABLE_API_KEY")
+        base_id = os.environ.get("AIRTABLE_BASE_ID")
+
+        if not api_key:
+            raise ValueError("AIRTABLE_API_KEY not set")
+        if not base_id:
+            raise ValueError("AIRTABLE_BASE_ID not set")
+
+        self.api = Api(api_key)
+        self.base_id = base_id
+        self.table: Table = self.api.table(base_id, "Contracts")
+
+    def _to_airtable_fields(self, contract: dict) -> dict:
+        """Convert contract dict to Airtable fields format."""
+        extraction = contract.get("extraction", {})
+        computed_dates = contract.get("computed_dates", {})
+
+        # Handle parties - can be list or dict with normalized_value
+        parties = extraction.get("parties")
+        if isinstance(parties, dict):
+            parties = parties.get("normalized_value", [])
+        if isinstance(parties, list):
+            parties = json.dumps(parties)
+        else:
+            parties = str(parties) if parties else ""
+
+        # Handle other extraction fields that might be dicts
+        def get_normalized(field_data: Any) -> str | None:
+            if field_data is None:
+                return None
+            if isinstance(field_data, dict):
+                return field_data.get("normalized_value")
+            return str(field_data)
+
+        # Get expiration date for type determination
+        exp_date = computed_dates.get("expiration_date")
+
+        # Normalize contract type for Airtable
+        raw_contract_type = get_normalized(extraction.get("contract_type"))
+        normalized_type = normalize_contract_type(raw_contract_type)
+
+        fields = {
+            "filename": contract.get("filename", ""),
+            "parties": parties,
+            "contract_type": normalized_type,
+            "agreement_date": date_to_iso(computed_dates.get("agreement_date")),
+            "effective_date": date_to_iso(computed_dates.get("effective_date")),
+            "expiration_date": date_to_iso(exp_date),
+            "expiration_type": get_expiration_type(exp_date),
+            "notice_deadline": date_to_iso(computed_dates.get("notice_deadline")),
+            "first_renewal_date": date_to_iso(computed_dates.get("first_renewal_date")),
+            "governing_law": get_normalized(extraction.get("governing_law")),
+            "notice_period": get_normalized(extraction.get("notice_period")),
+            "renewal_term": get_normalized(extraction.get("renewal_term")),
+            "status": "under_review",
+            "raw_extraction": json.dumps(contract, indent=2, default=str),
+        }
+
+        # Remove None values - Airtable doesn't like them
+        return {k: v for k, v in fields.items() if v is not None}
+
+    def create_contract(self, contract: dict) -> dict:
+        """
+        Create a new contract record in Airtable.
+
+        Args:
+            contract: Dict with 'filename', 'extraction', 'computed_dates'
+
+        Returns:
+            Created record with 'id' and 'fields'
+        """
+        fields = self._to_airtable_fields(contract)
+        record = self.table.create(fields)
+        return record
+
+    def get_contract(self, record_id: str) -> dict | None:
+        """Get a contract by its Airtable record ID."""
+        try:
+            return self.table.get(record_id)
+        except Exception:
+            return None
+
+    def update_contract(self, record_id: str, fields: dict) -> dict:
+        """Update a contract record."""
+        return self.table.update(record_id, fields)
+
+    def mark_reviewed(self, record_id: str) -> dict:
+        """Mark a contract as reviewed."""
+        return self.table.update(
+            record_id,
+            {
+                "status": "reviewed",
+                "reviewed_at": datetime.now().strftime("%Y-%m-%d"),
+            },
+        )
+
+    def list_contracts(
+        self,
+        status: str | None = None,
+        limit: int = 100,
+    ) -> list[dict]:
+        """
+        List contracts with optional status filter.
+
+        Args:
+            status: Filter by 'under_review' or 'reviewed'
+            limit: Max records to return
+
+        Returns:
+            List of contract records
+        """
+        formula = None
+        if status:
+            formula = f"{{status}} = '{status}'"
+
+        records = self.table.all(formula=formula, max_records=limit)
+        return records
+
+    def get_airtable_url(self, record_id: str) -> str:
+        """Get the direct URL to a record in Airtable."""
+        return f"https://airtable.com/{self.base_id}/Contracts/{record_id}"
