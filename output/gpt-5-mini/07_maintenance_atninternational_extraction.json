@@ -1,0 +1,54 @@
+{
+  "source_file": "07_maintenance_atninternational.txt",
+  "provider": "openai",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This Network Build and Maintenance Agreement is entered into as of the 31st day of July, 2019 (the \u201cEffective Date\u201d) by and between Commnet Wireless, LLC, a Delaware limited liability company (hereinafter referred to as \u201cVendor\u201d), and AT&T Mobility LLC, a Delaware limited liability company on behalf of itself and its Affiliates (as such term is defined herein) (collectively and hereinafter referred to as \u201cAT&T\u201d), each of which may be referred to in the singular as a \u201cParty\u201d or in the plural as the \u201cParties.\u201d",
+      "reasoning": "The sentence explicitly states the parties to the agreement ('by and between ... Commnet Wireless, LLC ... and AT&T Mobility LLC') and identifies their legal names and roles. It is the formal contracting clause that introduces the parties.",
+      "normalized_value": [
+        "Commnet Wireless, LLC",
+        "AT&T Mobility LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "Subject to the terms and conditions of this Agreement, Vendor shall (i) build, install and deploy a radio access network (\u201cRAN\u201d) at certain Cell Sites in one or more states for AT&T and its Affiliates as more particularly described in Addendum 1: Network Build and Structured Payments (the \u201cBuild Addendum\u201d) attached hereto, (ii) provide ongoing maintenance of the RAN network constructed by Vendor pursuant to the Build Addendum as more particularly described in Addendum 2: Maintenance (the \u201cMaintenance Addendum\u201d) attached hereto and (iii) provide to AT&T certain other Material and Services related thereto as described herein and therein.",
+      "reasoning": "The core obligations are (i) to build/install/deploy a RAN and (ii) to provide ongoing maintenance of that RAN. The economic substance is construction/implementation plus ongoing maintenance services. The title also uses 'Network Build and Maintenance Agreement.' The primary purpose fits 'Maintenance Agreement' from the provided categories.",
+      "normalized_value": "Maintenance Agreement"
+    },
+    "agreement_date": {
+      "raw_snippet": "This Network Build and Maintenance Agreement is entered into as of the 31st day of July, 2019 (the \u201cEffective Date\")",
+      "reasoning": "The phrase 'is entered into as of the 31st day of July, 2019' identifies when the agreement was made/signed. This is the contract 'made' date reproduced verbatim in the document.",
+      "normalized_value": "2019-07-31"
+    },
+    "effective_date": {
+      "raw_snippet": "This Network Build and Maintenance Agreement is entered into as of the 31st day of July, 2019 (the \u201cEffective Date\")",
+      "reasoning": "The same clause defines the parenthetical '(the \u201cEffective Date\")' immediately after the 'entered into as of the 31st day of July, 2019' language, so the Effective Date is explicitly defined as July 31, 2019.",
+      "normalized_value": "2019-07-31"
+    },
+    "expiration_date": {
+      "raw_snippet": "The \u201cTerm\u201d of this Agreement shall commence on the Effective Date and shall continue in full force and effect until the expiration or earlier termination of the last Addendum to expire or be terminated, at which time this Agreement will expire, unless this Agreement is sooner terminated in accordance with the terms and provisions of this Agreement.",
+      "reasoning": "Section 1.2 ('Term of Agreement') explicitly sets the duration: the Agreement continues from the Effective Date until the last Addendum expires or is terminated. This is a relative term (based on addenda), not a fixed calendar date.",
+      "normalized_value": "shall continue in full force and effect until the expiration or earlier termination of the last Addendum to expire or be terminated"
+    },
+    "governing_law": {
+      "raw_snippet": "The laws of the State of New York (excluding any laws that direct the application of another jurisdiction\u2019s law) govern all matters arising out of or relating to this Agreement and all of the transactions it contemplates, including its validity, interpretation, construction, performance, and enforcement.",
+      "reasoning": "Section 3.14 is the governing law clause and explicitly states that the laws of the State of New York govern the agreement.",
+      "normalized_value": "New York"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "I searched the Agreement for any clause that creates an automatic renewal with an advance notice period to prevent renewal (e.g., 'X days prior to expiration'), but the document contains no automatic-renewal/prevention-of-renewal notice period language. The Term is tied to expiration/termination of addenda rather than an auto-renewal mechanism requiring advance notice.",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "The Agreement defines a Term tied to the addenda expiration/termination and contains no explicit renewal language (no automatic renewal or renewal terms were found). Therefore there is no renewal term to extract.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 50791,
+    "output_tokens": 2395
+  }
+}

@@ -1,0 +1,494 @@
+{
+  "eval_id": "date_eval_std_20251203_062630",
+  "split": "train",
+  "model": "gpt-5-mini",
+  "code_interpreter": false,
+  "num_files": 10,
+  "num_successful": 10,
+  "total_input_tokens": 23281,
+  "total_output_tokens": 4036,
+  "total_latency_seconds": 73.3751266002655,
+  "avg_latency_seconds": 7.33751266002655,
+  "files": [
+    {
+      "source_file": "01_service_gpaq_extraction.json",
+      "input_data": {
+        "agreement_date": {
+          "raw_snippet": "This SPONSORSHIP AND SERVICES AGREEMENT (the \u201cAgreement\u201d) is made and entered into as of the 19th day of December, 2018, by and among HOF Village, LLC, a Delaware limited liability company (\u201cHOFV\u201d), National Football Museum, Inc., d/b/a Pro Football Hall of Fame, an Ohio corporation (\u201cPFHOF\u201d and, together with HOFV, the \u201cHOF Entities\u201d) and Constellation NewEnergy, Inc., a Delaware corporation, on behalf of itself and its retail affiliates and subsidiaries (collectively, \u201cConstellation\u201d).",
+          "normalized_value": "2018-12-19"
+        },
+        "effective_date": {
+          "raw_snippet": "The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+          "normalized_value": "2018-12-19"
+        },
+        "expiration_date": {
+          "raw_snippet": "The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+          "normalized_value": "2028-12-31"
+        },
+        "notice_period": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        },
+        "renewal_term": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        }
+      },
+      "computed_dates": {
+        "agreement_date": {
+          "year": 2018,
+          "month": 12,
+          "day": 19
+        },
+        "effective_date": {
+          "year": 2018,
+          "month": 12,
+          "day": 19
+        },
+        "expiration_date": {
+          "year": 2028,
+          "month": 12,
+          "day": 31
+        },
+        "notice_deadline": null,
+        "first_renewal_date": null
+      },
+      "model": "gpt-5-mini-2025-08-07",
+      "input_tokens": 2364,
+      "output_tokens": 270,
+      "latency_seconds": 6.232626914978027,
+      "code_interpreter_used": false,
+      "eval_id": "date_eval_std_20251203_062630"
+    },
+    {
+      "source_file": "02_service_reynolds_extraction.json",
+      "input_data": {
+        "agreement_date": {
+          "raw_snippet": "TRANSITION SERVICES AGREEMENT (the \u201cAgreement\u201d) dated as of [\u2022], 2020, between Reynolds Group Holdings Inc., a Delaware corporation\n(\u201cRGHI\u201d), and Reynolds Consumer Products Inc., a Delaware corporation, (the \u201cCompany\u201d or \u201cRCP\u201d).",
+          "normalized_value": ""
+        },
+        "effective_date": {
+          "raw_snippet": "Effective February 4, 2020 (the \u201cCommencement Date\u201d), RCP is undertaking an initial public offering of shares of common stock and thereafter the Company will no longer be a subsidiary of RGHL.",
+          "normalized_value": "2020-02-04"
+        },
+        "expiration_date": {
+          "raw_snippet": "With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \u201cCommencement Date\u201d), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \u201cTerm\u201d) or (ii) earlier terminated pursuant to this Agreement (a \u201cTermination Date\u201d).",
+          "normalized_value": "12 months following the Commencement Date"
+        },
+        "notice_period": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        },
+        "renewal_term": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        }
+      },
+      "computed_dates": {
+        "agreement_date": null,
+        "effective_date": {
+          "year": 2020,
+          "month": 2,
+          "day": 4
+        },
+        "expiration_date": {
+          "year": 2021,
+          "month": 2,
+          "day": 4
+        },
+        "notice_deadline": null,
+        "first_renewal_date": null
+      },
+      "model": "gpt-5-mini-2025-08-07",
+      "input_tokens": 2365,
+      "output_tokens": 294,
+      "latency_seconds": 5.716085910797119,
+      "code_interpreter_used": false,
+      "eval_id": "date_eval_std_20251203_062630"
+    },
+    {
+      "source_file": "03_service_verizon_extraction.json",
+      "input_data": {
+        "agreement_date": {
+          "raw_snippet": "Dated as of January 29, 2020",
+          "normalized_value": "2020-01-29"
+        },
+        "effective_date": {
+          "raw_snippet": "Closing Date means January 29, 2020.",
+          "normalized_value": "2020-01-29"
+        },
+        "expiration_date": {
+          "raw_snippet": "Section 8.3 Termination. This Agreement will terminate on the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement.",
+          "normalized_value": "the earlier to occur of (a) the date upon which the last remaining Receivable is paid in full, settled, sold or written off and any amounts received are applied and (b) the Issuer is terminated under Section 8.1 of the Trust Agreement"
+        },
+        "notice_period": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        },
+        "renewal_term": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        }
+      },
+      "computed_dates": {
+        "agreement_date": {
+          "year": 2020,
+          "month": 1,
+          "day": 29
+        },
+        "effective_date": {
+          "year": 2020,
+          "month": 1,
+          "day": 29
+        },
+        "expiration_date": "conditional",
+        "notice_deadline": null,
+        "first_renewal_date": null
+      },
+      "model": "gpt-5-mini-2025-08-07",
+      "input_tokens": 2243,
+      "output_tokens": 219,
+      "latency_seconds": 4.6937830448150635,
+      "code_interpreter_used": false,
+      "eval_id": "date_eval_std_20251203_062630"
+    },
+    {
+      "source_file": "04_service_integrity_extraction.json",
+      "input_data": {
+        "agreement_date": {
+          "raw_snippet": "January 18, 2020",
+          "normalized_value": "2020-01-18"
+        },
+        "effective_date": {
+          "raw_snippet": "In Witness Whereof, the parties hereto have caused this Agreement to be executed as of the date first set forth herein.",
+          "normalized_value": "2020-01-18"
+        },
+        "expiration_date": {
+          "raw_snippet": "Section 7.1 This Agreement shall continue until January 18, 2022, and thereafter shall continue automatically for successive annual\nperiods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s\nBoard of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees who are not interested persons\n(as defined in the 1940 Act) of the Fund and who have no direct or indirect financial interest in the operation of the Plan, in this\nAgreement, or any agreement related to the Plan (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the\npurpose of voting on such approval.",
+          "normalized_value": "2022-01-18"
+        },
+        "notice_period": {
+          "raw_snippet": "This Agreement is terminable with respect to the Fund, without penalty, (a) on 60 days\u2019 written notice, by vote of a majority of the Qualified Trustees or by vote of a majority (as defined in the 1940 Act) of the outstanding voting securities of the Fund or (b) on 90 days\u2019 written notice by Integrity.",
+          "normalized_value": "60 days (Fund) / 90 days (Integrity)"
+        },
+        "renewal_term": {
+          "raw_snippet": "and thereafter shall continue automatically for successive annual periods ending on January 18th of each year, provided such continuance is specifically approved at least annually by (a) the Fund\u2019s Board of Trustees and (b) a vote of a majority (as defined in the 1940 Act) of the Fund\u2019s Trustees ... (the \u201cQualified Trustees\u201d), by vote cast in person at a meeting called for the purpose of voting on such approval.",
+          "normalized_value": "1 year auto-renewal (successive annual periods)"
+        }
+      },
+      "computed_dates": {
+        "agreement_date": {
+          "year": 2020,
+          "month": 1,
+          "day": 18
+        },
+        "effective_date": {
+          "year": 2020,
+          "month": 1,
+          "day": 18
+        },
+        "expiration_date": {
+          "year": 2022,
+          "month": 1,
+          "day": 18
+        },
+        "notice_deadline": {
+          "year": 2021,
+          "month": 11,
+          "day": 19
+        },
+        "first_renewal_date": {
+          "year": 2022,
+          "month": 1,
+          "day": 18
+        }
+      },
+      "model": "gpt-5-mini-2025-08-07",
+      "input_tokens": 2506,
+      "output_tokens": 1259,
+      "latency_seconds": 19.72911787033081,
+      "code_interpreter_used": false,
+      "eval_id": "date_eval_std_20251203_062630"
+    },
+    {
+      "source_file": "05_license_gopage_extraction.json",
+      "input_data": {
+        "agreement_date": {
+          "raw_snippet": "dated as of Feb 10, 2014",
+          "normalized_value": "2014-02-10"
+        },
+        "effective_date": {
+          "raw_snippet": "dated as of Feb 10, 2014 (the \"Effective Date\")",
+          "normalized_value": "2014-02-10"
+        },
+        "expiration_date": {
+          "raw_snippet": "The initial term of this Agreement commences as of the Effective Date and, unless terminated earlier pursuant to any express provision\nof this Agreement, shall continue until five (5) years following the Effective Date (the \"Initial Term\").",
+          "normalized_value": "five (5) years following the Effective Date"
+        },
+        "notice_period": {
+          "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\") unless either party provides the other with written notice of non-renewal at least ninety (90) days before the expiration of the Initial Term].",
+          "normalized_value": "90 days"
+        },
+        "renewal_term": {
+          "raw_snippet": "Thereafter, this Agreement shall renew automatically for one (1) additional three (3) year period (the \"Renewal Term\" and collectively, together with the Initial Term, the \"Term\")",
+          "normalized_value": "3 year auto-renewal"
+        }
+      },
+      "computed_dates": {
+        "agreement_date": {
+          "year": 2014,
+          "month": 2,
+          "day": 10
+        },
+        "effective_date": {
+          "year": 2014,
+          "month": 2,
+          "day": 10
+        },
+        "expiration_date": {
+          "year": 2019,
+          "month": 2,
+          "day": 10
+        },
+        "notice_deadline": {
+          "year": 2018,
+          "month": 11,
+          "day": 12
+        },
+        "first_renewal_date": {
+          "year": 2019,
+          "month": 2,
+          "day": 10
+        }
+      },
+      "model": "gpt-5-mini-2025-08-07",
+      "input_tokens": 2306,
+      "output_tokens": 619,
+      "latency_seconds": 10.478797912597656,
+      "code_interpreter_used": false,
+      "eval_id": "date_eval_std_20251203_062630"
+    },
+    {
+      "source_file": "06_license_morganstanley_extraction.json",
+      "input_data": {
+        "agreement_date": {
+          "raw_snippet": "This TRADEMARK LICENSE AGREEMENT (the \u201cAgreement\u201d) is effective as of the [\u00b7] day of [\u00b7], 2019 (\u201cEffective Date\u201d)",
+          "normalized_value": ""
+        },
+        "effective_date": {
+          "raw_snippet": "This TRADEMARK LICENSE AGREEMENT (the \u201cAgreement\u201d) is effective as of the [\u00b7] day of [\u00b7], 2019 (\u201cEffective Date\u201d)",
+          "normalized_value": ""
+        },
+        "expiration_date": {
+          "raw_snippet": "Section 4.1.Term. The term of this Agreement commences on the Effective Date and continues in perpetuity, unless termination occurs pursuant to Sections 4.2 through 4.4.",
+          "normalized_value": "perpetual"
+        },
+        "notice_period": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        },
+        "renewal_term": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        }
+      },
+      "computed_dates": {
+        "agreement_date": null,
+        "effective_date": null,
+        "expiration_date": "perpetual",
+        "notice_deadline": null,
+        "first_renewal_date": null
+      },
+      "model": "gpt-5-mini-2025-08-07",
+      "input_tokens": 2233,
+      "output_tokens": 239,
+      "latency_seconds": 3.9286952018737793,
+      "code_interpreter_used": false,
+      "eval_id": "date_eval_std_20251203_062630"
+    },
+    {
+      "source_file": "07_license_cytodyn_extraction.json",
+      "input_data": {
+        "agreement_date": {
+          "raw_snippet": "This Commercialization and License Agreement (this \u201cAgreement\u201d) is made effective as of December 17, 2019 (the \u201cEffective Date\u201d) by and between\nVyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d).",
+          "normalized_value": "2019-12-17"
+        },
+        "effective_date": {
+          "raw_snippet": "This Commercialization and License Agreement (this \u201cAgreement\u201d) is made effective as of December 17, 2019 (the \u201cEffective Date\u201d) by and between\nVyera Pharmaceuticals, LLC, a Delaware limited liability company (\u201cVyera\u201d), and CytoDyn Inc., a Delaware corporation (\u201cCytoDyn\u201d).",
+          "normalized_value": "2019-12-17"
+        },
+        "expiration_date": {
+          "raw_snippet": "The term of this Agreement (\u201cTerm\u201d) shall commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall\nexpire on the last day of the Royalty Term.",
+          "normalized_value": "commence upon the Effective Date and, unless earlier terminated pursuant to this Article 11, shall expire on the last day of the Royalty Term."
+        },
+        "notice_period": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        },
+        "renewal_term": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        }
+      },
+      "computed_dates": {
+        "agreement_date": {
+          "year": 2019,
+          "month": 12,
+          "day": 17
+        },
+        "effective_date": {
+          "year": 2019,
+          "month": 12,
+          "day": 17
+        },
+        "expiration_date": "conditional",
+        "notice_deadline": null,
+        "first_renewal_date": null
+      },
+      "model": "gpt-5-mini-2025-08-07",
+      "input_tokens": 2348,
+      "output_tokens": 295,
+      "latency_seconds": 5.793551921844482,
+      "code_interpreter_used": false,
+      "eval_id": "date_eval_std_20251203_062630"
+    },
+    {
+      "source_file": "08_license_artara_extraction.json",
+      "input_data": {
+        "agreement_date": {
+          "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
+          "normalized_value": "2018-11-28"
+        },
+        "effective_date": {
+          "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
+          "normalized_value": "2018-11-28"
+        },
+        "expiration_date": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        },
+        "notice_period": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        },
+        "renewal_term": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        }
+      },
+      "computed_dates": {
+        "agreement_date": {
+          "year": 2018,
+          "month": 11,
+          "day": 28
+        },
+        "effective_date": {
+          "year": 2018,
+          "month": 11,
+          "day": 28
+        },
+        "expiration_date": null,
+        "notice_deadline": null,
+        "first_renewal_date": null
+      },
+      "model": "gpt-5-mini-2025-08-07",
+      "input_tokens": 2331,
+      "output_tokens": 259,
+      "latency_seconds": 5.87934684753418,
+      "code_interpreter_used": false,
+      "eval_id": "date_eval_std_20251203_062630"
+    },
+    {
+      "source_file": "09_outsourcing_photronics_extraction.json",
+      "input_data": {
+        "agreement_date": {
+          "raw_snippet": "This OUTSOURCING AGREEMENT (this \u201cAgreement\u201d) is made and entered into as of the 16th day of May, 2017,",
+          "normalized_value": "2017-05-16"
+        },
+        "effective_date": {
+          "raw_snippet": "This OUTSOURCING AGREEMENT (this \u201cAgreement\u201d) is made and entered into as of the 16th day of May, 2017,",
+          "normalized_value": "2017-05-16"
+        },
+        "expiration_date": {
+          "raw_snippet": "This Agreement shall become effective as of the Effective Date and shall continue to be in full force and effect for so long as\nPhotronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company.",
+          "normalized_value": "shall continue to be in full force and effect for so long as Photronics and DNP, or any of their Affiliates, each remains a Shareholder of the Company."
+        },
+        "notice_period": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        },
+        "renewal_term": {
+          "raw_snippet": "",
+          "normalized_value": ""
+        }
+      },
+      "computed_dates": {
+        "agreement_date": {
+          "year": 2017,
+          "month": 5,
+          "day": 16
+        },
+        "effective_date": {
+          "year": 2017,
+          "month": 5,
+          "day": 16
+        },
+        "expiration_date": "conditional",
+        "notice_deadline": null,
+        "first_renewal_date": null
+      },
+      "model": "gpt-5-mini-2025-08-07",
+      "input_tokens": 2259,
+      "output_tokens": 259,
+      "latency_seconds": 4.829806089401245,
+      "code_interpreter_used": false,
+      "eval_id": "date_eval_std_20251203_062630"
+    },
+    {
+      "source_file": "10_outsourcing_paratek_extraction.json",
+      "input_data": {
+        "agreement_date": {
+          "raw_snippet": "THIS AGREEMENT (this \u201cAgreement\u201d), dated December 30, 2016 (the \u201cEffective Date\u201d), is",
+          "normalized_value": "2016-12-30"
+        },
+        "effective_date": {
+          "raw_snippet": "THIS AGREEMENT (this \u201cAgreement\u201d), dated December 30, 2016 (the \u201cEffective Date\u201d), is",
+          "normalized_value": "2016-12-30"
+        },
+        "expiration_date": {
+          "raw_snippet": "This Agreement shall commence on the Effective Date and shall be valid until the [* * *] (the \u201cInitial Term\u201d).",
+          "normalized_value": ""
+        },
+        "notice_period": {
+          "raw_snippet": "a) Customer delivers written notice of termination to Supplier at least [* * *] prior to the expiration date of the Initial Term, which termination shall\nbe effective as of the expiration date of the Initial Term\u037e",
+          "normalized_value": ""
+        },
+        "renewal_term": {
+          "raw_snippet": "Should the Parties have not agreed to the following agreement by [* * *], this Agreement shall automatically stay in force for a maximum of [* * *] (unless otherwise mutually agreed by the Parties or as otherwise set forth in Section 18.1(a)) or until the Parties have signed the follow-on agreement (the \u201cRenewal Term\u201d).",
+          "normalized_value": ""
+        }
+      },
+      "computed_dates": {
+        "agreement_date": {
+          "year": 2016,
+          "month": 12,
+          "day": 30
+        },
+        "effective_date": {
+          "year": 2016,
+          "month": 12,
+          "day": 30
+        },
+        "expiration_date": null,
+        "notice_deadline": null,
+        "first_renewal_date": null
+      },
+      "model": "gpt-5-mini-2025-08-07",
+      "input_tokens": 2326,
+      "output_tokens": 323,
+      "latency_seconds": 6.09331488609314,
+      "code_interpreter_used": false,
+      "eval_id": "date_eval_std_20251203_062630"
+    }
+  ]
+}

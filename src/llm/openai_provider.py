@@ -8,6 +8,10 @@ Requires environment variables:
 - LANGFUSE_SECRET_KEY: Your Langfuse secret key (for tracing)
 """
 
+# Load .env BEFORE importing langfuse (it reads env vars at import time)
+from dotenv import load_dotenv
+load_dotenv()
+
 import json
 import time
 from dataclasses import dataclass
@@ -17,6 +21,7 @@ from langfuse import get_client, observe
 from openai import OpenAI
 from opentelemetry.instrumentation.openai import OpenAIInstrumentor
 
+from extraction.schema import DateComputationResult
 from llm.base import BaseLLMProvider, LLMResponse
 
 
@@ -163,43 +168,8 @@ class OpenAIProvider(BaseLLMProvider):
         contract_data_str = json.dumps(contract_data, indent=2)
         full_prompt = prompt.format(contract_data=contract_data_str)
 
-        # Define the output schema for structured output
-        # Date field can be: {year, month, day} object, null, or string (for "perpetual"/"conditional")
-        date_field_schema = {
-            "anyOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "year": {"type": "integer"},
-                        "month": {"type": "integer"},
-                        "day": {"type": "integer"},
-                    },
-                    "required": ["year", "month", "day"],
-                    "additionalProperties": False,
-                },
-                {"type": "null"},
-                {"type": "string"},
-            ]
-        }
-
-        date_schema = {
-            "type": "object",
-            "properties": {
-                "agreement_date": date_field_schema,
-                "effective_date": date_field_schema,
-                "expiration_date": date_field_schema,
-                "notice_deadline": date_field_schema,
-                "first_renewal_date": date_field_schema,
-            },
-            "required": [
-                "agreement_date",
-                "effective_date",
-                "expiration_date",
-                "notice_deadline",
-                "first_renewal_date",
-            ],
-            "additionalProperties": False,
-        }
+        # Get JSON schema from Pydantic model
+        date_schema = DateComputationResult.model_json_schema()
 
         response = self._client.chat.completions.create(
             model=model,

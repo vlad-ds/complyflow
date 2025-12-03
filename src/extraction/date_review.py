@@ -6,7 +6,6 @@ Generates CSV and markdown tables for manual review of computed dates.
 import csv
 import json
 from pathlib import Path
-from typing import Literal
 
 
 def format_date_obj(date_val) -> str:
@@ -25,50 +24,6 @@ def format_date_obj(date_val) -> str:
     if isinstance(date_val, dict):
         return f"{date_val['year']}-{date_val['month']:02d}-{date_val['day']:02d}"
     return str(date_val)
-
-
-def needs_review(input_data: dict, computed_dates: dict) -> bool:
-    """Determine if a result needs manual review.
-
-    A result needs review if:
-    - expiration_date was computed from a relative term
-    - any field has a special marker (perpetual, conditional)
-
-    Args:
-        input_data: The input date fields from extraction.
-        computed_dates: The computed date objects.
-
-    Returns:
-        True if manual review is recommended.
-    """
-    # Check for special markers
-    for field in ["agreement_date", "effective_date", "expiration_date"]:
-        val = computed_dates.get(field)
-        if isinstance(val, str) and val in ("perpetual", "conditional"):
-            return True
-
-    # Check if expiration_date was computed from relative term
-    exp_input = input_data.get("expiration_date", {}).get("normalized_value", "")
-    if exp_input and not _is_iso_date(exp_input):
-        return True
-
-    return False
-
-
-def _is_iso_date(value: str) -> bool:
-    """Check if a string is an ISO date (YYYY-MM-DD)."""
-    if not value:
-        return False
-    parts = value.split("-")
-    if len(parts) != 3:
-        return False
-    try:
-        int(parts[0])
-        int(parts[1])
-        int(parts[2])
-        return True
-    except ValueError:
-        return False
 
 
 def generate_review_csv(
@@ -122,8 +77,7 @@ def generate_review_csv(
             ),
             "first_renewal_date": format_date_obj(computed.get("first_renewal_date")),
             # Metadata
-            "needs_review": "YES" if needs_review(input_data, computed) else "",
-            "code_interpreter": "YES" if result.get("code_interpreter_used") else "NO",
+            "code_interpreter": "TRUE" if result.get("code_interpreter_used") else "FALSE",
             "latency_s": f"{result.get('latency_seconds', 0):.1f}",
         }
         rows.append(row)
@@ -141,7 +95,6 @@ def generate_review_csv(
         "notice_deadline",
         "renewal_term",
         "first_renewal_date",
-        "needs_review",
         "code_interpreter",
         "latency_s",
     ]
@@ -153,7 +106,6 @@ def generate_review_csv(
 
     print(f"Generated review CSV: {output_path}")
     print(f"  Total contracts: {len(rows)}")
-    print(f"  Needs review: {sum(1 for r in rows if r['needs_review'] == 'YES')}")
 
     return output_path
 
@@ -237,72 +189,6 @@ def generate_review_markdown(
         f.write("\n".join(lines))
 
     print(f"Generated review markdown: {output_path}")
-    return output_path
-
-
-def generate_comparison_table(
-    ci_results_dir: Path,
-    std_results_dir: Path,
-    output_path: Path,
-) -> Path:
-    """Generate a comparison table between code interpreter and standard results.
-
-    Args:
-        ci_results_dir: Directory with code interpreter results.
-        std_results_dir: Directory with standard results.
-        output_path: Path to save the comparison CSV.
-
-    Returns:
-        Path to the generated CSV file.
-    """
-    ci_files = {f.name: f for f in ci_results_dir.glob("*_dates.json")}
-    std_files = {f.name: f for f in std_results_dir.glob("*_dates.json")}
-
-    rows = []
-    all_files = set(ci_files.keys()) | set(std_files.keys())
-
-    for filename in sorted(all_files):
-        ci_data = {}
-        std_data = {}
-
-        if filename in ci_files:
-            with open(ci_files[filename]) as f:
-                ci_data = json.load(f)
-        if filename in std_files:
-            with open(std_files[filename]) as f:
-                std_data = json.load(f)
-
-        ci_computed = ci_data.get("computed_dates", {})
-        std_computed = std_data.get("computed_dates", {})
-
-        # Compare each field
-        for field in ["agreement_date", "effective_date", "expiration_date"]:
-            ci_val = format_date_obj(ci_computed.get(field))
-            std_val = format_date_obj(std_computed.get(field))
-            match = "YES" if ci_val == std_val else "NO"
-
-            rows.append(
-                {
-                    "contract": filename.replace("_dates.json", ""),
-                    "field": field,
-                    "code_interpreter": ci_val,
-                    "standard": std_val,
-                    "match": match,
-                }
-            )
-
-    fieldnames = ["contract", "field", "code_interpreter", "standard", "match"]
-
-    with open(output_path, "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
-
-    matches = sum(1 for r in rows if r["match"] == "YES")
-    total = len(rows)
-    print(f"Generated comparison CSV: {output_path}")
-    print(f"  Match rate: {matches}/{total} ({matches/total:.1%})")
-
     return output_path
 
 

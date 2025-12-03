@@ -1,0 +1,1539 @@
+{
+  "eval_id": "date_eval_all_20251203_081548",
+  "timestamp": "20251203_081548",
+  "model": "gpt-5-mini",
+  "split": "all",
+  "num_contracts": 20,
+  "total_fields": 120,
+  "correct_fields": 117,
+  "field_accuracy": 0.975,
+  "contracts_perfect": 17,
+  "contract_accuracy": 0.85,
+  "total_input_tokens": 64547,
+  "total_output_tokens": 14086,
+  "total_latency_seconds": 241.20905184745789,
+  "avg_latency_seconds": 12.060452592372894,
+  "langfuse_cost_usd": 0.042784499999000004,
+  "contracts": [
+    {
+      "contract_id": "01_service_gpaq",
+      "split": "train",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2018,
+            "month": 12,
+            "day": 19
+          },
+          "actual": {
+            "year": 2018,
+            "month": 12,
+            "day": 19
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2018,
+            "month": 12,
+            "day": 19
+          },
+          "actual": {
+            "year": 2018,
+            "month": 12,
+            "day": 19
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 2028,
+            "month": 12,
+            "day": 31
+          },
+          "actual": {
+            "year": 2028,
+            "month": 12,
+            "day": 31
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": false,
+          "actual": false,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3215,
+      "output_tokens": 388,
+      "latency_seconds": 6.818966865539551,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "01_service_mplx",
+      "split": "test",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2015,
+            "month": 6,
+            "day": 11
+          },
+          "actual": {
+            "year": 2015,
+            "month": 6,
+            "day": 11
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2015,
+            "month": 6,
+            "day": 11
+          },
+          "actual": {
+            "year": 2015,
+            "month": 6,
+            "day": 11
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": "conditional",
+          "actual": "conditional",
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3362,
+      "output_tokens": 430,
+      "latency_seconds": 8.06761884689331,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "02_service_martinmidstream",
+      "split": "test",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2003,
+            "month": 12,
+            "day": 23
+          },
+          "actual": {
+            "year": 2003,
+            "month": 12,
+            "day": 23
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2003,
+            "month": 12,
+            "day": 23
+          },
+          "actual": {
+            "year": 2003,
+            "month": 12,
+            "day": 23
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 2006,
+            "month": 12,
+            "day": 23
+          },
+          "actual": {
+            "year": 2006,
+            "month": 12,
+            "day": 23
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": {
+            "year": 2006,
+            "month": 11,
+            "day": 23
+          },
+          "actual": {
+            "year": 2006,
+            "month": 11,
+            "day": 23
+          },
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": {
+            "year": 2006,
+            "month": 12,
+            "day": 23
+          },
+          "actual": {
+            "year": 2006,
+            "month": 12,
+            "day": 23
+          },
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3355,
+      "output_tokens": 562,
+      "latency_seconds": 11.668489933013916,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "02_service_reynolds",
+      "split": "train",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2020,
+            "month": 2,
+            "day": 4
+          },
+          "actual": {
+            "year": 2020,
+            "month": 2,
+            "day": 4
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 2021,
+            "month": 2,
+            "day": 4
+          },
+          "actual": {
+            "year": 2021,
+            "month": 2,
+            "day": 4
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3216,
+      "output_tokens": 493,
+      "latency_seconds": 8.275657892227173,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "03_service_blackstonegsolo",
+      "split": "test",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2011,
+            "month": 1,
+            "day": 26
+          },
+          "actual": {
+            "year": 2011,
+            "month": 1,
+            "day": 26
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2011,
+            "month": 1,
+            "day": 26
+          },
+          "actual": null,
+          "match": false
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 2014,
+            "month": 1,
+            "day": 26
+          },
+          "actual": {
+            "year": 2014,
+            "month": 1,
+            "day": 26
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": {
+            "year": 2013,
+            "month": 11,
+            "day": 27
+          },
+          "actual": {
+            "year": 2013,
+            "month": 11,
+            "day": 27
+          },
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": {
+            "year": 2014,
+            "month": 1,
+            "day": 26
+          },
+          "actual": {
+            "year": 2014,
+            "month": 1,
+            "day": 26
+          },
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 5,
+      "fields_total": 6,
+      "accuracy": 0.8333333333333334,
+      "input_tokens": 3235,
+      "output_tokens": 731,
+      "latency_seconds": 11.918980121612549,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "03_service_verizon",
+      "split": "train",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2020,
+            "month": 1,
+            "day": 29
+          },
+          "actual": {
+            "year": 2020,
+            "month": 1,
+            "day": 29
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2020,
+            "month": 1,
+            "day": 29
+          },
+          "actual": {
+            "year": 2020,
+            "month": 1,
+            "day": 29
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": "conditional",
+          "actual": "conditional",
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3094,
+      "output_tokens": 238,
+      "latency_seconds": 4.814763069152832,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "04_service_atmosenergy",
+      "split": "test",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 1992,
+            "month": 5,
+            "day": 20
+          },
+          "actual": {
+            "year": 1992,
+            "month": 5,
+            "day": 20
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 1992,
+            "month": 5,
+            "day": 20
+          },
+          "actual": null,
+          "match": false
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 2002,
+            "month": 5,
+            "day": 20
+          },
+          "actual": {
+            "year": 2002,
+            "month": 5,
+            "day": 20
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": {
+            "year": 2001,
+            "month": 11,
+            "day": 21
+          },
+          "actual": {
+            "year": 2001,
+            "month": 11,
+            "day": 21
+          },
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": {
+            "year": 2002,
+            "month": 5,
+            "day": 20
+          },
+          "actual": {
+            "year": 2002,
+            "month": 5,
+            "day": 20
+          },
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 5,
+      "fields_total": 6,
+      "accuracy": 0.8333333333333334,
+      "input_tokens": 3194,
+      "output_tokens": 2075,
+      "latency_seconds": 34.65338397026062,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "04_service_integrity",
+      "split": "train",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2020,
+            "month": 1,
+            "day": 18
+          },
+          "actual": {
+            "year": 2020,
+            "month": 1,
+            "day": 18
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2020,
+            "month": 1,
+            "day": 18
+          },
+          "actual": {
+            "year": 2020,
+            "month": 1,
+            "day": 18
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 2022,
+            "month": 1,
+            "day": 18
+          },
+          "actual": {
+            "year": 2022,
+            "month": 1,
+            "day": 18
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": {
+            "year": 2021,
+            "month": 10,
+            "day": 20
+          },
+          "actual": {
+            "year": 2021,
+            "month": 10,
+            "day": 20
+          },
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": {
+            "year": 2022,
+            "month": 1,
+            "day": 18
+          },
+          "actual": {
+            "year": 2022,
+            "month": 1,
+            "day": 18
+          },
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3357,
+      "output_tokens": 946,
+      "latency_seconds": 14.059170007705688,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "05_license_gopage",
+      "split": "train",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2014,
+            "month": 2,
+            "day": 10
+          },
+          "actual": {
+            "year": 2014,
+            "month": 2,
+            "day": 10
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2014,
+            "month": 2,
+            "day": 10
+          },
+          "actual": {
+            "year": 2014,
+            "month": 2,
+            "day": 10
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 2019,
+            "month": 2,
+            "day": 10
+          },
+          "actual": {
+            "year": 2019,
+            "month": 2,
+            "day": 10
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": {
+            "year": 2018,
+            "month": 11,
+            "day": 12
+          },
+          "actual": {
+            "year": 2018,
+            "month": 11,
+            "day": 12
+          },
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": {
+            "year": 2019,
+            "month": 2,
+            "day": 10
+          },
+          "actual": {
+            "year": 2019,
+            "month": 2,
+            "day": 10
+          },
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3157,
+      "output_tokens": 690,
+      "latency_seconds": 11.616756916046143,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "05_license_pacificapentert",
+      "split": "test",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2005,
+            "month": 11,
+            "day": 3
+          },
+          "actual": {
+            "year": 2005,
+            "month": 11,
+            "day": 3
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2005,
+            "month": 11,
+            "day": 3
+          },
+          "actual": null,
+          "match": false
+        },
+        {
+          "field": "expiration_date",
+          "expected": "conditional",
+          "actual": "conditional",
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 5,
+      "fields_total": 6,
+      "accuracy": 0.8333333333333334,
+      "input_tokens": 3315,
+      "output_tokens": 919,
+      "latency_seconds": 17.34417724609375,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "06_license_midwestenergyem",
+      "split": "test",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2008,
+            "month": 6,
+            "day": 2
+          },
+          "actual": {
+            "year": 2008,
+            "month": 6,
+            "day": 2
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2008,
+            "month": 6,
+            "day": 2
+          },
+          "actual": {
+            "year": 2008,
+            "month": 6,
+            "day": 2
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 2010,
+            "month": 6,
+            "day": 2
+          },
+          "actual": {
+            "year": 2010,
+            "month": 6,
+            "day": 2
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": {
+            "year": 2010,
+            "month": 3,
+            "day": 4
+          },
+          "actual": {
+            "year": 2010,
+            "month": 3,
+            "day": 4
+          },
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": {
+            "year": 2010,
+            "month": 6,
+            "day": 2
+          },
+          "actual": {
+            "year": 2010,
+            "month": 6,
+            "day": 2
+          },
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3294,
+      "output_tokens": 1074,
+      "latency_seconds": 16.537741899490356,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "06_license_morganstanley",
+      "split": "train",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": "perpetual",
+          "actual": "perpetual",
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3077,
+      "output_tokens": 258,
+      "latency_seconds": 5.157080888748169,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "07_license_cytodyn",
+      "split": "train",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2019,
+            "month": 12,
+            "day": 17
+          },
+          "actual": {
+            "year": 2019,
+            "month": 12,
+            "day": 17
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2019,
+            "month": 12,
+            "day": 17
+          },
+          "actual": {
+            "year": 2019,
+            "month": 12,
+            "day": 17
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": "conditional",
+          "actual": "conditional",
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3199,
+      "output_tokens": 366,
+      "latency_seconds": 8.012630224227905,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "07_license_gpaqacquisition",
+      "split": "test",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 2034,
+            "month": 12,
+            "day": 31
+          },
+          "actual": {
+            "year": 2034,
+            "month": 12,
+            "day": 31
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": {
+            "year": 2034,
+            "month": 6,
+            "day": 30
+          },
+          "actual": {
+            "year": 2034,
+            "month": 6,
+            "day": 30
+          },
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": {
+            "year": 2034,
+            "month": 12,
+            "day": 31
+          },
+          "actual": {
+            "year": 2034,
+            "month": 12,
+            "day": 31
+          },
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": false,
+          "actual": false,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3335,
+      "output_tokens": 900,
+      "latency_seconds": 15.52819299697876,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "08_license_artara",
+      "split": "train",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2018,
+            "month": 11,
+            "day": 28
+          },
+          "actual": {
+            "year": 2018,
+            "month": 11,
+            "day": 28
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2018,
+            "month": 11,
+            "day": 28
+          },
+          "actual": {
+            "year": 2018,
+            "month": 11,
+            "day": 28
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3182,
+      "output_tokens": 365,
+      "latency_seconds": 6.726731061935425,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "08_license_euromediaholdin",
+      "split": "test",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2006,
+            "month": 7,
+            "day": 11
+          },
+          "actual": {
+            "year": 2006,
+            "month": 7,
+            "day": 11
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2006,
+            "month": 7,
+            "day": 11
+          },
+          "actual": {
+            "year": 2006,
+            "month": 7,
+            "day": 11
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 2010,
+            "month": 6,
+            "day": 30
+          },
+          "actual": {
+            "year": 2010,
+            "month": 6,
+            "day": 30
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": false,
+          "actual": false,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3097,
+      "output_tokens": 516,
+      "latency_seconds": 8.459954023361206,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "09_outsourcing_photronics",
+      "split": "train",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2017,
+            "month": 5,
+            "day": 16
+          },
+          "actual": {
+            "year": 2017,
+            "month": 5,
+            "day": 16
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2017,
+            "month": 5,
+            "day": 16
+          },
+          "actual": {
+            "year": 2017,
+            "month": 5,
+            "day": 16
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": "conditional",
+          "actual": "conditional",
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3110,
+      "output_tokens": 430,
+      "latency_seconds": 7.40008807182312,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "09_outsourcing_sykeshealthplan",
+      "split": "test",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 1998,
+            "month": 1,
+            "day": 1
+          },
+          "actual": {
+            "year": 1998,
+            "month": 1,
+            "day": 1
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 1998,
+            "month": 1,
+            "day": 1
+          },
+          "actual": {
+            "year": 1998,
+            "month": 1,
+            "day": 1
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 1998,
+            "month": 12,
+            "day": 31
+          },
+          "actual": {
+            "year": 1998,
+            "month": 12,
+            "day": 31
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": {
+            "year": 1998,
+            "month": 10,
+            "day": 2
+          },
+          "actual": {
+            "year": 1998,
+            "month": 10,
+            "day": 2
+          },
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": {
+            "year": 1998,
+            "month": 12,
+            "day": 31
+          },
+          "actual": {
+            "year": 1998,
+            "month": 12,
+            "day": 31
+          },
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": false,
+          "actual": false,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3268,
+      "output_tokens": 1650,
+      "latency_seconds": 26.525723934173584,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "10_outsourcing_ofgban",
+      "split": "test",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2007,
+            "month": 1,
+            "day": 26
+          },
+          "actual": {
+            "year": 2007,
+            "month": 1,
+            "day": 26
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2007,
+            "month": 1,
+            "day": 26
+          },
+          "actual": {
+            "year": 2007,
+            "month": 1,
+            "day": 26
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": {
+            "year": 2014,
+            "month": 11,
+            "day": 30
+          },
+          "actual": {
+            "year": 2014,
+            "month": 11,
+            "day": 30
+          },
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": {
+            "year": 2013,
+            "month": 11,
+            "day": 30
+          },
+          "actual": {
+            "year": 2013,
+            "month": 11,
+            "day": 30
+          },
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": {
+            "year": 2014,
+            "month": 11,
+            "day": 30
+          },
+          "actual": {
+            "year": 2014,
+            "month": 11,
+            "day": 30
+          },
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3308,
+      "output_tokens": 690,
+      "latency_seconds": 10.89901089668274,
+      "model": "gpt-5-mini-2025-08-07"
+    },
+    {
+      "contract_id": "10_outsourcing_paratek",
+      "split": "train",
+      "fields": [
+        {
+          "field": "agreement_date",
+          "expected": {
+            "year": 2016,
+            "month": 12,
+            "day": 30
+          },
+          "actual": {
+            "year": 2016,
+            "month": 12,
+            "day": 30
+          },
+          "match": true
+        },
+        {
+          "field": "effective_date",
+          "expected": {
+            "year": 2016,
+            "month": 12,
+            "day": 30
+          },
+          "actual": {
+            "year": 2016,
+            "month": 12,
+            "day": 30
+          },
+          "match": true
+        },
+        {
+          "field": "expiration_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "notice_deadline",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "first_renewal_date",
+          "expected": null,
+          "actual": null,
+          "match": true
+        },
+        {
+          "field": "needs_review",
+          "expected": true,
+          "actual": true,
+          "match": true
+        }
+      ],
+      "fields_correct": 6,
+      "fields_total": 6,
+      "accuracy": 1.0,
+      "input_tokens": 3177,
+      "output_tokens": 365,
+      "latency_seconds": 6.723932981491089,
+      "model": "gpt-5-mini-2025-08-07"
+    }
+  ],
+  "field_breakdown": {
+    "agreement_date": {
+      "correct": 20,
+      "total": 20,
+      "accuracy": 1.0
+    },
+    "effective_date": {
+      "correct": 17,
+      "total": 20,
+      "accuracy": 0.85
+    },
+    "expiration_date": {
+      "correct": 20,
+      "total": 20,
+      "accuracy": 1.0
+    },
+    "notice_deadline": {
+      "correct": 20,
+      "total": 20,
+      "accuracy": 1.0
+    },
+    "first_renewal_date": {
+      "correct": 20,
+      "total": 20,
+      "accuracy": 1.0
+    },
+    "needs_review": {
+      "correct": 20,
+      "total": 20,
+      "accuracy": 1.0
+    }
+  }
+}

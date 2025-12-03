@@ -1,0 +1,54 @@
+{
+  "source_file": "03_distributor_fusemedical.txt",
+  "provider": "openai",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "(1) Signature Orthopaedics Pty Ltd (ACN 106 702 416) , 7 Sirius Road, Lane Cove, NSW\n(2) CPM Medical Consultants, LLC of 1565N. Central Expressway, Suite 200, Dallas, TX 75080.",
+      "reasoning": "The contract's 'Parties' section explicitly lists the two contracting entities as (1) and (2). These are the primary parties to the agreement.",
+      "normalized_value": [
+        "Signature Orthopaedics Pty Ltd",
+        "CPM Medical Consultants, LLC"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "Distributorship agreement\n\nBackground\nThe Supplier wishes to appoint the Distributor as its non-exclusive distributor for the promotion and sale of the Products within the\nTerritory (both as defined below), and the Distributor wishes to promote and sell the Products within the Territory on the terms of\nthis agreement.",
+      "reasoning": "The document title is 'Distributorship agreement' and the Background describes the Supplier appointing the Distributor as a non-exclusive distributor to promote and sell Products in a Territory. The primary economic substance is distribution/resale of goods.",
+      "normalized_value": "Distributor Agreement"
+    },
+    "agreement_date": {
+      "raw_snippet": "Dated 29/3/18",
+      "reasoning": "The document header shows 'Dated 29/3/18', indicating the date the agreement was made/signed.",
+      "normalized_value": "2018-03-29"
+    },
+    "effective_date": {
+      "raw_snippet": "Commencement Date: means the date of this agreement.",
+      "reasoning": "The agreement defines 'Commencement Date' as 'the date of this agreement' and clause 11.1 states the agreement begins on the Commencement Date; therefore the effective date is the agreement date (29/3/18).",
+      "normalized_value": "2018-03-29"
+    },
+    "expiration_date": {
+      "raw_snippet": "11.1 This agreement begins on the Commencement Date and, subject to clause 11.2, shall continue for an initial term of one (1) years (Initial Term) and indefinitely after that until terminated by either party giving at least twelve (12) months' prior written notice to expire on or after the expiry date of the initial term.",
+      "reasoning": "Clause 11.1 specifies an initial one (1) year term and then continuation indefinitely thereafter until terminated by 12 months' prior written notice. This describes the term/expiration in relative terms.",
+      "normalized_value": "initial term of one (1) years and indefinitely after that until terminated by either party giving at least twelve (12) months' prior written notice to expire on or after the expiry date of the initial term"
+    },
+    "governing_law": {
+      "raw_snippet": "24.1 This agreement and any dispute or claim arising out of or in connection with it or its subject matter or formation (including non-contractual disputes or claims) shall be governed by and construed in accordance with Ohio law.",
+      "reasoning": "Clause 24.1 explicitly states the governing law as 'Ohio law.'",
+      "normalized_value": "Ohio"
+    },
+    "notice_period": {
+      "raw_snippet": "11.1 This agreement begins on the Commencement Date and, subject to clause 11.2, shall continue for an initial term of one (1) years (Initial Term) and indefinitely after that until terminated by either party giving at least twelve (12) months' prior written notice to expire on or after the expiry date of the initial term.",
+      "reasoning": "Clause 11.1 sets the requirement to terminate the post-initial-term continuation: 'giving at least twelve (12) months' prior written notice' to cause expiry on or after the initial term. This is the advance notice required to prevent continuation/renewal.",
+      "normalized_value": "12 months"
+    },
+    "renewal_term": {
+      "raw_snippet": "11.1 This agreement begins on the Commencement Date and, subject to clause 11.2, shall continue for an initial term of one (1) years (Initial Term) and indefinitely after that until terminated by either party giving at least twelve (12) months' prior written notice to expire on or after the expiry date of the initial term.",
+      "reasoning": "Rather than a fixed 'renewal' period, clause 11.1 provides for continuation 'indefinitely after' the initial one-year term until either party terminates with 12 months' notice; there is no automatic fixed-length renewal term.",
+      "normalized_value": "indefinite continuation after initial 1-year term (no fixed renewal term)"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 9306,
+    "output_tokens": 2320
+  }
+}

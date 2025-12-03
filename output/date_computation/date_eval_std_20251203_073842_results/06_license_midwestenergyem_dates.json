@@ -1,0 +1,63 @@
+{
+  "source_file": "06_license_midwestenergyem_extraction.json",
+  "input_data": {
+    "agreement_date": {
+      "raw_snippet": "THIS AGREEMENTis made as of this 2nd day of June, 2008",
+      "normalized_value": "2008-06-02"
+    },
+    "effective_date": {
+      "raw_snippet": "A. This Agreement and the provisions hereof, except as otherwise provided, shall be in full force and\neffect commencing on the date of execution by both Parties and shall extend for an initial term of two\n(2) years.",
+      "normalized_value": "2008-06-02"
+    },
+    "effective_date_inferred": {
+      "normalized_value": "2008-06-02",
+      "was_inferred": false
+    },
+    "expiration_date": {
+      "raw_snippet": "A. This Agreement and the provisions hereof, except as otherwise provided, shall be in full force and\neffect commencing on the date of execution by both Parties and shall extend for an initial term of two\n(2) years. This Agreement shall be automatically renewed for additional extended terms each of two\n(2) years duration unless either party notifies the other in writing of its intention not to renew the\nAgreement, such notification to be provided at least ninety (90) days prior to the expiration of the\nthen in-effect term. The initial two (2) year term as it might be extended herein is referred to herein as\nthe \"Term.\"",
+      "normalized_value": "initial term of two (2) years; automatically renewed for additional extended terms each of two (2) years duration"
+    },
+    "notice_period": {
+      "raw_snippet": "unless either party notifies the other in writing of its intention not to renew the Agreement, such notification to be provided at least ninety (90) days prior to the expiration of the then in-effect term.",
+      "normalized_value": "90 days"
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement shall be automatically renewed for additional extended terms each of two\n(2) years duration unless either party notifies the other in writing of its intention not to renew the\nAgreement, such notification to be provided at least ninety (90) days prior to the expiration of the\nthen in-effect term.",
+      "normalized_value": "automatic renewal for additional two (2) year terms"
+    }
+  },
+  "computed_dates": {
+    "agreement_date": {
+      "year": 2008,
+      "month": 6,
+      "day": 2
+    },
+    "effective_date": {
+      "year": 2008,
+      "month": 6,
+      "day": 2
+    },
+    "expiration_date": {
+      "year": 2010,
+      "month": 6,
+      "day": 2
+    },
+    "notice_deadline": {
+      "year": 2010,
+      "month": 3,
+      "day": 4
+    },
+    "first_renewal_date": {
+      "year": 2010,
+      "month": 6,
+      "day": 2
+    },
+    "needs_review": true
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "input_tokens": 3294,
+  "output_tokens": 754,
+  "latency_seconds": 11.245628118515015,
+  "code_interpreter_used": false,
+  "eval_id": "date_eval_std_20251203_073842"
+}

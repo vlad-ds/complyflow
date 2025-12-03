@@ -1,0 +1,42 @@
+{
+  "source_file": "01_service_gpaq_extraction.json",
+  "input_data": {
+    "agreement_date": {
+      "raw_snippet": "",
+      "normalized_value": ""
+    },
+    "effective_date": {
+      "raw_snippet": "",
+      "normalized_value": ""
+    },
+    "expiration_date": {
+      "raw_snippet": "shall expire on December 31, 2028",
+      "normalized_value": "2028-12-31"
+    },
+    "notice_period": {
+      "raw_snippet": "The term of this Agreement (the \u201cTerm\u201d), unless mutually extended by written agreement of the Parties or unless sooner terminated as provided herein, shall commence effective as of the date hereof and shall expire on December 31, 2028.",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "unless mutually extended by written agreement of the Parties",
+      "normalized_value": ""
+    }
+  },
+  "computed_dates": {
+    "agreement_date": null,
+    "effective_date": null,
+    "expiration_date": {
+      "year": 2028,
+      "month": 12,
+      "day": 31
+    },
+    "notice_deadline": null,
+    "first_renewal_date": null
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "input_tokens": 2167,
+  "output_tokens": 207,
+  "latency_seconds": 4.517345190048218,
+  "code_interpreter_used": false,
+  "eval_id": "date_eval_std_20251201_213215"
+}

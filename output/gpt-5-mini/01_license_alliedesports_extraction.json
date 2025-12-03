@@ -1,0 +1,55 @@
+{
+  "source_file": "01_license_alliedesports.txt",
+  "provider": "openai",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This JOINT CONTENT LICENSE AGREEMENT (the \u201cAgreement\u201d), dated February 1, 2018 (the \u201cEffective Date\u201d), is made by and between\nWPT Enterprises, Inc., a Delaware corporation, with offices located at 1920 Main Street, Suite 1150, Irvine, CA 92614 (\u201cWPT\u201d), and ZYNGA INC., a\nDelaware corporation with offices located at 699 8th Street, San Francisco CA, 94103 (\u201cZynga US\u201d) and ZYNGA GAME IRELAND LIMITED, a\nlimited company organized under the laws of Ireland, resident in Ireland and having its registered office located at The Oval, Building One, Third\nFloor 160 Shelbourne Road Ballsbridge 4 Co. Dublin Ireland (\u201cZynga Ireland,\u201d and together with Zynga US and their respective Affiliates,\n\u201cZynga\u201d).",
+      "reasoning": "The opening paragraph of the agreement explicitly names the contracting parties and their corporate forms/addresses and designates short names (WPT, Zynga US, Zynga Ireland). These are the main parties to the agreement.",
+      "normalized_value": [
+        "WPT Enterprises, Inc.",
+        "Zynga Inc.",
+        "Zynga Game Ireland Limited"
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "This Agreement describes the terms of a content license and cooperative marketing\nrelationship under which each party will independently or cooperatively engage in mutually agreed activities to promote each other\u2019s\nproducts and services throughout the Territory (as defined below).",
+      "reasoning": "The clause states the core purpose: a content license combined with cooperative marketing to promote each other's products. The principal economic substance is granting/using licensed IP and reciprocal promotional activities\u2014i.e., a license of content/IP together with marketing. The best match from the provided categories is a License Agreement.",
+      "normalized_value": "License Agreement"
+    },
+    "agreement_date": {
+      "raw_snippet": "dated February 1, 2018 (the \u201cEffective Date\u201d)",
+      "reasoning": "The header states the agreement is \"dated February 1, 2018\" which is the date the agreement was made/signed (it also defines the Effective Date).",
+      "normalized_value": "2018-02-01"
+    },
+    "effective_date": {
+      "raw_snippet": "dated February 1, 2018 (the \u201cEffective Date\u201d)",
+      "reasoning": "The same header text explicitly defines February 1, 2018 as the \"Effective Date.\"",
+      "normalized_value": "2018-02-01"
+    },
+    "expiration_date": {
+      "raw_snippet": "3. Term. This Agreement will be in effect for three (3) years from the Effective Date (\u201cInitial Term\u201d) unless terminated earlier in accordance\nwith this Agreement. This Agreement shall automatically extend for an additional two (2) years on the same terms herein (\u201cRenewal\nTerm\u201d) provided WPT receives payments greater than twelve million U.S. dollars ($12,000,000) within the Initial Term. The Initial Term and\nany such Renewal Term are collectively referred to as the \u201cTerm.\u201d",
+      "reasoning": "Section 3 defines the term: an Initial Term of three years from the Effective Date, with a conditional automatic extension for an additional two years if a payment condition is met. This is relative-term language rather than a fixed calendar expiration date.",
+      "normalized_value": "three (3) years from the Effective Date"
+    },
+    "governing_law": {
+      "raw_snippet": "g. Governing Law and Forum. This Agreement will for all purposes be governed by and interpreted in accordance with the laws of\nthe State of California without giving effect to any conflict of laws principles that require the application of the laws of a different\nstate.",
+      "reasoning": "Section 10.g explicitly states the governing law as the laws of the State of California. The governing jurisdiction is therefore California.",
+      "normalized_value": "California"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The contract contains an automatic renewal conditioned on WPT receiving certain payments rather than a required advance notice to prevent renewal. There is no clause specifying a notice period to terminate or prevent automatic renewal, so no applicable notice-to-prevent-renewal period is found.",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "This Agreement shall automatically extend for an additional two (2) years on the same terms herein (\u201cRenewal\nTerm\u201d) provided WPT receives payments greater than twelve million U.S. dollars ($12,000,000) within the Initial Term.",
+      "reasoning": "Section 3 provides the renewal mechanism: an automatic two-year extension conditioned on WPT receiving payments > $12,000,000 within the Initial Term.",
+      "normalized_value": "2 year automatic renewal (conditional on WPT payments > $12,000,000 within the Initial Term)"
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 9987,
+    "output_tokens": 2621
+  }
+}

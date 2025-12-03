@@ -47,6 +47,19 @@ TEST_FILES = [
     "10_outsourcing_ofgban",
 ]
 
+TRAIN_2_FILES = [
+    "01_license_alliedesports",
+    "02_license_datacall",
+    "03_distributor_fusemedical",
+    "04_distributor_scansource",
+    "05_development_aimmune",
+    "06_development_conformis",
+    "07_maintenance_atninternational",
+    "08_maintenance_bloomenergy",
+    "09_outsourcing_ferroglobe",
+    "10_outsourcing_imperialgarden",
+]
+
 
 @dataclass
 class DateComputationResult:
@@ -65,13 +78,13 @@ class DateComputationResult:
 
 def get_extraction_files(
     extractions_dir: Path,
-    split: Literal["train", "test", "all"] = "train",
+    split: Literal["train", "test", "train_2", "all"] = "train",
 ) -> list[Path]:
     """Get extraction files for the specified split.
 
     Args:
         extractions_dir: Directory containing extraction JSON files.
-        split: Which split to return ("train", "test", or "all").
+        split: Which split to return ("train", "test", "train_2", or "all").
 
     Returns:
         List of extraction file paths.
@@ -82,7 +95,12 @@ def get_extraction_files(
         return all_files
 
     # Use exact file prefix matching
-    file_prefixes = TRAIN_FILES if split == "train" else TEST_FILES
+    split_map = {
+        "train": TRAIN_FILES,
+        "test": TEST_FILES,
+        "train_2": TRAIN_2_FILES,
+    }
+    file_prefixes = split_map[split]
 
     return [
         f
@@ -99,24 +117,33 @@ def extract_date_fields(extraction_path: Path) -> dict:
 
     Returns:
         Dict with date fields including notice_period and renewal_term for derived calculations.
+        Includes effective_date_inferred which falls back to agreement_date if effective_date is missing.
     """
     with open(extraction_path) as f:
         data = json.load(f)
 
     extraction = data.get("extraction", {})
 
+    # Get raw values
+    agreement_date_val = extraction.get("agreement_date", {}).get("normalized_value", "")
+    effective_date_val = extraction.get("effective_date", {}).get("normalized_value", "")
+
+    # Infer effective_date from agreement_date if missing
+    effective_date_inferred = effective_date_val if effective_date_val else agreement_date_val
+    effective_date_was_inferred = not effective_date_val and bool(agreement_date_val)
+
     return {
         "agreement_date": {
             "raw_snippet": extraction.get("agreement_date", {}).get("raw_snippet", ""),
-            "normalized_value": extraction.get("agreement_date", {}).get(
-                "normalized_value", ""
-            ),
+            "normalized_value": agreement_date_val,
         },
         "effective_date": {
             "raw_snippet": extraction.get("effective_date", {}).get("raw_snippet", ""),
-            "normalized_value": extraction.get("effective_date", {}).get(
-                "normalized_value", ""
-            ),
+            "normalized_value": effective_date_val,
+        },
+        "effective_date_inferred": {
+            "normalized_value": effective_date_inferred,
+            "was_inferred": effective_date_was_inferred,
         },
         "expiration_date": {
             "raw_snippet": extraction.get("expiration_date", {}).get("raw_snippet", ""),

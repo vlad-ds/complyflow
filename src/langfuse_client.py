@@ -6,25 +6,49 @@ analysis, and monitoring of LLM calls.
 Requires environment variables:
 - LANGFUSE_PUBLIC_KEY: Your Langfuse public key
 - LANGFUSE_SECRET_KEY: Your Langfuse secret key
-- LANGFUSE_BASE_URL: Langfuse host (e.g., https://cloud.langfuse.com)
+- LANGFUSE_HOST: Langfuse host (default: https://cloud.langfuse.com)
 """
 
-from datetime import datetime
+import os
+from datetime import datetime, timedelta
 from typing import Any
 
 from dotenv import load_dotenv
 from langfuse import Langfuse
+from langfuse.api.client import FernLangfuse
 
 load_dotenv()
 
 
 def get_langfuse_client() -> Langfuse:
-    """Get a Langfuse client for querying observability data.
+    """Get a Langfuse client for tracing (decorator-based).
 
     Returns:
         Langfuse client configured from environment variables.
     """
     return Langfuse()
+
+
+def get_api_client() -> FernLangfuse:
+    """Get a Langfuse API client for querying data.
+
+    Returns:
+        FernLangfuse API client for trace/observation queries.
+    """
+    public_key = os.getenv("LANGFUSE_PUBLIC_KEY")
+    secret_key = os.getenv("LANGFUSE_SECRET_KEY")
+    host = os.getenv("LANGFUSE_HOST", "https://cloud.langfuse.com")
+
+    if not public_key or not secret_key:
+        raise ValueError(
+            "LANGFUSE_PUBLIC_KEY and LANGFUSE_SECRET_KEY must be set in environment"
+        )
+
+    return FernLangfuse(
+        username=public_key,
+        password=secret_key,
+        base_url=host,
+    )
 
 
 def list_traces(
@@ -50,7 +74,7 @@ def list_traces(
     Returns:
         List of trace dictionaries.
     """
-    client = get_langfuse_client()
+    client = get_api_client()
     kwargs: dict[str, Any] = {"limit": limit}
 
     if user_id:
@@ -66,7 +90,7 @@ def list_traces(
     if to_timestamp:
         kwargs["to_timestamp"] = to_timestamp
 
-    response = client.api.trace.list(**kwargs)
+    response = client.trace.list(**kwargs)
     return [trace.dict() for trace in response.data]
 
 
@@ -79,8 +103,8 @@ def get_trace(trace_id: str) -> dict[str, Any]:
     Returns:
         Trace dictionary with full details.
     """
-    client = get_langfuse_client()
-    trace = client.api.trace.get(trace_id)
+    client = get_api_client()
+    trace = client.trace.get(trace_id)
     return trace.dict()
 
 
@@ -105,7 +129,7 @@ def list_observations(
     Returns:
         List of observation dictionaries.
     """
-    client = get_langfuse_client()
+    client = get_api_client()
     kwargs: dict[str, Any] = {"limit": limit}
 
     if trace_id:
@@ -119,7 +143,7 @@ def list_observations(
     if to_start_time:
         kwargs["to_start_time"] = to_start_time
 
-    response = client.api.observations.get_many(**kwargs)
+    response = client.observations.get_many(**kwargs)
     return [obs.dict() for obs in response.data]
 
 
@@ -132,8 +156,8 @@ def get_observation(observation_id: str) -> dict[str, Any]:
     Returns:
         Observation dictionary with full details including input/output.
     """
-    client = get_langfuse_client()
-    obs = client.api.observations.get(observation_id)
+    client = get_api_client()
+    obs = client.observations.get(observation_id)
     return obs.dict()
 
 
@@ -146,8 +170,8 @@ def list_sessions(limit: int = 20) -> list[dict[str, Any]]:
     Returns:
         List of session dictionaries.
     """
-    client = get_langfuse_client()
-    response = client.api.sessions.list(limit=limit)
+    client = get_api_client()
+    response = client.sessions.list(limit=limit)
     return [session.dict() for session in response.data]
 
 
@@ -200,6 +224,22 @@ def get_trace_summary(trace_id: str) -> dict[str, Any]:
     }
 
 
+def get_traces_by_tag(
+    tag: str,
+    limit: int = 100,
+) -> list[dict[str, Any]]:
+    """Get all traces with a specific tag.
+
+    Args:
+        tag: Tag to filter by.
+        limit: Maximum traces to return (default 100).
+
+    Returns:
+        List of trace dictionaries.
+    """
+    return list_traces(tags=[tag], limit=limit)
+
+
 def get_recent_activity(
     hours: int = 24,
     limit: int = 50,
@@ -214,9 +254,7 @@ def get_recent_activity(
         Dictionary with activity summary including trace count,
         total tokens, total cost, and model breakdown.
     """
-    from_time = datetime.now().replace(
-        hour=datetime.now().hour - hours if datetime.now().hour >= hours else 0
-    )
+    from_time = datetime.now() - timedelta(hours=hours)
 
     traces = list_traces(limit=limit, from_timestamp=from_time)
 
@@ -229,13 +267,17 @@ def get_recent_activity(
         trace_name = trace.get("name", "unnamed")
         trace_names[trace_name] = trace_names.get(trace_name, 0) + 1
 
-        # Get observations for this trace
+        # Get cost/tokens directly from trace if available
+        trace_cost = trace.get("total_cost") or trace.get("totalCost") or 0
+        total_cost += trace_cost
+
+        # Get observations for token breakdown
         observations = list_observations(trace_id=trace["id"])
         for obs in observations:
             if obs.get("type") == "GENERATION":
                 usage = obs.get("usage") or {}
-                total_tokens += usage.get("total_tokens", 0) or 0
-                total_cost += obs.get("calculated_total_cost", 0) or 0
+                obs_tokens = usage.get("total") or usage.get("total_tokens") or 0
+                total_tokens += obs_tokens
                 model = obs.get("model", "unknown")
                 models[model] = models.get(model, 0) + 1
 
@@ -243,7 +285,7 @@ def get_recent_activity(
         "period_hours": hours,
         "trace_count": len(traces),
         "total_tokens": total_tokens,
-        "total_cost": round(total_cost, 4),
+        "total_cost": round(total_cost, 6),
         "traces_by_name": trace_names,
         "models_used": models,
     }

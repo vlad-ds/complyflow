@@ -1,0 +1,46 @@
+{
+  "source_file": "08_license_artara_extraction.json",
+  "input_data": {
+    "agreement_date": {
+      "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
+      "normalized_value": "2018-11-28"
+    },
+    "effective_date": {
+      "raw_snippet": "This Sponsored Research and License Agreement (this \u201cAgreement\u201d) is entered into on November 28, 2018 (the \u201cEffective Date\u201d), by and between ArTara, Inc. located at 1 Little West 12th Street, New York, NY 10014 (\u201cArTara\u201d), and The University of Iowa, located at c/o Division of Sponsored Programs, 2 Gilmore Hall, Iowa City, IA 52242 (\u201cUniversity\u201d).",
+      "normalized_value": "2018-11-28"
+    },
+    "expiration_date": {
+      "raw_snippet": "",
+      "normalized_value": ""
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "normalized_value": ""
+    }
+  },
+  "computed_dates": {
+    "agreement_date": {
+      "year": 2018,
+      "month": 11,
+      "day": 28
+    },
+    "effective_date": {
+      "year": 2018,
+      "month": 11,
+      "day": 28
+    },
+    "expiration_date": null,
+    "notice_deadline": null,
+    "first_renewal_date": null
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "input_tokens": 2331,
+  "output_tokens": 259,
+  "latency_seconds": 5.87934684753418,
+  "code_interpreter_used": false,
+  "eval_id": "date_eval_std_20251203_062630"
+}

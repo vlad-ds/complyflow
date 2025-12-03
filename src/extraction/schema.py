@@ -88,3 +88,51 @@ class ExtractionResponse(BaseModel):
     governing_law: StringFieldExtraction
     notice_period: StringFieldExtraction
     renewal_term: StringFieldExtraction
+
+
+# --- Date Computation schemas ---
+
+
+class SpecialDateValue(str, Enum):
+    """Special values for dates that cannot be computed to a specific date."""
+
+    PERPETUAL = "perpetual"  # Contract has no expiration (runs indefinitely)
+    CONDITIONAL = "conditional"  # Expiration depends on an event, not a fixed date
+
+
+class DateField(BaseModel):
+    """A specific calendar date."""
+
+    model_config = {"extra": "forbid"}  # additionalProperties: false
+
+    year: int = Field(description="4-digit year (e.g., 2024)")
+    month: int = Field(ge=1, le=12, description="Month (1-12)")
+    day: int = Field(ge=1, le=31, description="Day of month (1-31)")
+
+
+class DateComputationResult(BaseModel):
+    """Result of date computation from extracted contract fields.
+
+    Each date field can be:
+    - DateField: A specific computed date
+    - SpecialDateValue: "perpetual" or "conditional"
+    - None: Date not available or cannot be computed
+    """
+
+    model_config = {"extra": "forbid"}  # additionalProperties: false
+
+    agreement_date: DateField | None = Field(
+        description="When the contract was signed"
+    )
+    effective_date: DateField | None = Field(
+        description="When the contract takes effect"
+    )
+    expiration_date: DateField | SpecialDateValue | None = Field(
+        description="When the contract expires. Can be 'perpetual' or 'conditional' for special cases"
+    )
+    notice_deadline: DateField | None = Field(
+        description="Deadline to give notice to prevent auto-renewal (expiration - notice_period)"
+    )
+    first_renewal_date: DateField | None = Field(
+        description="When first renewal period starts (equals expiration if auto-renewal exists)"
+    )

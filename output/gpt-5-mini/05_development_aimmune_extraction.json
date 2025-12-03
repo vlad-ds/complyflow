@@ -1,0 +1,54 @@
+{
+  "source_file": "05_development_aimmune.txt",
+  "provider": "openai",
+  "extraction": {
+    "parties": {
+      "raw_snippet": "This License, Development and Commercialization Agreement (this \u201cAgreement\u201d), dated as of February 4, 2020 (the \u201cEffective Date\u201d), is made by\nand between Xencor, Inc. (\u201cXencor\u201d), and Aimmune Therapeutics, Inc. (\u201cAimmune\u201d).",
+      "reasoning": "The parties are identified in the introductory paragraph that states the Agreement is made \"by and between\" Xencor, Inc. and Aimmune Therapeutics, Inc.",
+      "normalized_value": [
+        "Xencor, Inc.",
+        "Aimmune Therapeutics, Inc."
+      ]
+    },
+    "contract_type": {
+      "raw_snippet": "LICENSE, DEVELOPMENT AND COMMERCIALIZATION AGREEMENT",
+      "reasoning": "The document title names it a License, Development and Commercialization Agreement and the substantive provisions (e.g., Section 2.1 granting Xencor license rights to Aimmune and obligations for Aimmune to develop, manufacture and commercialize the Product) show the core economic deal is a license of IP plus development and commercialization by the licensee. The best match from the provided categories is \"License Agreement.\"",
+      "normalized_value": "License Agreement"
+    },
+    "agreement_date": {
+      "raw_snippet": "dated as of February 4, 2020 (the \u201cEffective Date\u201d)",
+      "reasoning": "The preamble states the agreement is \"dated as of February 4, 2020\" which is the signing/making date of the agreement.",
+      "normalized_value": "2020-02-04"
+    },
+    "effective_date": {
+      "raw_snippet": "dated as of February 4, 2020 (the \u201cEffective Date\u201d)",
+      "reasoning": "The same preamble designates February 4, 2020 as the \"Effective Date.\" Therefore the Effective Date equals the agreement date.",
+      "normalized_value": "2020-02-04"
+    },
+    "expiration_date": {
+      "raw_snippet": "This Agreement shall become effective on the Effective Date and, unless earlier terminated pursuant to this ARTICLE 13, shall remain in\neffect on a Product-by-Product and country-by-country basis until the expiration of the Royalty Term applicable to such Product and such country\n(the \u201cTerm\u201d). Upon expiration of this Agreement with respect to a Product in a country, the licenses granted to Aimmune pursuant to this Agreement shall\ncontinue in full force and effect on a fully-paid basis.",
+      "reasoning": "Section 13.1 defines the Term: the agreement remains in effect product-by-product and country-by-country until the expiration of the applicable Royalty Term. This is a relative term (ends at expiration of the Royalty Term).",
+      "normalized_value": "until the expiration of the Royalty Term applicable to such Product and such country"
+    },
+    "governing_law": {
+      "raw_snippet": "This Agreement shall be governed by and construed in accordance with the internal laws of the State of California applicable to agreements made and to be performed entirely within such state, without regard to the conflicts of law principles of such state\u037e provided that any matters relating to the construction or effect of any Patent will be governed by the patent laws of the relevant jurisdiction in which such Patent is granted.",
+      "reasoning": "Section 15.13.1 explicitly states the governing law as the \"internal laws of the State of California.\" The clause also contains a carve-out for patent law, but the governing jurisdiction is California.",
+      "normalized_value": "California"
+    },
+    "notice_period": {
+      "raw_snippet": "",
+      "reasoning": "The contract does not contain any clause requiring advance notice to prevent an automatic renewal (there is no automatic renewal/renewal-by-default provision). Term/expiration is tied to the Royalty Term; termination provisions specify cure periods and convenience termination rights, but no \"notice to prevent renewal\" period is present.",
+      "normalized_value": ""
+    },
+    "renewal_term": {
+      "raw_snippet": "",
+      "reasoning": "The agreement does not include any automatic renewal language or specific renewal term; the Term runs until expiration of the Royalty Term and there is no renewal clause to extract.",
+      "normalized_value": ""
+    }
+  },
+  "usage": {
+    "model": "gpt-5-mini-2025-08-07",
+    "input_tokens": 39155,
+    "output_tokens": 2135
+  }
+}
