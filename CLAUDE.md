@@ -251,6 +251,51 @@ To see only API-originated token usage in Langfuse:
 
 This separates API production usage from batch evaluation runs.
 
+## Deadline Alerts
+
+Standalone service to check for impending contract deadlines and send Slack notifications.
+
+**Module:** `src/alerts/deadlines.py`
+
+### Deadline Fields Monitored
+
+| Field | Description |
+|-------|-------------|
+| `expiration_date` | Contract expiration |
+| `notice_deadline` | Deadline to send renewal notice |
+| `first_renewal_date` | First auto-renewal date |
+
+### Alert Windows
+
+Alerts are sent when a deadline is exactly:
+- **30 days away** (1 month warning)
+- **7 days away** (1 week warning)
+
+### Usage
+
+```bash
+# Run deadline check with Slack notifications
+PYTHONPATH=src uv run python -m alerts.deadlines
+
+# Dry run (list without sending)
+PYTHONPATH=src uv run python -m alerts.deadlines --dry-run
+
+# Check for a specific date (testing)
+PYTHONPATH=src uv run python -m alerts.deadlines --date 2024-12-15
+```
+
+### Railway Cron Job
+
+To run daily at 9 AM UTC:
+
+1. In Railway dashboard, create a new "Cron Job" service
+2. Use the same Docker image as the main service
+3. Set schedule: `0 9 * * *` (daily at 9 AM UTC)
+4. Set start command: `python -m alerts.deadlines`
+5. Add environment variables: `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, `SLACK_WEBHOOK_URL`
+
+Alternatively, use an external scheduler (e.g., cron-job.org) to run the script.
+
 ## Deployment
 
 ### Railway (Production)
