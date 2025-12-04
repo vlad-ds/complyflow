@@ -108,13 +108,24 @@ FastAPI server for contract upload, extraction, and Airtable storage.
 
 ### API Endpoints
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/contracts/upload` | POST | Upload PDF, extract metadata, store in Airtable |
-| `/contracts/{id}` | GET | Get contract by Airtable record ID |
-| `/contracts/{id}/review` | PATCH | Mark contract as reviewed |
-| `/contracts` | GET | List contracts (filter by `?status=under_review`) |
-| `/health` | GET | Health check |
+| Endpoint | Method | Auth | Description |
+|----------|--------|------|-------------|
+| `/contracts/upload` | POST | Yes | Upload PDF, extract metadata, store in Airtable |
+| `/contracts/{id}` | GET | Yes | Get contract by Airtable record ID |
+| `/contracts/{id}/review` | PATCH | Yes | Mark contract as reviewed |
+| `/contracts` | GET | Yes | List contracts (filter by `?status=under_review`) |
+| `/health` | GET | No | Health check (public for Railway)
+
+### Authentication
+
+All `/contracts` endpoints require an API key via `X-API-Key` header:
+
+```bash
+curl -H "X-API-Key: YOUR_API_KEY" https://complyflow-production.up.railway.app/contracts
+```
+
+- Set `API_KEY` env var in Railway to enable authentication
+- If `API_KEY` is not set, auth is disabled (local dev mode)
 
 ### Running the API
 
@@ -232,6 +243,7 @@ railway redeploy -y
 ```
 
 **Environment variables (set in Railway dashboard):**
+- `API_KEY` - API authentication key (required for production)
 - `AIRTABLE_API_KEY`
 - `AIRTABLE_BASE_ID`
 - `OPENAI_API_KEY`
