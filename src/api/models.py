@@ -76,6 +76,7 @@ class ContractUploadResponse(BaseModel):
     airtable_url: str = Field(description="Direct link to Airtable record")
     created_at: datetime = Field(default_factory=datetime.utcnow)
     usage: dict | None = Field(default=None, description="Token usage stats")
+    pdf_url: str | None = Field(default=None, description="URL to PDF file in storage")
 
 
 class ContractRecord(BaseModel):

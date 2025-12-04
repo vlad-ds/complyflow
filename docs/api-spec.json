@@ -590,6 +590,18 @@
             "format": "binary",
             "title": "File",
             "description": "PDF contract file to upload"
+          },
+          "pdf_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf Url",
+            "description": "URL where PDF is stored (e.g., Supabase Storage)"
           }
         },
         "type": "object",
@@ -770,6 +782,18 @@
             ],
             "title": "Usage",
             "description": "Token usage stats"
+          },
+          "pdf_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf Url",
+            "description": "URL to PDF file in storage"
           }
         },
         "type": "object",

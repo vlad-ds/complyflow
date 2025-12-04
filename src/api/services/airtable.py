@@ -127,6 +127,7 @@ class AirtableService:
             "renewal_term": get_normalized(extraction.get("renewal_term")),
             "status": "under_review",
             "raw_extraction": json.dumps(contract, indent=2, default=str),
+            "pdf_url": contract.get("pdf_url"),
         }
 
         # Remove None values - Airtable doesn't like them

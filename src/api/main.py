@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 # Load environment variables before other imports
 load_dotenv()
 
-from fastapi import Depends, FastAPI, File, Header, HTTPException, Query, UploadFile
+from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Query, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.models import (
@@ -138,6 +138,7 @@ async def health():
 )
 async def upload_contract(
     file: Annotated[UploadFile, File(description="PDF contract file to upload")],
+    pdf_url: Annotated[str | None, Form(description="URL where PDF is stored (e.g., Supabase Storage)")] = None,
 ):
     """
     Upload a contract PDF for processing.
@@ -148,6 +149,8 @@ async def upload_contract(
     3. Computes derived dates (notice deadline, renewal date)
     4. Stores the contract in Airtable with status "under_review"
     5. Sends a Slack notification (if configured)
+
+    Optionally accepts pdf_url to store a link to the PDF in Airtable.
     """
     # Validate filename
     if not file.filename:
@@ -220,6 +223,10 @@ async def upload_contract(
 
     logger.info(f"Extraction complete for {filename}")
 
+    # Add pdf_url if provided
+    if pdf_url:
+        contract_data["pdf_url"] = pdf_url
+
     # Store in Airtable
     try:
         airtable = get_airtable()
@@ -252,6 +259,7 @@ async def upload_contract(
         airtable_url=airtable_url,
         created_at=datetime.utcnow(),
         usage=contract_data.get("usage"),
+        pdf_url=pdf_url,
     )
 
 
