@@ -198,15 +198,24 @@ class AirtableService:
         """Get the direct URL to a record in Airtable."""
         return f"https://airtable.com/{self.base_id}/{self.table_id}/{record_id}"
 
+    def correction_exists(self, contract_id: str, field_name: str) -> bool:
+        """Check if a correction already exists for this contract+field."""
+        formula = f"AND({{contract}} = '{contract_id}', {{field_name}} = '{field_name}')"
+        records = self.corrections_table.all(formula=formula, max_records=1)
+        return len(records) > 0
+
     def log_correction(
         self,
         contract_id: str,
         field_name: str,
         original_value: Any,
         corrected_value: Any,
-    ) -> dict:
+    ) -> dict | None:
         """
         Log a human correction to the Corrections table.
+
+        Only logs the first correction for each contract+field combination.
+        Subsequent edits are user corrections, not AI corrections.
 
         Args:
             contract_id: Airtable record ID of the contract
@@ -215,8 +224,12 @@ class AirtableService:
             corrected_value: The human-corrected value
 
         Returns:
-            Created correction record
+            Created correction record, or None if correction already exists
         """
+        # Skip if this field was already corrected for this contract
+        if self.correction_exists(contract_id, field_name):
+            return None
+
         # Serialize values to JSON strings for storage
         original_str = json.dumps(original_value, default=str) if original_value is not None else ""
         corrected_str = json.dumps(corrected_value, default=str) if corrected_value is not None else ""
