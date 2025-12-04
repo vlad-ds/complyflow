@@ -198,8 +198,8 @@ class AirtableService:
         """Get the direct URL to a record in Airtable."""
         return f"https://airtable.com/{self.base_id}/{self.table_id}/{record_id}"
 
-    def correction_exists(self, contract_id: str, field_name: str) -> bool:
-        """Check if a correction already exists for this contract+field."""
+    def find_correction(self, contract_id: str, field_name: str) -> dict | None:
+        """Find existing correction for this contract+field."""
         # Filter by field_name in Airtable, then check contract link in Python
         # (Airtable formulas for linked records are unreliable)
         formula = f"{{field_name}} = '{field_name}'"
@@ -209,8 +209,8 @@ class AirtableService:
             # contract field is an array of linked record IDs
             linked_contracts = record.get("fields", {}).get("contract", [])
             if contract_id in linked_contracts:
-                return True
-        return False
+                return record
+        return None
 
     def log_correction(
         self,
@@ -218,29 +218,37 @@ class AirtableService:
         field_name: str,
         original_value: Any,
         corrected_value: Any,
-    ) -> dict | None:
+    ) -> dict:
         """
-        Log a human correction to the Corrections table.
+        Log or update a human correction in the Corrections table.
 
-        Only logs the first correction for each contract+field combination.
-        Subsequent edits are user corrections, not AI corrections.
+        - First correction: Creates new record with AI value as original
+        - Subsequent edits: Updates corrected_value only (keeps original AI value)
 
         Args:
             contract_id: Airtable record ID of the contract
             field_name: Name of the field that was corrected
-            original_value: The AI-extracted value
-            corrected_value: The human-corrected value
+            original_value: The value before this edit (ignored if correction exists)
+            corrected_value: The new human-corrected value
 
         Returns:
-            Created correction record, or None if correction already exists
+            Created or updated correction record
         """
-        # Skip if this field was already corrected for this contract
-        if self.correction_exists(contract_id, field_name):
-            return None
-
-        # Serialize values to JSON strings for storage
-        original_str = json.dumps(original_value, default=str) if original_value is not None else ""
         corrected_str = json.dumps(corrected_value, default=str) if corrected_value is not None else ""
+
+        # Check if correction already exists
+        existing = self.find_correction(contract_id, field_name)
+
+        if existing:
+            # Update only the corrected_value and timestamp (keep original AI value)
+            record = self.corrections_table.update(existing["id"], {
+                "corrected_value": corrected_str,
+                "corrected_at": datetime.now().isoformat(),
+            })
+            return record
+
+        # First correction - create new record with AI value as original
+        original_str = json.dumps(original_value, default=str) if original_value is not None else ""
 
         record = self.corrections_table.create({
             "contract": [contract_id],  # Link to contract record
