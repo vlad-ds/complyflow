@@ -200,9 +200,17 @@ class AirtableService:
 
     def correction_exists(self, contract_id: str, field_name: str) -> bool:
         """Check if a correction already exists for this contract+field."""
-        formula = f"AND({{contract}} = '{contract_id}', {{field_name}} = '{field_name}')"
-        records = self.corrections_table.all(formula=formula, max_records=1)
-        return len(records) > 0
+        # Filter by field_name in Airtable, then check contract link in Python
+        # (Airtable formulas for linked records are unreliable)
+        formula = f"{{field_name}} = '{field_name}'"
+        records = self.corrections_table.all(formula=formula)
+
+        for record in records:
+            # contract field is an array of linked record IDs
+            linked_contracts = record.get("fields", {}).get("contract", [])
+            if contract_id in linked_contracts:
+                return True
+        return False
 
     def log_correction(
         self,
