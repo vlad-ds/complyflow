@@ -4,6 +4,7 @@ ComplyFlow Contract Intake API.
 FastAPI server for contract upload, metadata extraction, and Airtable storage.
 """
 
+import os
 from contextlib import asynccontextmanager
 from datetime import datetime
 from typing import Annotated
@@ -13,7 +14,7 @@ from dotenv import load_dotenv
 # Load environment variables before other imports
 load_dotenv()
 
-from fastapi import FastAPI, File, HTTPException, Query, UploadFile
+from fastapi import Depends, FastAPI, File, Header, HTTPException, Query, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.models import (
@@ -35,7 +36,32 @@ from api.utils.retry import LLMRetryExhaustedError, LLMTimeoutError
 MAX_FILE_SIZE_MB = 50
 MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024
 
+# API Key from environment
+API_KEY = os.getenv("API_KEY")
+
 logger = get_logger(__name__)
+
+
+async def verify_api_key(x_api_key: Annotated[str | None, Header()] = None) -> None:
+    """Verify the API key from the X-API-Key header.
+
+    If API_KEY env var is not set, authentication is disabled (dev mode).
+    """
+    if not API_KEY:
+        # No API key configured - auth disabled
+        return
+
+    if not x_api_key:
+        raise HTTPException(
+            status_code=401,
+            detail="Missing API key. Provide X-API-Key header.",
+        )
+
+    if x_api_key != API_KEY:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid API key.",
+        )
 
 
 # Global service instances
@@ -99,11 +125,13 @@ async def health():
     response_model=ContractUploadResponse,
     responses={
         400: {"model": ErrorResponse, "description": "Invalid input (bad file, empty, too large)"},
+        401: {"model": ErrorResponse, "description": "Unauthorized - invalid or missing API key"},
         500: {"model": ErrorResponse, "description": "Internal server error"},
         502: {"model": ErrorResponse, "description": "LLM service error after retries"},
         504: {"model": ErrorResponse, "description": "LLM timeout"},
     },
     tags=["Contracts"],
+    dependencies=[Depends(verify_api_key)],
 )
 async def upload_contract(
     file: Annotated[UploadFile, File(description="PDF contract file to upload")],
@@ -227,8 +255,12 @@ async def upload_contract(
 @app.get(
     "/contracts/{record_id}",
     response_model=ContractRecord,
-    responses={404: {"model": ErrorResponse}},
+    responses={
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        404: {"model": ErrorResponse},
+    },
     tags=["Contracts"],
+    dependencies=[Depends(verify_api_key)],
 )
 async def get_contract(record_id: str):
     """Get a contract by its Airtable record ID."""
@@ -248,8 +280,12 @@ async def get_contract(record_id: str):
 @app.patch(
     "/contracts/{record_id}/review",
     response_model=ContractReviewResponse,
-    responses={404: {"model": ErrorResponse}},
+    responses={
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        404: {"model": ErrorResponse},
+    },
     tags=["Contracts"],
+    dependencies=[Depends(verify_api_key)],
 )
 async def review_contract(record_id: str, body: ContractReviewRequest):
     """Mark a contract as reviewed."""
@@ -276,7 +312,9 @@ async def review_contract(record_id: str, body: ContractReviewRequest):
 @app.get(
     "/contracts",
     response_model=ContractListResponse,
+    responses={401: {"model": ErrorResponse, "description": "Unauthorized"}},
     tags=["Contracts"],
+    dependencies=[Depends(verify_api_key)],
 )
 async def list_contracts(
     status: Annotated[
