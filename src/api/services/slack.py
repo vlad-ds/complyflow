@@ -83,14 +83,25 @@ async def notify_new_contract(
 
     filename = contract.get("filename", "Unknown")
 
+    # Compliance officer to notify (Slack member ID for proper mention)
+    compliance_officer = os.environ.get("SLACK_COMPLIANCE_OFFICER_ID", "")
+    mention = f"<@{compliance_officer}> " if compliance_officer else ""
+
     message = {
         "blocks": [
             {
                 "type": "header",
                 "text": {
                     "type": "plain_text",
-                    "text": "New Contract Uploaded",
+                    "text": "📋 New Contract Uploaded",
                     "emoji": True,
+                },
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": f"{mention}A new contract requires your review.",
                 },
             },
             {
