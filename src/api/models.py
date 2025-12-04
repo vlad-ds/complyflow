@@ -142,3 +142,10 @@ class FieldUpdateResponse(BaseModel):
     correction_logged: bool = Field(
         description="Whether a correction was logged (true if value changed)"
     )
+
+
+class ContractDeleteResponse(BaseModel):
+    """Response from DELETE /contracts/{id}."""
+
+    success: bool = True
+    id: str = Field(description="Deleted contract record ID")

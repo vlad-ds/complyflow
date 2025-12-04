@@ -153,6 +153,11 @@ class AirtableService:
         except Exception:
             return None
 
+    def delete_contract(self, record_id: str) -> bool:
+        """Delete a contract by its Airtable record ID."""
+        self.table.delete(record_id)
+        return True
+
     def update_contract(self, record_id: str, fields: dict) -> dict:
         """Update a contract record."""
         return self.table.update(record_id, fields)

@@ -5,6 +5,12 @@
     "description": "API for uploading contracts, extracting metadata, and storing in Airtable",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://complyflow-production.up.railway.app",
+      "description": "Production server"
+    }
+  ],
   "paths": {
     "/health": {
       "get": {
@@ -203,6 +209,83 @@
               }
             },
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Contracts"
+        ],
+        "summary": "Delete Contract",
+        "description": "Delete a contract by its Airtable record ID.",
+        "operationId": "delete_contract_contracts__record_id__delete",
+        "parameters": [
+          {
+            "name": "record_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Record Id"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContractDeleteResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Contract not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
@@ -514,6 +597,26 @@
           "file"
         ],
         "title": "Body_upload_contract_contracts_upload_post"
+      },
+      "ContractDeleteResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Deleted contract record ID"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "title": "ContractDeleteResponse",
+        "description": "Response from DELETE /contracts/{id}."
       },
       "ContractListResponse": {
         "properties": {

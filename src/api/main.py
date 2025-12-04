@@ -18,6 +18,7 @@ from fastapi import Depends, FastAPI, File, Header, HTTPException, Query, Upload
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.models import (
+    ContractDeleteResponse,
     ContractListResponse,
     ContractRecord,
     ContractReviewRequest,
@@ -277,6 +278,38 @@ async def get_contract(record_id: str):
         fields=record["fields"],
         created_time=record.get("createdTime"),
     )
+
+
+@app.delete(
+    "/contracts/{record_id}",
+    response_model=ContractDeleteResponse,
+    responses={
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        404: {"model": ErrorResponse, "description": "Contract not found"},
+    },
+    tags=["Contracts"],
+    dependencies=[Depends(verify_api_key)],
+)
+async def delete_contract(record_id: str):
+    """Delete a contract by its Airtable record ID."""
+    airtable = get_airtable()
+
+    # Verify contract exists
+    existing = airtable.get_contract(record_id)
+    if not existing:
+        raise HTTPException(status_code=404, detail="Contract not found")
+
+    try:
+        airtable.delete_contract(record_id)
+        logger.info(f"Deleted contract: {record_id}")
+    except Exception as e:
+        log_error(logger, "Delete failed", e, record_id=record_id)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to delete contract: {type(e).__name__}: {e}",
+        )
+
+    return ContractDeleteResponse(id=record_id)
 
 
 @app.patch(
