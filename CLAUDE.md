@@ -113,6 +113,7 @@ FastAPI server for contract upload, extraction, and Airtable storage.
 | `/contracts/upload` | POST | Yes | Upload PDF, extract metadata, store in Airtable |
 | `/contracts/{id}` | GET | Yes | Get contract by Airtable record ID |
 | `/contracts/{id}/review` | PATCH | Yes | Mark contract as reviewed |
+| `/contracts/{id}/fields` | PATCH | Yes | Update single field, log correction for ML training |
 | `/contracts` | GET | Yes | List contracts (filter by `?status=under_review`) |
 | `/health` | GET | No | Health check (public for Railway)
 
@@ -172,6 +173,18 @@ PYTHONPATH=src uv run python scripts/test_api.py --full
 | status | Single select | under_review, reviewed |
 | reviewed_at | Date | When reviewed |
 | raw_extraction | Long text | Full extraction JSON |
+
+### Corrections Table (ML Training Data)
+
+Tracks human corrections to AI-extracted fields for building training datasets.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| field_name | Text | Primary field - which field was corrected |
+| contract | Link | Links to Contracts table |
+| original_value | Long text | AI-extracted value (JSON) |
+| corrected_value | Long text | Human-corrected value (JSON) |
+| corrected_at | DateTime | When correction was made |
 
 ### Setup (one-time)
 

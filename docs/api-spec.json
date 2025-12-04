@@ -306,6 +306,105 @@
         }
       }
     },
+    "/contracts/{record_id}/fields": {
+      "patch": {
+        "tags": [
+          "Contracts"
+        ],
+        "summary": "Update Contract Field",
+        "description": "Update a single field and log the correction for ML training.\n\nThis endpoint:\n1. Updates the specified field in Airtable\n2. Logs the correction to a separate Corrections table if the value changed\n3. Returns success status and whether a correction was logged\n\nCorrections are used to build a training dataset for improving AI extraction.",
+        "operationId": "update_contract_field_contracts__record_id__fields_patch",
+        "parameters": [
+          {
+            "name": "record_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Record Id"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldUpdateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid field name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Contract not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/contracts": {
       "get": {
         "tags": [
@@ -605,6 +704,60 @@
         ],
         "title": "ErrorResponse",
         "description": "Error response."
+      },
+      "FieldUpdateRequest": {
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "title": "Field Name",
+            "description": "Name of the field to update (e.g., 'parties', 'expiration_date')"
+          },
+          "original_value": {
+            "title": "Original Value",
+            "description": "The original AI-extracted value (for correction tracking)"
+          },
+          "new_value": {
+            "title": "New Value",
+            "description": "The new corrected value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "field_name",
+          "original_value",
+          "new_value"
+        ],
+        "title": "FieldUpdateRequest",
+        "description": "Request body for PATCH /contracts/{id}/fields."
+      },
+      "FieldUpdateResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "field_name": {
+            "type": "string",
+            "title": "Field Name"
+          },
+          "new_value": {
+            "title": "New Value"
+          },
+          "correction_logged": {
+            "type": "boolean",
+            "title": "Correction Logged",
+            "description": "Whether a correction was logged (true if value changed)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "field_name",
+          "new_value",
+          "correction_logged"
+        ],
+        "title": "FieldUpdateResponse",
+        "description": "Response from PATCH /contracts/{id}/fields."
       },
       "HTTPValidationError": {
         "properties": {
