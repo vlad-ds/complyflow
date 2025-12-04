@@ -252,6 +252,84 @@ async def send_slack_alert(deadline: UpcomingDeadline) -> bool:
         return False
 
 
+async def send_admin_summary(
+    check_date: date,
+    upcoming: list[UpcomingDeadline],
+    notifications_sent: int,
+    notifications_failed: int,
+) -> bool:
+    """
+    Send a summary message to the Admin Slack channel.
+
+    This runs every time the service executes, for monitoring purposes.
+    """
+    webhook_url = os.environ.get("SLACK_ADMIN_WEBHOOK_URL")
+
+    if not webhook_url:
+        print("SLACK_ADMIN_WEBHOOK_URL not configured, skipping admin summary")
+        return False
+
+    date_str = check_date.strftime("%B %d, %Y")
+
+    # Build the deadline list
+    if upcoming:
+        deadline_lines = []
+        for d in upcoming:
+            deadline_lines.append(
+                f"• *{d.parties}* - {d.field_label} on {d.deadline_date} ({d.days_away} days)"
+            )
+        deadlines_text = "\n".join(deadline_lines)
+    else:
+        deadlines_text = "_No deadlines within alert windows (7 or 30 days)_"
+
+    # Status emoji
+    if notifications_failed > 0:
+        status_emoji = ":warning:"
+        status_text = f"Sent {notifications_sent}, Failed {notifications_failed}"
+    elif notifications_sent > 0:
+        status_emoji = ":white_check_mark:"
+        status_text = f"Sent {notifications_sent} alert(s) to compliance channel"
+    else:
+        status_emoji = ":white_check_mark:"
+        status_text = "No alerts needed"
+
+    message = {
+        "blocks": [
+            {
+                "type": "header",
+                "text": {
+                    "type": "plain_text",
+                    "text": f"{status_emoji} Deadline Check Complete",
+                    "emoji": True,
+                },
+            },
+            {
+                "type": "section",
+                "fields": [
+                    {"type": "mrkdwn", "text": f"*Date:*\n{date_str}"},
+                    {"type": "mrkdwn", "text": f"*Status:*\n{status_text}"},
+                ],
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": f"*Upcoming Deadlines ({len(upcoming)}):*\n{deadlines_text}",
+                },
+            },
+        ],
+    }
+
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.post(webhook_url, json=message, timeout=10.0)
+            response.raise_for_status()
+            return True
+    except Exception as e:
+        print(f"Failed to send admin summary: {e}")
+        return False
+
+
 async def run_deadline_check(today: date | None = None, dry_run: bool = False) -> dict:
     """
     Run the full deadline check and optionally send notifications.
@@ -284,6 +362,10 @@ async def run_deadline_check(today: date | None = None, dry_run: bool = False) -
                 sent += 1
             else:
                 failed += 1
+
+    # Send admin summary (always, even on dry run)
+    if not dry_run:
+        await send_admin_summary(check_date, upcoming, sent, failed)
 
     return {
         "date": str(check_date),
