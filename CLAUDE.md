@@ -227,6 +227,7 @@ Required in `.env`:
 AIRTABLE_API_KEY=patXXX...
 AIRTABLE_BASE_ID=appN3qGux4iVHtdU8
 SLACK_WEBHOOK_URL=https://hooks.slack.com/...  # Optional
+FRONTEND_URL=https://your-app.lovable.app  # For Slack review button
 ```
 
 ## Langfuse Tracing
@@ -335,6 +336,7 @@ railway redeploy -y
 - `LANGFUSE_PUBLIC_KEY`
 - `LANGFUSE_SECRET_KEY`
 - `SLACK_WEBHOOK_URL` (optional)
+- `FRONTEND_URL` - Frontend app URL for Slack review button (e.g., `https://your-app.lovable.app`)
 
 **Key learnings:**
 - Use `railway.json` (not `.toml`) with `"builder": "DOCKERFILE"`

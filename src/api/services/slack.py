@@ -43,7 +43,6 @@ def format_parties(parties: Any) -> str:
 async def notify_new_contract(
     contract: dict,
     airtable_record_id: str,
-    airtable_url: str,
 ) -> bool:
     """
     Send Slack notification for a new contract upload.
@@ -51,17 +50,20 @@ async def notify_new_contract(
     Args:
         contract: Contract data with extraction and computed_dates
         airtable_record_id: The Airtable record ID
-        airtable_url: Direct link to the Airtable record
 
     Returns:
         True if notification sent successfully, False otherwise
     """
     webhook_url = os.environ.get("SLACK_WEBHOOK_URL")
+    frontend_url = os.environ.get("FRONTEND_URL", "")
 
     if not webhook_url:
         # Slack not configured - skip silently
         print("SLACK_WEBHOOK_URL not configured, skipping notification")
         return False
+
+    if not frontend_url:
+        print("Warning: FRONTEND_URL not configured, review button will have relative URL")
 
     extraction = contract.get("extraction", {})
     computed_dates = contract.get("computed_dates", {})
@@ -122,8 +124,8 @@ async def notify_new_contract(
                 "elements": [
                     {
                         "type": "button",
-                        "text": {"type": "plain_text", "text": "Review in Airtable"},
-                        "url": airtable_url,
+                        "text": {"type": "plain_text", "text": "Review Contract"},
+                        "url": f"{frontend_url}/contracts/{airtable_record_id}",
                         "style": "primary",
                     }
                 ],

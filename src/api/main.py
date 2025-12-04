@@ -245,7 +245,7 @@ async def upload_contract(
 
     # Send Slack notification (fire and forget, don't fail if Slack fails)
     try:
-        await notify_new_contract(contract_data, record_id, airtable_url)
+        await notify_new_contract(contract_data, record_id)
         logger.info(f"Slack notification sent for {filename}")
     except Exception as e:
         log_error(logger, "Slack notification failed (non-fatal)", e, filename=filename)
