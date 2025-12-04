@@ -48,6 +48,41 @@ def get_contract_types() -> list[dict]:
     ]
 
 
+def create_citations_table(api: Api, base_id: str, contracts_table_id: str) -> None:
+    """Create the Citations table for storing quotes and reasoning for each field."""
+    base = api.base(base_id)
+
+    # Check if table already exists
+    schema = base.schema()
+    existing_tables = [t.name.lower() for t in schema.tables]
+    if "citations" in existing_tables:
+        print("Table 'Citations' already exists. Skipping creation.")
+        return
+
+    # Note: Primary field (first) must be text type in Airtable
+    fields = [
+        {"name": "field_name", "type": "singleLineText"},
+        {
+            "name": "contract",
+            "type": "multipleRecordLinks",
+            "options": {"linkedTableId": contracts_table_id},
+        },
+        {"name": "quote", "type": "multilineText"},
+        {"name": "reasoning", "type": "multilineText"},
+    ]
+
+    print(f"Creating 'Citations' table with {len(fields)} fields...")
+    table = base.create_table(
+        name="Citations",
+        fields=fields,
+        description="Quotes and reasoning for each extracted contract field",
+    )
+    print(f"Created table: {table.name} (ID: {table.id})")
+    print("\nFields created:")
+    for field in fields:
+        print(f"  - {field['name']} ({field['type']})")
+
+
 def create_corrections_table(api: Api, base_id: str, contracts_table_id: str) -> None:
     """Create the Corrections table for tracking human edits."""
     base = api.base(base_id)
@@ -194,8 +229,9 @@ def main():
     contracts_table = next((t for t in schema.tables if t.name.lower() == "contracts"), None)
     if contracts_table:
         create_corrections_table(api, base_id, contracts_table.id)
+        create_citations_table(api, base_id, contracts_table.id)
     else:
-        print("Warning: Could not find Contracts table ID for Corrections link")
+        print("Warning: Could not find Contracts table ID for linked tables")
 
     print("\nSetup complete!")
 

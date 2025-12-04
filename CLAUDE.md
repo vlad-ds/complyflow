@@ -112,6 +112,7 @@ FastAPI server for contract upload, extraction, and Airtable storage.
 |----------|--------|------|-------------|
 | `/contracts/upload` | POST | Yes | Upload PDF, extract metadata, store in Airtable |
 | `/contracts/{id}` | GET | Yes | Get contract by Airtable record ID |
+| `/contracts/{id}/citations` | GET | Yes | Get quotes and reasoning for each extracted field |
 | `/contracts/{id}/review` | PATCH | Yes | Mark contract as reviewed |
 | `/contracts/{id}/fields` | PATCH | Yes | Update single field, log correction for ML training |
 | `/contracts` | GET | Yes | List contracts (filter by `?status=under_review`) |
@@ -185,6 +186,19 @@ Tracks human corrections to AI-extracted fields for building training datasets.
 | original_value | Long text | AI-extracted value (JSON) |
 | corrected_value | Long text | Human-corrected value (JSON) |
 | corrected_at | DateTime | When correction was made |
+
+### Citations Table (Quotes & Reasoning)
+
+Stores the exact PDF quotes and AI reasoning for each extracted field. Created automatically when a contract is uploaded.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| field_name | Text | Which field this citation is for (parties, contract_type, etc.) |
+| contract | Link | Links to Contracts table |
+| quote | Long text | Exact verbatim text from the PDF |
+| reasoning | Long text | AI's explanation of how the value was interpreted |
+
+Use the `/contracts/{id}/citations` endpoint to retrieve citations for a contract.
 
 ### Setup (one-time)
 

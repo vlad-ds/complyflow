@@ -18,6 +18,8 @@ from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Query, 
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.models import (
+    Citation,
+    CitationsResponse,
     ContractDeleteResponse,
     ContractListResponse,
     ContractRecord,
@@ -285,6 +287,37 @@ async def get_contract(record_id: str):
         id=record["id"],
         fields=record["fields"],
         created_time=record.get("createdTime"),
+    )
+
+
+@app.get(
+    "/contracts/{record_id}/citations",
+    response_model=CitationsResponse,
+    responses={
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        404: {"model": ErrorResponse, "description": "Contract not found"},
+    },
+    tags=["Contracts"],
+    dependencies=[Depends(verify_api_key)],
+)
+async def get_contract_citations(record_id: str):
+    """
+    Get all citations (quotes and reasoning) for a contract.
+
+    Returns the exact PDF quotes and AI reasoning for each extracted field.
+    """
+    airtable = get_airtable()
+
+    # Verify contract exists
+    record = airtable.get_contract(record_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Contract not found")
+
+    citations_data = airtable.get_citations(record_id)
+
+    return CitationsResponse(
+        contract_id=record_id,
+        citations=[Citation(**c) for c in citations_data],
     )
 
 

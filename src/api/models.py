@@ -150,3 +150,22 @@ class ContractDeleteResponse(BaseModel):
 
     success: bool = True
     id: str = Field(description="Deleted contract record ID")
+
+
+# --- Citation Models ---
+
+
+class Citation(BaseModel):
+    """A citation record with quote and reasoning for a field."""
+
+    id: str = Field(description="Citation record ID")
+    field_name: str = Field(description="Name of the extracted field")
+    quote: str = Field(default="", description="Exact verbatim text from document")
+    reasoning: str = Field(default="", description="AI's interpretation logic")
+
+
+class CitationsResponse(BaseModel):
+    """Response from GET /contracts/{id}/citations."""
+
+    contract_id: str
+    citations: list[Citation]

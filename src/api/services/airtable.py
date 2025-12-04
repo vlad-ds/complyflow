@@ -79,6 +79,7 @@ class AirtableService:
         self.base_id = base_id
         self.table: Table = self.api.table(base_id, "Contracts")
         self.corrections_table: Table = self.api.table(base_id, "Corrections")
+        self.citations_table: Table = self.api.table(base_id, "Citations")
 
         # Get table ID for URL generation
         self.table_id = self.table.id
@@ -145,7 +146,57 @@ class AirtableService:
         """
         fields = self._to_airtable_fields(contract)
         record = self.table.create(fields)
+
+        # Create citation records for each extracted field
+        self._create_citations(record["id"], contract.get("extraction", {}))
+
         return record
+
+    def _create_citations(self, contract_id: str, extraction: dict) -> list[dict]:
+        """
+        Create citation records for each extracted field.
+
+        Args:
+            contract_id: The Airtable record ID of the contract
+            extraction: The extraction dict with field data
+
+        Returns:
+            List of created citation records
+        """
+        # Fields that have citations (raw_snippet + reasoning)
+        citation_fields = [
+            "parties",
+            "contract_type",
+            "agreement_date",
+            "effective_date",
+            "expiration_date",
+            "governing_law",
+            "notice_period",
+            "renewal_term",
+        ]
+
+        citations = []
+        for field_name in citation_fields:
+            field_data = extraction.get(field_name, {})
+            if not isinstance(field_data, dict):
+                continue
+
+            quote = field_data.get("raw_snippet", "")
+            reasoning = field_data.get("reasoning", "")
+
+            # Skip if both are empty
+            if not quote and not reasoning:
+                continue
+
+            citation = self.citations_table.create({
+                "field_name": field_name,
+                "contract": [contract_id],
+                "quote": quote,
+                "reasoning": reasoning,
+            })
+            citations.append(citation)
+
+        return citations
 
     def get_contract(self, record_id: str) -> dict | None:
         """Get a contract by its Airtable record ID."""
@@ -153,6 +204,33 @@ class AirtableService:
             return self.table.get(record_id)
         except Exception:
             return None
+
+    def get_citations(self, contract_id: str) -> list[dict]:
+        """
+        Get all citations for a contract.
+
+        Args:
+            contract_id: The Airtable record ID of the contract
+
+        Returns:
+            List of citation records with field_name, quote, reasoning
+        """
+        # Get all citations linked to this contract
+        all_citations = self.citations_table.all()
+
+        # Filter to those linked to this contract
+        contract_citations = []
+        for record in all_citations:
+            linked_contracts = record.get("fields", {}).get("contract", [])
+            if contract_id in linked_contracts:
+                contract_citations.append({
+                    "id": record["id"],
+                    "field_name": record["fields"].get("field_name"),
+                    "quote": record["fields"].get("quote", ""),
+                    "reasoning": record["fields"].get("reasoning", ""),
+                })
+
+        return contract_citations
 
     def delete_contract(self, record_id: str) -> bool:
         """Delete a contract by its Airtable record ID."""
