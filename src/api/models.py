@@ -156,12 +156,13 @@ class ContractDeleteResponse(BaseModel):
 
 
 class Citation(BaseModel):
-    """A citation record with quote and reasoning for a field."""
+    """A citation record with quote, reasoning, and AI's original value for a field."""
 
     id: str = Field(description="Citation record ID")
     field_name: str = Field(description="Name of the extracted field")
     quote: str = Field(default="", description="Exact verbatim text from document")
     reasoning: str = Field(default="", description="AI's interpretation logic")
+    ai_value: str = Field(default="", description="AI's original extracted value (JSON string)")
 
 
 class CitationsResponse(BaseModel):

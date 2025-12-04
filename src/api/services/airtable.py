@@ -163,7 +163,7 @@ class AirtableService:
         Returns:
             List of created citation records
         """
-        # Fields that have citations (raw_snippet + reasoning)
+        # Fields that have citations (raw_snippet + reasoning + normalized_value)
         citation_fields = [
             "parties",
             "contract_type",
@@ -183,9 +183,13 @@ class AirtableService:
 
             quote = field_data.get("raw_snippet", "")
             reasoning = field_data.get("reasoning", "")
+            normalized_value = field_data.get("normalized_value")
 
-            # Skip if both are empty
-            if not quote and not reasoning:
+            # Convert ai_value to JSON string for storage
+            ai_value_str = json.dumps(normalized_value, default=str) if normalized_value is not None else ""
+
+            # Skip if all are empty
+            if not quote and not reasoning and not ai_value_str:
                 continue
 
             citation = self.citations_table.create({
@@ -193,6 +197,7 @@ class AirtableService:
                 "contract": [contract_id],
                 "quote": quote,
                 "reasoning": reasoning,
+                "ai_value": ai_value_str,
             })
             citations.append(citation)
 
@@ -213,7 +218,7 @@ class AirtableService:
             contract_id: The Airtable record ID of the contract
 
         Returns:
-            List of citation records with field_name, quote, reasoning
+            List of citation records with field_name, quote, reasoning, ai_value
         """
         # Get all citations linked to this contract
         all_citations = self.citations_table.all()
@@ -228,6 +233,7 @@ class AirtableService:
                     "field_name": record["fields"].get("field_name"),
                     "quote": record["fields"].get("quote", ""),
                     "reasoning": record["fields"].get("reasoning", ""),
+                    "ai_value": record["fields"].get("ai_value", ""),
                 })
 
         return contract_citations

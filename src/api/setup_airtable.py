@@ -69,6 +69,7 @@ def create_citations_table(api: Api, base_id: str, contracts_table_id: str) -> N
         },
         {"name": "quote", "type": "multilineText"},
         {"name": "reasoning", "type": "multilineText"},
+        {"name": "ai_value", "type": "multilineText"},  # AI's original normalized value (JSON)
     ]
 
     print(f"Creating 'Citations' table with {len(fields)} fields...")

@@ -2,6 +2,13 @@
 
 Case study implementation for Bit Capital: automated contract management and regulatory monitoring.
 
+## Development Philosophy
+
+This is a **greenfield project** for a take-home assessment. Priorities:
+- **Simple, modular code** over complex abstractions
+- **No migrations or backwards compatibility** - delete and recreate as needed
+- **Clean architecture** that's easy to understand and extend
+
 ## Project Overview
 
 Three main workflows:
@@ -187,9 +194,9 @@ Tracks human corrections to AI-extracted fields for building training datasets.
 | corrected_value | Long text | Human-corrected value (JSON) |
 | corrected_at | DateTime | When correction was made |
 
-### Citations Table (Quotes & Reasoning)
+### Citations Table (Quotes, Reasoning & AI Values)
 
-Stores the exact PDF quotes and AI reasoning for each extracted field. Created automatically when a contract is uploaded.
+Stores the exact PDF quotes, AI reasoning, and original AI-extracted values for each field. Created automatically when a contract is uploaded.
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -197,6 +204,12 @@ Stores the exact PDF quotes and AI reasoning for each extracted field. Created a
 | contract | Link | Links to Contracts table |
 | quote | Long text | Exact verbatim text from the PDF |
 | reasoning | Long text | AI's explanation of how the value was interpreted |
+| ai_value | Long text | AI's original extracted value (JSON string) |
+
+This table preserves the AI's original interpretation even after human edits. The frontend can show:
+- **AI value** (from `ai_value`) - what the AI extracted
+- **Current value** (from Contracts table) - possibly human-edited
+- **Quote + Reasoning** - why the AI made that interpretation
 
 Use the `/contracts/{id}/citations` endpoint to retrieve citations for a contract.
 
