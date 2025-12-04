@@ -24,6 +24,8 @@ from api.models import (
     ContractReviewResponse,
     ContractUploadResponse,
     ErrorResponse,
+    FieldUpdateRequest,
+    FieldUpdateResponse,
     HealthResponse,
 )
 from api.logging import get_logger, log_error
@@ -306,6 +308,85 @@ async def review_contract(record_id: str, body: ContractReviewRequest):
         id=updated["id"],
         status=updated["fields"].get("status", "unknown"),
         reviewed_at=updated["fields"].get("reviewed_at"),
+    )
+
+
+# Allowed fields for update
+UPDATABLE_FIELDS = {
+    "parties",
+    "contract_type",
+    "agreement_date",
+    "effective_date",
+    "expiration_date",
+    "notice_deadline",
+    "first_renewal_date",
+    "governing_law",
+    "notice_period",
+    "renewal_term",
+}
+
+
+@app.patch(
+    "/contracts/{record_id}/fields",
+    response_model=FieldUpdateResponse,
+    responses={
+        400: {"model": ErrorResponse, "description": "Invalid field name"},
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        404: {"model": ErrorResponse, "description": "Contract not found"},
+    },
+    tags=["Contracts"],
+    dependencies=[Depends(verify_api_key)],
+)
+async def update_contract_field(record_id: str, body: FieldUpdateRequest):
+    """
+    Update a single field and log the correction for ML training.
+
+    This endpoint:
+    1. Updates the specified field in Airtable
+    2. Logs the correction to a separate Corrections table if the value changed
+    3. Returns success status and whether a correction was logged
+
+    Corrections are used to build a training dataset for improving AI extraction.
+    """
+    # Validate field name
+    if body.field_name not in UPDATABLE_FIELDS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid field name: '{body.field_name}'. "
+            f"Allowed fields: {', '.join(sorted(UPDATABLE_FIELDS))}",
+        )
+
+    airtable = get_airtable()
+
+    # Verify contract exists
+    existing = airtable.get_contract(record_id)
+    if not existing:
+        raise HTTPException(status_code=404, detail="Contract not found")
+
+    # Update field and log correction
+    try:
+        updated, correction = airtable.update_field_with_correction(
+            record_id=record_id,
+            field_name=body.field_name,
+            original_value=body.original_value,
+            new_value=body.new_value,
+        )
+        logger.info(
+            f"Updated field '{body.field_name}' for contract {record_id}, "
+            f"correction_logged={correction is not None}"
+        )
+    except Exception as e:
+        log_error(logger, "Field update failed", e, record_id=record_id)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to update field: {type(e).__name__}: {e}",
+        )
+
+    return FieldUpdateResponse(
+        success=True,
+        field_name=body.field_name,
+        new_value=body.new_value,
+        correction_logged=correction is not None,
     )
 
 

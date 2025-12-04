@@ -64,7 +64,7 @@ def normalize_contract_type(contract_type: str | None) -> str | None:
 
 
 class AirtableService:
-    """Service for interacting with Airtable Contracts table."""
+    """Service for interacting with Airtable Contracts and Corrections tables."""
 
     def __init__(self):
         api_key = os.environ.get("AIRTABLE_API_KEY")
@@ -78,6 +78,7 @@ class AirtableService:
         self.api = Api(api_key)
         self.base_id = base_id
         self.table: Table = self.api.table(base_id, "Contracts")
+        self.corrections_table: Table = self.api.table(base_id, "Corrections")
 
     def _to_airtable_fields(self, contract: dict) -> dict:
         """Convert contract dict to Airtable fields format."""
@@ -188,3 +189,82 @@ class AirtableService:
     def get_airtable_url(self, record_id: str) -> str:
         """Get the direct URL to a record in Airtable."""
         return f"https://airtable.com/{self.base_id}/Contracts/{record_id}"
+
+    def log_correction(
+        self,
+        contract_id: str,
+        field_name: str,
+        original_value: Any,
+        corrected_value: Any,
+    ) -> dict:
+        """
+        Log a human correction to the Corrections table.
+
+        Args:
+            contract_id: Airtable record ID of the contract
+            field_name: Name of the field that was corrected
+            original_value: The AI-extracted value
+            corrected_value: The human-corrected value
+
+        Returns:
+            Created correction record
+        """
+        # Serialize values to JSON strings for storage
+        original_str = json.dumps(original_value, default=str) if original_value is not None else ""
+        corrected_str = json.dumps(corrected_value, default=str) if corrected_value is not None else ""
+
+        record = self.corrections_table.create({
+            "contract": [contract_id],  # Link to contract record
+            "field_name": field_name,
+            "original_value": original_str,
+            "corrected_value": corrected_str,
+            "corrected_at": datetime.now().isoformat(),
+        })
+        return record
+
+    def update_field_with_correction(
+        self,
+        record_id: str,
+        field_name: str,
+        original_value: Any,
+        new_value: Any,
+    ) -> tuple[dict, dict | None]:
+        """
+        Update a single field and log the correction if value changed.
+
+        Args:
+            record_id: Airtable record ID
+            field_name: Field to update
+            original_value: The original AI-extracted value
+            new_value: The new value to set
+
+        Returns:
+            Tuple of (updated contract record, correction record or None)
+        """
+        # Prepare the value for Airtable based on field type
+        airtable_value = new_value
+
+        # Handle special field types
+        if field_name == "parties" and isinstance(new_value, list):
+            airtable_value = json.dumps(new_value)
+        elif field_name == "contract_type":
+            airtable_value = normalize_contract_type(new_value)
+        elif field_name in ("agreement_date", "effective_date", "expiration_date",
+                           "notice_deadline", "first_renewal_date"):
+            # Convert date dict to ISO string if needed
+            airtable_value = date_to_iso(new_value)
+
+        # Update the contract record
+        updated = self.table.update(record_id, {field_name: airtable_value})
+
+        # Log correction if value actually changed
+        correction = None
+        if json.dumps(original_value, default=str) != json.dumps(new_value, default=str):
+            correction = self.log_correction(
+                contract_id=record_id,
+                field_name=field_name,
+                original_value=original_value,
+                corrected_value=new_value,
+            )
+
+        return updated, correction

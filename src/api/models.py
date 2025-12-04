@@ -119,3 +119,26 @@ class ErrorResponse(BaseModel):
 
     error: str
     detail: str | None = None
+
+
+class FieldUpdateRequest(BaseModel):
+    """Request body for PATCH /contracts/{id}/fields."""
+
+    field_name: str = Field(
+        description="Name of the field to update (e.g., 'parties', 'expiration_date')"
+    )
+    original_value: Any = Field(
+        description="The original AI-extracted value (for correction tracking)"
+    )
+    new_value: Any = Field(description="The new corrected value")
+
+
+class FieldUpdateResponse(BaseModel):
+    """Response from PATCH /contracts/{id}/fields."""
+
+    success: bool = True
+    field_name: str
+    new_value: Any
+    correction_logged: bool = Field(
+        description="Whether a correction was logged (true if value changed)"
+    )

@@ -48,6 +48,50 @@ def get_contract_types() -> list[dict]:
     ]
 
 
+def create_corrections_table(api: Api, base_id: str, contracts_table_id: str) -> None:
+    """Create the Corrections table for tracking human edits."""
+    base = api.base(base_id)
+
+    # Check if table already exists
+    schema = base.schema()
+    existing_tables = [t.name.lower() for t in schema.tables]
+    if "corrections" in existing_tables:
+        print("Table 'Corrections' already exists. Skipping creation.")
+        return
+
+    # Note: First field becomes the primary field, so field_name goes first
+    fields = [
+        {"name": "field_name", "type": "singleLineText"},
+        {
+            "name": "contract",
+            "type": "multipleRecordLinks",
+            "options": {"linkedTableId": contracts_table_id},
+        },
+        {"name": "original_value", "type": "multilineText"},
+        {"name": "corrected_value", "type": "multilineText"},
+        {
+            "name": "corrected_at",
+            "type": "dateTime",
+            "options": {
+                "dateFormat": {"name": "iso"},
+                "timeFormat": {"name": "24hour"},
+                "timeZone": "utc",
+            },
+        },
+    ]
+
+    print(f"Creating 'Corrections' table with {len(fields)} fields...")
+    table = base.create_table(
+        name="Corrections",
+        fields=fields,
+        description="Human corrections to AI-extracted contract metadata (for ML training)",
+    )
+    print(f"Created table: {table.name} (ID: {table.id})")
+    print("\nFields created:")
+    for field in fields:
+        print(f"  - {field['name']} ({field['type']})")
+
+
 def create_contracts_table(api: Api, base_id: str) -> None:
     """Create the Contracts table with all required fields."""
     base = api.base(base_id)
@@ -142,7 +186,17 @@ def main():
         print("  - schema.bases:write")
         sys.exit(1)
 
+    # Get or create Contracts table
     create_contracts_table(api, base_id)
+
+    # Get Contracts table ID for linking
+    schema = base.schema()
+    contracts_table = next((t for t in schema.tables if t.name.lower() == "contracts"), None)
+    if contracts_table:
+        create_corrections_table(api, base_id, contracts_table.id)
+    else:
+        print("Warning: Could not find Contracts table ID for Corrections link")
+
     print("\nSetup complete!")
 
 
