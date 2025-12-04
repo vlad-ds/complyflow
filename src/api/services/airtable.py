@@ -80,6 +80,9 @@ class AirtableService:
         self.table: Table = self.api.table(base_id, "Contracts")
         self.corrections_table: Table = self.api.table(base_id, "Corrections")
 
+        # Get table ID for URL generation
+        self.table_id = self.table.id
+
     def _to_airtable_fields(self, contract: dict) -> dict:
         """Convert contract dict to Airtable fields format."""
         extraction = contract.get("extraction", {})
@@ -188,7 +191,7 @@ class AirtableService:
 
     def get_airtable_url(self, record_id: str) -> str:
         """Get the direct URL to a record in Airtable."""
-        return f"https://airtable.com/{self.base_id}/Contracts/{record_id}"
+        return f"https://airtable.com/{self.base_id}/{self.table_id}/{record_id}"
 
     def log_correction(
         self,
