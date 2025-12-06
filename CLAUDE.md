@@ -343,16 +343,102 @@ railway redeploy -y
 - Start command needs shell wrapper for `$PORT` expansion: `/bin/sh -c 'uvicorn ...'`
 - Use `--loop asyncio` to avoid uvloop C extension issues in slim Docker images
 
+## Regwatch (Regulatory Monitoring)
+
+Module for fetching EU regulatory documents from EUR-Lex RSS feeds.
+
+**Module:** `src/regwatch/`
+
+### Architecture
+
+```
+src/regwatch/
+├── config.py              # RSS feeds, retry settings, Jina config
+├── storage.py             # S3/local storage abstraction
+└── connectors/
+    ├── base.py            # BaseConnector, Document dataclass
+    └── eurlex.py          # EUR-Lex RSS + Jina.ai full-text extraction
+```
+
+### How It Works
+
+1. **RSS Feeds**: 7 pre-configured feeds (DORA, MiCA, AIFMD, MiFID II, AML, AI Act, SFDR)
+2. **Full-text Extraction**: Uses Jina.ai Reader API to bypass EUR-Lex WAF
+3. **Storage**: S3 on Railway, local filesystem for development
+4. **Caching**: Documents cached to avoid re-downloading
+
+### Key Jina.ai Headers (for WAF bypass)
+
+```python
+headers = {
+    "X-Proxy-Url": "true",           # Proxy mode for WAF bypass
+    "X-Wait-For-Selector": "#document1",  # Wait for content to load
+    "X-Timeout": "60",               # Long timeout for WAF challenge
+    "X-No-Cache": "true",            # Bypass cached failures
+}
+```
+
+### Running Regwatch
+
+```bash
+# Test document fetch (uses S3 if configured, else local cache)
+PYTHONPATH=src uv run python scripts/test_regwatch.py
+```
+
+### Environment Variables
+
+```
+JINA_API_KEY=jina_xxx...           # Jina.ai API key (higher rate limits)
+BUCKET=regwatch-xxx                # Railway bucket name
+ACCESS_KEY_ID=xxx                  # Railway S3 access key
+SECRET_ACCESS_KEY=xxx              # Railway S3 secret
+ENDPOINT=https://storage.railway.app
+REGION=auto
+```
+
+## Railway S3 Bucket
+
+Railway provides S3-compatible storage via Buckets.
+
+### Accessing Bucket Contents
+
+Railway CLI doesn't have bucket commands. Use AWS CLI with credentials from `.env`:
+
+```bash
+# Load credentials and list bucket
+source .env
+AWS_ACCESS_KEY_ID=$ACCESS_KEY_ID \
+AWS_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY \
+aws s3 ls s3://$BUCKET/regwatch/cache/ --endpoint-url $ENDPOINT
+```
+
+**Shell alias** (added to `~/.zshrc`):
+```bash
+alias s3-railway='AWS_ACCESS_KEY_ID=$ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY aws s3 --endpoint-url $ENDPOINT'
+
+# Usage:
+source .env
+s3-railway ls s3://$BUCKET/regwatch/cache/
+```
+
+### Creating a Bucket
+
+1. Go to Railway dashboard → your project
+2. Click **Create** → **Bucket**
+3. Name it (e.g., `regwatch`)
+4. Link to your service - env vars are auto-injected
+
 ## Tech Stack
 
 - Python backend (uv for package management)
 - API: FastAPI + uvicorn
 - Deployment: Railway (Docker)
+- Storage: Railway Buckets (S3-compatible)
 - Observability: Langfuse
 - Vector store: TBD
 - LLM: OpenAI GPT-5-mini (extraction + date computation)
 - Database: Airtable
-- Integrations: Airtable API, Slack API
+- Integrations: Airtable API, Slack API, Jina.ai Reader API
 - Frontend: TBD
 
 ## Commands

@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 # S3 Configuration (Railway Bucket environment variables)
 # =============================================================================
 
-S3_BUCKET = os.getenv("BUCKET")  # Railway bucket name
+S3_BUCKET = os.getenv("BUCKET")
 S3_ACCESS_KEY = os.getenv("ACCESS_KEY_ID")
 S3_SECRET_KEY = os.getenv("SECRET_ACCESS_KEY")
 S3_ENDPOINT = os.getenv("ENDPOINT", "https://storage.railway.app")
