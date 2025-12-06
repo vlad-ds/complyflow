@@ -21,7 +21,6 @@ from email.utils import parsedate_to_datetime
 import httpx
 
 from regwatch.config import (
-    CACHE_DIR,
     DOC_TYPE_KEYWORDS,
     EURLEX_DOC_URL,
     EURLEX_SKIP_PATTERNS,
@@ -36,11 +35,9 @@ from regwatch.config import (
     RSSFeed,
 )
 from regwatch.connectors.base import BaseConnector, Document
+from regwatch.storage import get_storage
 
 logger = logging.getLogger(__name__)
-
-# Ensure cache directory exists
-CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 
 class EURLexConnector(BaseConnector):
@@ -297,23 +294,22 @@ class EURLexConnector(BaseConnector):
         return headers
 
     # -------------------------------------------------------------------------
-    # Cache helpers
+    # Cache helpers (uses S3 on Railway, local filesystem in development)
     # -------------------------------------------------------------------------
 
     def _read_cache(self, celex: str) -> str | None:
         """Read document from cache if valid."""
-        cache_file = CACHE_DIR / f"{celex}.txt"
-        if cache_file.exists():
-            content = cache_file.read_text()
-            if len(content) >= MIN_VALID_CONTENT_LENGTH:
-                logger.info(f"Cache hit for {celex}: {len(content)} chars")
-                return content
+        storage = get_storage()
+        content = storage.read(celex)
+        if content and len(content) >= MIN_VALID_CONTENT_LENGTH:
+            logger.info(f"Cache hit for {celex}: {len(content)} chars")
+            return content
         return None
 
     def _write_cache(self, celex: str, content: str) -> None:
         """Write document to cache."""
-        cache_file = CACHE_DIR / f"{celex}.txt"
-        cache_file.write_text(content)
+        storage = get_storage()
+        storage.write(celex, content)
 
     # -------------------------------------------------------------------------
     # Content extraction helpers

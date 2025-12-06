@@ -18,14 +18,12 @@ Management URL: https://eur-lex.europa.eu/protected/my-eurlex/my-rss.html
 
 import os
 from dataclasses import dataclass
-from pathlib import Path
 
 
 # =============================================================================
 # Cache Configuration
 # =============================================================================
 
-CACHE_DIR = Path("output/regwatch/cache")
 MIN_VALID_CONTENT_LENGTH = 1000  # Minimum chars for valid document content
 
 

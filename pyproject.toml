@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "anthropic>=0.75.0",
+    "boto3>=1.42.4",
     "fastapi>=0.115.0",
     "google-cloud-aiplatform[tokenization]>=1.128.0",
     "google-genai>=1.0.0",
