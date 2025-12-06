@@ -234,6 +234,28 @@ FRONTEND_URL=https://your-app.lovable.app  # For Slack review button
 
 All LLM calls are traced in Langfuse for observability and cost tracking.
 
+### Cost Tracking Policy
+
+**All LLM calls MUST go through Langfuse.** This is required for accurate cost tracking.
+
+How to ensure proper cost tracking:
+1. Use the existing providers in `src/llm/` (OpenAIProvider, GeminiProvider, etc.)
+2. These providers use instrumentors that auto-trace to Langfuse
+3. Always set a Langfuse tag to identify the source (e.g., `regwatch-eval`, `source:api`)
+4. Query Langfuse to get actual costs - never hardcode pricing estimates
+
+To verify costs after a run:
+```python
+from langfuse_client import get_traces_by_tag, get_trace_summary
+
+# Get traces for a specific tag
+traces = get_traces_by_tag("regwatch-eval", limit=100)
+
+# Get cost summary for a trace
+summary = get_trace_summary(trace_id)
+print(f"Cost: ${summary['total_cost']:.6f}")
+```
+
 ### Tags
 
 | Tag | Description |
@@ -242,7 +264,10 @@ All LLM calls are traced in Langfuse for observability and cost tracking.
 | `extraction` | Contract metadata extraction calls |
 | `date-computation` | Date computation calls |
 | `provider:openai` | OpenAI provider calls |
+| `provider:gemini` | Google Gemini provider calls |
+| `provider:cohere` | Cohere provider calls |
 | `split:train` / `split:test` | Batch evaluation runs |
+| `regwatch-eval` | Regwatch RAG generation evaluation |
 
 ### Filtering API Usage
 
@@ -459,3 +484,14 @@ PYTHONPATH=src uv run uvicorn api.main:app --reload --port 8000
 - When asked about current APIs, libraries, or technical solutions, proactively search online without being explicitly asked.
 - Use Context7 MCP to look up current library documentation and usage examples.
 - Use DeepWiki MCP to explore GitHub repositories and understand library architecture.
+
+### Report Write-ups
+
+When asked for a "short write-up" or "write-up for report", produce text for a technical assessment report:
+
+- **Context**: This is a take-home assessment for Bit Capital. The report documents implementation decisions, methodology, and results.
+- **Format**: Plain text suitable for Google Docs. No markdown tables (use prose instead). No code blocks unless specifically requested.
+- **Length**: 2-4 paragraphs per topic. Concise but substantive.
+- **Tone**: Professional, technical, third-person ("we implemented", "the system uses").
+- **Content**: What was built, why (rationale), how it works, key metrics/results, limitations or future improvements.
+- **Audience**: Technical reviewers evaluating the assessment submission.

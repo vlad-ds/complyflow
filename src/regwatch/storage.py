@@ -10,9 +10,24 @@ import os
 from pathlib import Path
 
 import boto3
+from dotenv import load_dotenv
+
+# Load .env file for local development (no-op if file doesn't exist)
+load_dotenv()
 from botocore.exceptions import ClientError
 
 logger = logging.getLogger(__name__)
+
+
+# =============================================================================
+# Storage Mode Detection
+# =============================================================================
+
+# Force local storage in development (set USE_LOCAL_STORAGE=1 in .env)
+USE_LOCAL_STORAGE = os.getenv("USE_LOCAL_STORAGE", "").lower() in ("1", "true", "yes")
+
+# Detect Railway environment (Railway injects this env var)
+IS_RAILWAY = bool(os.getenv("RAILWAY_ENVIRONMENT"))
 
 
 # =============================================================================
@@ -26,14 +41,49 @@ S3_ENDPOINT = os.getenv("ENDPOINT", "https://storage.railway.app")
 S3_REGION = os.getenv("REGION", "auto")
 
 # S3 key prefix for regwatch documents
-S3_PREFIX = "regwatch/cache/"
+S3_PREFIX = "regwatch/cache"
 
 # Local fallback cache directory
 LOCAL_CACHE_DIR = Path("output/regwatch/cache")
 
 
+def _build_key(subfolder: str | None, key: str) -> str:
+    """Build a storage key with optional subfolder.
+
+    Args:
+        subfolder: Optional subfolder (e.g., feed topic like "DORA", "MiCA")
+        key: Document identifier (e.g., CELEX number)
+
+    Returns:
+        Full key path: "{subfolder}/{key}" or just "{key}"
+    """
+    if subfolder:
+        return f"{subfolder}/{key}"
+    return key
+
+
 def is_s3_configured() -> bool:
-    """Check if S3 storage is configured (Railway bucket environment)."""
+    """
+    Check if S3 storage should be used.
+
+    Returns True when:
+    - Running on Railway (RAILWAY_ENVIRONMENT is set), AND
+    - S3 credentials are available
+
+    Returns False when:
+    - USE_LOCAL_STORAGE is set (forces local storage in development)
+    - Not running on Railway
+    - S3 credentials are missing
+    """
+    # Force local storage if explicitly requested
+    if USE_LOCAL_STORAGE:
+        return False
+
+    # Only use S3 when running on Railway
+    if not IS_RAILWAY:
+        return False
+
+    # Check if S3 credentials are available
     return all([S3_BUCKET, S3_ACCESS_KEY, S3_SECRET_KEY])
 
 
@@ -65,46 +115,52 @@ class DocumentStorage:
             LOCAL_CACHE_DIR.mkdir(parents=True, exist_ok=True)
             logger.info(f"Using local storage: {LOCAL_CACHE_DIR}")
 
-    def read(self, key: str) -> str | None:
+    def read(self, key: str, subfolder: str | None = None) -> str | None:
         """
         Read document content by key.
 
         Args:
             key: Document identifier (e.g., CELEX number)
+            subfolder: Optional subfolder (e.g., feed topic like "DORA")
 
         Returns:
             Document content as string, or None if not found
         """
+        full_key = _build_key(subfolder, key)
         if self.use_s3:
-            return self._read_s3(key)
-        return self._read_local(key)
+            return self._read_s3(full_key)
+        return self._read_local(full_key)
 
-    def write(self, key: str, content: str) -> bool:
+    def write(self, key: str, content: str, subfolder: str | None = None) -> bool:
         """
         Write document content.
 
         Args:
             key: Document identifier
             content: Document content to store
+            subfolder: Optional subfolder (e.g., feed topic like "DORA")
 
         Returns:
             True if successful, False otherwise
         """
+        full_key = _build_key(subfolder, key)
         if self.use_s3:
-            return self._write_s3(key, content)
-        return self._write_local(key, content)
+            return self._write_s3(full_key, content)
+        return self._write_local(full_key, content)
 
-    def exists(self, key: str) -> bool:
+    def exists(self, key: str, subfolder: str | None = None) -> bool:
         """Check if document exists in storage."""
+        full_key = _build_key(subfolder, key)
         if self.use_s3:
-            return self._exists_s3(key)
-        return self._exists_local(key)
+            return self._exists_s3(full_key)
+        return self._exists_local(full_key)
 
-    def delete(self, key: str) -> bool:
+    def delete(self, key: str, subfolder: str | None = None) -> bool:
         """Delete document from storage."""
+        full_key = _build_key(subfolder, key)
         if self.use_s3:
-            return self._delete_s3(key)
-        return self._delete_local(key)
+            return self._delete_s3(full_key)
+        return self._delete_local(full_key)
 
     # -------------------------------------------------------------------------
     # S3 Implementation
@@ -177,6 +233,8 @@ class DocumentStorage:
         """Write document to local filesystem."""
         file_path = LOCAL_CACHE_DIR / f"{key}.txt"
         try:
+            # Create parent directories if they don't exist (for subfolder support)
+            file_path.parent.mkdir(parents=True, exist_ok=True)
             file_path.write_text(content)
             logger.debug(f"Local write: {file_path} ({len(content)} chars)")
             return True

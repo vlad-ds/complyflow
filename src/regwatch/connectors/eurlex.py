@@ -300,16 +300,16 @@ class EURLexConnector(BaseConnector):
     def _read_cache(self, celex: str) -> str | None:
         """Read document from cache if valid."""
         storage = get_storage()
-        content = storage.read(celex)
+        content = storage.read(celex, subfolder=self.feed.topic)
         if content and len(content) >= MIN_VALID_CONTENT_LENGTH:
-            logger.info(f"Cache hit for {celex}: {len(content)} chars")
+            logger.info(f"Cache hit for {celex} ({self.feed.topic}): {len(content)} chars")
             return content
         return None
 
     def _write_cache(self, celex: str, content: str) -> None:
         """Write document to cache."""
         storage = get_storage()
-        storage.write(celex, content)
+        storage.write(celex, content, subfolder=self.feed.topic)
 
     # -------------------------------------------------------------------------
     # Content extraction helpers
@@ -342,8 +342,31 @@ class EURLexConnector(BaseConnector):
         return "\n".join(content_lines).strip()
 
     def _clean_celex(self, celex: str) -> str:
-        """Clean CELEX number by removing parenthetical suffixes like R(09)."""
-        return re.sub(r"\([^)]+\)$", "", celex)
+        """
+        Clean CELEX number for use as storage key.
+
+        Operations:
+        1. Remove corrigendum/rectification suffixes like R(09) or (09)
+        2. Replace forward slashes with underscores (for CELEX like C/2025/05391)
+
+        CELEX structure: [sector][year][type][number][optional suffix]
+        - Sector: 1 digit (3 = legislation) or letter (C = OJ C series)
+        - Year: 4 digits
+        - Type: 1 letter (R = Regulation, L = Directive, D = Decision)
+        - Number: variable digits
+        - Suffix: R(xx) or (xx) for corrigenda/versions - REMOVE THIS
+
+        Examples:
+            32022R2554R(09) → 32022R2554  (corrigendum suffix removed)
+            32022R2554(09)  → 32022R2554  (version suffix removed)
+            C/2025/05391    → C_2025_05391  (slashes replaced)
+            32022R2554      → 32022R2554  (no change)
+        """
+        # Remove corrigendum suffix: R followed by parentheses, or just parentheses
+        # The base CELEX ends with digits, so we look for R(xx) or (xx) after digits
+        cleaned = re.sub(r"(\d)R?\([^)]+\)$", r"\1", celex)
+        # Replace forward slashes with underscores for filesystem safety
+        return cleaned.replace("/", "_")
 
     def _extract_celex(self, url: str) -> str | None:
         """Extract CELEX number from EUR-Lex URL."""

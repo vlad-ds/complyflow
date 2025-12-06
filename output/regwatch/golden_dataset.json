@@ -1,0 +1,142 @@
+[
+  {
+    "source_file": "DORA/32022R2554.txt",
+    "segment_id": "Article 3 - Definitions (60)",
+    "question": "What is the definition of a microenterprise under DORA?",
+    "ground_truth_answer": "A financial entity that employs fewer than 10 persons and has an annual turnover and/or annual balance sheet total that does not exceed EUR 2 million, excluding trading venues, central counterparties, trade repositories, and central securities depositories.",
+    "target_quote": "‘microenterprise’ means a financial entity, other than a trading venue, a central counterparty, a trade repository or a central securities depository, which employs fewer than 10 persons and has an annual turnover and/or annual balance sheet total that does not exceed EUR 2 million;"
+  },
+  {
+    "source_file": "DORA/32022R2554.txt",
+    "segment_id": "Article 26 - Advanced testing",
+    "question": "How often must financial entities carry out threat-led penetration testing (TLPT)?",
+    "ground_truth_answer": "Financial entities must carry out TLPT at least every 3 years, though the competent authority may request a different frequency based on risk profile and operational circumstances.",
+    "target_quote": "Financial entities, other than entities referred to in Article 16(1), first subparagraph, and other than microenterprises, which are identified in accordance with paragraph 8, third subparagraph, of this Article, shall carry out at least every 3 years advanced testing by means of TLPT."
+  },
+  {
+    "source_file": "DORA/32022R2554.txt",
+    "segment_id": "Article 24 - Digital operational resilience testing",
+    "question": "How often must financial entities (other than microenterprises) conduct tests on ICT systems supporting critical or important functions?",
+    "ground_truth_answer": "At least yearly, financial entities other than microenterprises must ensure appropriate tests are conducted on all ICT systems and applications supporting critical or important functions.",
+    "target_quote": "Financial entities, other than microenterprises, shall ensure, at least yearly, that appropriate tests are conducted on all ICT systems and applications supporting critical or important functions."
+  },
+  {
+    "source_file": "DORA/32022R2554.txt",
+    "segment_id": "Article 27 - Requirements for testers",
+    "question": "When using internal testers for TLPT, how often must financial entities contract external testers?",
+    "ground_truth_answer": "When financial entities use internal testers for the purposes of undertaking TLPT, they shall contract external testers every three tests.",
+    "target_quote": "When financial entities use internal testers for the purposes of undertaking TLPT, they shall contract external testers every three tests."
+  },
+  {
+    "source_file": "DORA/32022R2554.txt",
+    "segment_id": "Article 3 - Definitions (17)",
+    "question": "What is the definition of threat-led penetration testing (TLPT) under DORA?",
+    "ground_truth_answer": "A framework that mimics the tactics, techniques and procedures of real-life threat actors perceived as posing a genuine cyber threat, that delivers a controlled, bespoke, intelligence-led (red team) test of the financial entity's critical live production systems.",
+    "target_quote": "‘threat-led penetration testing (TLPT)’ means a framework that mimics the tactics, techniques and procedures of real-life threat actors perceived as posing a genuine cyber threat, that delivers a controlled, bespoke, intelligence-led (red team) test of the financial entity’s critical live production systems;"
+  },
+  {
+    "source_file": "DORA/32022R2554.txt",
+    "segment_id": "Article 28 - General principles on ICT third-party risk",
+    "question": "What information must financial entities report to competent authorities regarding ICT third-party services?",
+    "ground_truth_answer": "Financial entities shall report at least yearly on the number of new arrangements, the categories of ICT third-party service providers, the type of contractual arrangements, and the ICT services and functions which are being provided.",
+    "target_quote": "Financial entities shall report at least yearly to the competent authorities on the number of new arrangements on the use of ICT services, the categories of ICT third-party service providers, the type of contractual arrangements and the ICT services and functions which are being provided."
+  },
+  {
+    "source_file": "DORA/32025R1355.txt",
+    "segment_id": "Article 2 - Definitions (1)",
+    "question": "What is the definition of a 'payment system' under the ECB Regulation on systemically important payment systems?",
+    "ground_truth_answer": "A formal arrangement between three or more participants, not counting possible settlement banks, central counterparties, clearing houses or indirect participants, with common rules and standardised arrangements for the execution of transfer orders between the participants.",
+    "target_quote": "‘payment system’ means a formal arrangement between three or more participants, not counting possible settlement banks, central counterparties, clearing houses or indirect participants, with common rules and standardised arrangements for the execution of transfer orders between the participants;"
+  },
+  {
+    "source_file": "DORA/32025R1355.txt",
+    "segment_id": "Article 3 - Identification criteria",
+    "question": "What is the minimum daily average value threshold for a payment system to be identified as a SIPS?",
+    "ground_truth_answer": "The total daily average value of euro-denominated payments processed must exceed EUR 10 billion.",
+    "target_quote": "the total daily average value of euro-denominated payments processed exceeds EUR 10 billion"
+  },
+  {
+    "source_file": "DORA/32025R1355.txt",
+    "segment_id": "Article 9 - Governance (6)",
+    "question": "What three lines of defence must the Board of a SIPS operator ensure?",
+    "ground_truth_answer": "Operations, risk management, and internal audit - which must be separate from each other and have sufficient authority, independence, resources and access to the Board.",
+    "target_quote": "The Board shall ensure that there are three clear and effective lines of defence (operations, risk management and internal audit), which are separate from each other and have sufficient authority, independence, resources and access to the Board."
+  },
+  {
+    "source_file": "DORA/32025R1355.txt",
+    "segment_id": "Article 12 - Collateral",
+    "question": "How frequently must a SIPS operator mark-to-market its collateral?",
+    "ground_truth_answer": "A SIPS operator must mark-to-market its collateral at least on a daily basis.",
+    "target_quote": "A SIPS operator shall mark-to-market its collateral at least on a daily basis."
+  },
+  {
+    "source_file": "DORA/32025R1355.txt",
+    "segment_id": "Article 12 - Collateral (3)",
+    "question": "How frequently must a SIPS operator test haircuts for collateral?",
+    "ground_truth_answer": "A SIPS operator shall establish stable and conservative haircuts and shall test them at least annually, taking into account stressed market conditions.",
+    "target_quote": "A SIPS operator shall establish stable and conservative haircuts and shall test them at least annually and take into account stressed market conditions."
+  },
+  {
+    "source_file": "DORA/32025R1143.txt",
+    "segment_id": "Article 5 - Management body information (4)",
+    "question": "How long must APAs or ARMs retain personal data related to the good repute of management body members?",
+    "ground_truth_answer": "An APA or an ARM shall keep the information on criminal records and good repute for no longer than five years after the concerned member has ceased to perform its function.",
+    "target_quote": "An APA or an ARM shall keep the information set out in paragraph 1, points (d) and (e), for no longer than five years after the concerned member has ceased to perform its function."
+  },
+  {
+    "source_file": "DORA/32025R1143.txt",
+    "segment_id": "Article 5 - Management body information (2)",
+    "question": "When must an APA or ARM notify the competent authority of changes to management body membership if prior notification was not possible?",
+    "ground_truth_answer": "The notification shall be made within 10 working days after the change has occurred.",
+    "target_quote": "Where, for substantiated reasons, it is not possible to make the notification before that change takes effect, it shall be made within 10 working days after the change has occurred."
+  },
+  {
+    "source_file": "MiCA/32025R1264.txt",
+    "segment_id": "Article 1 - Scope",
+    "question": "Which issuers of asset-referenced tokens and e-money tokens does the MiCA liquidity management regulation apply to?",
+    "ground_truth_answer": "The regulation applies to issuers of significant asset-referenced tokens, electronic money institutions issuing significant e-money tokens, and issuers of non-significant tokens where required by competent authorities under Article 35(4) or Article 58(2) of MiCA.",
+    "target_quote": "This Regulation applies to the following issuers of asset referenced tokens and e-money tokens:\n\n(a)issuers of significant asset-referenced tokens;\n\n(b)electronic money institutions issuing significant e-money tokens;\n\n(c)issuers of asset-referenced tokens that are not significant, where required by a competent authority under Article 35(4) of Regulation (EU)2023/1114;\n\n(d)electronic money institutions issuing e-money tokens that are not significant, where required by a competent authority under Article 58(2) of Regulation (EU)2023/1114."
+  },
+  {
+    "source_file": "MiCA/32025R1264.txt",
+    "segment_id": "Article 5 - Stress testing",
+    "question": "What type of stress test must issuers of asset-referenced tokens include in their liquidity stress testing?",
+    "ground_truth_answer": "The liquidity stress testing shall include a reverse stress test element to assess the limit of resilience of the liquidity profile of each reserve of assets.",
+    "target_quote": "The liquidity stress testing shall include a reverse stress test element to assess the limit of resilience of the liquidity profile of each reserve of assets."
+  },
+  {
+    "source_file": "MiCA/32025R1264.txt",
+    "segment_id": "Article 3 - Contingency policy",
+    "question": "What early warning signals must issuers of asset-referenced tokens or e-money tokens develop?",
+    "ground_truth_answer": "Warnings for maximum deviations between the market value of reserve assets and market value of referenced assets, and warnings for maximum deviations between market value of tokens and market value of referenced assets.",
+    "target_quote": "issuers of asset-referenced tokens or e-money tokens shall develop and appropriately calibrate early warning signals. Those signals shall include the following warnings:\n\n(a)for maximum deviations between the market value of the reserve of assets and the market value of the assets referenced by the tokens;\n\n(b)for maximum deviations between the market value of the tokens and the market value of the assets referenced by the tokens."
+  },
+  {
+    "source_file": "DORA/32025R1125.txt",
+    "segment_id": "Article 3 - Business plan",
+    "question": "For how many years must an applicant issuer of asset-referenced tokens provide forecast financial information?",
+    "ground_truth_answer": "The business plan shall contain forecast financial information for the three years following the granting of authorisation.",
+    "target_quote": "forecast accounting plans for the three years following the granting of authorisation"
+  },
+  {
+    "source_file": "DORA/32025R1125.txt",
+    "segment_id": "Article 6 - Reserve of assets",
+    "question": "How frequently must an independent audit of the reserve of assets be conducted for asset-referenced tokens?",
+    "ground_truth_answer": "An independent audit on the reserve of assets must be conducted every six months.",
+    "target_quote": "the name of the external consultant that will be in charge of the independent audit on the reserve of assets every six months in accordance with Article 36(9) of Regulation (EU)2023/1114"
+  },
+  {
+    "source_file": "DORA/32022R2554.txt",
+    "segment_id": "Article 3 - Definitions (29)",
+    "question": "What is the definition of ICT concentration risk under DORA?",
+    "ground_truth_answer": "An exposure to individual or multiple related critical ICT third-party service providers creating a degree of dependency on such providers so that the unavailability, failure or other type of shortfall of such provider may potentially endanger the ability of a financial entity to deliver critical or important functions, or cause other adverse effects including large losses, or endanger the financial stability of the Union.",
+    "target_quote": "‘ICT concentration risk’ means an exposure to individual or multiple related critical ICT third-party service providers creating a degree of dependency on such providers so that the unavailability, failure or other type of shortfall of such provider may potentially endanger the ability of a financial entity to deliver critical or important functions, or cause it to suffer other types of adverse effects, including large losses, or endanger the financial stability of the Union as a whole;"
+  },
+  {
+    "source_file": "DORA/32022R2554.txt",
+    "segment_id": "Article 5 - Governance and organisation",
+    "question": "Who bears ultimate responsibility for managing a financial entity's ICT risk under DORA?",
+    "ground_truth_answer": "The management body bears the ultimate responsibility for managing the financial entity's ICT risk.",
+    "target_quote": "the management body shall:\n\n(a)bear the ultimate responsibility for managing the financial entity’s ICT risk;"
+  }
+]
