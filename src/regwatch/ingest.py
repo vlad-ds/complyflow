@@ -250,7 +250,8 @@ async def _process_feed(
                     )
                     if materiality_result.is_material:
                         result.material_documents += 1
-                        result.slack_notifications_sent += 1
+                        if materiality_result.slack_notified:
+                            result.slack_notifications_sent += 1
                         logger.info(
                             f"Material document {celex}: {materiality_result.relevance} relevance"
                         )

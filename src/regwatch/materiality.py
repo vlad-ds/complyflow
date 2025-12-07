@@ -83,6 +83,7 @@ class MaterialityResult:
     impact: str | None
     action_required: str | None
     eurlex_url: str
+    slack_notified: bool = False
 
 
 @observe(name="regwatch-materiality-analysis")
@@ -316,6 +317,7 @@ async def analyze_and_notify(
                 impact=existing.impact,
                 action_required=existing.action_required,
                 eurlex_url=existing.eurlex_url,
+                slack_notified=existing.slack_notified,
             )
 
     # Run materiality analysis
@@ -342,5 +344,8 @@ async def analyze_and_notify(
 
     # Save registry after each analysis
     registry.save()
+
+    # Update result with notification status
+    result.slack_notified = slack_notified
 
     return result
