@@ -168,7 +168,7 @@ class DocumentStorage:
 
     def _read_s3(self, key: str) -> str | None:
         """Read document from S3."""
-        s3_key = f"{S3_PREFIX}{key}.txt"
+        s3_key = f"{S3_PREFIX}/{key}.txt"
         try:
             response = self.s3_client.get_object(Bucket=S3_BUCKET, Key=s3_key)
             content = response["Body"].read().decode("utf-8")
@@ -182,7 +182,7 @@ class DocumentStorage:
 
     def _write_s3(self, key: str, content: str) -> bool:
         """Write document to S3."""
-        s3_key = f"{S3_PREFIX}{key}.txt"
+        s3_key = f"{S3_PREFIX}/{key}.txt"
         try:
             self.s3_client.put_object(
                 Bucket=S3_BUCKET,
@@ -198,7 +198,7 @@ class DocumentStorage:
 
     def _exists_s3(self, key: str) -> bool:
         """Check if document exists in S3."""
-        s3_key = f"{S3_PREFIX}{key}.txt"
+        s3_key = f"{S3_PREFIX}/{key}.txt"
         try:
             self.s3_client.head_object(Bucket=S3_BUCKET, Key=s3_key)
             return True
@@ -207,7 +207,7 @@ class DocumentStorage:
 
     def _delete_s3(self, key: str) -> bool:
         """Delete document from S3."""
-        s3_key = f"{S3_PREFIX}{key}.txt"
+        s3_key = f"{S3_PREFIX}/{key}.txt"
         try:
             self.s3_client.delete_object(Bucket=S3_BUCKET, Key=s3_key)
             logger.debug(f"S3 delete: {s3_key}")
