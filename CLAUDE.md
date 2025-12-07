@@ -370,8 +370,12 @@ railway redeploy -y
 
 **Railway CLI Tips:**
 ```bash
-# Set environment variables
+# Set environment variables (use --service to target specific service)
 railway variables --set "VAR_NAME=value"
+railway variables --service regwatch-ingest --set "VAR_NAME=value"
+
+# Deploy to a specific service (--service flag works without TTY!)
+railway up --service regwatch-ingest --detach
 
 # Deploy current directory to linked service
 railway up --detach
@@ -379,13 +383,14 @@ railway up --detach
 # Check current linked service
 railway status
 
-# View logs (may be empty if service just deployed)
+# View logs (use --service for specific service)
 railway logs -n 50
+railway logs --service regwatch-ingest -n 50
 
-# Interactive commands (link, service) require TTY - use dashboard instead
+# Interactive commands (link) require TTY - use dashboard instead
+# But --service flag bypasses the need to link!
 
-# Trigger a cron job manually: use `railway up --detach` to redeploy
-# The service will run its start command on deployment
+# Trigger a cron job manually: use `railway up --service <name> --detach`
 ```
 
 **Service Configuration:**
