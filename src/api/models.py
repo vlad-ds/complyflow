@@ -170,3 +170,45 @@ class CitationsResponse(BaseModel):
 
     contract_id: str
     citations: list[Citation]
+
+
+# --- Chat Models ---
+
+
+class ChatMessage(BaseModel):
+    """A message in the conversation history."""
+
+    role: Literal["user", "assistant"]
+    content: str
+
+
+class ChatRequest(BaseModel):
+    """Request body for POST /regwatch/chat."""
+
+    query: str = Field(description="The user's question")
+    history: list[ChatMessage] = Field(
+        default=[],
+        description="Conversation history for context",
+    )
+
+
+class ChatSource(BaseModel):
+    """A source chunk used to generate the answer."""
+
+    doc_id: str = Field(description="Document CELEX ID")
+    title: str | None = Field(default=None, description="Document title")
+    text: str = Field(description="Chunk text")
+    topic: str | None = Field(default=None, description="Regulatory topic (DORA, MiCA, etc.)")
+    score: float = Field(description="Similarity score (0-1)")
+
+
+class ChatResponse(BaseModel):
+    """Response from POST /regwatch/chat."""
+
+    answer: str = Field(description="Generated answer")
+    sources: list[ChatSource] = Field(description="Source chunks used for the answer")
+    rewritten_query: str | None = Field(
+        default=None,
+        description="Query after rewriting (if history was provided)",
+    )
+    usage: dict | None = Field(default=None, description="Token usage statistics")

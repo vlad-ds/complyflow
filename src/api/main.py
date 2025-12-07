@@ -18,6 +18,10 @@ from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Query, 
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.models import (
+    ChatMessage,
+    ChatRequest,
+    ChatResponse,
+    ChatSource,
     Citation,
     CitationsResponse,
     ContractDeleteResponse,
@@ -503,6 +507,73 @@ async def list_contracts(
     ]
 
     return ContractListResponse(contracts=contracts, total=len(contracts))
+
+
+# --- Regwatch Chat Endpoint ---
+
+
+@app.post(
+    "/regwatch/chat",
+    response_model=ChatResponse,
+    responses={
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        500: {"model": ErrorResponse, "description": "Internal server error"},
+    },
+    tags=["Regwatch"],
+    dependencies=[Depends(verify_api_key)],
+)
+async def regwatch_chat(body: ChatRequest):
+    """
+    RAG chat endpoint for regulatory questions.
+
+    This endpoint:
+    1. Rewrites follow-up questions to be standalone (if history provided)
+    2. Embeds the query using Snowflake Arctic
+    3. Retrieves top-K relevant chunks from Qdrant
+    4. Generates an answer using GPT-5-mini with citations
+
+    The frontend should send conversation history with each request.
+    """
+    from chatbot.rag import ChatMessage as RagChatMessage
+    from chatbot.rag import chat
+
+    logger.info(f"Chat request: {body.query[:50]}... (history: {len(body.history)} messages)")
+
+    # Convert API models to internal models
+    history = [
+        RagChatMessage(role=msg.role, content=msg.content)
+        for msg in body.history
+    ]
+
+    try:
+        result = chat(query=body.query, history=history, top_k=20)
+    except Exception as e:
+        log_error(logger, "Chat failed", e, query=body.query[:50])
+        raise HTTPException(
+            status_code=500,
+            detail=f"Chat failed: {type(e).__name__}: {e}",
+        )
+
+    # Convert internal models to API response
+    sources = [
+        ChatSource(
+            doc_id=src.doc_id,
+            title=src.title,
+            text=src.text,
+            topic=src.topic,
+            score=src.score,
+        )
+        for src in result.sources
+    ]
+
+    logger.info(f"Chat response: {len(sources)} sources, {len(result.answer)} chars")
+
+    return ChatResponse(
+        answer=result.answer,
+        sources=sources,
+        rewritten_query=result.rewritten_query,
+        usage=result.usage,
+    )
 
 
 # Run with: uvicorn api.main:app --reload

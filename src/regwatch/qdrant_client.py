@@ -190,3 +190,33 @@ class RegwatchQdrant:
         except Exception as e:
             logger.warning(f"Failed to get collection stats: {e}")
             return {"error": str(e)}
+
+    def search(self, query_embedding: list[float], top_k: int = 20) -> list[dict]:
+        """
+        Search for similar chunks using vector similarity.
+
+        Args:
+            query_embedding: Query vector (768-dim for Snowflake Arctic)
+            top_k: Number of results to return
+
+        Returns:
+            List of chunk dicts with doc_id, title, text, topic, score
+        """
+        # Use query_points (new qdrant-client API) instead of deprecated search
+        response = self.client.query_points(
+            collection_name=self.config.collection_name,
+            query=query_embedding,
+            limit=top_k,
+            with_payload=True,
+        )
+        return [
+            {
+                "doc_id": point.payload.get("doc_id"),
+                "title": point.payload.get("title"),
+                "text": point.payload.get("text"),
+                "topic": point.payload.get("topic"),
+                "chunk_index": point.payload.get("chunk_index"),
+                "score": point.score,
+            }
+            for point in response.points
+        ]
