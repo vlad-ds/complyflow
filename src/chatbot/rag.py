@@ -124,7 +124,7 @@ def rewrite_query(query: str, history: list[ChatMessage]) -> str:
     response = client.chat.completions.create(
         model="gpt-5-mini-2025-08-07",
         messages=[{"role": "user", "content": prompt}],
-        max_completion_tokens=256,
+        max_completion_tokens=4096,  # Needs headroom for reasoning tokens
     )
 
     rewritten = response.choices[0].message.content.strip()
@@ -210,7 +210,7 @@ def generate_answer(
     response = client.chat.completions.create(
         model="gpt-5-mini-2025-08-07",
         messages=messages,
-        max_completion_tokens=1024,
+        max_completion_tokens=16384,  # Needs headroom for reasoning tokens
     )
 
     answer = response.choices[0].message.content.strip()
