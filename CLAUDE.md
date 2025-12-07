@@ -368,6 +368,32 @@ railway redeploy -y
 - Start command needs shell wrapper for `$PORT` expansion: `/bin/sh -c 'uvicorn ...'`
 - Use `--loop asyncio` to avoid uvloop C extension issues in slim Docker images
 
+**Railway CLI Tips:**
+```bash
+# Set environment variables
+railway variables --set "VAR_NAME=value"
+
+# Deploy current directory to linked service
+railway up --detach
+
+# Check current linked service
+railway status
+
+# View logs (may be empty if service just deployed)
+railway logs -n 50
+
+# Interactive commands (link, service) require TTY - use dashboard instead
+
+# Trigger a cron job manually: use `railway up --detach` to redeploy
+# The service will run its start command on deployment
+```
+
+**Service Configuration:**
+- Each service has its own `railway.json` config file
+- Set "Config Path" in Railway dashboard to point to the service's config file
+- Example: `src/regwatch/railway.json` for regwatch-ingest service
+- Cron services use `"cronSchedule": "0 8 * * *"` in the config
+
 ## Regwatch (Regulatory Monitoring)
 
 Module for fetching EU regulatory documents from EUR-Lex RSS feeds.
