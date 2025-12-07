@@ -60,10 +60,18 @@ class DocumentEmbedder:
     def model(self) -> TextEmbedding:
         """Lazy-load the embedding model."""
         if self._model is None:
-            self._model = TextEmbedding(
-                model_name=self.config.model_name,
-                max_length=self.config.max_length,
-            )
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.info(f"Loading embedding model: {self.config.model_name}")
+            try:
+                self._model = TextEmbedding(
+                    model_name=self.config.model_name,
+                    max_length=self.config.max_length,
+                )
+                logger.info("Embedding model loaded successfully")
+            except Exception as e:
+                logger.error(f"Failed to load embedding model: {type(e).__name__}: {e}")
+                raise
         return self._model
 
     @property

@@ -403,17 +403,45 @@ headers = {
 }
 ```
 
-### Running Regwatch
+### Daily Ingestion Pipeline
 
+Automated pipeline to fetch new documents, chunk, embed, and index to Qdrant.
+
+**Module:** `src/regwatch/ingest.py`
+
+**Configuration:** `src/regwatch/ingest_config.py`
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `feeds` | `["DORA", "MiCA"]` | RSS feeds to process |
+| `recent_docs_limit` | `5` | Max docs per feed |
+| `lookback_days` | `30` | Only fetch docs from last N days |
+| `chunk_size` | `2048` | Characters per chunk |
+| `chunk_overlap` | `200` | Overlap between chunks |
+
+**Run locally:**
 ```bash
-# Test document fetch (uses S3 if configured, else local cache)
-PYTHONPATH=src uv run python scripts/test_regwatch.py
+# Dry run (fetch and process, but don't upload to Qdrant)
+PYTHONPATH=src uv run python -m regwatch --dry-run --verbose
+
+# Real run
+PYTHONPATH=src uv run python -m regwatch --verbose
+
+# With custom settings
+PYTHONPATH=src uv run python -m regwatch --recent-docs-limit 10 --lookback-days 60
 ```
+
+**Key features:**
+- Registry (in S3) is source of truth for fully-indexed documents
+- Deterministic point IDs (`{celex}_chunk_{index}`) for idempotent upserts
+- Partial failure recovery: re-run re-uploads all chunks for incomplete documents
 
 ### Environment Variables
 
 ```
 JINA_API_KEY=jina_xxx...           # Jina.ai API key (higher rate limits)
+QDRANT_URL=https://xxx.qdrant.io   # Qdrant Cloud URL
+QDRANT_API_KEY=xxx                 # Qdrant API key
 BUCKET=regwatch-xxx                # Railway bucket name
 ACCESS_KEY_ID=xxx                  # Railway S3 access key
 SECRET_ACCESS_KEY=xxx              # Railway S3 secret

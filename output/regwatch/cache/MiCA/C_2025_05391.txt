@@ -1,0 +1,272 @@
+EUR-Lex - CELEX:C_2025_05391 - EN - EUR-Lex
+
+===============
+
+![Image 1](https://webtools.europa.eu/images/flags/eu.svg)An official website of the European Union An official EU website How do you know? 
+
+All official European Union website addresses are in the **europa.eu** domain.
+
+[See all EU institutions and bodies](https://european-union.europa.eu/institutions-law-budget/institutions-and-bodies/search-all-eu-institutions-and-bodies_en)
+
+This site uses cookies. Visit our [cookies policy page](https://eur-lex.europa.eu/content/legal-notice/legal-notice.html?locale=en#5.%20Cookies%20notice) or click the link in any footer for more information and to change your preferences.
+
+
+×
+
+
+[![Image 2: European Union flag](https://eur-lex.europa.eu/revamp/components/vendor/ec/eu-preset-v4.1.1/images/logo/condensed-version/positive/logo-eu--en.svg)](https://european-union.europa.eu/index_en)
+
+[My EUR-Lex](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+
+*   My EUR-Lex
+*   [Sign in](https://eur-lex.europa.eu/protected/homepage.html?url=%2Flegal-content%2FEN%2FTXT%2F%3Furi%3DCELEX%253AC_2025_05391)
+*   [Register](https://ecas.ec.europa.eu/cas/eim/external/register.cgi/)
+
+*   [My recent searches (0)](https://eur-lex.europa.eu/my-eurlex/my-queries.html#recentQueries "My recent searches (0)")
+
+[English](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+
+ Select your language 
+
+* * *
+
+ Official EU languages: 
+
+*   [bg български](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [es Español](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [cs Čeština](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [da Dansk](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [de Deutsch](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [et Eesti keel](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [el Ελληνικά](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [en English](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [fr Français](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [ga Gaeilge](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [hr Hrvatski](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [it Italiano](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [lv Latviešu valoda](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [lt Lietuvių kalba](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [hu Magyar](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [mt Malti](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [nl Nederlands](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [pl Polski](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [pt Português](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [ro Română](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [sk Slovenčina](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [sl Slovenščina](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [fi Suomi](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [sv Svenska](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+
+[EUR-Lex](https://eur-lex.europa.eu/homepage.html?lang=en)
+
+ Access to European Union law 
+
+[<a href="https://eur-lex.europa.eu/content/help/eurlex-content/experimental-features.html" target="_blank">More about the experimental features corner</a>](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)Experimental features- [x]  
+
+×
+
+##### Choose the experimental features you want to try
+
+* * *
+
+Do you want to help improving EUR-Lex ? This is a list of experimental features that you can enable. These features are still under development; they are not fully tested, and might reduce EUR-Lex stability. Don't forget to give your feedback!
+
+ Warning! Experimental feature conflicts detected. 
+
+*       *   - [x]  Replacement of CELEX identifiers by short titles - experimental feature. It replaces clickable CELEX identifiers of treaties and case-law by short titles.  
+    *   - [x]  Visualisation of document relationships. It displays a dynamic graph with relations between the act and related documents. It is currently only available for legal acts.  
+
+*       *   - [x]  Deep linking. It enables links to other legal acts referred to within the documents. It is currently only available for documents smaller than 900 KB.  
+
+ Apply 
+
+[](https://eur-lex.europa.eu/experimental-features.html?action=confirmFeedback)
+
+![Image 3](https://eur-lex.europa.eu/images/eu-logo/logo-eu-en-01.jpg)
+
+ EUR-Lex 
+
+ Access to European Union law 
+
+This document is an excerpt from the EUR-Lex website
+
+3.   EUR-Lex - CELEX:C_2025_05391 - EN 
+
+*   [Help](https://eur-lex.europa.eu/content/help.html)
+*    Print 
+*   [Share](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#share) 
+
+Menu
+
+EU law
+
+*   [Treaties](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391# "Treaties")
+    *   [Treaties currently in force](https://eur-lex.europa.eu/collection/eu-law/treaties/treaties-force.html "Treaties currently in force")
+    *   [Founding Treaties](https://eur-lex.europa.eu/collection/eu-law/treaties/treaties-founding.html "Founding Treaties")
+    *   [Accession Treaties](https://eur-lex.europa.eu/collection/eu-law/treaties/treaties-accession.html "Accession Treaties")
+    *   [Other treaties and protocols](https://eur-lex.europa.eu/collection/eu-law/treaties/treaties-other.html "Other treaties and protocols")
+    *   [Chronological overview](https://eur-lex.europa.eu/collection/eu-law/treaties/treaties-overview.html "Chronological overview")
+
+*   [Legal acts](https://eur-lex.europa.eu/collection/eu-law/legal-acts/recent.html "Legal acts")
+*   [Consolidated texts](https://eur-lex.europa.eu/collection/eu-law/consleg.html "Consolidated texts")
+*   [International agreements](https://eur-lex.europa.eu/collection/eu-law/inter-agree.html "International agreements")
+*   [Preparatory documents](https://eur-lex.europa.eu/collection/eu-law/pre-acts.html "Preparatory documents")
+*   [EFTA documents](https://eur-lex.europa.eu/collection/eu-law/efta.html "EFTA (European Free Trade Association) documents")
+*   [Lawmaking procedures](https://eur-lex.europa.eu/collection/legislative-procedures.html "Lawmaking procedures and EU Law Tracker")
+*   [Summaries of EU legislation](https://eur-lex.europa.eu/browse/summaries.html "Summaries of EU legislation")
+*   [Browse by EU institutions](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391# "Browse by EU institutions")
+    *   [European Parliament](https://eur-lex.europa.eu/browse/institutions/eu-parliament.html "European Parliament")
+    *   [European Council](https://eur-lex.europa.eu/browse/institutions/eu-council.html "European Council")
+    *   [Council of the European Union](https://eur-lex.europa.eu/browse/institutions/council.html "Council of the European Union")
+    *   [European Commission](https://eur-lex.europa.eu/browse/institutions/eu-commission.html "European Commission")
+    *   [Court of Justice of the European Union](https://eur-lex.europa.eu/browse/institutions/justice.html "Court of Justice of the European Union")
+    *   [European Central Bank](https://eur-lex.europa.eu/browse/institutions/bank.html "European Central Bank")
+    *   [European Court of Auditors](https://eur-lex.europa.eu/browse/institutions/auditors.html "European Court of Auditors")
+    *   [European Economic and Social Committee](https://eur-lex.europa.eu/browse/institutions/eco-social.html "European Economic and Social Committee")
+    *   [European Committee of the Regions](https://eur-lex.europa.eu/browse/institutions/regions.html "European Committee of the Regions")
+
+*   [Browse by EuroVoc](https://eur-lex.europa.eu/browse/eurovoc.html "Browse by EuroVoc (EU's multilingual and multidisciplinary thesaurus)")
+
+EU case-law
+
+*   [Case-law](https://eur-lex.europa.eu/collection/eu-law/eu-case-law.html "Case-law")
+*   [Reports of cases](https://eur-lex.europa.eu/collection/eu-law/eu-case-law/reports.html "Reports of cases")
+*   [Directory of case-law](https://eur-lex.europa.eu/browse/directories/new-case-law.html "Directory of case-law")
+
+Official Journal
+
+*   [Access to the Official Journal](https://eur-lex.europa.eu/oj/direct-access.html "Access to the Official Journal")
+*   [Official Journal L series daily view](https://eur-lex.europa.eu/oj/daily-view/L-series/default.html "Official Journal L series daily view")
+*   [Official Journal C series daily view](https://eur-lex.europa.eu/oj/daily-view/C-series/default.html "Official Journal C series daily view")
+*   [Browse the Official Journal](https://eur-lex.europa.eu/oj/browse-oj.html "Browse the Official Journal")
+*   [Legally binding printed editions](https://eur-lex.europa.eu/oj/all/auth-direct-access.html "Legally binding printed editions")
+*   [Special edition](https://eur-lex.europa.eu/eu-enlargement/special.html "Special edition")
+
+National law and case-law
+
+*   [National transposition](https://eur-lex.europa.eu/collection/n-law/mne.html "National transposition")
+*   [National case-law](https://eur-lex.europa.eu/collection/n-law/n-case-law.html "National case-law")
+*   [JURE case-law](https://eur-lex.europa.eu/collection/n-law/jure.html "JURE (Jurisdiction, recognition and enforcement of judgments in civil and commercial matters) case-law")
+
+Information
+
+*   [Themes in focus](https://eur-lex.europa.eu/content/news/index.html "Themes in focus")
+*   [EUR-Lex developments](https://eur-lex.europa.eu/content/development/index.html "EUR-Lex developments")
+*   [Statistics](https://eur-lex.europa.eu/statistics/statistics.html "Statistics")
+*   [ELI register](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391# "ELI (European Legislation Identifier) register")
+    *   [What is ELI](https://eur-lex.europa.eu/eli-register/what_is_eli.html "What is ELI")
+    *   [ELI background](https://eur-lex.europa.eu/eli-register/background.html "ELI background")
+    *   [Why implement ELI](https://eur-lex.europa.eu/eli-register/benefits.html "Why implement ELI")
+    *   [Countries implementing ELI](https://eur-lex.europa.eu/eli-register/implementing_countries.html "Countries implementing ELI")
+    *   [Testimonials](https://eur-lex.europa.eu/eli-register/testimonials.html "Testimonials")
+    *   [Implementing ELI](https://eur-lex.europa.eu/eli-register/implementing_eli.html "Implementing ELI")
+    *   [Glossary](https://eur-lex.europa.eu/eli-register/glossary.html "Glossary")
+
+*   [EU budget online](https://eur-lex.europa.eu/budget/www/index-en.htm "EU budget online")
+
+
+ Use quotation marks to search for an "exact phrase". Append an asterisk (*) to a search term to find variations of it (transp*, 32019R*). Use a question mark (?) instead of a single character in your search term to find variations of it (ca?e finds case, cane, care). 
+
+
+
+Document C_2025_05391
+
+*   [Help](https://eur-lex.europa.eu/content/help.html)
+*    Print 
+*   [Share](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#share) 
+
+ The requested document does not exist. 
+
+
+This site is managed by the [Publications Office of the European Union](http://op.europa.eu/en/home "Publications Office of the European Union")
+
+Need help?
+----------
+
+*   [Help pages](https://eur-lex.europa.eu/content/help.html "Help pages")
+*   [Contact](https://eur-lex.europa.eu/contact.html "Contact")
+*   [Sitemap](https://eur-lex.europa.eu/content/site-map/site-map.html "Sitemap")
+
+Follow us
+---------
+
+*   [![Image 5: X](https://eur-lex.europa.eu/revamp/images/twitter.svg)X](https://twitter.com/EURLex/ "X")
+
+Legal
+-----
+
+*   [Legal notice](https://eur-lex.europa.eu/content/legal-notice/legal-notice.html "Legal notice")
+*   [Cookies policy](https://eur-lex.europa.eu/content/legal-notice/legal-notice.html#5.%20Cookies%20notice "Cookies policy")
+*   [Accessibility](https://eur-lex.europa.eu/content/legal-notice/legal-notice.html#4.%20Accessibility%20statement "Accessibility")
+*   [Privacy statement](https://eur-lex.europa.eu/content/legal-notice/legal-notice.html#3.%20protection "Privacy statement")
+
+Information
+-----------
+
+*   [About EUR-Lex](https://eur-lex.europa.eu/content/welcome/about.html "About EUR-Lex")
+*   [Newsletter](https://eur-lex.europa.eu/newsletter/newsletterLatest.html "Newsletter")
+*   [Useful links](https://eur-lex.europa.eu/content/links/links.html "Useful links")
+
+Other services
+--------------
+
+*   [European Data](https://data.europa.eu/euodp/en/data/ "European Data")
+*   [EU tenders](https://ted.europa.eu/TED/main/HomePage.do "EU tenders")
+*   [EU research results](http://cordis.europa.eu/en/ "EU research results")
+*   [EU Whoiswho](http://op.europa.eu/en/web/who-is-who "EU Whoiswho")
+*   [EU publications](http://op.europa.eu/en/web/general-publications/publications "EU publications")
+
+*   [N-Lex](http://n-lex.europa.eu/n-lex/index?lang=en "N-Lex")
+*   [](http://op.europa.eu/en/web/eu-law-in-force)
+*   [EU Law Tracker](http://law-tracker.europa.eu/joint-legislative-portal/homepage?lang=en "EU Law Tracker")
+
+[![Image 6: European Union logo](https://eur-lex.europa.eu/revamp/images/logo-eu--en-sm.svg)](https://european-union.europa.eu/)
+
+Discover more on [europa.eu](https://europa.eu/)
+
+Contact the EU
+--------------
+
+*   [Call us 00 800 6 7 8 9 10 11](tel:0080067891011)
+*   [Use other telephone options](https://european-union.europa.eu/contact-eu/call-us_en)
+*   [Write to us via our contact form](https://european-union.europa.eu/contact-eu/write-us_en)
+*   [Meet us at one of the EU centres](https://european-union.europa.eu/contact-eu/meet-us_en)
+
+Social media
+------------
+
+*   [Search for EU social media channels](https://european-union.europa.eu/contact-eu/social-media-channels_en#/search)
+
+Legal
+-----
+
+*   [Languages on our websites](https://european-union.europa.eu/languages-our-websites_en)
+*   [Privacy policy](https://european-union.europa.eu/privacy-policy_en)
+*   [Legal notice](https://european-union.europa.eu/legal-notice_en)
+*   [Cookies](https://european-union.europa.eu/cookies_en)
+
+EU institutions
+---------------
+
+*   [European Parliament](https://www.europarl.europa.eu/portal/)
+*   [European Council](https://www.consilium.europa.eu/en/european-council/)
+*   [Council of the European Union](https://www.consilium.europa.eu/en/home/)
+*   [European Commission](https://commission.europa.eu/index_en)
+*   [Court of Justice of the European Union (CJEU)](https://curia.europa.eu/jcms/jcms/j_6/en/)
+*   [European Central Bank (ECB)](https://www.ecb.europa.eu/home/html/index.en.html)
+*   [European Court of Auditors](https://www.eca.europa.eu/en)
+*   [European External Action Service (EEAS)](https://eeas.europa.eu/headquarters/headquarters-homepage_en)
+*   [European Economic and Social Committee](https://www.eesc.europa.eu/?i=portal.en.home)
+*   [European Committee of Regions (CoR)](https://cor.europa.eu/en/)
+*   [European Investment Bank](https://www.eib.org/en/index.htm)
+*   [European Ombudsman](https://www.ombudsman.europa.eu/en/home)
+*   [European Data Protection Supervisor (EDPS)](https://secure.edps.europa.eu/EDPSWEB/edps/EDPS?lang=en)
+*   [European Data Protection Board](https://edpb.europa.eu/edpb_en)
+*   [European Personnel Selection Office](https://epso.europa.eu/en)
+*   [Publications Office of the European Union](https://op.europa.eu/en/home)
+*   [Agencies](https://european-union.europa.eu/institutions-law-budget/institutions-and-bodies/institutions-and-bodies-profiles_en?f%5B0%5D=oe_organisation_eu_type%3Ahttp%3A//publications.europa.eu/resource/authority/corporate-body-classification/AGENCY_DEC&f%5B1%5D=oe_organisation_eu_type%3Ahttp%3A//publications.europa.eu/resource/authority/corporate-body-classification/AGENCY_EXEC&f%5B2%5D=oe_organisation_eu_type%3Ahttp%3A//publications.europa.eu/resource/authority/corporate-body-classification/EU_JU)
+
+[](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+
+*   [Switch to mobile](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
+*   [Switch to desktop](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C_2025_05391#)
