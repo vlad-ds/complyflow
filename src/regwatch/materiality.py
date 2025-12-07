@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import httpx
-from langfuse import observe
+from langfuse import get_client, observe
 from openai import OpenAI
 from opentelemetry.instrumentation.openai import OpenAIInstrumentor
 
@@ -86,7 +86,7 @@ class MaterialityResult:
     slack_notified: bool = False
 
 
-@observe(name="regwatch-materiality-analysis", tags=["regwatch-materiality", "source:regwatch-ingest"])
+@observe(name="regwatch-materiality-analysis")
 def analyze_materiality(
     celex: str,
     topic: str,
@@ -108,6 +108,13 @@ def analyze_materiality(
         MaterialityResult with analysis
     """
     logger.info(f"Analyzing materiality for {celex} ({topic})")
+
+    # Update Langfuse trace with tags
+    langfuse = get_client()
+    langfuse.update_current_trace(
+        tags=["regwatch-materiality", "source:regwatch-ingest"],
+        metadata={"celex": celex, "topic": topic},
+    )
 
     # Truncate content if too long
     content_excerpt = content[:max_content_chars]
