@@ -28,13 +28,13 @@ Analyze the following EU regulatory document and determine if it contains materi
 3. Provide your analysis in this exact JSON format:
 
 ```json
-{
+{{
   "is_material": true/false,
   "relevance": "high/medium/low/none",
   "summary": "1-2 sentence summary of what this document does",
   "impact": "1-2 sentence description of specific impact on BIT Capital (or null if not material)",
   "action_required": "brief description of any action needed (or null if none)"
-}
+}}
 ```
 
 Be concise. This will be sent to Slack, so keep the summary and impact short and actionable.
