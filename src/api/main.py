@@ -586,66 +586,50 @@ async def regwatch_chat(body: ChatRequest):
     response_model=WeeklySummaryResponse,
     responses={
         401: {"model": ErrorResponse, "description": "Unauthorized"},
+        404: {"model": ErrorResponse, "description": "No summary available"},
         500: {"model": ErrorResponse, "description": "Internal server error"},
     },
     tags=["Regwatch"],
     dependencies=[Depends(verify_api_key)],
 )
 async def get_weekly_summary(
-    start_date: Annotated[
-        str | None,
-        Query(description="Start date (YYYY-MM-DD). Defaults to 7 days ago."),
-    ] = None,
-    end_date: Annotated[
-        str | None,
-        Query(description="End date (YYYY-MM-DD). Defaults to today."),
-    ] = None,
+    regenerate: Annotated[
+        bool,
+        Query(description="Force regeneration instead of reading from cache"),
+    ] = False,
 ):
     """
     Get weekly regulatory summary.
 
-    Generates a digest of regulatory updates for the specified period,
-    including an executive summary and individual document summaries.
+    Returns the pre-generated weekly digest from storage.
+    The digest is generated weekly by a cron job.
+
+    Use regenerate=true to force a fresh generation (slower).
     """
-    from datetime import date, datetime
+    from regwatch.summary import generate_weekly_summary, load_weekly_summary
 
-    from regwatch.summary import generate_weekly_summary
+    # Try to load cached summary first (unless regenerate requested)
+    if not regenerate:
+        summary = load_weekly_summary()
+        if summary:
+            logger.info(f"Loaded cached summary: {summary.period_start} to {summary.period_end}")
+        else:
+            logger.info("No cached summary found, generating fresh")
+            summary = None
+    else:
+        logger.info("Regeneration requested, generating fresh summary")
+        summary = None
 
-    # Parse dates
-    parsed_start = None
-    parsed_end = None
-
-    if start_date:
+    # Generate if no cached summary
+    if summary is None:
         try:
-            parsed_start = datetime.strptime(start_date, "%Y-%m-%d").date()
-        except ValueError:
+            summary = generate_weekly_summary()
+        except Exception as e:
+            log_error(logger, "Weekly summary generation failed", e)
             raise HTTPException(
-                status_code=400,
-                detail=f"Invalid start_date format: {start_date}. Use YYYY-MM-DD.",
+                status_code=500,
+                detail=f"Failed to generate summary: {type(e).__name__}: {e}",
             )
-
-    if end_date:
-        try:
-            parsed_end = datetime.strptime(end_date, "%Y-%m-%d").date()
-        except ValueError:
-            raise HTTPException(
-                status_code=400,
-                detail=f"Invalid end_date format: {end_date}. Use YYYY-MM-DD.",
-            )
-
-    logger.info(f"Generating weekly summary: {start_date or 'default'} to {end_date or 'default'}")
-
-    try:
-        summary = generate_weekly_summary(
-            start_date=parsed_start,
-            end_date=parsed_end,
-        )
-    except Exception as e:
-        log_error(logger, "Weekly summary generation failed", e)
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to generate summary: {type(e).__name__}: {e}",
-        )
 
     # Convert to response model
     documents = [
@@ -653,11 +637,13 @@ async def get_weekly_summary(
             celex=doc.celex,
             topic=doc.topic,
             title=doc.title,
-            indexed_at=doc.indexed_at,
+            analyzed_at=doc.analyzed_at,
             eurlex_url=doc.eurlex_url,
-            summary=doc.summary,
+            is_material=doc.is_material,
             relevance=doc.relevance,
-            key_points=doc.key_points,
+            summary=doc.summary,
+            impact=doc.impact,
+            action_required=doc.action_required,
         )
         for doc in summary.documents
     ]
@@ -667,6 +653,7 @@ async def get_weekly_summary(
         period_end=summary.period_end,
         generated_at=summary.generated_at,
         total_documents=summary.total_documents,
+        material_documents=summary.material_documents,
         documents_by_topic=summary.documents_by_topic,
         executive_summary=summary.executive_summary,
         documents=documents,
@@ -681,64 +668,40 @@ async def get_weekly_summary(
             "description": "PDF download of weekly summary",
         },
         401: {"model": ErrorResponse, "description": "Unauthorized"},
+        404: {"model": ErrorResponse, "description": "No summary available"},
         500: {"model": ErrorResponse, "description": "Internal server error"},
     },
     tags=["Regwatch"],
     dependencies=[Depends(verify_api_key)],
 )
-async def get_weekly_summary_pdf(
-    start_date: Annotated[
-        str | None,
-        Query(description="Start date (YYYY-MM-DD). Defaults to 7 days ago."),
-    ] = None,
-    end_date: Annotated[
-        str | None,
-        Query(description="End date (YYYY-MM-DD). Defaults to today."),
-    ] = None,
-):
+async def get_weekly_summary_pdf():
     """
     Download weekly regulatory summary as PDF.
 
-    Generates a formatted PDF report of regulatory updates for the specified period.
+    Returns a PDF of the pre-generated weekly digest from storage.
     """
-    from datetime import datetime
     from io import BytesIO
 
     from fastapi.responses import StreamingResponse
 
-    from regwatch.summary import generate_summary_html, generate_weekly_summary
+    from regwatch.summary import generate_summary_html, generate_weekly_summary, load_weekly_summary
 
-    # Parse dates
-    parsed_start = None
-    parsed_end = None
+    logger.info("Generating weekly summary PDF")
 
-    if start_date:
+    # Try to load cached summary first
+    summary = load_weekly_summary()
+    if not summary:
+        logger.info("No cached summary found, generating fresh")
         try:
-            parsed_start = datetime.strptime(start_date, "%Y-%m-%d").date()
-        except ValueError:
+            summary = generate_weekly_summary()
+        except Exception as e:
+            log_error(logger, "Weekly summary generation failed", e)
             raise HTTPException(
-                status_code=400,
-                detail=f"Invalid start_date format: {start_date}. Use YYYY-MM-DD.",
+                status_code=500,
+                detail=f"Failed to generate summary: {type(e).__name__}: {e}",
             )
-
-    if end_date:
-        try:
-            parsed_end = datetime.strptime(end_date, "%Y-%m-%d").date()
-        except ValueError:
-            raise HTTPException(
-                status_code=400,
-                detail=f"Invalid end_date format: {end_date}. Use YYYY-MM-DD.",
-            )
-
-    logger.info(f"Generating weekly summary PDF: {start_date or 'default'} to {end_date or 'default'}")
 
     try:
-        # Generate summary
-        summary = generate_weekly_summary(
-            start_date=parsed_start,
-            end_date=parsed_end,
-        )
-
         # Convert to HTML
         html_content = generate_summary_html(summary)
 

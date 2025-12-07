@@ -18,8 +18,27 @@ from openai import OpenAI
 from opentelemetry.instrumentation.openai import OpenAIInstrumentor
 
 from regwatch.config import EURLEX_DOC_URL
+from regwatch.materiality_registry import MaterialityRegistry
 
 logger = logging.getLogger(__name__)
+
+# Singleton registry instance
+_materiality_registry: MaterialityRegistry | None = None
+
+
+def get_materiality_registry() -> MaterialityRegistry:
+    """Get or create materiality registry instance."""
+    global _materiality_registry
+    if _materiality_registry is None:
+        _materiality_registry = MaterialityRegistry()
+        _materiality_registry.load()
+    return _materiality_registry
+
+
+def save_materiality_registry() -> None:
+    """Save the materiality registry to storage."""
+    if _materiality_registry is not None:
+        _materiality_registry.save()
 
 # Prompts directory
 PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
@@ -267,7 +286,7 @@ async def analyze_and_notify(
     content: str,
 ) -> MaterialityResult:
     """
-    Analyze a document for materiality and send Slack notification if material.
+    Analyze a document for materiality, save to registry, and send Slack notification if material.
 
     This is the main entry point called from the ingestion pipeline.
 
@@ -280,11 +299,48 @@ async def analyze_and_notify(
     Returns:
         MaterialityResult with analysis
     """
+    registry = get_materiality_registry()
+
+    # Check if already analyzed (avoid duplicate notifications)
+    if registry.has_analysis(celex):
+        logger.info(f"Document {celex} already analyzed, skipping")
+        existing = registry.get_record(celex)
+        if existing:
+            return MaterialityResult(
+                celex=existing.celex,
+                topic=existing.topic,
+                title=existing.title,
+                is_material=existing.is_material,
+                relevance=existing.relevance,
+                summary=existing.summary,
+                impact=existing.impact,
+                action_required=existing.action_required,
+                eurlex_url=existing.eurlex_url,
+            )
+
     # Run materiality analysis
     result = analyze_materiality(celex, topic, title, content)
 
-    # Send Slack notification if material
+    # Save to registry
+    slack_notified = False
     if result.is_material:
-        await send_materiality_alert(result)
+        # Send Slack notification
+        slack_notified = await send_materiality_alert(result)
+
+    registry.add_result(
+        celex=result.celex,
+        topic=result.topic,
+        title=result.title,
+        is_material=result.is_material,
+        relevance=result.relevance,
+        summary=result.summary,
+        impact=result.impact,
+        action_required=result.action_required,
+        eurlex_url=result.eurlex_url,
+        slack_notified=slack_notified,
+    )
+
+    # Save registry after each analysis
+    registry.save()
 
     return result

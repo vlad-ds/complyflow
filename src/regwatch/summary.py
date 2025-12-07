@@ -1,13 +1,12 @@
 """
 Weekly regulatory summary generation.
 
-Generates a digest of regulatory updates from the past week,
-suitable for viewing on the compliance website or exporting as PDF.
+Reads materiality analysis from the registry and generates a digest,
+storing it in S3 for frontend access.
 """
 
 import json
 import logging
-import os
 from dataclasses import asdict, dataclass
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -16,14 +15,17 @@ from langfuse import observe
 from openai import OpenAI
 from opentelemetry.instrumentation.openai import OpenAIInstrumentor
 
-from regwatch.config import EURLEX_DOC_URL, EURLEX_FEEDS
-from regwatch.registry import DocumentRegistry
+from regwatch.materiality_registry import MaterialityRecord, MaterialityRegistry
 from regwatch.storage import get_storage
 
 logger = logging.getLogger(__name__)
 
 # Prompts directory
 PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
+
+# Summary storage location
+SUMMARY_SUBFOLDER = None  # Root of regwatch cache
+SUMMARY_FILENAME = "weekly_summary"
 
 # Initialize OpenAI instrumentation
 _instrumentor = OpenAIInstrumentor()
@@ -42,12 +44,6 @@ def _get_openai() -> OpenAI:
     return _openai_client
 
 
-def _load_prompt(name: str) -> str:
-    """Load a prompt from the prompts directory."""
-    path = PROMPTS_DIR / f"{name}.md"
-    return path.read_text()
-
-
 @dataclass
 class DocumentSummary:
     """Summary of a single regulatory document."""
@@ -55,11 +51,13 @@ class DocumentSummary:
     celex: str
     topic: str
     title: str
-    indexed_at: str
+    analyzed_at: str
     eurlex_url: str
+    is_material: bool
+    relevance: str
     summary: str
-    relevance: str  # high, medium, low
-    key_points: list[str]
+    impact: str | None
+    action_required: str | None
 
 
 @dataclass
@@ -70,6 +68,7 @@ class WeeklySummary:
     period_end: str  # ISO date
     generated_at: str  # ISO datetime
     total_documents: int
+    material_documents: int
     documents_by_topic: dict[str, int]
     executive_summary: str
     documents: list[DocumentSummary]
@@ -81,6 +80,7 @@ class WeeklySummary:
             "period_end": self.period_end,
             "generated_at": self.generated_at,
             "total_documents": self.total_documents,
+            "material_documents": self.material_documents,
             "documents_by_topic": self.documents_by_topic,
             "executive_summary": self.executive_summary,
             "documents": [asdict(d) for d in self.documents],
@@ -101,74 +101,24 @@ def get_topic_name(topic_code: str) -> str:
     return topic_names.get(topic_code, topic_code)
 
 
-def get_documents_for_period(
-    start_date: date,
-    end_date: date,
-    registry_filename: str = "indexed_documents.json",
-) -> list[dict]:
-    """
-    Get all documents indexed within a date range.
-
-    Args:
-        start_date: Start of period (inclusive)
-        end_date: End of period (inclusive)
-        registry_filename: Registry file to use
-
-    Returns:
-        List of document dicts with celex, topic, indexed_at, chunk_count
-    """
-    registry = DocumentRegistry(registry_filename)
+def load_materiality_registry() -> MaterialityRegistry:
+    """Load the materiality registry from storage."""
+    registry = MaterialityRegistry()
     registry.load()
-
-    documents = []
-    for doc in registry.get_all_indexed():
-        # Parse indexed_at timestamp
-        try:
-            indexed_dt = datetime.fromisoformat(doc.indexed_at)
-            indexed_date = indexed_dt.date()
-        except (ValueError, TypeError):
-            continue
-
-        # Check if within range
-        if start_date <= indexed_date <= end_date:
-            documents.append({
-                "celex": doc.celex,
-                "topic": doc.topic,
-                "indexed_at": doc.indexed_at,
-                "chunk_count": doc.chunk_count,
-            })
-
-    return documents
-
-
-def get_document_content(celex: str, topic: str) -> str | None:
-    """
-    Read document content from cache.
-
-    Args:
-        celex: CELEX number
-        topic: Topic (used as cache subfolder)
-
-    Returns:
-        Document content or None if not found
-    """
-    storage = get_storage()
-    return storage.read(celex, subfolder=topic)
+    return registry
 
 
 @observe(name="regwatch-weekly-summary")
 def generate_weekly_summary(
     start_date: date | None = None,
     end_date: date | None = None,
-    max_content_chars: int = 8000,
 ) -> WeeklySummary:
     """
-    Generate a weekly summary of regulatory updates.
+    Generate a weekly summary from the materiality registry.
 
     Args:
         start_date: Start of period (default: 7 days ago)
         end_date: End of period (default: today)
-        max_content_chars: Max content per document for summarization
 
     Returns:
         WeeklySummary with digest
@@ -181,16 +131,23 @@ def generate_weekly_summary(
 
     logger.info(f"Generating weekly summary for {start_date} to {end_date}")
 
-    # Get documents for period
-    documents = get_documents_for_period(start_date, end_date)
-    logger.info(f"Found {len(documents)} documents in period")
+    # Load registry
+    registry = load_materiality_registry()
 
-    if not documents:
+    # Get records for period
+    records = registry.get_records_for_period(
+        start_date.isoformat(),
+        end_date.isoformat(),
+    )
+    logger.info(f"Found {len(records)} documents in period")
+
+    if not records:
         return WeeklySummary(
             period_start=start_date.isoformat(),
             period_end=end_date.isoformat(),
             generated_at=datetime.utcnow().isoformat(),
             total_documents=0,
+            material_documents=0,
             documents_by_topic={},
             executive_summary="No new regulatory documents were published during this period.",
             documents=[],
@@ -198,130 +155,76 @@ def generate_weekly_summary(
 
     # Count by topic
     docs_by_topic: dict[str, int] = {}
-    for doc in documents:
-        topic = doc["topic"]
+    material_count = 0
+    for record in records:
+        topic = record.topic
         docs_by_topic[topic] = docs_by_topic.get(topic, 0) + 1
+        if record.is_material:
+            material_count += 1
 
-    # Fetch content and generate individual summaries
-    doc_summaries: list[DocumentSummary] = []
-
-    for doc in documents:
-        content = get_document_content(doc["celex"], doc["topic"])
-        if not content:
-            logger.warning(f"No content found for {doc['celex']}")
-            continue
-
-        # Truncate content for summarization
-        content_excerpt = content[:max_content_chars]
-
-        # Generate summary for this document
-        summary_data = _summarize_document(
-            celex=doc["celex"],
-            topic=doc["topic"],
-            content=content_excerpt,
+    # Convert records to document summaries
+    doc_summaries = [
+        DocumentSummary(
+            celex=r.celex,
+            topic=r.topic,
+            title=r.title,
+            analyzed_at=r.analyzed_at,
+            eurlex_url=r.eurlex_url,
+            is_material=r.is_material,
+            relevance=r.relevance,
+            summary=r.summary,
+            impact=r.impact,
+            action_required=r.action_required,
         )
+        for r in records
+    ]
 
-        doc_summaries.append(DocumentSummary(
-            celex=doc["celex"],
-            topic=doc["topic"],
-            title=summary_data.get("title", doc["celex"]),
-            indexed_at=doc["indexed_at"],
-            eurlex_url=EURLEX_DOC_URL.format(celex=doc["celex"]),
-            summary=summary_data.get("summary", ""),
-            relevance=summary_data.get("relevance", "medium"),
-            key_points=summary_data.get("key_points", []),
-        ))
-
-    # Generate executive summary
-    executive_summary = _generate_executive_summary(doc_summaries, start_date, end_date)
+    # Generate executive summary using LLM
+    executive_summary = _generate_executive_summary(records, start_date, end_date)
 
     return WeeklySummary(
         period_start=start_date.isoformat(),
         period_end=end_date.isoformat(),
         generated_at=datetime.utcnow().isoformat(),
-        total_documents=len(doc_summaries),
+        total_documents=len(records),
+        material_documents=material_count,
         documents_by_topic=docs_by_topic,
         executive_summary=executive_summary,
         documents=doc_summaries,
     )
 
 
-def _summarize_document(celex: str, topic: str, content: str) -> dict:
-    """Summarize a single document using GPT-5 Mini."""
-    prompt = f"""Analyze this EU regulatory document and provide a brief summary.
-
-**CELEX:** {celex}
-**Topic:** {topic}
-
-**Content (excerpt):**
-{content}
-
-Respond in JSON format:
-```json
-{{
-  "title": "Short descriptive title for the document",
-  "summary": "2-3 sentence summary of what this document does",
-  "relevance": "high/medium/low (for a tech-focused asset manager)",
-  "key_points": ["Key point 1", "Key point 2", "Key point 3"]
-}}
-```
-"""
-
-    client = _get_openai()
-    response = client.chat.completions.create(
-        model="gpt-5-mini-2025-08-07",
-        messages=[{"role": "user", "content": prompt}],
-        max_completion_tokens=2048,
-    )
-
-    response_text = response.choices[0].message.content.strip()
-
-    try:
-        # Extract JSON from response
-        if "```json" in response_text:
-            json_start = response_text.find("```json") + 7
-            json_end = response_text.find("```", json_start)
-            json_str = response_text[json_start:json_end].strip()
-        elif "```" in response_text:
-            json_start = response_text.find("```") + 3
-            json_end = response_text.find("```", json_start)
-            json_str = response_text[json_start:json_end].strip()
-        else:
-            json_str = response_text
-
-        return json.loads(json_str)
-    except json.JSONDecodeError:
-        return {
-            "title": celex,
-            "summary": "Summary generation failed",
-            "relevance": "medium",
-            "key_points": [],
-        }
-
-
 def _generate_executive_summary(
-    documents: list[DocumentSummary],
+    records: list[MaterialityRecord],
     start_date: date,
     end_date: date,
 ) -> str:
-    """Generate an executive summary of all documents."""
-    if not documents:
+    """Generate an executive summary of all documents using GPT-5 Mini."""
+    if not records:
         return "No regulatory updates during this period."
+
+    # Filter to material documents for the summary
+    material_records = [r for r in records if r.is_material]
+
+    if not material_records:
+        return f"During this period, {len(records)} regulatory documents were processed. None were identified as having material impact on BIT Capital's operations."
 
     # Format document summaries for the prompt
     doc_list = []
-    for doc in documents:
+    for r in material_records:
+        impact_str = f" Impact: {r.impact}" if r.impact else ""
         doc_list.append(
-            f"- **{doc.topic}** ({doc.celex}): {doc.summary}"
+            f"- **{r.topic}** ({r.celex}): {r.summary}{impact_str}"
         )
     doc_text = "\n".join(doc_list)
 
-    prompt = f"""You are preparing an executive summary of regulatory updates for BIT Capital, a Berlin-based technology-focused asset manager.
+    prompt = f"""You are preparing an executive summary of regulatory updates for BIT Capital, a Berlin-based technology-focused asset manager with ~€1.7B AUM.
 
 **Period:** {start_date.strftime('%B %d, %Y')} to {end_date.strftime('%B %d, %Y')}
-**Total Documents:** {len(documents)}
+**Total Documents:** {len(records)}
+**Material Documents:** {len(material_records)}
 
-**Documents:**
+**Material Documents:**
 {doc_text}
 
 Write a 2-3 paragraph executive summary that:
@@ -342,6 +245,57 @@ Do not use bullet points. Write in prose.
     return response.choices[0].message.content.strip()
 
 
+def save_weekly_summary(summary: WeeklySummary) -> str:
+    """
+    Save weekly summary to S3 for frontend access.
+
+    Args:
+        summary: The weekly summary to save
+
+    Returns:
+        The storage key where summary was saved
+    """
+    storage = get_storage()
+
+    # Save as JSON
+    content = json.dumps(summary.to_dict(), indent=2)
+    storage.write(SUMMARY_FILENAME, content, subfolder=SUMMARY_SUBFOLDER)
+
+    logger.info(f"Saved weekly summary to {SUMMARY_FILENAME}")
+    return SUMMARY_FILENAME
+
+
+def load_weekly_summary() -> WeeklySummary | None:
+    """
+    Load the latest weekly summary from S3.
+
+    Returns:
+        WeeklySummary if found, None otherwise
+    """
+    storage = get_storage()
+    content = storage.read(SUMMARY_FILENAME, subfolder=SUMMARY_SUBFOLDER)
+
+    if not content:
+        logger.info("No weekly summary found in storage")
+        return None
+
+    try:
+        data = json.loads(content)
+        return WeeklySummary(
+            period_start=data["period_start"],
+            period_end=data["period_end"],
+            generated_at=data["generated_at"],
+            total_documents=data["total_documents"],
+            material_documents=data["material_documents"],
+            documents_by_topic=data["documents_by_topic"],
+            executive_summary=data["executive_summary"],
+            documents=[DocumentSummary(**d) for d in data["documents"]],
+        )
+    except (json.JSONDecodeError, KeyError, TypeError) as e:
+        logger.error(f"Failed to parse weekly summary: {e}")
+        return None
+
+
 def generate_summary_html(summary: WeeklySummary) -> str:
     """
     Generate HTML version of the weekly summary for PDF export.
@@ -357,19 +311,25 @@ def generate_summary_html(summary: WeeklySummary) -> str:
     end_dt = datetime.fromisoformat(summary.period_end)
     period_str = f"{start_dt.strftime('%B %d, %Y')} - {end_dt.strftime('%B %d, %Y')}"
 
-    # Build document sections
+    # Build document sections (only material documents)
     doc_sections = []
     for doc in summary.documents:
+        if not doc.is_material:
+            continue
+
         relevance_color = {
             "high": "#dc2626",
             "medium": "#f59e0b",
             "low": "#16a34a",
         }.get(doc.relevance, "#6b7280")
 
-        key_points_html = ""
-        if doc.key_points:
-            points = "".join(f"<li>{point}</li>" for point in doc.key_points)
-            key_points_html = f"<ul>{points}</ul>"
+        impact_html = ""
+        if doc.impact:
+            impact_html = f"<p><strong>Impact:</strong> {doc.impact}</p>"
+
+        action_html = ""
+        if doc.action_required:
+            action_html = f"<p><strong>Action Required:</strong> {doc.action_required}</p>"
 
         doc_sections.append(f"""
         <div class="document">
@@ -380,18 +340,19 @@ def generate_summary_html(summary: WeeklySummary) -> str:
             <h3>{doc.title}</h3>
             <p class="celex">CELEX: <a href="{doc.eurlex_url}">{doc.celex}</a></p>
             <p>{doc.summary}</p>
-            {key_points_html}
+            {impact_html}
+            {action_html}
         </div>
         """)
 
-    docs_html = "\n".join(doc_sections)
+    docs_html = "\n".join(doc_sections) if doc_sections else "<p>No material documents in this period.</p>"
 
     # Topic breakdown
     topic_items = [
         f"<li>{get_topic_name(topic)}: {count} document(s)</li>"
         for topic, count in sorted(summary.documents_by_topic.items())
     ]
-    topics_html = "<ul>" + "".join(topic_items) + "</ul>"
+    topics_html = "<ul>" + "".join(topic_items) + "</ul>" if topic_items else "<p>No documents.</p>"
 
     html = f"""<!DOCTYPE html>
 <html>
@@ -502,14 +463,6 @@ def generate_summary_html(summary: WeeklySummary) -> str:
         .celex a {{
             color: #2563eb;
         }}
-        .document ul {{
-            background: #f9fafb;
-            padding: 15px 15px 15px 35px;
-            border-radius: 4px;
-        }}
-        .document li {{
-            margin: 8px 0;
-        }}
         .footer {{
             margin-top: 50px;
             padding-top: 20px;
@@ -526,6 +479,7 @@ def generate_summary_html(summary: WeeklySummary) -> str:
         <div class="period">{period_str}</div>
         <div class="meta">
             <span class="meta-item"><strong>{summary.total_documents}</strong> documents</span>
+            <span class="meta-item"><strong>{summary.material_documents}</strong> material</span>
             <span class="meta-item"><strong>{len(summary.documents_by_topic)}</strong> regulatory areas</span>
         </div>
     </div>
@@ -541,7 +495,7 @@ def generate_summary_html(summary: WeeklySummary) -> str:
     </div>
 
     <div class="documents">
-        <h2>Document Details</h2>
+        <h2>Material Documents</h2>
         {docs_html}
     </div>
 

@@ -223,11 +223,13 @@ class DocumentSummaryResponse(BaseModel):
     celex: str = Field(description="CELEX document identifier")
     topic: str = Field(description="Regulatory topic (DORA, MiCA, etc.)")
     title: str = Field(description="Document title")
-    indexed_at: str = Field(description="When the document was indexed")
+    analyzed_at: str = Field(description="When the document was analyzed")
     eurlex_url: str = Field(description="Link to EUR-Lex document")
+    is_material: bool = Field(description="Whether the document is material to BIT Capital")
+    relevance: str = Field(description="Relevance level (high, medium, low, none)")
     summary: str = Field(description="Brief summary of the document")
-    relevance: str = Field(description="Relevance level (high, medium, low)")
-    key_points: list[str] = Field(description="Key points from the document")
+    impact: str | None = Field(default=None, description="Impact on BIT Capital")
+    action_required: str | None = Field(default=None, description="Action required")
 
 
 class WeeklySummaryResponse(BaseModel):
@@ -237,6 +239,7 @@ class WeeklySummaryResponse(BaseModel):
     period_end: str = Field(description="End date of the period (ISO format)")
     generated_at: str = Field(description="When the summary was generated")
     total_documents: int = Field(description="Total number of documents in the period")
+    material_documents: int = Field(description="Number of material documents")
     documents_by_topic: dict[str, int] = Field(description="Document count by topic")
     executive_summary: str = Field(description="Executive summary of the period")
     documents: list[DocumentSummaryResponse] = Field(description="Individual document summaries")
