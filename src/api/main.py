@@ -30,10 +30,12 @@ from api.models import (
     ContractReviewRequest,
     ContractReviewResponse,
     ContractUploadResponse,
+    DocumentSummaryResponse,
     ErrorResponse,
     FieldUpdateRequest,
     FieldUpdateResponse,
     HealthResponse,
+    WeeklySummaryResponse,
 )
 from api.logging import get_logger, log_error
 from api.services.airtable import AirtableService
@@ -574,6 +576,198 @@ async def regwatch_chat(body: ChatRequest):
         rewritten_query=result.rewritten_query,
         usage=result.usage,
     )
+
+
+# --- Weekly Summary Endpoints ---
+
+
+@app.get(
+    "/regwatch/summary/weekly",
+    response_model=WeeklySummaryResponse,
+    responses={
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        500: {"model": ErrorResponse, "description": "Internal server error"},
+    },
+    tags=["Regwatch"],
+    dependencies=[Depends(verify_api_key)],
+)
+async def get_weekly_summary(
+    start_date: Annotated[
+        str | None,
+        Query(description="Start date (YYYY-MM-DD). Defaults to 7 days ago."),
+    ] = None,
+    end_date: Annotated[
+        str | None,
+        Query(description="End date (YYYY-MM-DD). Defaults to today."),
+    ] = None,
+):
+    """
+    Get weekly regulatory summary.
+
+    Generates a digest of regulatory updates for the specified period,
+    including an executive summary and individual document summaries.
+    """
+    from datetime import date, datetime
+
+    from regwatch.summary import generate_weekly_summary
+
+    # Parse dates
+    parsed_start = None
+    parsed_end = None
+
+    if start_date:
+        try:
+            parsed_start = datetime.strptime(start_date, "%Y-%m-%d").date()
+        except ValueError:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid start_date format: {start_date}. Use YYYY-MM-DD.",
+            )
+
+    if end_date:
+        try:
+            parsed_end = datetime.strptime(end_date, "%Y-%m-%d").date()
+        except ValueError:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid end_date format: {end_date}. Use YYYY-MM-DD.",
+            )
+
+    logger.info(f"Generating weekly summary: {start_date or 'default'} to {end_date or 'default'}")
+
+    try:
+        summary = generate_weekly_summary(
+            start_date=parsed_start,
+            end_date=parsed_end,
+        )
+    except Exception as e:
+        log_error(logger, "Weekly summary generation failed", e)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to generate summary: {type(e).__name__}: {e}",
+        )
+
+    # Convert to response model
+    documents = [
+        DocumentSummaryResponse(
+            celex=doc.celex,
+            topic=doc.topic,
+            title=doc.title,
+            indexed_at=doc.indexed_at,
+            eurlex_url=doc.eurlex_url,
+            summary=doc.summary,
+            relevance=doc.relevance,
+            key_points=doc.key_points,
+        )
+        for doc in summary.documents
+    ]
+
+    return WeeklySummaryResponse(
+        period_start=summary.period_start,
+        period_end=summary.period_end,
+        generated_at=summary.generated_at,
+        total_documents=summary.total_documents,
+        documents_by_topic=summary.documents_by_topic,
+        executive_summary=summary.executive_summary,
+        documents=documents,
+    )
+
+
+@app.get(
+    "/regwatch/summary/weekly/pdf",
+    responses={
+        200: {
+            "content": {"application/pdf": {}},
+            "description": "PDF download of weekly summary",
+        },
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        500: {"model": ErrorResponse, "description": "Internal server error"},
+    },
+    tags=["Regwatch"],
+    dependencies=[Depends(verify_api_key)],
+)
+async def get_weekly_summary_pdf(
+    start_date: Annotated[
+        str | None,
+        Query(description="Start date (YYYY-MM-DD). Defaults to 7 days ago."),
+    ] = None,
+    end_date: Annotated[
+        str | None,
+        Query(description="End date (YYYY-MM-DD). Defaults to today."),
+    ] = None,
+):
+    """
+    Download weekly regulatory summary as PDF.
+
+    Generates a formatted PDF report of regulatory updates for the specified period.
+    """
+    from datetime import datetime
+    from io import BytesIO
+
+    from fastapi.responses import StreamingResponse
+
+    from regwatch.summary import generate_summary_html, generate_weekly_summary
+
+    # Parse dates
+    parsed_start = None
+    parsed_end = None
+
+    if start_date:
+        try:
+            parsed_start = datetime.strptime(start_date, "%Y-%m-%d").date()
+        except ValueError:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid start_date format: {start_date}. Use YYYY-MM-DD.",
+            )
+
+    if end_date:
+        try:
+            parsed_end = datetime.strptime(end_date, "%Y-%m-%d").date()
+        except ValueError:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid end_date format: {end_date}. Use YYYY-MM-DD.",
+            )
+
+    logger.info(f"Generating weekly summary PDF: {start_date or 'default'} to {end_date or 'default'}")
+
+    try:
+        # Generate summary
+        summary = generate_weekly_summary(
+            start_date=parsed_start,
+            end_date=parsed_end,
+        )
+
+        # Convert to HTML
+        html_content = generate_summary_html(summary)
+
+        # Convert to PDF using WeasyPrint
+        from weasyprint import HTML
+
+        pdf_bytes = HTML(string=html_content).write_pdf()
+
+        # Create filename
+        filename = f"regulatory_summary_{summary.period_start}_to_{summary.period_end}.pdf"
+
+        return StreamingResponse(
+            BytesIO(pdf_bytes),
+            media_type="application/pdf",
+            headers={"Content-Disposition": f"attachment; filename={filename}"},
+        )
+
+    except ImportError:
+        logger.error("WeasyPrint not installed for PDF generation")
+        raise HTTPException(
+            status_code=500,
+            detail="PDF generation is not available. WeasyPrint is required.",
+        )
+    except Exception as e:
+        log_error(logger, "PDF generation failed", e)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to generate PDF: {type(e).__name__}: {e}",
+        )
 
 
 # Run with: uvicorn api.main:app --reload

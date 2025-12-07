@@ -212,3 +212,31 @@ class ChatResponse(BaseModel):
         description="Query after rewriting (if history was provided)",
     )
     usage: dict | None = Field(default=None, description="Token usage statistics")
+
+
+# --- Weekly Summary Models ---
+
+
+class DocumentSummaryResponse(BaseModel):
+    """Summary of a single regulatory document."""
+
+    celex: str = Field(description="CELEX document identifier")
+    topic: str = Field(description="Regulatory topic (DORA, MiCA, etc.)")
+    title: str = Field(description="Document title")
+    indexed_at: str = Field(description="When the document was indexed")
+    eurlex_url: str = Field(description="Link to EUR-Lex document")
+    summary: str = Field(description="Brief summary of the document")
+    relevance: str = Field(description="Relevance level (high, medium, low)")
+    key_points: list[str] = Field(description="Key points from the document")
+
+
+class WeeklySummaryResponse(BaseModel):
+    """Weekly regulatory digest response."""
+
+    period_start: str = Field(description="Start date of the period (ISO format)")
+    period_end: str = Field(description="End date of the period (ISO format)")
+    generated_at: str = Field(description="When the summary was generated")
+    total_documents: int = Field(description="Total number of documents in the period")
+    documents_by_topic: dict[str, int] = Field(description="Document count by topic")
+    executive_summary: str = Field(description="Executive summary of the period")
+    documents: list[DocumentSummaryResponse] = Field(description="Individual document summaries")

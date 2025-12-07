@@ -435,6 +435,70 @@ PYTHONPATH=src uv run python -m regwatch --recent-docs-limit 10 --lookback-days 
 - Registry (in S3) is source of truth for fully-indexed documents
 - Deterministic point IDs (`{celex}_chunk_{index}`) for idempotent upserts
 - Partial failure recovery: re-run re-uploads all chunks for incomplete documents
+- **Materiality analysis**: Each new document is analyzed by GPT-5 Mini for relevance to BIT Capital
+- **Slack notifications**: Material documents trigger Slack alerts with summary and EUR-Lex links
+
+### Materiality Analysis
+
+When new documents are indexed, they are automatically analyzed for materiality to BIT Capital using GPT-5 Mini.
+
+**Module:** `src/regwatch/materiality.py`
+
+**Prompt:** `src/prompts/materiality_analysis_v1.md`
+
+The analysis considers:
+- New compliance obligations for asset managers
+- Impact on crypto/digital asset investments
+- Reporting, disclosure, or risk management changes
+- Fund distribution and investor protection requirements
+- Operational resilience and IT security requirements
+- ESG/sustainability disclosure obligations
+
+Documents are classified by relevance (high/medium/low) and material documents trigger Slack notifications with:
+- Brief summary and impact description
+- Link to EUR-Lex document
+- Link to the regulatory chatbot for follow-up questions
+
+**Environment Variables:**
+```
+SLACK_REGWATCH_WEBHOOK_URL=https://hooks.slack.com/...  # Regwatch channel webhook
+FRONTEND_URL=https://your-app.lovable.app               # Frontend URL for chatbot links
+```
+
+### Weekly Summary
+
+Generates a digest of regulatory updates for the past week, suitable for the compliance website or PDF export.
+
+**Module:** `src/regwatch/summary.py`
+
+**API Endpoints:**
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/regwatch/summary/weekly` | GET | Get weekly summary as JSON |
+| `/regwatch/summary/weekly/pdf` | GET | Download weekly summary as PDF |
+
+**Query Parameters:**
+- `start_date` (optional): Start of period (YYYY-MM-DD), defaults to 7 days ago
+- `end_date` (optional): End of period (YYYY-MM-DD), defaults to today
+
+**Example:**
+```bash
+# Get JSON summary for last 7 days
+curl -H "X-API-Key: $API_KEY" \
+  https://complyflow-production.up.railway.app/regwatch/summary/weekly
+
+# Get PDF for specific period
+curl -H "X-API-Key: $API_KEY" \
+  "https://complyflow-production.up.railway.app/regwatch/summary/weekly/pdf?start_date=2024-12-01&end_date=2024-12-07" \
+  -o summary.pdf
+```
+
+The summary includes:
+- Executive summary tailored for BIT Capital
+- Document count by regulatory area
+- Individual document summaries with key points
+- Links to EUR-Lex source documents
 
 ### Environment Variables
 

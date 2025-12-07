@@ -18,6 +18,7 @@ from regwatch.config import EURLEX_FEEDS
 from regwatch.connectors.eurlex import EURLexConnector
 from regwatch.embeddings import get_embedder
 from regwatch.ingest_config import IngestConfig
+from regwatch.materiality import analyze_and_notify
 from regwatch.metadata import extract_metadata
 from regwatch.qdrant_client import RegwatchQdrant
 from regwatch.registry import DocumentRegistry
@@ -34,6 +35,8 @@ class IngestResult:
     documents_skipped: int = 0  # Already indexed
     documents_indexed: int = 0
     chunks_created: int = 0
+    material_documents: int = 0  # Documents flagged as material
+    slack_notifications_sent: int = 0
     errors: list[str] = field(default_factory=list)
     duration_seconds: float = 0.0
 
@@ -45,6 +48,8 @@ class IngestResult:
             f"Documents skipped (already indexed): {self.documents_skipped}",
             f"Documents indexed: {self.documents_indexed}",
             f"Chunks created: {self.chunks_created}",
+            f"Material documents: {self.material_documents}",
+            f"Slack notifications sent: {self.slack_notifications_sent}",
             f"Errors: {len(self.errors)}",
             f"Duration: {self.duration_seconds:.1f}s",
         ]
@@ -232,6 +237,26 @@ async def _process_feed(
             result.chunks_created += len(chunks)
 
             logger.info(f"Indexed {celex}: {len(chunks)} chunks")
+
+            # Analyze materiality and send Slack notification if material
+            # This happens AFTER indexing to ensure we don't notify for failed documents
+            if not config.dry_run:
+                try:
+                    materiality_result = await analyze_and_notify(
+                        celex=celex,
+                        topic=feed.topic,
+                        title=doc.title,
+                        content=full_text,
+                    )
+                    if materiality_result.is_material:
+                        result.material_documents += 1
+                        result.slack_notifications_sent += 1
+                        logger.info(
+                            f"Material document {celex}: {materiality_result.relevance} relevance"
+                        )
+                except Exception as e:
+                    # Don't fail ingestion if materiality analysis fails
+                    logger.warning(f"Materiality analysis failed for {celex}: {e}")
 
     finally:
         await connector.close()
