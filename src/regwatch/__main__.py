@@ -2,9 +2,10 @@
 CLI entry point for regwatch ingestion.
 
 Usage:
-    PYTHONPATH=src python -m regwatch.ingest
-    PYTHONPATH=src python -m regwatch.ingest --dry-run
-    PYTHONPATH=src python -m regwatch.ingest --recent-docs-limit 10 --verbose
+    PYTHONPATH=src python -m regwatch
+    PYTHONPATH=src python -m regwatch --dry-run
+    PYTHONPATH=src python -m regwatch --recent-docs-limit 10 --verbose
+    PYTHONPATH=src python -m regwatch --clear-registry  # Force re-index all documents
 """
 
 import argparse
@@ -16,6 +17,7 @@ from dotenv import load_dotenv
 
 from regwatch.ingest import run_ingestion
 from regwatch.ingest_config import IngestConfig
+from regwatch.storage import get_storage
 
 # Configure logging
 logging.basicConfig(
@@ -60,8 +62,21 @@ def main():
         default="DORA,MiCA",
         help="Comma-separated list of feeds to process (default: DORA,MiCA)",
     )
+    parser.add_argument(
+        "--clear-registry",
+        action="store_true",
+        help="Clear the registry before ingestion (forces re-indexing of all documents)",
+    )
 
     args = parser.parse_args()
+
+    # Clear registry if requested
+    if args.clear_registry:
+        print("Clearing document registry...")
+        storage = get_storage()
+        storage.delete("indexed_documents")
+        print("Registry cleared. All documents will be re-indexed.")
+        print()
 
     # Build config from CLI args (use defaults from IngestConfig if not specified)
     config_kwargs = {

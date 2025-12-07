@@ -496,9 +496,8 @@ This Regulation lays down uniform requirements...
 
 **Note:** After changing the chunking format, existing documents need re-indexing:
 ```bash
-# Clear registry to force re-indexing
-# Then run ingestion to re-chunk and re-embed all documents
-PYTHONPATH=src uv run python -m regwatch --verbose
+# Use --clear-registry to force re-indexing of all documents
+PYTHONPATH=src uv run python -m regwatch --clear-registry --verbose
 ```
 
 ### Materiality Analysis
