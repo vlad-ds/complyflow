@@ -196,15 +196,25 @@ async def _process_feed(
                 result.chunks_created += len(chunks)
                 continue
 
-            # Generate embeddings
+            # Generate embeddings in batches to avoid OOM
             logger.info(f"Starting embedding for {len(chunks)} chunks...")
             texts = [c["text"] for c in chunks]
             try:
-                logger.info("Initializing embedder model...")
-                embeddings = embedder.embed_texts(texts)
+                embeddings = []
+                batch_size = 16  # Small batches to avoid OOM
+                for i in range(0, len(texts), batch_size):
+                    batch = texts[i:i + batch_size]
+                    batch_num = i // batch_size + 1
+                    total_batches = (len(texts) + batch_size - 1) // batch_size
+                    logger.info(f"Embedding batch {batch_num}/{total_batches} ({len(batch)} chunks)...")
+                    batch_embeddings = embedder.embed_texts(batch)
+                    embeddings.extend(batch_embeddings)
+                    logger.info(f"Batch {batch_num} complete")
                 logger.info(f"Embedding complete: {len(embeddings)} vectors")
             except Exception as e:
                 logger.error(f"Embedding failed: {type(e).__name__}: {e}")
+                import traceback
+                logger.error(traceback.format_exc())
                 result.errors.append(f"Embedding error {celex}: {e}")
                 continue
 
