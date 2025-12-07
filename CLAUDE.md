@@ -268,6 +268,8 @@ print(f"Cost: ${summary['total_cost']:.6f}")
 | `provider:cohere` | Cohere provider calls |
 | `split:train` / `split:test` | Batch evaluation runs |
 | `regwatch-eval` | Regwatch RAG generation evaluation |
+| `regwatch-materiality` | Materiality analysis for new documents |
+| `source:regwatch-ingest` | Calls from regwatch ingestion pipeline |
 
 ### Filtering API Usage
 
