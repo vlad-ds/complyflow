@@ -86,7 +86,7 @@ class MaterialityResult:
     slack_notified: bool = False
 
 
-@observe(name="regwatch-materiality-analysis")
+@observe(name="regwatch-materiality-analysis", tags=["regwatch-materiality", "source:regwatch-ingest"])
 def analyze_materiality(
     celex: str,
     topic: str,
