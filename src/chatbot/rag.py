@@ -122,9 +122,9 @@ def rewrite_query(query: str, history: list[ChatMessage]) -> str:
 
     client = _get_openai()
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-5-mini-2025-08-07",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=256,
+        max_completion_tokens=256,
     )
 
     rewritten = response.choices[0].message.content.strip()
@@ -208,9 +208,9 @@ def generate_answer(
 
     client = _get_openai()
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-5-mini-2025-08-07",
         messages=messages,
-        max_tokens=1024,
+        max_completion_tokens=1024,
     )
 
     answer = response.choices[0].message.content.strip()
