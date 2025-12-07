@@ -468,8 +468,37 @@ PYTHONPATH=src uv run python -m regwatch --recent-docs-limit 10 --lookback-days 
 - Registry (in S3) is source of truth for fully-indexed documents
 - Deterministic point IDs (`{celex}_chunk_{index}`) for idempotent upserts
 - Partial failure recovery: re-run re-uploads all chunks for incomplete documents
+- **Metadata-enriched chunks**: Each chunk includes a metadata header with CELEX, topic, and title for semantic searchability
 - **Materiality analysis**: Each new document is analyzed by GPT-5 Mini for relevance to BIT Capital
 - **Slack notifications**: Material documents trigger Slack alerts with summary and EUR-Lex links
+
+### Metadata-Enriched Chunks
+
+Document chunks include a metadata header prepended to the text before embedding. This enables semantic search to find documents by their identifiers (CELEX number, topic, title) - not just by content similarity.
+
+**Example chunk text:**
+```
+[CELEX: 32022R2554 | Topic: DORA | Type: regulation]
+Title: Digital Operational Resilience Act (DORA)
+Subject: on digital operational resilience for the financial sector
+---
+Article 1
+
+This Regulation lays down uniform requirements...
+```
+
+**Why this matters:**
+- Users can search "what does CELEX 32022R2554 say" and find the document
+- Search for "DORA regulation" returns DORA-tagged documents first
+- The LLM receives document context (title, CELEX) alongside the content
+
+**Implementation:** `src/regwatch/chunking.py:format_metadata_header()`
+
+**Note:** After changing the chunking format, existing documents need re-indexing:
+```bash
+# Use --clear-registry to force re-indexing of all documents
+PYTHONPATH=src uv run python -m regwatch --clear-registry --verbose
+```
 
 ### Materiality Analysis
 
