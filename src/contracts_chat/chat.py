@@ -183,8 +183,11 @@ def chat(
     csv_content = export_contracts_csv()
     file_id = _upload_csv_file(client, csv_content)
 
-    # Step 2: Build system prompt
-    system_prompt = _load_prompt("contracts_chat_system_v1")
+    # Step 2: Build system prompt with current date
+    from datetime import date
+    system_prompt = _load_prompt("contracts_chat_system_v1").format(
+        current_date=date.today().isoformat()
+    )
 
     # Step 3: Build messages
     messages = []
