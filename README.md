@@ -1,6 +1,6 @@
 # ComplyFlow
 
-AI-powered legal and compliance platform for automated contract management and regulatory monitoring. Built as a case study for Bit Capital.
+AI-powered legal and compliance platform for automated contract management and regulatory monitoring.
 
 ## Features
 

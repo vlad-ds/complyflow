@@ -2,7 +2,7 @@
 Materiality analysis for regulatory documents.
 
 Analyzes new regulatory documents using GPT-5 Mini to determine
-if they contain material information for BIT Capital, then sends
+if they contain material information for the organization, then sends
 Slack notifications for material updates.
 """
 
@@ -95,7 +95,7 @@ def analyze_materiality(
     max_content_chars: int = 15000,
 ) -> MaterialityResult:
     """
-    Analyze a regulatory document for materiality to BIT Capital.
+    Analyze a regulatory document for materiality to the organization.
 
     Args:
         celex: CELEX number of the document
@@ -233,7 +233,7 @@ async def send_materiality_alert(result: MaterialityResult) -> bool:
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": f"*Impact on BIT Capital:*\n{result.impact}",
+                "text": f"*Impact:*\n{result.impact}",
             },
         })
 

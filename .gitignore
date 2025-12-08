@@ -21,3 +21,6 @@ docs/
 
 # Output files (extractions, evaluations, caches)
 output/
+
+# Project instructions (local only)
+CLAUDE.md

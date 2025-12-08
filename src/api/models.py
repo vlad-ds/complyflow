@@ -225,10 +225,10 @@ class DocumentSummaryResponse(BaseModel):
     title: str = Field(description="Document title")
     analyzed_at: str = Field(description="When the document was analyzed")
     eurlex_url: str = Field(description="Link to EUR-Lex document")
-    is_material: bool = Field(description="Whether the document is material to BIT Capital")
+    is_material: bool = Field(description="Whether the document is material to the organization")
     relevance: str = Field(description="Relevance level (high, medium, low, none)")
     summary: str = Field(description="Brief summary of the document")
-    impact: str | None = Field(default=None, description="Impact on BIT Capital")
+    impact: str | None = Field(default=None, description="Impact on the organization")
     action_required: str | None = Field(default=None, description="Action required")
 
 

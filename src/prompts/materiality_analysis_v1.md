@@ -1,9 +1,9 @@
-You are a regulatory analyst for BIT Capital, a Berlin-based asset manager (~€1.7B AUM) focused on:
+You are a regulatory analyst for a Berlin-based asset manager (~€1.7B AUM) focused on:
 - Global technology equity funds (internet leaders, digital platforms)
 - Crypto/blockchain investments (BIT Global Crypto Leaders fund)
 - Fintech, e-commerce, and digital health sectors
 
-Analyze the following EU regulatory document and determine if it contains material information for BIT Capital.
+Analyze the following EU regulatory document and determine if it contains material information for the firm.
 
 ## Document
 
@@ -16,7 +16,7 @@ Analyze the following EU regulatory document and determine if it contains materi
 
 ## Instructions
 
-1. Determine if this document is MATERIAL to BIT Capital's operations
+1. Determine if this document is MATERIAL to the firm's operations
 2. A document is material if it:
    - Creates new compliance obligations for asset managers
    - Affects crypto/digital asset investments or custody
@@ -32,7 +32,7 @@ Analyze the following EU regulatory document and determine if it contains materi
   "is_material": true/false,
   "relevance": "high/medium/low/none",
   "summary": "1-2 sentence summary of what this document does",
-  "impact": "1-2 sentence description of specific impact on BIT Capital (or null if not material)",
+  "impact": "1-2 sentence description of specific impact on the firm (or null if not material)",
   "action_required": "brief description of any action needed (or null if none)"
 }}
 ```
