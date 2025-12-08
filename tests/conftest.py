@@ -17,6 +17,10 @@ sys.path.insert(0, str(src_path))
 # Set test environment before importing app
 os.environ["AIRTABLE_API_KEY"] = "test_key"
 os.environ["AIRTABLE_BASE_ID"] = "test_base"
+os.environ["API_KEY"] = "test_api_key"  # For API authentication
+
+# Test API key for authenticated requests
+TEST_API_KEY = "test_api_key"
 
 # Import the app module after setting env vars
 import api.main as api_main
@@ -123,6 +127,20 @@ def mock_airtable_service(mock_airtable_record):
     return mock
 
 
+class AuthenticatedTestClient(TestClient):
+    """Test client that automatically adds API key header."""
+
+    def __init__(self, app, api_key: str = TEST_API_KEY):
+        super().__init__(app)
+        self.api_key = api_key
+
+    def request(self, method, url, **kwargs):
+        """Add API key header to all requests."""
+        headers = kwargs.pop("headers", None) or {}
+        headers["X-API-Key"] = self.api_key
+        return super().request(method, url, headers=headers, **kwargs)
+
+
 @pytest.fixture
 def client(mock_airtable_service):
     """
@@ -134,11 +152,20 @@ def client(mock_airtable_service):
     - notify_new_contract (no real Slack calls)
     """
     with patch.object(api_main, "get_airtable", return_value=mock_airtable_service):
-        yield TestClient(api_main.app)
+        yield AuthenticatedTestClient(api_main.app)
 
 
 @pytest.fixture
-def client_with_extraction(mock_airtable_service, mock_extraction_result):
+def mock_embedding_result():
+    """Mock embedding result."""
+    return {
+        "chunks_count": 5,
+        "points_upserted": 5,
+    }
+
+
+@pytest.fixture
+def client_with_extraction(mock_airtable_service, mock_extraction_result, mock_embedding_result):
     """
     Test client with mocked extraction pipeline.
 
@@ -147,7 +174,9 @@ def client_with_extraction(mock_airtable_service, mock_extraction_result):
     with patch.object(api_main, "get_airtable", return_value=mock_airtable_service):
         with patch.object(api_main, "process_contract", return_value={
             "filename": "test.pdf",
+            "text": "This is a mock contract text for testing purposes.",
             **mock_extraction_result,
         }):
             with patch.object(api_main, "notify_new_contract", return_value=None):
-                yield TestClient(api_main.app)
+                with patch("api.main.embed_and_store_contract", return_value=mock_embedding_result):
+                    yield AuthenticatedTestClient(api_main.app)
