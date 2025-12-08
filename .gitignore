@@ -18,3 +18,6 @@ temp/
 
 # Internal docs (plans, specs, prompts)
 docs/
+
+# Output files (extractions, evaluations, caches)
+output/
