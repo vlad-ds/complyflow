@@ -25,6 +25,7 @@ from opentelemetry.instrumentation.openai import OpenAIInstrumentor
 from qdrant_client import QdrantClient
 from tqdm import tqdm
 
+from prompts import load_prompt
 from regwatch.embeddings import DocumentEmbedder, RetrievalConfig
 
 # Initialize Langfuse instrumentors for automatic tracing
@@ -58,19 +59,8 @@ QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 # Langfuse session for this eval run
 SESSION_ID = f"regwatch-eval-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
 
-# System prompt for all models
-SYSTEM_PROMPT = """You are a regulatory compliance expert answering questions about EU financial regulations.
-
-CRITICAL INSTRUCTIONS:
-1. Answer ONLY using information from the provided document chunks
-2. For EVERY claim, include a citation in [N] format referring to the chunk number
-3. If the answer is not in the provided chunks, say "I cannot find this information in the provided documents"
-4. Be concise and precise - this is for compliance officers who need accurate information
-5. Never use information from your training data - ONLY cite the provided chunks
-
-Example format:
-"Financial entities must conduct testing at least yearly [3]. The management body bears ultimate responsibility for ICT risk [7]."
-"""
+# Load system prompt from file
+SYSTEM_PROMPT = load_prompt("eval_generation_system_v1")
 
 
 def format_chunks_for_prompt(chunks: list[dict]) -> str:

@@ -15,13 +15,11 @@ from langfuse import observe
 from openai import OpenAI
 from opentelemetry.instrumentation.openai import OpenAIInstrumentor
 
+from prompts import load_prompt
 from regwatch.materiality_registry import MaterialityRecord, MaterialityRegistry
 from regwatch.storage import get_storage
 
 logger = logging.getLogger(__name__)
-
-# Prompts directory
-PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
 
 # Summary storage location
 SUMMARY_SUBFOLDER = None  # Root of regwatch cache
@@ -218,22 +216,15 @@ def _generate_executive_summary(
         )
     doc_text = "\n".join(doc_list)
 
-    prompt = f"""You are preparing an executive summary of regulatory updates for a Berlin-based technology-focused asset manager with ~€1.7B AUM.
-
-**Period:** {start_date.strftime('%B %d, %Y')} to {end_date.strftime('%B %d, %Y')}
-**Total Documents:** {len(records)}
-**Material Documents:** {len(material_records)}
-
-**Material Documents:**
-{doc_text}
-
-Write a 2-3 paragraph executive summary that:
-1. Highlights the most important updates for a tech-focused asset manager with crypto exposure
-2. Notes any immediate compliance actions required
-3. Uses professional, concise language suitable for senior management
-
-Do not use bullet points. Write in prose.
-"""
+    # Load and format prompt template
+    prompt_template = load_prompt("weekly_summary_v1")
+    prompt = prompt_template.format(
+        start_date=start_date.strftime('%B %d, %Y'),
+        end_date=end_date.strftime('%B %d, %Y'),
+        total_documents=len(records),
+        material_documents=len(material_records),
+        doc_text=doc_text,
+    )
 
     client = _get_openai()
     response = client.chat.completions.create(
