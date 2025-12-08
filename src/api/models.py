@@ -243,3 +243,36 @@ class WeeklySummaryResponse(BaseModel):
     documents_by_topic: dict[str, int] = Field(description="Document count by topic")
     executive_summary: str = Field(description="Executive summary of the period")
     documents: list[DocumentSummaryResponse] = Field(description="Individual document summaries")
+
+
+# --- Contracts Chat Models ---
+
+
+class ContractsChatRequest(BaseModel):
+    """Request body for POST /contracts/chat."""
+
+    query: str = Field(description="The user's question about contracts")
+    history: list[ChatMessage] = Field(
+        default=[],
+        description="Conversation history for context",
+    )
+
+
+class ContractsChatSource(BaseModel):
+    """A source from contract content search."""
+
+    contract_id: str = Field(description="Airtable record ID")
+    filename: str = Field(description="Contract filename")
+    text: str = Field(description="Relevant text excerpt")
+    score: float = Field(description="Similarity score (0-1)")
+
+
+class ContractsChatResponse(BaseModel):
+    """Response from POST /contracts/chat."""
+
+    answer: str = Field(description="Generated answer")
+    sources: list[ContractsChatSource] = Field(
+        default=[],
+        description="Contract sources used for the answer (from semantic search)",
+    )
+    usage: dict | None = Field(default=None, description="Token usage statistics")

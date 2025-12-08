@@ -1,0 +1,327 @@
+"""
+Contracts chatbot using Claude Sonnet 4.5.
+
+Combines:
+- Code Execution Tool for structured data analysis (Airtable CSV)
+- Custom search_contracts tool for semantic search (Qdrant)
+- Search Results feature for proper citations
+"""
+
+import logging
+from dataclasses import dataclass, field
+from pathlib import Path
+
+import anthropic
+from dotenv import load_dotenv
+from langfuse import get_client, observe
+
+from contracts_chat.airtable_export import export_contracts_csv
+from contracts_chat.tools import (
+    SEARCH_CONTRACTS_TOOL,
+    format_tool_result_for_claude,
+    handle_search_contracts,
+)
+
+load_dotenv()
+
+logger = logging.getLogger(__name__)
+
+# Prompts directory
+PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
+
+# Beta headers for Files API and Code Execution
+BETA_HEADERS = ["files-api-2025-04-14", "code-execution-2025-08-25"]
+
+# Model to use
+MODEL = "claude-sonnet-4-5-20250929"
+
+
+def _load_prompt(name: str) -> str:
+    """Load a prompt from the prompts directory."""
+    path = PROMPTS_DIR / f"{name}.md"
+    return path.read_text()
+
+
+@dataclass
+class ChatMessage:
+    """A message in the conversation history."""
+
+    role: str  # "user" or "assistant"
+    content: str
+
+
+@dataclass
+class ContractSource:
+    """A source from contract content search."""
+
+    contract_id: str
+    filename: str
+    text: str
+    score: float
+
+
+@dataclass
+class ChatResult:
+    """Result from the chat function."""
+
+    answer: str
+    sources: list[ContractSource] = field(default_factory=list)
+    usage: dict | None = None
+
+
+# Singleton client
+_anthropic_client: anthropic.Anthropic | None = None
+
+
+def _get_anthropic() -> anthropic.Anthropic:
+    """Get or create Anthropic client."""
+    global _anthropic_client
+    if _anthropic_client is None:
+        _anthropic_client = anthropic.Anthropic()
+    return _anthropic_client
+
+
+def _upload_csv_file(client: anthropic.Anthropic, csv_content: str) -> str:
+    """
+    Upload CSV content to Anthropic Files API.
+
+    Args:
+        client: Anthropic client
+        csv_content: CSV string to upload
+
+    Returns:
+        file_id for use in messages
+    """
+    file_response = client.beta.files.upload(
+        file=(
+            "contracts.csv",
+            csv_content.encode("utf-8"),
+            "text/csv",
+        ),
+    )
+    logger.info(f"Uploaded contracts CSV, file_id: {file_response.id}")
+    return file_response.id
+
+
+def _extract_answer_text(content_blocks: list) -> str:
+    """Extract text content from Claude's response."""
+    text_parts = []
+    for block in content_blocks:
+        if hasattr(block, "type"):
+            if block.type == "text":
+                text_parts.append(block.text)
+    return "\n".join(text_parts)
+
+
+def _handle_tool_use(tool_name: str, tool_input: dict) -> list[dict]:
+    """
+    Handle a tool use request from Claude.
+
+    Args:
+        tool_name: Name of the tool called
+        tool_input: Input arguments for the tool
+
+    Returns:
+        Tool result content (list of content blocks)
+    """
+    if tool_name == "search_contracts":
+        query = tool_input.get("query", "")
+        contract_id = tool_input.get("contract_id")
+
+        logger.info(f"Handling search_contracts: query='{query[:50]}...', contract_id={contract_id}")
+
+        search_results = handle_search_contracts(
+            query=query,
+            contract_id=contract_id,
+            top_k=20,
+        )
+        return format_tool_result_for_claude(search_results)
+    else:
+        # Unknown tool - return error
+        return [{"type": "text", "text": f"Unknown tool: {tool_name}"}]
+
+
+@observe(name="contracts-chat")
+def chat(
+    query: str,
+    history: list[ChatMessage] | None = None,
+) -> ChatResult:
+    """
+    Main chat function for contracts Q&A.
+
+    Uses Claude Sonnet 4.5 with:
+    - Code Execution Tool for CSV analysis
+    - search_contracts tool for content search
+
+    Args:
+        query: User's question
+        history: Conversation history (optional)
+
+    Returns:
+        ChatResult with answer, sources, and usage
+    """
+    history = history or []
+
+    # Update Langfuse trace
+    langfuse = get_client()
+    langfuse.update_current_trace(
+        name="contracts-chat",
+        tags=["contracts-chat"],
+        metadata={"query": query, "history_length": len(history)},
+    )
+
+    client = _get_anthropic()
+
+    # Step 1: Export contracts to CSV and upload
+    logger.info("Exporting contracts to CSV...")
+    csv_content = export_contracts_csv()
+    file_id = _upload_csv_file(client, csv_content)
+
+    # Step 2: Build system prompt
+    system_prompt = _load_prompt("contracts_chat_system_v1")
+
+    # Step 3: Build messages
+    messages = []
+
+    # Add conversation history (last 10 messages)
+    for msg in history[-10:]:
+        messages.append({"role": msg.role, "content": msg.content})
+
+    # Add current user message with file reference
+    messages.append(
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": query},
+                {
+                    "type": "container_upload",
+                    "file_id": file_id,
+                },
+            ],
+        }
+    )
+
+    # Step 4: Define tools
+    tools = [
+        # Code execution tool (Anthropic-managed)
+        {"type": "code_execution_20250825", "name": "code_execution"},
+        # Custom search tool
+        SEARCH_CONTRACTS_TOOL,
+    ]
+
+    # Step 5: Call Claude with tool use loop
+    all_sources: list[ContractSource] = []
+    total_usage = {"input_tokens": 0, "output_tokens": 0}
+
+    max_iterations = 10  # Safety limit
+    iteration = 0
+
+    while iteration < max_iterations:
+        iteration += 1
+        logger.info(f"Claude API call iteration {iteration}")
+
+        response = client.beta.messages.create(
+            model=MODEL,
+            max_tokens=16384,
+            system=system_prompt,
+            messages=messages,
+            tools=tools,
+            betas=BETA_HEADERS,
+        )
+
+        # Track usage
+        if response.usage:
+            total_usage["input_tokens"] += response.usage.input_tokens
+            total_usage["output_tokens"] += response.usage.output_tokens
+
+        # Check stop reason
+        if response.stop_reason == "end_turn":
+            # Claude is done - extract final answer
+            answer = _extract_answer_text(response.content)
+            logger.info(f"Chat complete after {iteration} iterations")
+            break
+
+        elif response.stop_reason == "tool_use":
+            # Claude wants to use a tool
+            # Add assistant's response to messages
+            messages.append({"role": "assistant", "content": response.content})
+
+            # Process each tool use
+            tool_results = []
+            for block in response.content:
+                if hasattr(block, "type") and block.type == "tool_use":
+                    tool_name = block.name
+                    tool_id = block.id
+                    tool_input = block.input
+
+                    logger.info(f"Tool use: {tool_name}")
+
+                    # Handle our custom tool
+                    if tool_name == "search_contracts":
+                        result_content = _handle_tool_use(tool_name, tool_input)
+
+                        # Track sources from search results
+                        for item in result_content:
+                            if item.get("type") == "search_result":
+                                source = item.get("source", "")
+                                # Parse contract_id from source (format: "contract://{id}")
+                                contract_id = source.replace("contract://", "") if source.startswith("contract://") else ""
+                                all_sources.append(
+                                    ContractSource(
+                                        contract_id=contract_id,
+                                        filename=item.get("title", ""),
+                                        text=item.get("content", [{}])[0].get("text", "")[:200],
+                                        score=0.0,  # Score not available in this context
+                                    )
+                                )
+
+                        tool_results.append(
+                            {
+                                "type": "tool_result",
+                                "tool_use_id": tool_id,
+                                "content": result_content,
+                            }
+                        )
+                    else:
+                        # For code_execution, Claude handles it server-side
+                        # We don't need to provide a result - it's automatic
+                        pass
+
+            # If we have tool results to send back, add them
+            if tool_results:
+                messages.append({"role": "user", "content": tool_results})
+
+        elif response.stop_reason == "pause_turn":
+            # Long-running turn paused - continue
+            logger.info("Turn paused, continuing...")
+            messages.append({"role": "assistant", "content": response.content})
+            # Continue the loop to let Claude resume
+            continue
+
+        else:
+            # Unexpected stop reason
+            logger.warning(f"Unexpected stop_reason: {response.stop_reason}")
+            answer = _extract_answer_text(response.content)
+            break
+
+    else:
+        # Hit max iterations
+        logger.warning(f"Hit max iterations ({max_iterations})")
+        answer = _extract_answer_text(response.content) if response else "I encountered an error processing your request."
+
+    # Clean up: delete the uploaded file
+    try:
+        client.beta.files.delete(file_id, betas=["files-api-2025-04-14"])
+        logger.info(f"Deleted temporary file: {file_id}")
+    except Exception as e:
+        logger.warning(f"Failed to delete file {file_id}: {e}")
+
+    return ChatResult(
+        answer=answer,
+        sources=all_sources,
+        usage={
+            "input_tokens": total_usage["input_tokens"],
+            "output_tokens": total_usage["output_tokens"],
+            "total_tokens": total_usage["input_tokens"] + total_usage["output_tokens"],
+        },
+    )

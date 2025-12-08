@@ -29,6 +29,9 @@ from api.models import (
     ContractRecord,
     ContractReviewRequest,
     ContractReviewResponse,
+    ContractsChatRequest,
+    ContractsChatResponse,
+    ContractsChatSource,
     ContractUploadResponse,
     DocumentSummaryResponse,
     ErrorResponse,
@@ -607,6 +610,74 @@ async def regwatch_chat(body: ChatRequest):
         answer=result.answer,
         sources=sources,
         rewritten_query=result.rewritten_query,
+        usage=result.usage,
+    )
+
+
+# --- Contracts Chat Endpoint ---
+
+
+@app.post(
+    "/contracts/chat",
+    response_model=ContractsChatResponse,
+    responses={
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        500: {"model": ErrorResponse, "description": "Internal server error"},
+    },
+    tags=["Contracts"],
+    dependencies=[Depends(verify_api_key)],
+)
+async def contracts_chat(body: ContractsChatRequest):
+    """
+    Q&A chatbot for contracts.
+
+    This endpoint uses Claude Sonnet 4.5 with:
+    - Code Execution Tool to analyze contract metadata (from Airtable CSV)
+    - Custom search_contracts tool for semantic search on contract content
+
+    Use this for questions like:
+    - "How many contracts expire in the next 2 weeks?"
+    - "What does the ACME contract say about termination?"
+    - "List all service agreements under review"
+
+    The frontend should send conversation history with each request.
+    """
+    from contracts_chat.chat import ChatMessage as ContractsChatMessage
+    from contracts_chat.chat import chat
+
+    logger.info(f"Contracts chat request: {body.query[:50]}... (history: {len(body.history)} messages)")
+
+    # Convert API models to internal models
+    history = [
+        ContractsChatMessage(role=msg.role, content=msg.content)
+        for msg in body.history
+    ]
+
+    try:
+        result = chat(query=body.query, history=history)
+    except Exception as e:
+        log_error(logger, "Contracts chat failed", e, query=body.query[:50])
+        raise HTTPException(
+            status_code=500,
+            detail=f"Chat failed: {type(e).__name__}: {e}",
+        )
+
+    # Convert internal models to API response
+    sources = [
+        ContractsChatSource(
+            contract_id=src.contract_id,
+            filename=src.filename,
+            text=src.text,
+            score=src.score,
+        )
+        for src in result.sources
+    ]
+
+    logger.info(f"Contracts chat response: {len(sources)} sources, {len(result.answer)} chars")
+
+    return ContractsChatResponse(
+        answer=result.answer,
+        sources=sources,
         usage=result.usage,
     )
 
