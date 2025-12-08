@@ -637,8 +637,8 @@ async def regwatch_chat(body: ChatRequest):
 
     The frontend should send conversation history with each request.
     """
-    from chatbot.rag import ChatMessage as RagChatMessage
-    from chatbot.rag import chat
+    from regwatch.chat import ChatMessage as RagChatMessage
+    from regwatch.chat import chat
 
     logger.info(f"Chat request: {body.query[:50]}... (history: {len(body.history)} messages)")
 

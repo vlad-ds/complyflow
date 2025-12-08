@@ -95,19 +95,26 @@ PYTHONPATH=src uv run python -m regwatch --dry-run --verbose
 
 ```
 src/
-  api/            # FastAPI endpoints for contract management
-  alerts/         # Deadline notification service
-  chatbot/        # Regulatory Q&A chatbot
-  contracts/      # Contract data models
-  contracts_chat/ # Contract Q&A with citations
-  extraction/     # PDF parsing and metadata extraction
-  llm/            # LLM provider abstractions (OpenAI, Gemini, Cohere)
-  prompts/        # Prompt templates
-  regwatch/       # Regulatory monitoring pipeline
-  utils/          # Token counting, helpers
+├── api/              # FastAPI REST API
+│   ├── services/     # Airtable, extraction, Slack, PDF storage
+│   └── models.py     # Pydantic request/response schemas
+├── alerts/           # Contract deadline monitoring (cron service)
+├── contracts/        # Contract embedding pipeline for vector search
+├── contracts_chat/   # Contract Q&A chatbot with Claude
+├── evaluation/       # Batch evaluation and benchmarking tools
+├── extraction/       # PDF parsing, metadata extraction, date computation
+├── llm/              # LLM provider abstractions (OpenAI, Anthropic, Gemini)
+├── prompts/          # Prompt templates for extraction, chat, evaluation
+├── regwatch/         # Regulatory monitoring pipeline
+│   ├── connectors/   # EUR-Lex RSS feed connector
+│   ├── chat.py       # Regulatory Q&A chatbot
+│   ├── ingest.py     # Document ingestion to Qdrant
+│   └── materiality.py# Materiality analysis for new regulations
+└── utils/            # Shared utilities (token counting, Langfuse client)
 
-cuad/             # Test contracts from CUAD dataset
-scripts/          # Utility scripts
+deploy/               # Railway deployment configs for cron services
+cuad/                 # Test contracts from CUAD dataset
+tests/                # pytest test suite
 ```
 
 ## Deployment

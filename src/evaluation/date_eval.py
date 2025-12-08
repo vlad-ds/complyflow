@@ -164,7 +164,7 @@ def evaluate_contract(
 def get_langfuse_cost(eval_id: str) -> float | None:
     """Query Langfuse for total cost of traces with this eval_id tag."""
     try:
-        from langfuse_client import get_traces_by_tag
+        from utils.langfuse import get_traces_by_tag
 
         traces = get_traces_by_tag(eval_id)
         if not traces:
