@@ -626,12 +626,26 @@ s3-railway ls s3://$BUCKET/regwatch/cache/
 # Sync dependencies
 uv sync
 
+# Add a new package
+uv add <package-name>
+
+# Upgrade a package
+uv add <package-name> --upgrade
+
 # Run scripts
 uv run python script.py
 
 # Start API server
 PYTHONPATH=src uv run uvicorn api.main:app --reload --port 8000
 ```
+
+## Package Management
+
+We use **uv** for package management. Always use uv commands for dependency operations:
+- `uv add <package>` to add new dependencies
+- `uv sync` to install from lock file
+- `uv run` to execute scripts with the venv
+- Never use pip directly
 
 ## Claude Instructions
 
