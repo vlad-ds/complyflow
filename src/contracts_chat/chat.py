@@ -109,14 +109,36 @@ def _upload_csv_file(client: anthropic.Anthropic, csv_content: str) -> str:
     return file_response.id
 
 
-def _extract_answer_text(content_blocks: list) -> str:
-    """Extract text content from Claude's response."""
+def _extract_answer_and_citations(content_blocks: list) -> tuple[str, list[dict]]:
+    """
+    Extract text content and citations from Claude's response.
+
+    Returns:
+        Tuple of (answer_text, citations_list)
+        Each citation has: source, title, cited_text, search_result_index
+    """
     text_parts = []
+    all_citations = []
+    seen_sources = set()  # Deduplicate citations by source
+
     for block in content_blocks:
         if hasattr(block, "type"):
             if block.type == "text":
                 text_parts.append(block.text)
-    return "\n".join(text_parts)
+                # Extract citations from this text block
+                if hasattr(block, "citations") and block.citations:
+                    for citation in block.citations:
+                        source = getattr(citation, "source", "") or ""
+                        if source and source not in seen_sources:
+                            seen_sources.add(source)
+                            all_citations.append({
+                                "source": source,
+                                "title": getattr(citation, "title", "") or "",
+                                "cited_text": getattr(citation, "cited_text", "") or "",
+                                "search_result_index": getattr(citation, "search_result_index", 0),
+                            })
+
+    return "\n".join(text_parts), all_citations
 
 
 def _handle_tool_use(tool_name: str, tool_input: dict) -> list[dict]:
@@ -219,11 +241,14 @@ def chat(
     ]
 
     # Step 5: Call Claude with tool use loop
-    all_sources: list[ContractSource] = []
     total_usage = {"input_tokens": 0, "output_tokens": 0}
+    # Store search results we send, keyed by source for citation lookup
+    sent_search_results: dict[str, dict] = {}
 
     max_iterations = 10  # Safety limit
     iteration = 0
+    answer = ""
+    citations = []
 
     while iteration < max_iterations:
         iteration += 1
@@ -245,9 +270,9 @@ def chat(
 
         # Check stop reason
         if response.stop_reason == "end_turn":
-            # Claude is done - extract final answer
-            answer = _extract_answer_text(response.content)
-            logger.info(f"Chat complete after {iteration} iterations")
+            # Claude is done - extract final answer and citations
+            answer, citations = _extract_answer_and_citations(response.content)
+            logger.info(f"Chat complete after {iteration} iterations, {len(citations)} citations")
             break
 
         elif response.stop_reason == "tool_use":
@@ -269,20 +294,11 @@ def chat(
                     if tool_name == "search_contracts":
                         result_content = _handle_tool_use(tool_name, tool_input)
 
-                        # Track sources from search results
+                        # Store search results for citation lookup later
                         for item in result_content:
                             if item.get("type") == "search_result":
                                 source = item.get("source", "")
-                                # Parse contract_id from source (format: "contract://{id}")
-                                contract_id = source.replace("contract://", "") if source.startswith("contract://") else ""
-                                all_sources.append(
-                                    ContractSource(
-                                        contract_id=contract_id,
-                                        filename=item.get("title", ""),
-                                        text=item.get("content", [{}])[0].get("text", "")[:200],
-                                        score=0.0,  # Score not available in this context
-                                    )
-                                )
+                                sent_search_results[source] = item
 
                         tool_results.append(
                             {
@@ -310,13 +326,32 @@ def chat(
         else:
             # Unexpected stop reason
             logger.warning(f"Unexpected stop_reason: {response.stop_reason}")
-            answer = _extract_answer_text(response.content)
+            answer, citations = _extract_answer_and_citations(response.content)
             break
 
     else:
         # Hit max iterations
         logger.warning(f"Hit max iterations ({max_iterations})")
-        answer = _extract_answer_text(response.content) if response else "I encountered an error processing your request."
+        if response:
+            answer, citations = _extract_answer_and_citations(response.content)
+        else:
+            answer = "I encountered an error processing your request."
+
+    # Build sources from citations (only the ones actually used)
+    all_sources: list[ContractSource] = []
+    for citation in citations:
+        source_key = citation.get("source", "")
+        if source_key in sent_search_results:
+            item = sent_search_results[source_key]
+            contract_id = source_key.replace("contract://", "") if source_key.startswith("contract://") else ""
+            all_sources.append(
+                ContractSource(
+                    contract_id=contract_id,
+                    filename=item.get("title", ""),
+                    text=citation.get("cited_text", "")[:200],  # Use the actual cited text
+                    score=0.0,
+                )
+            )
 
     # Clean up: delete the uploaded file
     try:
