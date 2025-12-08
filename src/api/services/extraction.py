@@ -273,6 +273,7 @@ def process_contract(pdf_bytes: bytes, filename: str, model: str = "gpt-5-mini")
         "filename": filename,
         "extraction": extraction_result["extraction"],
         "computed_dates": date_result["computed_dates"],
+        "text": text,  # Include extracted text for embedding
         "usage": {
             "extraction": extraction_result["usage"],
             "date_computation": date_result["usage"],

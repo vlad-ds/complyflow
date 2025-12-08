@@ -10,6 +10,28 @@ from typing import Any
 from pyairtable import Api, Table
 
 
+# Airtable long text field limit is 100KB, we truncate at 90KB to be safe
+AIRTABLE_MAX_TEXT_LENGTH = 90_000
+
+
+def _truncate_json(data: dict, max_length: int) -> str:
+    """
+    Convert dict to JSON string, truncating if necessary.
+
+    Args:
+        data: Dict to convert
+        max_length: Maximum string length
+
+    Returns:
+        JSON string, truncated with "...[TRUNCATED]" suffix if too long
+    """
+    json_str = json.dumps(data, indent=2, default=str)
+    if len(json_str) <= max_length:
+        return json_str
+    # Truncate and add marker
+    return json_str[: max_length - 20] + "\n...[TRUNCATED]"
+
+
 def date_to_iso(d: dict | str | None) -> str | None:
     """Convert date dict {year, month, day} to ISO format string."""
     if d is None:
@@ -127,7 +149,7 @@ class AirtableService:
             "notice_period": get_normalized(extraction.get("notice_period")),
             "renewal_term": get_normalized(extraction.get("renewal_term")),
             "status": "under_review",
-            "raw_extraction": json.dumps(contract, indent=2, default=str),
+            "raw_extraction": _truncate_json(contract, AIRTABLE_MAX_TEXT_LENGTH),
             "pdf_url": contract.get("pdf_url"),
         }
 

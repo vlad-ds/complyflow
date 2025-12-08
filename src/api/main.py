@@ -42,6 +42,7 @@ from api.services.airtable import AirtableService
 from api.services.extraction import process_contract
 from api.services.slack import notify_new_contract
 from api.utils.retry import LLMRetryExhaustedError, LLMTimeoutError
+from contracts.embedding import embed_and_store_contract, delete_contract_embeddings
 
 # Constants
 MAX_FILE_SIZE_MB = 50
@@ -249,6 +250,31 @@ async def upload_contract(
             detail=f"Database storage failed: {type(e).__name__}: {e}",
         )
 
+    # Embed contract and store in Qdrant (blocking - upload fails if this fails)
+    try:
+        embedding_result = embed_and_store_contract(
+            text=contract_data["text"],
+            contract_id=record_id,
+            filename=filename,
+            extraction=contract_data["extraction"],
+        )
+        logger.info(
+            f"Embedded {filename}: {embedding_result['chunks_count']} chunks, "
+            f"{embedding_result['points_upserted']} points"
+        )
+    except Exception as e:
+        # Embedding failed - delete the Airtable record to maintain consistency
+        log_error(logger, "Embedding failed, rolling back Airtable record", e, filename=filename)
+        try:
+            airtable.delete_contract(record_id)
+            logger.info(f"Rolled back Airtable record {record_id}")
+        except Exception as rollback_err:
+            log_error(logger, "Rollback failed", rollback_err, record_id=record_id)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Contract embedding failed: {type(e).__name__}: {e}",
+        )
+
     # Send Slack notification (fire and forget, don't fail if Slack fails)
     try:
         await notify_new_contract(contract_data, record_id)
@@ -348,13 +374,20 @@ async def delete_contract(record_id: str):
 
     try:
         airtable.delete_contract(record_id)
-        logger.info(f"Deleted contract: {record_id}")
+        logger.info(f"Deleted contract from Airtable: {record_id}")
     except Exception as e:
         log_error(logger, "Delete failed", e, record_id=record_id)
         raise HTTPException(
             status_code=500,
             detail=f"Failed to delete contract: {type(e).__name__}: {e}",
         )
+
+    # Delete embeddings from Qdrant (non-fatal if this fails)
+    try:
+        deleted_points = delete_contract_embeddings(record_id)
+        logger.info(f"Deleted {deleted_points} embeddings for contract: {record_id}")
+    except Exception as e:
+        log_error(logger, "Embedding deletion failed (non-fatal)", e, record_id=record_id)
 
     return ContractDeleteResponse(id=record_id)
 
@@ -684,7 +717,7 @@ async def get_weekly_summary_pdf():
 
     from fastapi.responses import StreamingResponse
 
-    from regwatch.summary import generate_summary_html, generate_weekly_summary, load_weekly_summary
+    from regwatch.summary import generate_weekly_summary, load_weekly_summary
 
     logger.info("Generating weekly summary PDF")
 
@@ -702,13 +735,10 @@ async def get_weekly_summary_pdf():
             )
 
     try:
-        # Convert to HTML
-        html_content = generate_summary_html(summary)
+        # Generate PDF using reportlab
+        from regwatch.pdf_export import generate_summary_pdf
 
-        # Convert to PDF using WeasyPrint
-        from weasyprint import HTML
-
-        pdf_bytes = HTML(string=html_content).write_pdf()
+        pdf_bytes = generate_summary_pdf(summary)
 
         # Create filename
         filename = f"regulatory_summary_{summary.period_start}_to_{summary.period_end}.pdf"
@@ -719,12 +749,6 @@ async def get_weekly_summary_pdf():
             headers={"Content-Disposition": f"attachment; filename={filename}"},
         )
 
-    except ImportError:
-        logger.error("WeasyPrint not installed for PDF generation")
-        raise HTTPException(
-            status_code=500,
-            detail="PDF generation is not available. WeasyPrint is required.",
-        )
     except Exception as e:
         log_error(logger, "PDF generation failed", e)
         raise HTTPException(
