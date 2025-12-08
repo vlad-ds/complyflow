@@ -44,7 +44,7 @@ def save_materiality_registry() -> None:
 PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
 
 # Configuration
-FRONTEND_URL = os.getenv("FRONTEND_URL", "https://id-preview--c058f18d-849d-4f2e-a8d9-59e8c9322ec1.lovable.app")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "https://spec-whisperer-38.lovable.app")
 SLACK_REGWATCH_WEBHOOK_URL = os.getenv("SLACK_REGWATCH_WEBHOOK_URL")
 
 # Initialize OpenAI instrumentation for Langfuse tracing
@@ -256,7 +256,7 @@ async def send_materiality_alert(result: MaterialityResult) -> bool:
     })
 
     # Add action buttons
-    chat_url = f"{FRONTEND_URL}/chat"
+    chat_url = f"{FRONTEND_URL}/compychat"
     blocks.append({
         "type": "actions",
         "elements": [
