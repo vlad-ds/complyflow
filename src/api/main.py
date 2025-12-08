@@ -40,6 +40,7 @@ from api.models import (
 from api.logging import get_logger, log_error
 from api.services.airtable import AirtableService
 from api.services.extraction import process_contract
+from api.services.pdf_storage import get_pdf_storage
 from api.services.slack import notify_new_contract
 from api.utils.retry import LLMRetryExhaustedError, LLMTimeoutError
 from contracts.embedding import embed_and_store_contract, delete_contract_embeddings
@@ -147,7 +148,6 @@ async def health():
 )
 async def upload_contract(
     file: Annotated[UploadFile, File(description="PDF contract file to upload")],
-    pdf_url: Annotated[str | None, Form(description="URL where PDF is stored (e.g., Supabase Storage)")] = None,
 ):
     """
     Upload a contract PDF for processing.
@@ -157,9 +157,8 @@ async def upload_contract(
     2. Uses LLM to extract metadata (parties, dates, terms, etc.)
     3. Computes derived dates (notice deadline, renewal date)
     4. Stores the contract in Airtable with status "under_review"
-    5. Sends a Slack notification (if configured)
-
-    Optionally accepts pdf_url to store a link to the PDF in Airtable.
+    5. Stores the PDF in Railway bucket for later retrieval
+    6. Sends a Slack notification (if configured)
     """
     # Validate filename
     if not file.filename:
@@ -232,11 +231,7 @@ async def upload_contract(
 
     logger.info(f"Extraction complete for {filename}")
 
-    # Add pdf_url if provided
-    if pdf_url:
-        contract_data["pdf_url"] = pdf_url
-
-    # Store in Airtable
+    # Store in Airtable (without pdf_url initially)
     try:
         airtable = get_airtable()
         record = airtable.create_contract(contract_data)
@@ -249,6 +244,21 @@ async def upload_contract(
             status_code=500,
             detail=f"Database storage failed: {type(e).__name__}: {e}",
         )
+
+    # Store PDF in Railway bucket (using record_id as key)
+    pdf_storage_path = None
+    try:
+        pdf_storage = get_pdf_storage()
+        pdf_storage_path = pdf_storage.store(record_id, filename, pdf_bytes)
+        logger.info(f"PDF stored: {filename} -> {pdf_storage_path}")
+
+        # Update Airtable with the storage path
+        airtable.update_contract(record_id, {"pdf_url": pdf_storage_path})
+        logger.info(f"Airtable updated with pdf_url: {record_id}")
+    except Exception as e:
+        # PDF storage failed - log but don't fail the upload
+        # The contract is still usable without the PDF
+        log_error(logger, "PDF storage failed (non-fatal)", e, filename=filename)
 
     # Embed contract and store in Qdrant (blocking - upload fails if this fails)
     try:
@@ -293,7 +303,7 @@ async def upload_contract(
         airtable_url=airtable_url,
         created_at=datetime.utcnow(),
         usage=contract_data.get("usage"),
-        pdf_url=pdf_url,
+        pdf_url=pdf_storage_path,
     )
 
 
@@ -319,6 +329,61 @@ async def get_contract(record_id: str):
         id=record["id"],
         fields=record["fields"],
         created_time=record.get("createdTime"),
+    )
+
+
+@app.get(
+    "/contracts/{record_id}/pdf",
+    responses={
+        200: {
+            "content": {"application/pdf": {}},
+            "description": "PDF file download",
+        },
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        404: {"model": ErrorResponse, "description": "Contract or PDF not found"},
+    },
+    tags=["Contracts"],
+    dependencies=[Depends(verify_api_key)],
+)
+async def get_contract_pdf(record_id: str):
+    """
+    Download the PDF file for a contract.
+
+    Returns the original PDF that was uploaded for this contract.
+    The PDF is stored in Railway bucket (production) or local filesystem (development).
+    """
+    from io import BytesIO
+
+    from fastapi.responses import StreamingResponse
+
+    airtable = get_airtable()
+
+    # Verify contract exists and get filename
+    record = airtable.get_contract(record_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Contract not found")
+
+    filename = record["fields"].get("filename", "contract.pdf")
+
+    # Retrieve PDF from storage
+    pdf_storage = get_pdf_storage()
+    pdf_bytes = pdf_storage.retrieve(record_id)
+
+    if not pdf_bytes:
+        raise HTTPException(
+            status_code=404,
+            detail="PDF not found. This contract may have been uploaded before PDF storage was enabled.",
+        )
+
+    logger.info(f"PDF download: {record_id} ({len(pdf_bytes)} bytes)")
+
+    return StreamingResponse(
+        BytesIO(pdf_bytes),
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": f'inline; filename="{filename}"',
+            "Content-Length": str(len(pdf_bytes)),
+        },
     )
 
 
