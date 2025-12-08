@@ -14,6 +14,7 @@ from pathlib import Path
 import anthropic
 from dotenv import load_dotenv
 from langfuse import get_client, observe
+from opentelemetry.instrumentation.anthropic import AnthropicInstrumentor
 
 from contracts_chat.airtable_export import export_contracts_csv
 from contracts_chat.tools import (
@@ -25,6 +26,11 @@ from contracts_chat.tools import (
 load_dotenv()
 
 logger = logging.getLogger(__name__)
+
+# Initialize Anthropic instrumentation for Langfuse tracing
+_instrumentor = AnthropicInstrumentor()
+if not _instrumentor.is_instrumented_by_opentelemetry:
+    _instrumentor.instrument()
 
 # Prompts directory
 PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
