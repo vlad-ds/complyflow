@@ -1,81 +1,42 @@
 # CUAD Sample Contracts
 
-10 sample contracts from the [CUAD dataset](https://www.atticusprojectai.org/cuad) for testing the AI Legal & Compliance platform.
+Sample contracts from the [CUAD dataset](https://www.atticusprojectai.org/cuad) for testing the extraction pipeline.
 
-## Setup
-
-To regenerate the contracts and metadata from the CUAD source:
-
-1. Download `CUAD_v1.zip` from https://www.atticusprojectai.org/cuad
-2. Place the zip file in this folder (`cuad/CUAD_v1.zip`)
-3. Run the extraction script:
-
-```bash
-python cuad/extract_metadata.py
-```
-
-This will:
-- Extract the zip file to `cuad/CUAD_v1/`
-- Copy the 10 selected contracts to `cuad/contracts/`
-- Generate `metadata.json` and `metadata.csv` with ground truth labels
-
-To select different contracts, edit `contracts_to_extract.json`.
-
-## Selection Criteria
-
-1. **3 contract types** most relevant to fintech/asset management:
-   - Service Agreement (vendor services)
-   - License Agreement (software, data, trademarks)
-   - Outsourcing Agreement (operational functions)
-
-2. **Metadata richness**: Contracts with annotated fields in CUAD ground truth
-
-3. **Diversity**: Multiple contracts per type to test extraction consistency
-
-## Contents
+## Structure
 
 ```
 cuad/
-├── README.md
-├── contract_types.json   # Full enum of 25 CUAD contract types
-├── metadata.json         # Ground truth labels (structured)
-├── metadata.csv          # Ground truth labels (spreadsheet)
-└── contracts/
-    ├── 01_service_gpaq.pdf
-    ├── 02_service_reynolds.pdf
-    ├── 03_service_verizon.pdf
-    ├── 04_service_integrity.pdf
-    ├── 05_license_gopage.pdf
-    ├── 06_license_morganstanley.pdf
-    ├── 07_license_cytodyn.pdf
-    ├── 08_license_artara.pdf
-    ├── 09_outsourcing_photronics.pdf
-    └── 10_outsourcing_paratek.pdf
+├── train/                  # 10 contracts for development
+│   ├── contracts/          # PDF files
+│   ├── metadata.json       # Ground truth labels
+│   └── metadata.csv
+├── test/                   # 10 contracts for evaluation
+│   ├── contracts/
+│   ├── metadata.json
+│   └── metadata.csv
+├── train_2/                # 10 additional contracts (expanded types)
+│   └── contracts/
+├── fake_data/              # Synthetic test contract
+│   └── fake_contract.txt
+├── contract_types.json     # Full enum of 26 CUAD contract types
+├── contracts_to_extract.json
+└── extract_metadata.py     # Script to regenerate from CUAD source
 ```
 
-## Contracts by Type
+## Contract Types
 
-| # | File | Type | Original |
-|---|------|------|----------|
-| 1 | `01_service_gpaq.pdf` | Service Agreement | GPAQ Acquisition Holdings |
-| 2 | `02_service_reynolds.pdf` | Service Agreement | Reynolds Consumer Products |
-| 3 | `03_service_verizon.pdf` | Service Agreement | Verizon ABS LLC |
-| 4 | `04_service_integrity.pdf` | Service Agreement | Integrity Funds |
-| 5 | `05_license_gopage.pdf` | License Agreement | Gopage Corp |
-| 6 | `06_license_morganstanley.pdf` | License Agreement | Morgan Stanley Direct Lending |
-| 7 | `07_license_cytodyn.pdf` | License Agreement | CytoDyn Inc |
-| 8 | `08_license_artara.pdf` | License Agreement | Artara Therapeutics |
-| 9 | `09_outsourcing_photronics.pdf` | Outsourcing Agreement | Photronics Inc |
-| 10 | `10_outsourcing_paratek.pdf` | Outsourcing Agreement | Paratek Pharmaceuticals |
+**train/** and **test/** contain 3 types relevant to fintech/asset management:
+- Service Agreement (4 each)
+- License Agreement (4 each)
+- Outsourcing Agreement (2 each)
+
+**train_2/** expands to additional types:
+- License, Distributor, Development, Maintenance, Outsourcing
 
 ## Metadata Fields
 
 | Field | Description |
 |-------|-------------|
-| `file` | Renamed PDF filename |
-| `original_filename` | Original CUAD filename |
-| `contract_type` | One of 3 types (see above) |
-| `Document Name` | Title from contract text |
 | `Parties` | Contracting parties |
 | `Agreement Date` | Date contract was signed |
 | `Effective Date` | When contract takes effect |
@@ -83,6 +44,18 @@ cuad/
 | `Renewal Term` | Auto-renewal terms |
 | `Notice Period To Terminate Renewal` | Notice required |
 | `Governing Law` | Jurisdiction |
+
+## Regenerating from Source
+
+If you need to regenerate the contracts from the original CUAD dataset:
+
+1. Download `CUAD_v1.zip` from https://www.atticusprojectai.org/cuad
+2. Place in this folder (it's gitignored)
+3. Run:
+
+```bash
+python cuad/extract_metadata.py
+```
 
 ## Source
 
