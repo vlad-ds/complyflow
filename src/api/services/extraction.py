@@ -16,6 +16,7 @@ from api.logging import get_logger
 from api.utils.retry import llm_retry
 from extraction.extract import _get_json_schema, _get_contract_types_str
 from extraction.schema import ExtractionResponse
+from extraction.validation import validate_extraction_citations
 from llm.openai_provider import OpenAIProvider, DateComputationResponse
 from llm.base import LLMResponse
 from prompts import load_prompt
@@ -262,7 +263,17 @@ def process_contract(pdf_bytes: bytes, filename: str, model: str = "gpt-5-mini")
     # Step 2: Run LLM extraction
     extraction_result = extract_metadata_from_text(text, model=model)
 
-    # Step 3: Compute dates
+    # Step 3: Validate citations against source text
+    citation_validation = validate_extraction_citations(
+        extraction_result["extraction"],
+        text,
+    )
+    logger.info(
+        f"Citation validation: {citation_validation['summary']['valid_citations']}/"
+        f"{citation_validation['summary']['total_citations']} citations verified"
+    )
+
+    # Step 4: Compute dates
     date_result = compute_dates_from_extraction(
         extraction_result["extraction"],
         model=model,
@@ -273,6 +284,7 @@ def process_contract(pdf_bytes: bytes, filename: str, model: str = "gpt-5-mini")
         "filename": filename,
         "extraction": extraction_result["extraction"],
         "computed_dates": date_result["computed_dates"],
+        "citation_validation": citation_validation,
         "text": text,  # Include extracted text for embedding
         "usage": {
             "extraction": extraction_result["usage"],
