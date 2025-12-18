@@ -52,6 +52,9 @@ from contracts.embedding import embed_and_store_contract, delete_contract_embedd
 MAX_FILE_SIZE_MB = 50
 MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024
 
+# Environment detection
+IS_PRODUCTION = bool(os.getenv("RAILWAY_ENVIRONMENT"))
+
 # API Key from environment
 API_KEY = os.getenv("API_KEY")
 
@@ -61,7 +64,9 @@ logger = get_logger(__name__)
 async def verify_api_key(x_api_key: Annotated[str | None, Header()] = None) -> None:
     """Verify the API key from the X-API-Key header.
 
-    If API_KEY env var is not set, authentication is disabled (dev mode).
+    In production (RAILWAY_ENVIRONMENT set), API_KEY is required - the app
+    refuses to start without it. In development, if API_KEY is not set,
+    authentication is disabled for convenience.
     """
     if not API_KEY:
         # No API key configured - auth disabled
@@ -96,6 +101,14 @@ def get_airtable() -> AirtableService:
 async def lifespan(app: FastAPI):
     """Application lifespan - initialize services on startup."""
     logger.info("Starting ComplyFlow API...")
+
+    # Security check: require API_KEY in production
+    if IS_PRODUCTION and not API_KEY:
+        logger.critical("API_KEY must be set in production. Refusing to start.")
+        raise RuntimeError("API_KEY environment variable is required in production")
+
+    if not API_KEY:
+        logger.warning("API_KEY not set - authentication disabled (development mode)")
 
     # Initialize Airtable service
     global _airtable
