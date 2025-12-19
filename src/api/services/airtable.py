@@ -149,7 +149,11 @@ class AirtableService:
             "notice_period": get_normalized(extraction.get("notice_period")),
             "renewal_term": get_normalized(extraction.get("renewal_term")),
             "status": "under_review",
-            "raw_extraction": _truncate_json(contract, AIRTABLE_MAX_TEXT_LENGTH),
+            # Exclude 'text' from raw_extraction - it's only needed for embedding, not storage
+            "raw_extraction": _truncate_json(
+                {k: v for k, v in contract.items() if k != "text"},
+                AIRTABLE_MAX_TEXT_LENGTH,
+            ),
             "pdf_url": contract.get("pdf_url"),
         }
 

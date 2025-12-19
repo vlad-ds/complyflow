@@ -26,6 +26,10 @@ logger = get_logger(__name__)
 # Tag for all API-originated LLM calls
 API_TAGS = ["source:api"]
 
+# Maximum contract text length (500KB) - beyond our longest CUAD contract
+# Prevents accidentally processing massive files or corrupted PDFs
+MAX_CONTRACT_TEXT_LENGTH = 500_000
+
 # Exceptions that should trigger a retry
 RETRYABLE_EXCEPTIONS = (APIError, APITimeoutError, RateLimitError)
 
@@ -259,6 +263,13 @@ def process_contract(pdf_bytes: bytes, filename: str, model: str = "gpt-5-mini")
 
     if not text.strip():
         raise ValueError("Could not extract text from PDF - file may be scanned/image-based")
+
+    # Length guard - reject files beyond our expected maximum
+    if len(text) > MAX_CONTRACT_TEXT_LENGTH:
+        raise ValueError(
+            f"Contract text too long ({len(text):,} chars). "
+            f"Maximum supported is {MAX_CONTRACT_TEXT_LENGTH:,} chars."
+        )
 
     # Step 2: Run LLM extraction
     extraction_result = extract_metadata_from_text(text, model=model)
