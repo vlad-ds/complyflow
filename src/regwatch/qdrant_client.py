@@ -191,13 +191,21 @@ class RegwatchQdrant:
             logger.warning(f"Failed to get collection stats: {e}")
             return {"error": str(e)}
 
-    def search(self, query_embedding: list[float], top_k: int = 20) -> list[dict]:
+    def search(
+        self,
+        query_embedding: list[float],
+        top_k: int = 20,
+        score_threshold: float = 0.7,
+    ) -> list[dict]:
         """
         Search for similar chunks using vector similarity.
 
         Args:
             query_embedding: Query vector (768-dim for Snowflake Arctic)
             top_k: Number of results to return
+            score_threshold: Minimum similarity score (0-1). Default 0.7 filters
+                out low-relevance chunks. Not empirically validated - chosen as
+                sensible default for cosine similarity.
 
         Returns:
             List of chunk dicts with doc_id, title, text, topic, score
@@ -208,6 +216,7 @@ class RegwatchQdrant:
             query=query_embedding,
             limit=top_k,
             with_payload=True,
+            score_threshold=score_threshold,
         )
         return [
             {
