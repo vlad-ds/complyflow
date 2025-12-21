@@ -235,20 +235,17 @@ class RegwatchQdrant:
         Returns:
             List of document dicts with doc_id, title, topic, doc_type, eurlex_url
         """
-        # Scroll through all points, getting only chunk_index=0 for each doc
-        # to avoid duplicates (each doc has many chunks)
+        # Scroll through all points and dedupe by doc_id
+        # (simpler than filtering by chunk_index which requires an index)
         documents = {}
         offset = None
 
         while True:
             result = self.client.scroll(
                 collection_name=self.config.collection_name,
-                scroll_filter=Filter(
-                    must=[FieldCondition(key="chunk_index", match=MatchValue(value=0))]
-                ),
                 limit=100,
                 offset=offset,
-                with_payload=True,
+                with_payload=["doc_id", "title", "topic", "doc_type"],
                 with_vectors=False,
             )
 
