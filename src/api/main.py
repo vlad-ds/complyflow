@@ -49,6 +49,7 @@ from api.services.extraction import process_contract
 from api.services.pdf_storage import get_pdf_storage
 from api.services.slack import notify_new_contract
 from api.utils.retry import LLMRetryExhaustedError, LLMTimeoutError
+from notify.telegram import notify
 from contracts.embedding import embed_and_store_contract, delete_contract_embeddings
 
 # Constants
@@ -312,6 +313,8 @@ async def upload_contract(
         log_error(logger, "Slack notification failed (non-fatal)", e, filename=filename)
 
     logger.info(f"Upload complete: {filename} -> {record_id}")
+
+    notify("Contract Uploaded", f"{filename}\n{contract_data['extraction'].get('contract_type', 'Unknown type')}")
 
     return ContractUploadResponse(
         contract_id=record_id,
@@ -687,6 +690,8 @@ async def regwatch_chat(body: ChatRequest):
 
     logger.info(f"Chat response: {len(sources)} sources, {len(result.answer)} chars")
 
+    notify("RegWatch Chat", f"Q: {body.query[:80]}...")
+
     return ChatResponse(
         answer=result.answer,
         sources=sources,
@@ -766,6 +771,8 @@ async def contracts_chat(body: ContractsChatRequest):
     ]
 
     logger.info(f"Contracts chat response: {len(sources)} sources, {len(tool_uses)} tool uses, {len(result.answer)} chars")
+
+    notify("Contracts Chat", f"Q: {body.query[:80]}...")
 
     return ContractsChatResponse(
         answer=result.answer,
