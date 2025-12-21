@@ -67,11 +67,22 @@ class ContractSource:
 
 
 @dataclass
+class ToolUseEvent:
+    """A tool use event from Claude's processing."""
+
+    tool_name: str
+    input_summary: str
+    output_summary: str
+    timestamp: str
+
+
+@dataclass
 class ChatResult:
     """Result from the chat function."""
 
     answer: str
     sources: list[ContractSource] = field(default_factory=list)
+    tool_uses: list[ToolUseEvent] = field(default_factory=list)
     usage: dict | None = None
 
 
@@ -244,6 +255,8 @@ def chat(
     total_usage = {"input_tokens": 0, "output_tokens": 0}
     # Store search results we send, keyed by source for citation lookup
     sent_search_results: dict[str, dict] = {}
+    # Track tool uses for frontend visibility
+    tool_uses: list[ToolUseEvent] = []
 
     max_iterations = 10  # Safety limit
     iteration = 0
@@ -289,16 +302,33 @@ def chat(
                     tool_input = block.input
 
                     logger.info(f"Tool use: {tool_name}")
+                    from datetime import datetime
+                    timestamp = datetime.utcnow().isoformat() + "Z"
 
                     # Handle our custom tool
                     if tool_name == "search_contracts":
+                        query = tool_input.get("query", "")[:100]
+                        contract_id = tool_input.get("contract_id")
+                        input_summary = f"Search: '{query}'"
+                        if contract_id:
+                            input_summary += f" in contract {contract_id}"
+
                         result_content = _handle_tool_use(tool_name, tool_input)
 
                         # Store search results for citation lookup later
+                        num_results = 0
                         for item in result_content:
                             if item.get("type") == "search_result":
                                 source = item.get("source", "")
                                 sent_search_results[source] = item
+                                num_results += 1
+
+                        tool_uses.append(ToolUseEvent(
+                            tool_name="search_contracts",
+                            input_summary=input_summary,
+                            output_summary=f"Found {num_results} matching chunks",
+                            timestamp=timestamp,
+                        ))
 
                         tool_results.append(
                             {
@@ -307,9 +337,17 @@ def chat(
                                 "content": result_content,
                             }
                         )
+                    elif tool_name == "code_execution":
+                        # Code execution is server-side, but we can still track it
+                        tool_uses.append(ToolUseEvent(
+                            tool_name="code_execution",
+                            input_summary="Analyzing contracts CSV data",
+                            output_summary="Executed Python code",
+                            timestamp=timestamp,
+                        ))
+                        # Claude handles it server-side - no result needed
                     else:
-                        # For code_execution, Claude handles it server-side
-                        # We don't need to provide a result - it's automatic
+                        # Unknown tool
                         pass
 
             # If we have tool results to send back, add them
@@ -363,6 +401,7 @@ def chat(
     return ChatResult(
         answer=answer,
         sources=all_sources,
+        tool_uses=tool_uses,
         usage={
             "input_tokens": total_usage["input_tokens"],
             "output_tokens": total_usage["output_tokens"],

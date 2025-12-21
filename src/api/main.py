@@ -32,6 +32,7 @@ from api.models import (
     ContractsChatRequest,
     ContractsChatResponse,
     ContractsChatSource,
+    ToolUseEvent,
     ContractUploadResponse,
     DocumentSummaryResponse,
     ErrorResponse,
@@ -753,11 +754,23 @@ async def contracts_chat(body: ContractsChatRequest):
         for src in result.sources
     ]
 
-    logger.info(f"Contracts chat response: {len(sources)} sources, {len(result.answer)} chars")
+    # Convert tool uses
+    tool_uses = [
+        ToolUseEvent(
+            tool_name=tu.tool_name,
+            input_summary=tu.input_summary,
+            output_summary=tu.output_summary,
+            timestamp=tu.timestamp,
+        )
+        for tu in result.tool_uses
+    ]
+
+    logger.info(f"Contracts chat response: {len(sources)} sources, {len(tool_uses)} tool uses, {len(result.answer)} chars")
 
     return ContractsChatResponse(
         answer=result.answer,
         sources=sources,
+        tool_uses=tool_uses,
         usage=result.usage,
     )
 

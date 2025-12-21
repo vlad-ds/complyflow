@@ -286,6 +286,15 @@ class ContractsChatSource(BaseModel):
     score: float = Field(description="Similarity score (0-1)")
 
 
+class ToolUseEvent(BaseModel):
+    """A tool use event from Claude's processing."""
+
+    tool_name: str = Field(description="Name of the tool (code_execution, search_contracts)")
+    input_summary: str = Field(description="Brief description of what was requested")
+    output_summary: str = Field(description="Brief description of the result")
+    timestamp: str = Field(description="ISO timestamp when tool was called")
+
+
 class ContractsChatResponse(BaseModel):
     """Response from POST /contracts/chat."""
 
@@ -293,5 +302,9 @@ class ContractsChatResponse(BaseModel):
     sources: list[ContractsChatSource] = Field(
         default=[],
         description="Contract sources used for the answer (from semantic search)",
+    )
+    tool_uses: list[ToolUseEvent] = Field(
+        default=[],
+        description="Tool uses during processing (code execution, searches)",
     )
     usage: dict | None = Field(default=None, description="Token usage statistics")
