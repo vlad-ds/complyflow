@@ -9,6 +9,7 @@ Combines:
 
 import logging
 from dataclasses import dataclass, field
+from datetime import datetime
 from pathlib import Path
 
 import anthropic
@@ -281,33 +282,32 @@ def chat(
             total_usage["input_tokens"] += response.usage.input_tokens
             total_usage["output_tokens"] += response.usage.output_tokens
 
-        # Log all block types for debugging
-        block_types = [getattr(b, "type", "unknown") for b in response.content]
-        logger.info(f"Response block types: {block_types}, stop_reason: {response.stop_reason}")
-
         # Check for server-side tool uses (code_execution) in ANY response
-        from datetime import datetime
         for block in response.content:
-            if hasattr(block, "type"):
-                if block.type == "server_tool_use":
-                    tool_name = getattr(block, "name", "unknown")
-                    logger.info(f"Found server_tool_use: {tool_name}")
-                    if tool_name == "code_execution":
-                        tool_uses.append(ToolUseEvent(
-                            tool_name="code_execution",
-                            input_summary="Analyzing contracts data with Python",
-                            output_summary="Running code...",
-                            timestamp=datetime.utcnow().isoformat() + "Z",
-                        ))
-                elif block.type == "code_execution_tool_result":
-                    logger.info("Found code_execution_tool_result")
-                    content = getattr(block, "content", None)
-                    return_code = getattr(content, "return_code", 0) if content else 0
-                    # Update the last code_execution tool use with result
-                    for tu in reversed(tool_uses):
-                        if tu.tool_name == "code_execution" and tu.output_summary == "Running code...":
-                            tu.output_summary = "Code executed successfully" if return_code == 0 else f"Code failed (exit {return_code})"
-                            break
+            if not hasattr(block, "type"):
+                continue
+
+            # Server-side tool use: text_editor_code_execution, bash_code_execution
+            if block.type == "server_tool_use":
+                tool_name = getattr(block, "name", "unknown")
+                timestamp = datetime.utcnow().isoformat() + "Z"
+
+                if tool_name in ("text_editor_code_execution", "bash_code_execution", "code_execution"):
+                    tool_uses.append(ToolUseEvent(
+                        tool_name="code_execution",
+                        input_summary="Analyzing contracts data with Python",
+                        output_summary="Running code...",
+                        timestamp=timestamp,
+                    ))
+
+            # Bash execution result - update the pending tool use
+            elif block.type == "bash_code_execution_tool_result":
+                content = getattr(block, "content", None)
+                return_code = getattr(content, "return_code", 0) if content else 0
+                for tu in reversed(tool_uses):
+                    if tu.tool_name == "code_execution" and tu.output_summary == "Running code...":
+                        tu.output_summary = "Code executed successfully" if return_code == 0 else f"Code failed (exit {return_code})"
+                        break
 
         # Check stop reason
         if response.stop_reason == "end_turn":
@@ -317,51 +317,18 @@ def chat(
             break
 
         elif response.stop_reason == "tool_use":
-            # Claude wants to use a tool
+            # Claude wants to use our custom tool (search_contracts)
             # Add assistant's response to messages
             messages.append({"role": "assistant", "content": response.content})
 
-            # Process each tool use
+            # Process custom tool uses
             tool_results = []
-            from datetime import datetime
-
             for block in response.content:
-                if not hasattr(block, "type"):
-                    continue
-
-                timestamp = datetime.utcnow().isoformat() + "Z"
-
-                # Server-side tool use (code_execution)
-                if block.type == "server_tool_use":
-                    tool_name = getattr(block, "name", "unknown")
-                    logger.info(f"Server tool use: {tool_name}")
-
-                    if tool_name == "code_execution":
-                        # Extract code snippet for summary
-                        code_input = getattr(block, "input", {})
-                        code_snippet = code_input.get("code", "")[:50] if isinstance(code_input, dict) else ""
-                        tool_uses.append(ToolUseEvent(
-                            tool_name="code_execution",
-                            input_summary="Analyzing contracts data with Python",
-                            output_summary="Running code...",
-                            timestamp=timestamp,
-                        ))
-
-                # Code execution result (update the output_summary)
-                elif block.type == "code_execution_tool_result":
-                    content = getattr(block, "content", {})
-                    return_code = content.return_code if hasattr(content, "return_code") else 0
-                    # Update the last code_execution tool use with result
-                    for tu in reversed(tool_uses):
-                        if tu.tool_name == "code_execution" and tu.output_summary == "Running code...":
-                            tu.output_summary = "Code executed successfully" if return_code == 0 else f"Code failed (exit {return_code})"
-                            break
-
-                # Custom tool use (search_contracts)
-                elif block.type == "tool_use":
+                if hasattr(block, "type") and block.type == "tool_use":
                     tool_name = block.name
                     tool_id = block.id
                     tool_input = block.input
+                    timestamp = datetime.utcnow().isoformat() + "Z"
 
                     logger.info(f"Tool use: {tool_name}")
 
