@@ -308,3 +308,23 @@ class ContractsChatResponse(BaseModel):
         description="Tool uses during processing (code execution, searches)",
     )
     usage: dict | None = Field(default=None, description="Token usage statistics")
+
+
+# --- Regwatch Documents Models ---
+
+
+class RegwatchDocument(BaseModel):
+    """A regulatory document indexed in Qdrant."""
+
+    celex: str = Field(description="CELEX number (unique identifier)")
+    title: str | None = Field(description="Document title from RSS feed")
+    topic: str | None = Field(description="Topic category (DORA, MiCA, etc.)")
+    doc_type: str | None = Field(description="Document type (regulation, directive, etc.)")
+    eurlex_url: str = Field(description="Link to EUR-Lex page")
+
+
+class RegwatchDocumentsResponse(BaseModel):
+    """Response for GET /regwatch/documents."""
+
+    documents: list[RegwatchDocument] = Field(description="List of indexed documents")
+    total: int = Field(description="Total number of documents")

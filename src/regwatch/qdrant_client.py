@@ -223,3 +223,50 @@ class RegwatchQdrant:
             }
             for point in response.points
         ]
+
+    def list_documents(self) -> list[dict]:
+        """
+        List all unique documents in the collection.
+
+        TEMPORARY: This queries Qdrant for document metadata. The proper solution
+        is to store document metadata (title, url, doc_type) in the registry.
+        See TODO.md for details.
+
+        Returns:
+            List of document dicts with doc_id, title, topic, doc_type, eurlex_url
+        """
+        # Scroll through all points, getting only chunk_index=0 for each doc
+        # to avoid duplicates (each doc has many chunks)
+        documents = {}
+        offset = None
+
+        while True:
+            result = self.client.scroll(
+                collection_name=self.config.collection_name,
+                scroll_filter=Filter(
+                    must=[FieldCondition(key="chunk_index", match=MatchValue(value=0))]
+                ),
+                limit=100,
+                offset=offset,
+                with_payload=True,
+                with_vectors=False,
+            )
+
+            points, next_offset = result
+
+            for point in points:
+                doc_id = point.payload.get("doc_id")
+                if doc_id and doc_id not in documents:
+                    documents[doc_id] = {
+                        "celex": doc_id,
+                        "title": point.payload.get("title"),
+                        "topic": point.payload.get("topic"),
+                        "doc_type": point.payload.get("doc_type"),
+                        "eurlex_url": f"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:{doc_id}",
+                    }
+
+            if next_offset is None:
+                break
+            offset = next_offset
+
+        return list(documents.values())

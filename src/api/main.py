@@ -39,6 +39,8 @@ from api.models import (
     FieldUpdateRequest,
     FieldUpdateResponse,
     HealthResponse,
+    RegwatchDocument,
+    RegwatchDocumentsResponse,
     WeeklySummaryListResponse,
     WeeklySummaryMetaResponse,
     WeeklySummaryResponse,
@@ -633,6 +635,46 @@ async def list_contracts(
     ]
 
     return ContractListResponse(contracts=contracts, total=len(contracts))
+
+
+# --- Regwatch Documents Endpoint ---
+
+
+@app.get(
+    "/regwatch/documents",
+    response_model=RegwatchDocumentsResponse,
+    responses={
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        500: {"model": ErrorResponse, "description": "Internal server error"},
+    },
+    tags=["Regwatch"],
+    dependencies=[Depends(verify_api_key)],
+)
+async def list_regwatch_documents():
+    """
+    List all indexed regulatory documents.
+
+    TEMPORARY: This queries Qdrant for document metadata. The proper solution
+    is to store document metadata (title, url, doc_type) in the registry.
+    See TODO.md for details.
+
+    Returns list of documents with CELEX, title, topic, doc_type, and EUR-Lex URL.
+    """
+    from regwatch.ingest_config import IngestConfig
+    from regwatch.qdrant_client import RegwatchQdrant
+
+    try:
+        config = IngestConfig()
+        qdrant = RegwatchQdrant(config)
+        docs = qdrant.list_documents()
+
+        return RegwatchDocumentsResponse(
+            documents=[RegwatchDocument(**doc) for doc in docs],
+            total=len(docs),
+        )
+    except Exception as e:
+        logger.error(f"Failed to list regwatch documents: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # --- Regwatch Chat Endpoint ---
