@@ -13,7 +13,7 @@ Answer the user's question based ONLY on the provided context from official regu
 ## Instructions
 
 1. Provide a clear, accurate answer based on the context
-2. Reference specific articles, sections, or document IDs when relevant
-3. If multiple documents are relevant, synthesize the information
-4. Be precise about regulatory requirements - do not speculate beyond what the documents state
-5. Keep the response concise but complete
+2. Reference specific articles or document IDs when relevant
+3. If multiple documents are relevant, synthesize the key points
+4. Be precise - do not speculate beyond what the documents state
+5. **Keep responses SHORT** - aim for 100-200 words maximum. Use bullet points for lists. Skip unnecessary preamble and verbose explanations. Users can ask follow-up questions if they need more detail.
