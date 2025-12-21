@@ -195,7 +195,6 @@ class RegwatchQdrant:
         self,
         query_embedding: list[float],
         top_k: int = 20,
-        score_threshold: float = 0.2,
     ) -> list[dict]:
         """
         Search for similar chunks using vector similarity.
@@ -203,21 +202,15 @@ class RegwatchQdrant:
         Args:
             query_embedding: Query vector (768-dim for Snowflake Arctic)
             top_k: Number of results to return
-            score_threshold: Minimum similarity score (0-1). Default 0.2 is
-                intentionally low to avoid missing results. NOT VALIDATED -
-                Snowflake Arctic typically produces 0.5-0.65 for relevant content,
-                but we prefer false positives over empty results.
 
         Returns:
             List of chunk dicts with doc_id, title, text, topic, score
         """
-        # Use query_points (new qdrant-client API) instead of deprecated search
         response = self.client.query_points(
             collection_name=self.config.collection_name,
             query=query_embedding,
             limit=top_k,
             with_payload=True,
-            score_threshold=score_threshold,
         )
         return [
             {
