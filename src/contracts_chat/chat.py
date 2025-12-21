@@ -281,11 +281,39 @@ def chat(
             total_usage["input_tokens"] += response.usage.input_tokens
             total_usage["output_tokens"] += response.usage.output_tokens
 
+        # Log all block types for debugging
+        block_types = [getattr(b, "type", "unknown") for b in response.content]
+        logger.info(f"Response block types: {block_types}, stop_reason: {response.stop_reason}")
+
+        # Check for server-side tool uses (code_execution) in ANY response
+        from datetime import datetime
+        for block in response.content:
+            if hasattr(block, "type"):
+                if block.type == "server_tool_use":
+                    tool_name = getattr(block, "name", "unknown")
+                    logger.info(f"Found server_tool_use: {tool_name}")
+                    if tool_name == "code_execution":
+                        tool_uses.append(ToolUseEvent(
+                            tool_name="code_execution",
+                            input_summary="Analyzing contracts data with Python",
+                            output_summary="Running code...",
+                            timestamp=datetime.utcnow().isoformat() + "Z",
+                        ))
+                elif block.type == "code_execution_tool_result":
+                    logger.info("Found code_execution_tool_result")
+                    content = getattr(block, "content", None)
+                    return_code = getattr(content, "return_code", 0) if content else 0
+                    # Update the last code_execution tool use with result
+                    for tu in reversed(tool_uses):
+                        if tu.tool_name == "code_execution" and tu.output_summary == "Running code...":
+                            tu.output_summary = "Code executed successfully" if return_code == 0 else f"Code failed (exit {return_code})"
+                            break
+
         # Check stop reason
         if response.stop_reason == "end_turn":
             # Claude is done - extract final answer and citations
             answer, citations = _extract_answer_and_citations(response.content)
-            logger.info(f"Chat complete after {iteration} iterations, {len(citations)} citations")
+            logger.info(f"Chat complete after {iteration} iterations, {len(citations)} citations, {len(tool_uses)} tool_uses")
             break
 
         elif response.stop_reason == "tool_use":
