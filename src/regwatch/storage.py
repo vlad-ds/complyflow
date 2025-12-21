@@ -162,6 +162,22 @@ class DocumentStorage:
             return self._delete_s3(full_key)
         return self._delete_local(full_key)
 
+    def list_keys(self, prefix: str, subfolder: str | None = None) -> list[str]:
+        """
+        List all keys matching a prefix.
+
+        Args:
+            prefix: Key prefix to match (e.g., "weekly_summary_")
+            subfolder: Optional subfolder
+
+        Returns:
+            List of matching keys (without .txt extension)
+        """
+        full_prefix = _build_key(subfolder, prefix)
+        if self.use_s3:
+            return self._list_keys_s3(full_prefix)
+        return self._list_keys_local(full_prefix)
+
     # -------------------------------------------------------------------------
     # S3 Implementation
     # -------------------------------------------------------------------------
@@ -216,6 +232,27 @@ class DocumentStorage:
             logger.error(f"S3 delete error for {s3_key}: {e}")
             return False
 
+    def _list_keys_s3(self, prefix: str) -> list[str]:
+        """List all keys matching a prefix in S3."""
+        s3_prefix = f"{S3_PREFIX}/{prefix}"
+        keys = []
+        try:
+            paginator = self.s3_client.get_paginator("list_objects_v2")
+            for page in paginator.paginate(Bucket=S3_BUCKET, Prefix=s3_prefix):
+                for obj in page.get("Contents", []):
+                    # Extract key without prefix and .txt extension
+                    key = obj["Key"]
+                    if key.startswith(S3_PREFIX + "/"):
+                        key = key[len(S3_PREFIX) + 1:]
+                    if key.endswith(".txt"):
+                        key = key[:-4]
+                    keys.append(key)
+            logger.debug(f"S3 list: prefix={prefix}, found {len(keys)} keys")
+            return keys
+        except ClientError as e:
+            logger.error(f"S3 list error for prefix {prefix}: {e}")
+            return []
+
     # -------------------------------------------------------------------------
     # Local Filesystem Implementation
     # -------------------------------------------------------------------------
@@ -257,6 +294,26 @@ class DocumentStorage:
         except Exception as e:
             logger.error(f"Local delete error for {file_path}: {e}")
             return False
+
+    def _list_keys_local(self, prefix: str) -> list[str]:
+        """List all keys matching a prefix locally."""
+        keys = []
+        # Handle prefix with subfolders (e.g., "DORA/32022R")
+        if "/" in prefix:
+            subfolder, file_prefix = prefix.rsplit("/", 1)
+            search_dir = LOCAL_CACHE_DIR / subfolder
+        else:
+            file_prefix = prefix
+            search_dir = LOCAL_CACHE_DIR
+
+        if search_dir.exists():
+            for file_path in search_dir.glob(f"{file_prefix}*.txt"):
+                # Return key relative to LOCAL_CACHE_DIR without .txt
+                relative = file_path.relative_to(LOCAL_CACHE_DIR)
+                key = str(relative).replace(".txt", "")
+                keys.append(key)
+        logger.debug(f"Local list: prefix={prefix}, found {len(keys)} keys")
+        return keys
 
 
 # Global storage instance (lazy initialization)

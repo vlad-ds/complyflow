@@ -245,6 +245,25 @@ class WeeklySummaryResponse(BaseModel):
     documents: list[DocumentSummaryResponse] = Field(description="Individual document summaries")
 
 
+class WeeklySummaryMetaResponse(BaseModel):
+    """Metadata for a weekly summary (for listing)."""
+
+    period_start: str = Field(description="Start date of the period")
+    period_end: str = Field(description="End date of the period")
+    generated_at: str = Field(description="When the summary was generated")
+    total_documents: int = Field(description="Total number of documents")
+    material_documents: int = Field(description="Number of material documents")
+
+
+class WeeklySummaryListResponse(BaseModel):
+    """Response for listing available weekly summaries."""
+
+    summaries: list[WeeklySummaryMetaResponse] = Field(
+        description="List of available summaries (newest first)"
+    )
+    total: int = Field(description="Total number of summaries")
+
+
 # --- Contracts Chat Models ---
 
 

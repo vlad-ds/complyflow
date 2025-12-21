@@ -38,6 +38,8 @@ from api.models import (
     FieldUpdateRequest,
     FieldUpdateResponse,
     HealthResponse,
+    WeeklySummaryListResponse,
+    WeeklySummaryMetaResponse,
     WeeklySummaryResponse,
 )
 from api.logging import get_logger, log_error
@@ -904,6 +906,101 @@ async def get_weekly_summary_pdf():
             status_code=500,
             detail=f"Failed to generate PDF: {type(e).__name__}: {e}",
         )
+
+
+@app.get(
+    "/regwatch/summary/list",
+    response_model=WeeklySummaryListResponse,
+    responses={
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+    },
+    tags=["Regwatch"],
+    dependencies=[Depends(verify_api_key)],
+)
+async def list_weekly_summaries():
+    """
+    List all available weekly summaries.
+
+    Returns metadata for all historical summaries, sorted by period_end (newest first).
+    Use the period_end value to fetch a specific summary.
+    """
+    from regwatch.summary import list_weekly_summaries as _list_summaries
+
+    logger.info("Listing weekly summaries")
+
+    summaries = _list_summaries()
+
+    return WeeklySummaryListResponse(
+        summaries=[
+            WeeklySummaryMetaResponse(
+                period_start=s.period_start,
+                period_end=s.period_end,
+                generated_at=s.generated_at,
+                total_documents=s.total_documents,
+                material_documents=s.material_documents,
+            )
+            for s in summaries
+        ],
+        total=len(summaries),
+    )
+
+
+@app.get(
+    "/regwatch/summary/{period_end}",
+    response_model=WeeklySummaryResponse,
+    responses={
+        401: {"model": ErrorResponse, "description": "Unauthorized"},
+        404: {"model": ErrorResponse, "description": "Summary not found"},
+    },
+    tags=["Regwatch"],
+    dependencies=[Depends(verify_api_key)],
+)
+async def get_weekly_summary_by_date(period_end: str):
+    """
+    Get a specific weekly summary by period end date.
+
+    Args:
+        period_end: The period end date in YYYY-MM-DD format
+    """
+    from regwatch.summary import load_weekly_summary_by_date
+
+    logger.info(f"Loading summary for period ending {period_end}")
+
+    summary = load_weekly_summary_by_date(period_end)
+
+    if not summary:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No summary found for period ending {period_end}",
+        )
+
+    # Convert to response model
+    documents = [
+        DocumentSummaryResponse(
+            celex=doc.celex,
+            topic=doc.topic,
+            title=doc.title,
+            analyzed_at=doc.analyzed_at,
+            eurlex_url=doc.eurlex_url,
+            is_material=doc.is_material,
+            relevance=doc.relevance,
+            summary=doc.summary,
+            impact=doc.impact,
+            action_required=doc.action_required,
+        )
+        for doc in summary.documents
+    ]
+
+    return WeeklySummaryResponse(
+        period_start=summary.period_start,
+        period_end=summary.period_end,
+        generated_at=summary.generated_at,
+        total_documents=summary.total_documents,
+        material_documents=summary.material_documents,
+        documents_by_topic=summary.documents_by_topic,
+        executive_summary=summary.executive_summary,
+        documents=documents,
+    )
 
 
 # Run with: uvicorn api.main:app --reload

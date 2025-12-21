@@ -224,7 +224,7 @@ class ContractsQdrant:
         query_embedding: list[float],
         top_k: int = 20,
         contract_id: str | None = None,
-        score_threshold: float = 0.7,
+        score_threshold: float = 0.4,
     ) -> list[dict]:
         """
         Search for similar chunks using vector similarity.
@@ -233,9 +233,9 @@ class ContractsQdrant:
             query_embedding: Query vector (768-dim for Snowflake Arctic)
             top_k: Number of results to return
             contract_id: Optional filter to search within a specific contract
-            score_threshold: Minimum similarity score (0-1). Default 0.7 filters
-                out low-relevance chunks. Not empirically validated - chosen as
-                sensible default for cosine similarity.
+            score_threshold: Minimum similarity score (0-1). Default 0.4 tuned
+                for Snowflake Arctic which produces scores in 0.5-0.65 range
+                for relevant content.
 
         Returns:
             List of chunk dicts with contract_id, filename, text, score

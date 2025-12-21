@@ -240,6 +240,10 @@ def save_weekly_summary(summary: WeeklySummary) -> str:
     """
     Save weekly summary to S3 for frontend access.
 
+    Saves both:
+    - weekly_summary (latest, for backward compat)
+    - weekly_summary_YYYY-MM-DD (historical, keyed by period_end)
+
     Args:
         summary: The weekly summary to save
 
@@ -247,12 +251,16 @@ def save_weekly_summary(summary: WeeklySummary) -> str:
         The storage key where summary was saved
     """
     storage = get_storage()
-
-    # Save as JSON
     content = json.dumps(summary.to_dict(), indent=2)
+
+    # Save as "latest" for backward compatibility
     storage.write(SUMMARY_FILENAME, content, subfolder=SUMMARY_SUBFOLDER)
 
-    logger.info(f"Saved weekly summary to {SUMMARY_FILENAME}")
+    # Save historical copy keyed by period_end date
+    historical_key = f"{SUMMARY_FILENAME}_{summary.period_end}"
+    storage.write(historical_key, content, subfolder=SUMMARY_SUBFOLDER)
+
+    logger.info(f"Saved weekly summary to {SUMMARY_FILENAME} and {historical_key}")
     return SUMMARY_FILENAME
 
 
@@ -285,6 +293,89 @@ def load_weekly_summary() -> WeeklySummary | None:
     except (json.JSONDecodeError, KeyError, TypeError) as e:
         logger.error(f"Failed to parse weekly summary: {e}")
         return None
+
+
+def load_weekly_summary_by_date(period_end: str) -> WeeklySummary | None:
+    """
+    Load a specific weekly summary by period end date.
+
+    Args:
+        period_end: The period end date (YYYY-MM-DD)
+
+    Returns:
+        WeeklySummary if found, None otherwise
+    """
+    storage = get_storage()
+    key = f"{SUMMARY_FILENAME}_{period_end}"
+    content = storage.read(key, subfolder=SUMMARY_SUBFOLDER)
+
+    if not content:
+        logger.info(f"No weekly summary found for period ending {period_end}")
+        return None
+
+    try:
+        data = json.loads(content)
+        return WeeklySummary(
+            period_start=data["period_start"],
+            period_end=data["period_end"],
+            generated_at=data["generated_at"],
+            total_documents=data["total_documents"],
+            material_documents=data["material_documents"],
+            documents_by_topic=data["documents_by_topic"],
+            executive_summary=data["executive_summary"],
+            documents=[DocumentSummary(**d) for d in data["documents"]],
+        )
+    except (json.JSONDecodeError, KeyError, TypeError) as e:
+        logger.error(f"Failed to parse weekly summary for {period_end}: {e}")
+        return None
+
+
+@dataclass
+class WeeklySummaryMeta:
+    """Metadata for a weekly summary (for listing)."""
+
+    period_start: str
+    period_end: str
+    generated_at: str
+    total_documents: int
+    material_documents: int
+
+
+def list_weekly_summaries() -> list[WeeklySummaryMeta]:
+    """
+    List all available weekly summaries.
+
+    Returns:
+        List of WeeklySummaryMeta sorted by period_end (newest first)
+    """
+    storage = get_storage()
+
+    # Find all weekly_summary_* keys
+    keys = storage.list_keys(f"{SUMMARY_FILENAME}_", subfolder=SUMMARY_SUBFOLDER)
+
+    summaries = []
+    for key in keys:
+        content = storage.read(key, subfolder=SUMMARY_SUBFOLDER)
+        if content:
+            try:
+                data = json.loads(content)
+                summaries.append(
+                    WeeklySummaryMeta(
+                        period_start=data["period_start"],
+                        period_end=data["period_end"],
+                        generated_at=data["generated_at"],
+                        total_documents=data["total_documents"],
+                        material_documents=data["material_documents"],
+                    )
+                )
+            except (json.JSONDecodeError, KeyError, TypeError) as e:
+                logger.warning(f"Failed to parse summary metadata for {key}: {e}")
+                continue
+
+    # Sort by period_end descending (newest first)
+    summaries.sort(key=lambda s: s.period_end, reverse=True)
+    logger.info(f"Found {len(summaries)} historical summaries")
+    return summaries
 
 
 def generate_summary_html(summary: WeeklySummary) -> str:
