@@ -295,15 +295,47 @@ def chat(
 
             # Process each tool use
             tool_results = []
+            from datetime import datetime
+
             for block in response.content:
-                if hasattr(block, "type") and block.type == "tool_use":
+                if not hasattr(block, "type"):
+                    continue
+
+                timestamp = datetime.utcnow().isoformat() + "Z"
+
+                # Server-side tool use (code_execution)
+                if block.type == "server_tool_use":
+                    tool_name = getattr(block, "name", "unknown")
+                    logger.info(f"Server tool use: {tool_name}")
+
+                    if tool_name == "code_execution":
+                        # Extract code snippet for summary
+                        code_input = getattr(block, "input", {})
+                        code_snippet = code_input.get("code", "")[:50] if isinstance(code_input, dict) else ""
+                        tool_uses.append(ToolUseEvent(
+                            tool_name="code_execution",
+                            input_summary="Analyzing contracts data with Python",
+                            output_summary="Running code...",
+                            timestamp=timestamp,
+                        ))
+
+                # Code execution result (update the output_summary)
+                elif block.type == "code_execution_tool_result":
+                    content = getattr(block, "content", {})
+                    return_code = content.return_code if hasattr(content, "return_code") else 0
+                    # Update the last code_execution tool use with result
+                    for tu in reversed(tool_uses):
+                        if tu.tool_name == "code_execution" and tu.output_summary == "Running code...":
+                            tu.output_summary = "Code executed successfully" if return_code == 0 else f"Code failed (exit {return_code})"
+                            break
+
+                # Custom tool use (search_contracts)
+                elif block.type == "tool_use":
                     tool_name = block.name
                     tool_id = block.id
                     tool_input = block.input
 
                     logger.info(f"Tool use: {tool_name}")
-                    from datetime import datetime
-                    timestamp = datetime.utcnow().isoformat() + "Z"
 
                     # Handle our custom tool
                     if tool_name == "search_contracts":
@@ -337,18 +369,6 @@ def chat(
                                 "content": result_content,
                             }
                         )
-                    elif tool_name == "code_execution":
-                        # Code execution is server-side, but we can still track it
-                        tool_uses.append(ToolUseEvent(
-                            tool_name="code_execution",
-                            input_summary="Analyzing contracts CSV data",
-                            output_summary="Executed Python code",
-                            timestamp=timestamp,
-                        ))
-                        # Claude handles it server-side - no result needed
-                    else:
-                        # Unknown tool
-                        pass
 
             # If we have tool results to send back, add them
             if tool_results:
