@@ -504,6 +504,9 @@ async def review_contract(record_id: str, body: ContractReviewRequest):
     else:
         updated = airtable.update_contract(record_id, {"status": "under_review"})
 
+    if body.reviewed:
+        notify("Contract Reviewed", f"ID: {record_id[:8]}...")
+
     return ContractReviewResponse(
         id=updated["id"],
         status=updated["fields"].get("status", "unknown"),
@@ -575,6 +578,7 @@ async def update_contract_field(record_id: str, body: FieldUpdateRequest):
             f"Updated field '{body.field_name}' for contract {record_id}, "
             f"correction_logged={correction is not None}"
         )
+        notify("Field Updated", f"{body.field_name}\n{body.new_value[:50] if body.new_value else 'cleared'}...")
     except Exception as e:
         log_error(logger, "Field update failed", e, record_id=record_id)
         raise HTTPException(
